@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements'
-import { StackNavigator } from 'react-navigation';
 import { FormLabel, FormInput } from 'react-native-elements'
 
 

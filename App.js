@@ -4,6 +4,7 @@ import { TabNavigator } from 'react-navigation';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TeacherDashboard from './app/components/TeacherDashboard.js';
+import Camera from './app/components/Camera.js';
 import LoginNavigation from './app/navigation/LoginNavigation.js';
 
 
@@ -28,6 +29,20 @@ const TabAnimations = TabNavigator(
       path: '/',
       navigationOptions: {
         tabBarLabel: 'TeachersDashboard',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Ionicons
+            name={focused ? 'ios-settings' : 'ios-settings-outline'}
+            size={26}
+            style={{ color: tintColor }}
+          />
+        ),
+      },
+    },
+    CameraTab: {
+      screen: Camera,
+      path: '/',
+      navigationOptions: {
+        tabBarLabel: 'Camera',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
