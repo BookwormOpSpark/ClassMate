@@ -52,7 +52,7 @@ export default class AccelerometerSensor extends React.Component {
         <Text style={styles.blue}>Lift up your phone to be added to the queue!</Text>
         <Text>Accelerometer:</Text>
         <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
-        <Text style={styles.red}>{y > 0.4 ? "Added to the queue" : ''}</Text>
+        <Text style={styles.red}>{y > 0.7 ? "Added to the queue" : ''}</Text>
       </View>
     );
   }

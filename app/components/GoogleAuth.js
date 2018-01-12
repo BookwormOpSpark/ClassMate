@@ -2,11 +2,13 @@ import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { Text } from 'react-native-elements'
+//import cfg from '../../config';
+// console.log(config);
 
 export default class GoogleAuth extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { user: '' };
     this.onLoginPress = this.onLoginPress.bind(this);
   }
 
@@ -15,7 +17,7 @@ export default class GoogleAuth extends React.Component {
     const result = await Expo.Google.logInAsync({
       behavior: 'web',
       androidClientId: '29245857360-gi2ilv6b04e6mpn9icn9ngiq0buq4elr.apps.googleusercontent.com',
-      // androidClientId: process.env.GOOGLE_ANDROID_CLIENT_ID,
+      //androidClientId: cfg.androidClientId,
 
       scopes: ['profile', 'email'],
     });
@@ -39,12 +41,22 @@ export default class GoogleAuth extends React.Component {
   }
 
   onLoginPress = async () => {
-    console.log('hello')
-    const result = await this.signInWithGoogleAsync()
-    const result2 = await this.getUserInfo(result);
-    console.log(result2)
-    // if there is no result.error or result.cancelled, the user is logged in
-    // do something with the result
+    console.log('hello');
+    const result = await this.signInWithGoogleAsync();
+    const userInfoResponse = await this.getUserInfo(result);
+    const userInfo = userInfoResponse._bodyText;
+    console.log(userInfo)
+    console.log(typeof userInfo)
+    const user = {
+    id: userInfo.id,
+    name: userInfo.name,
+    givenName: userInfo.given_name,
+    familyName: userInfo.family_name,
+    photoUrl: userInfo.picture,
+    email: userInfo.email,
+    }
+    console.log(user);
+    this.setState({user : userInfo})
   }  
 
 
@@ -57,6 +69,8 @@ export default class GoogleAuth extends React.Component {
           onPress={this.onLoginPress}
           large
           title='GoogleSignIn' />
+        <Text>{this.state.user ?  this.state.user : ''}</Text>
+
       </View>
     );
   }

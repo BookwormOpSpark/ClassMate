@@ -16,16 +16,12 @@ export default class FirstPage extends React.Component {
         <Text h1>Class Mate</Text>
         <Text>Are you a</Text>
         <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5, backgroundColor: 'blue' }]}
-          raised
-          large
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           onPress={() => this.props.navigation.navigate('StudentLogin')}
           title='Student?' />
 
         <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5, backgroundColor: 'blue' }]}
-          raised
-          large
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           onPress={() => this.props.navigation.navigate('TeacherLogin')}
           title='Teacher?' />
       </View>
