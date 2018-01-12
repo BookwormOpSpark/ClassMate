@@ -2,8 +2,9 @@ import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { Text } from 'react-native-elements'
-//import cfg from '../../config';
-// console.log(config);
+//import Config from 'react-native-config'
+import {androidClientId} from '../constant';
+console.log(androidClientId);
 
 export default class GoogleAuth extends React.Component {
   constructor(props) {
@@ -16,14 +17,11 @@ export default class GoogleAuth extends React.Component {
   try {
     const result = await Expo.Google.logInAsync({
       behavior: 'web',
-      androidClientId: '29245857360-gi2ilv6b04e6mpn9icn9ngiq0buq4elr.apps.googleusercontent.com',
-      //androidClientId: cfg.androidClientId,
-
+      androidClientId: androidClientId,
       scopes: ['profile', 'email'],
     });
 
     if (result.type === 'success') {
-      console.log(result.accessToken);
       return result.accessToken;
     } else {
       return { cancelled: true };
@@ -41,19 +39,17 @@ export default class GoogleAuth extends React.Component {
   }
 
   onLoginPress = async () => {
-    console.log('hello');
     const result = await this.signInWithGoogleAsync();
     const userInfoResponse = await this.getUserInfo(result);
     const userInfo = userInfoResponse._bodyText;
-    console.log(userInfo)
-    console.log(typeof userInfo)
+    const userParsed = JSON.parse(userInfo);
     const user = {
-    id: userInfo.id,
-    name: userInfo.name,
-    givenName: userInfo.given_name,
-    familyName: userInfo.family_name,
-    photoUrl: userInfo.picture,
-    email: userInfo.email,
+    id: userParsed.id,
+    name: userParsed.name,
+    givenName: userParsed.given_name,
+    familyName: userParsed.family_name,
+    photoUrl: userParsed.picture,
+    email: userParsed.email,
     }
     console.log(user);
     this.setState({user : userInfo})
