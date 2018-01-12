@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Text, Header } from 'react-native-elements'
 
 
-export default class TeacherLogin extends React.Component {
+export default class Dashboard1 extends React.Component {
   render() {
     return (
       <View style={styles.container}>
