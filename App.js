@@ -8,6 +8,7 @@ import Dashboard1 from './app/components/Header.js';
 import OpenCamera from './app/components/OpenCamera.js';
 import ImagePickerComponent from './app/components/ImagePicker.js';
 import GoogleAuth from './app/components/GoogleAuth.js';
+import Movies from './app/utilities/api-call.js';
 import JoinClass from './app/components/JoinClass.js';
 import AccelerometerSensor from './app/components/Accelerometer.js';
 import LoginNavigation from './app/navigation/LoginNavigation.js';
@@ -43,6 +44,20 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
+    MovieTab: {
+      screen: Movies,
+      path: '/',
+      navigationOptions: {
+        tabBarLabel: 'Movie',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Ionicons
+            name={focused ? 'ios-settings' : 'ios-settings-outline'}
+            size={15}
+            style={{ color: tintColor }}
+          />
+        ),
+      },
+    },
     SensorTab: {
       screen: AccelerometerSensor,
       path: '/',
@@ -58,10 +73,10 @@ const TabAnimations = TabNavigator(
       },
     },
     JoinClass: {
-      screen: JoinClass,
+      screen: Dashboard1,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'JoinClass',
+        tabBarLabel: 'dash1',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
@@ -85,7 +100,6 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
-
     GoogleTab: {
       screen: GoogleAuth,
       path: '/',
