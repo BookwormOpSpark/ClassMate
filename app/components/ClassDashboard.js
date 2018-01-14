@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 
-export default class StudentDashboard extends React.Component {
+export default class ClassDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -19,11 +19,12 @@ export default class StudentDashboard extends React.Component {
     return (
       <View style={styles.container}>
         <Text h1>Class Mate</Text>
-        <Text h4>Student Dashboard</Text>
-        <Text h2>Student Name</Text>
-        <Text h2>Your Class Schedule</Text>
-        <Text h2>Upcoming Due Dates</Text>
-        <Text h2>Add a sidebar</Text>
+        <Text h4>Class Dashboard</Text>
+        <Text h3>Biology</Text>
+        <Text h2>CheckIn</Text>
+        <Text h2>RaiseHand</Text>
+        <Text h2>Submit Assignment</Text>
+        <Text h2>Daily Schedule</Text>
       </View>
     );
   }

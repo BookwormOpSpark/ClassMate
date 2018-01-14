@@ -2,8 +2,9 @@ import React from 'react';
 import { Animated } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import TeacherDashboard from './app/components/TeacherDashboard';
-import ImagePickerComponent from './app/components/ImagePicker';
+import ClassDashboard from './app/components/TeacherDashboard';
+import StudentDashboard from './app/components/StudentDashboard';
+import SubmitHomework from './app/components/SubmitHomework';
 import AccelerometerSensor from './app/components/Accelerometer';
 import LoginNavigation from './app/navigation/LoginNavigation';
 
@@ -25,10 +26,24 @@ const TabAnimations = TabNavigator(
       },
     },
     SettingsTab: {
-      screen: TeacherDashboard,
+      screen: StudentDashboard,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'TeacherD',
+        tabBarLabel: 'StudentDashb',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Ionicons
+            name={focused ? 'ios-settings' : 'ios-settings-outline'}
+            size={15}
+            style={{ color: tintColor }}
+          />
+        ),
+      },
+    },
+    SettingsTab: {
+      screen: ClassDashboard,
+      path: '/',
+      navigationOptions: {
+        tabBarLabel: 'ClassDashb',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
@@ -53,7 +68,7 @@ const TabAnimations = TabNavigator(
       },
     },
     ImageTab: {
-      screen: ImagePickerComponent,
+      screen: SubmitHomework,
       path: '/',
       navigationOptions: {
         tabBarLabel: 'Homework',

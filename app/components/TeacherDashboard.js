@@ -1,65 +1,30 @@
 import React from 'react';
-import { Button, Platform, ScrollView, StatusBar } from 'react-native';
-import { DrawerNavigator, SafeAreaView } from 'react-navigation';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-elements';
 
-const MyNavScreen = ({ navigation, banner }) => (
-  <ScrollView>
-    <SafeAreaView forceInset={{ top: 'always' }}>
-      <Button
-        onPress={() => navigation.navigate('DrawerOpen')}
-        title="Open drawer"
-      />
-      <Button onPress={() => navigation.goBack(null)} title="Go back" />
-    </SafeAreaView>
-    <StatusBar barStyle="default" />
-  </ScrollView>
-);
-
-const InboxScreen = ({ navigation }) => (
-  <MyNavScreen banner={'Inbox Screen'} navigation={navigation} />
-);
-InboxScreen.navigationOptions = {
-  drawerLabel: 'Inbox',
-  drawerIcon: ({ tintColor }) => (
-    <MaterialIcons
-      name="move-to-inbox"
-      size={24}
-      style={{ color: tintColor }}
-    />
-  ),
-};
-
-const DraftsScreen = ({ navigation }) => (
-  <MyNavScreen banner={'Drafts Screen'} navigation={navigation} />
-);
-DraftsScreen.navigationOptions = {
-  drawerLabel: 'Drafts',
-  drawerIcon: ({ tintColor }) => (
-    <MaterialIcons name="drafts" size={24} style={{ color: tintColor }} />
-  ),
-};
-
-const TeacherDashboard = DrawerNavigator(
-  {
-    Inbox: {
-      path: '/',
-      screen: InboxScreen,
-    },
-    Drafts: {
-      path: '/sent',
-      screen: DraftsScreen,
-    },
-  },
-  {
-    drawerOpenRoute: 'DrawerOpen',
-    drawerCloseRoute: 'DrawerClose',
-    drawerToggleRoute: 'DrawerToggle',
-    initialRouteName: 'Drafts',
-    contentOptions: {
-      activeTintColor: '#e91e63',
-    },
+export default class TeacherDashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { text: '' };
   }
-);
-
-export default TeacherDashboard;
+  render() {
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    });
+    return (
+      <View style={styles.container}>
+        <Text h1>Class Mate</Text>
+        <Text h4>Teacher Dashboard</Text>
+        <Text h2>Teacher Name</Text>
+        <Text h2>Your Class Schedule</Text>
+        <Text h2>Upcoming Due Dates</Text>
+        <Text h2>Add a sidebar</Text>
+      </View>
+    );
+  }
+}

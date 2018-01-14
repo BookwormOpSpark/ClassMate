@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements';
 import axios from 'axios';
 import { SERVER_URI } from '../constant';
 
-export default class ImagePickerComponent extends React.Component {
+export default class SubmitHomework extends React.Component {
   state = {
     image: null,
   };
