@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { Google } from 'expo';
 import { StyleSheet, View, Button } from 'react-native';
 import { Text } from 'react-native-elements';
-import { androidClientId, SERVER_URI } from '../constant';
+import { androidClientId, iosClientId, SERVER_URI } from '../constant';
 
 export default class TeacherLogin extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ export default class TeacherLogin extends React.Component {
     Google.logInAsync({
       behavior: 'web',
       androidClientId,
+      iosClientId,
       scopes: ['profile', 'email'],
     }).then((info) => {
       const token = info.idToken;
@@ -84,3 +85,6 @@ export default class TeacherLogin extends React.Component {
   }
 }
 
+TeacherLogin.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
