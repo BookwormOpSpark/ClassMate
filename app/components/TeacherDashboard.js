@@ -19,11 +19,11 @@ export default class TeacherDashboard extends React.Component {
     return (
       <View style={styles.container}>
         <Text h1>Class Mate</Text>
-        <Text h4>Teacher Dashboard</Text>
-        <Text h2>Teacher Name</Text>
-        <Text h2>Your Class Schedule</Text>
-        <Text h2>Upcoming Due Dates</Text>
-        <Text h2>Add a sidebar</Text>
+        <Text h2>Teacher Dashboard</Text>
+        <Text h4>Teacher Name</Text>
+        <Text h4>Your Class Schedule</Text>
+        <Text h4>Upcoming Due Dates</Text>
+        <Text h4>Add a sidebar</Text>
       </View>
     );
   }

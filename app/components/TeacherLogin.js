@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import PropTypes from 'prop-types';
 import { Google } from 'expo';
 import { StyleSheet, View, Button } from 'react-native';
 import { Text } from 'react-native-elements';
@@ -37,7 +38,6 @@ export default class TeacherLogin extends React.Component {
         link: info.user.email,
         picture: { data: { url: info.user.photoUrl } },
       };
-      console.log(user);
       this.setState({
         user_id: user.id,
         user_name: user.name,
@@ -48,7 +48,8 @@ export default class TeacherLogin extends React.Component {
       axios.post(`${SERVER_URI}/login`, { idtoken: token })
         .then((res) => {
           console.log(res.data);
-          const verified = res.data.email_verified;
+          const { verified } = res.data;
+          console.log(verified);
           if (verified) {
             this.props.navigation.navigate('TeacherDashboard');
           }

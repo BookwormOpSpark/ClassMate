@@ -2,10 +2,10 @@ import React from 'react';
 import { Animated } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ClassDashboard from './app/components/TeacherDashboard';
+import ClassDashboard from './app/components/ClassDashboard';
 import StudentDashboard from './app/components/StudentDashboard';
 import SubmitHomework from './app/components/SubmitHomework';
-import AccelerometerSensor from './app/components/Accelerometer';
+import RaiseHand from './app/components/RaiseHand';
 import LoginNavigation from './app/navigation/LoginNavigation';
 
 
@@ -39,7 +39,7 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
-    SettingsTab: {
+    ClassTab: {
       screen: ClassDashboard,
       path: '/',
       navigationOptions: {
@@ -53,11 +53,11 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
-    SensorTab: {
-      screen: AccelerometerSensor,
+    QueueTab: {
+      screen: RaiseHand,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'Queue',
+        tabBarLabel: 'RaiseHand',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
@@ -67,7 +67,7 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
-    ImageTab: {
+    HomeworkTab: {
       screen: SubmitHomework,
       path: '/',
       navigationOptions: {
