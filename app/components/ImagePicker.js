@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 import { ImagePicker } from 'expo';
-import { Button } from 'react-native-elements'
+import { Button } from 'react-native-elements';
 import axios from 'axios';
 import { SERVER_URI } from '../constant';
 
@@ -9,11 +9,12 @@ export default class ImagePickerComponent extends React.Component {
   state = {
     image: null,
   };
+  postHomework = this.postHomework.bind(this);
 
   _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      //aspect: [4, 3],
+      // aspect: [4, 3],
       base64: true,
     });
 
@@ -25,7 +26,7 @@ export default class ImagePickerComponent extends React.Component {
   };
 
   _openCamera = async () => {
-    let result = await ImagePicker.launchCameraAsync({
+    const result = await ImagePicker.launchCameraAsync({
     });
     console.log(result);
 
@@ -34,20 +35,20 @@ export default class ImagePickerComponent extends React.Component {
     }
   }
   postHomework() {
-    const image = this.state.image;
+    const { image } = this.state;
     console.log(image);
-    axios.post(`${SERVER_URI}/hello`, {image: image})
+    axios.post(`${SERVER_URI}/hello`, { image })
       .then((response) => {
         console.log(response.data);
         return response.data;
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
 
   render() {
-    let { image } = this.state;
+    const { image } = this.state;
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

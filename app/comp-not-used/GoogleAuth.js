@@ -1,10 +1,10 @@
-import Expo from 'expo';
+pimport { Google } from 'expo';
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
-import { Text } from 'react-native-elements'
-//import Config from 'react-native-config'
-import {androidClientId} from '../constant';
-console.log(androidClientId);
+import { Text } from 'react-native-elements';
+// import Config from 'react-native-config'
+import { androidClientId } from '../constant';
+import { SERVER_URI } from '../constant';
 
 export default class GoogleAuth extends React.Component {
   constructor(props) {
@@ -13,26 +13,27 @@ export default class GoogleAuth extends React.Component {
     this.onLoginPress = this.onLoginPress.bind(this);
   }
 
-  signInWithGoogleAsync= async() => {
-  try {
-    const result = await Expo.Google.logInAsync({
-      behavior: 'web',
-      androidClientId: androidClientId,
-      scopes: ['profile', 'email'],
-    });
+  signInWithGoogleAsync= async () => {
+    try {
+      const result = await Google.logInAsync({
+        behavior: 'web',
+        androidClientId,
+        scopes: ['profile', 'email'],
+      });
 
-    if (result.type === 'success') {
-      return result.accessToken;
-    } else {
+      if (result.type === 'success') {
+        console.log(result);
+        return result.accessToken;
+      }
       return { cancelled: true };
+
+    } catch (e) {
+      return { error: true };
     }
-  } catch (e) {
-    return { error: true };
-  }
   }
 
   getUserInfo = async (accessToken) => {
-    let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+    const userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     return userInfoResponse;
@@ -42,18 +43,19 @@ export default class GoogleAuth extends React.Component {
     const result = await this.signInWithGoogleAsync();
     const userInfoResponse = await this.getUserInfo(result);
     const userInfo = userInfoResponse._bodyText;
+    console.log(userInfoResponse);
     const userParsed = JSON.parse(userInfo);
     const user = {
-    id: userParsed.id,
-    name: userParsed.name,
-    givenName: userParsed.given_name,
-    familyName: userParsed.family_name,
-    photoUrl: userParsed.picture,
-    email: userParsed.email,
-    }
+      id: userParsed.id,
+      name: userParsed.name,
+      givenName: userParsed.given_name,
+      familyName: userParsed.family_name,
+      photoUrl: userParsed.picture,
+      email: userParsed.email,
+    };
     console.log(user);
-    this.setState({user : userInfo})
-  }  
+    this.setState({ user: userInfo });
+  }
 
 
   render() {
@@ -64,8 +66,9 @@ export default class GoogleAuth extends React.Component {
         <Button
           onPress={this.onLoginPress}
           large
-          title='GoogleSignIn' />
-        <Text>{this.state.user ?  this.state.user : ''}</Text>
+          title="GoogleSignIn"
+        />
+        <Text>{this.state.user ? this.state.user : ''}</Text>
 
       </View>
     );

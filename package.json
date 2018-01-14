@@ -34,15 +34,23 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "appcenter": "^1.1.0",
+    "appcenter-analytics": "^1.1.0",
+    "appcenter-crashes": "^1.1.0",
     "axios": "^0.17.1",
+    "babel-eslint": "^8.2.1",
     "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "dotenv": "^4.0.0",
+    "eslint": "^4.15.0",
     "expo": "^23.0.4",
+    "jwt-decode": "^2.2.0",
+    "prop-types": "^15.6.0",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-native-config": "^0.11.5",
     "react-native-elements": "^0.18.5",
     "react-native-vector-icons": "^4.5.0",
-    "react-navigation": "^1.0.0-beta.23"
+    "react-navigation": "^1.0.0-beta.23",
+    "react-redux": "^5.0.6"
   }
 }
