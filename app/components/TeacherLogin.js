@@ -1,41 +1,86 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-elements'
-import { FormLabel, FormInput } from 'react-native-elements'
-
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { Google } from 'expo';
+import { StyleSheet, View, Button } from 'react-native';
+import { Text } from 'react-native-elements';
+import { androidClientId, SERVER_URI } from '../constant';
 
 export default class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = {
+      user_id: '',
+      user_name: '',
+      user_first_name: '',
+      user_last_name: '',
+      user_email: '',
+    };
+    this.onLoginPress = this.onLoginPress.bind(this);
   }
+
+  onLoginPress() {
+    Google.logInAsync({
+      behavior: 'web',
+      androidClientId,
+      scopes: ['profile', 'email'],
+    }).then((info) => {
+      const token = info.idToken;
+      const user = {
+        id: info.user.id,
+        name: info.user.name,
+        First_name: info.user.givenName,
+        Last_name: info.user.familyName,
+        verified: 'True',
+        email: info.user.email,
+        link: info.user.email,
+        picture: { data: { url: info.user.photoUrl } },
+      };
+      console.log(user);
+      this.setState({
+        user_id: user.id,
+        user_name: user.name,
+        user_first_name: user.First_name,
+        user_last_name: user.Last_name,
+        user_email: user.email,
+      });
+      axios.post(`${SERVER_URI}/login`, { idtoken: token })
+        .then((res) => {
+          console.log(res.data);
+          const verified = res.data.email_verified;
+          if (verified) {
+            this.props.navigation.navigate('TeacherDashboard');
+          }
+        })
+        .catch(err => console.log(err));
+    })
+      .catch(err => console.log(err));
+  }
+
+
   render() {
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+
+    });
     return (
       <View style={styles.container}>
         <Text h1>Class Mate</Text>
-        <Text>Teacher Login</Text>
-        <FormLabel>Email</FormLabel>
-        <FormInput
-          onChangeText={(text) => this.setState({ text })} />
-        <FormLabel>Password</FormLabel>
-        <FormInput
-          onChangeText={(text) => this.setState({ text })} />
+        <Text h3>Teacher Login</Text>
+        <Text>Please sign in with Google Authentication</Text>
         <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5, backgroundColor: 'blue' }]}
-          raised
+          onPress={this.onLoginPress}
           large
-          title='Forgot Password?' />
+          title="GoogleSignIn"
+        />
+        <Text>{this.state.user_id ? JSON.stringify(this.state) : ''}</Text>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-});

@@ -1,17 +1,11 @@
 import React from 'react';
-import { Animated, StatusBar } from 'react-native';
+import { Animated } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import TeacherDashboard from './app/components/TeacherDashboard.js';
-import Dashboard1 from './app/components/Header.js';
-import OpenCamera from './app/components/OpenCamera.js';
-import ImagePickerComponent from './app/components/ImagePicker.js';
-import GoogleAuth from './app/components/GoogleAuth.js';
-import Movies from './app/utilities/api-call.js';
-import JoinClass from './app/components/JoinClass.js';
-import AccelerometerSensor from './app/components/Accelerometer.js';
-import LoginNavigation from './app/navigation/LoginNavigation.js';
+import TeacherDashboard from './app/components/TeacherDashboard';
+import ImagePickerComponent from './app/components/ImagePicker';
+import AccelerometerSensor from './app/components/Accelerometer';
+import LoginNavigation from './app/navigation/LoginNavigation';
 
 
 const TabAnimations = TabNavigator(
@@ -44,39 +38,11 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
-    MovieTab: {
-      screen: Movies,
-      path: '/',
-      navigationOptions: {
-        tabBarLabel: 'Movie',
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-settings' : 'ios-settings-outline'}
-            size={15}
-            style={{ color: tintColor }}
-          />
-        ),
-      },
-    },
     SensorTab: {
       screen: AccelerometerSensor,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'Accelerometer',
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-settings' : 'ios-settings-outline'}
-            size={15}
-            style={{ color: tintColor }}
-          />
-        ),
-      },
-    },
-    JoinClass: {
-      screen: Dashboard1,
-      path: '/',
-      navigationOptions: {
-        tabBarLabel: 'dash1',
+        tabBarLabel: 'Queue',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
@@ -90,21 +56,7 @@ const TabAnimations = TabNavigator(
       screen: ImagePickerComponent,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'Image',
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-settings' : 'ios-settings-outline'}
-            size={15}
-            style={{ color: tintColor }}
-          />
-        ),
-      },
-    },
-    GoogleTab: {
-      screen: GoogleAuth,
-      path: '/',
-      navigationOptions: {
-        tabBarLabel: 'GoogleAuth',
+        tabBarLabel: 'Homework',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}

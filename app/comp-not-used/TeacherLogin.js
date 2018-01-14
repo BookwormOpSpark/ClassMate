@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-elements';
-import { FormLabel, FormInput } from 'react-native-elements';
+import { Button, Text, FormLabel, FormInput  } from 'react-native-elements';
 
 
-export default class StudentLogin extends React.Component {
+export default class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -13,7 +12,7 @@ export default class StudentLogin extends React.Component {
     return (
       <View style={styles.container}>
         <Text h1>Class Mate</Text>
-        <Text h4>Passport Student Login</Text>
+        <Text>Teacher Login</Text>
         <FormLabel>Email</FormLabel>
         <FormInput
           onChangeText={text => this.setState({ text })}
