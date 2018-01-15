@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 
-export default class StudentClassSchedule extends React.Component {
+export default class CheckIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -18,9 +18,7 @@ export default class StudentClassSchedule extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>Class Mate</Text>
-        <Text h4>Student Class Schedule</Text>
-        <Text>Google Calendar</Text>
+        <Text h1>CheckIn</Text>
       </View>
     );
   }

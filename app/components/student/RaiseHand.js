@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Accelerometer } from 'expo';
+import { Text } from 'react-native-elements';
 
 export default class RaiseHand extends React.Component {
   state = {
@@ -48,8 +49,8 @@ export default class RaiseHand extends React.Component {
 
     return (
       <View style={styles.sensor}>
-        <Text style={styles.blue}>Class Name</Text>
-        <Text style={styles.blue}>Lift up your phone to be added to the queue!</Text>
+        <Text h3>Class Name</Text>
+        <Text h4>Lift up your phone to be added to the queue!</Text>
         <Text>Accelerometer:</Text>
         <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
         <Text style={styles.red}>{y > 0.7 ? 'Added to the queue' : ''}</Text>

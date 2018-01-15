@@ -2,9 +2,9 @@ import React from 'react';
 import { Animated } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import StudentClassDashboard from './app/components/student/StudentClassDashboard';
-import StudentDashboard from './app/components/student/StudentDashboard';
 import LoginNavigation from './app/navigation/LoginNavigation';
+import StudentClassNavigation from './app/navigation/StudentClassNavigation';
+import StudentDashboardNavigation from './app/navigation/StudentDashboardNavigation';
 
 
 const TabAnimations = TabNavigator(
@@ -24,7 +24,7 @@ const TabAnimations = TabNavigator(
       },
     },
     SettingsTab: {
-      screen: StudentDashboard,
+      screen: StudentDashboardNavigation,
       path: '/',
       navigationOptions: {
         tabBarLabel: 'StudentDashb',
@@ -38,7 +38,7 @@ const TabAnimations = TabNavigator(
       },
     },
     ClassTab: {
-      screen: StudentClassDashboard,
+      screen: StudentClassNavigation,
       path: '/',
       navigationOptions: {
         tabBarLabel: 'StudClassDashb',

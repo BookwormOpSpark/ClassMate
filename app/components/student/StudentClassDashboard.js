@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Button } from 'react-native';
-import { Text } from 'react-native-elements';
+import { StyleSheet, View } from 'react-native';
+import { Text, Button } from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 export default class StudentClassDashboard extends React.Component {
@@ -19,27 +19,26 @@ export default class StudentClassDashboard extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>Class Mate</Text>
-        <Text h4>Class Dashboard</Text>
+        <Text h2>Class Dashboard</Text>
         <Text h3>Biology</Text>
         <Button
           onPress={() => this.props.navigation.navigate('CheckIn')}
-          large
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           title="CheckIn"
         />
         <Button
           onPress={() => this.props.navigation.navigate('RaiseHand')}
-          large
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           title="Raise Hand"
         />
         <Button
           onPress={() => this.props.navigation.navigate('SubmitHomework')}
-          large
-          title="Submit Assignment"
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          title="Submit Homework"
         />
         <Button
           onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
-          large
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           title="Daily Schedule"
         />
       </View>
