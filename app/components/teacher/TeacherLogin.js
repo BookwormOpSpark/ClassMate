@@ -48,7 +48,7 @@ export default class TeacherLogin extends React.Component {
       axios.post(`${SERVER_URI}/login`, { idtoken: token })
         .then((res) => {
           console.log(res.data);
-          const verified = res.data.email;
+          const verified = res.data.email; 
           console.log(verified);
           if (verified) {
             this.props.navigation.navigate('TeacherDashboard');
