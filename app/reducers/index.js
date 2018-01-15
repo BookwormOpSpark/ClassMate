@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import reducers from './reducers';
+import user from './user';
+import homeworks from './homeworks';
+import badges from './badges';
 
 const rootReducer = combineReducers({
-  reducers,
-})
+  user,
+  homeworks,
+  badges,
+});
 
 export default rootReducer;
