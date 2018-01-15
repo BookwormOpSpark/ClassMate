@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Google } from 'expo';
 import { StyleSheet, View, Button } from 'react-native';
 import { Text } from 'react-native-elements';
-import { androidClientId, iosClientId, SERVER_URI } from '../constant';
+import { androidClientId, iosClientId, SERVER_URI } from '../../constant';
 
 export default class TeacherLogin extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ export default class TeacherLogin extends React.Component {
       axios.post(`${SERVER_URI}/login`, { idtoken: token })
         .then((res) => {
           console.log(res.data);
-          const { verified } = res.data;
+          const verified = res.data.email_verified;
           console.log(verified);
           if (verified) {
             this.props.navigation.navigate('TeacherDashboard');
