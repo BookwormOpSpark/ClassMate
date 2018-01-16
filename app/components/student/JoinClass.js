@@ -78,10 +78,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(getSession, dispatch),
 });
-export default connect(mapDispatchToProps)(JoinClass);
+export default connect(mapDispatchToProps, mapStateToProps)(JoinClass);
 
 JoinClass.propTypes = {
-  //state: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 
 };

@@ -1,26 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Google } from 'expo';
 import { StyleSheet, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
-import { androidClientId, iosClientId, SERVER_URI } from '../../constant';
+import { androidClientId, iosClientId, SERVER_URI, loginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 
 class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
-    this.state = {
-      user_id: '',
-      user_name: '',
-      user_first_name: '',
-      user_last_name: '',
-      user_email: '',
-    };
     this.onLoginPress = this.onLoginPress.bind(this);
   }
 
@@ -32,32 +23,22 @@ class TeacherLogin extends React.Component {
       scopes: ['profile', 'email'],
     }).then((info) => {
       const token = info.idToken;
-      const user = {
-        id: info.user.id,
-        name: info.user.name,
-        First_name: info.user.givenName,
-        Last_name: info.user.familyName,
-        verified: 'True',
-        email: info.user.email,
-        link: info.user.email,
-        picture: { data: { url: info.user.photoUrl } },
-      };
-      this.props.dispatch(getUser(user));
-      console.log(this.props.dispatch(getUser(user)));
-
-
-      this.setState({
-        user_id: user.id,
-        user_name: user.name,
-        user_first_name: user.First_name,
-        user_last_name: user.Last_name,
-        user_email: user.email,
-      });
-      axios.post(`${SERVER_URI}/login`, { idtoken: token })
+      axios.post(`${SERVER_URI}${loginRoute}`, { idtoken: token })
         .then((res) => {
-          console.log(res.data);
-          const verified = res.data.email_verified;
-          console.log(verified);
+          const user = {
+            id: res.data.id,
+            First_name: res.data.nameFirst,
+            Last_name: res.data.nameLast,
+            email: res.data.email,
+            picture: { data: { url: res.data.photoUrl } },
+            emergencyContact: res.data.id_emergencyContact,
+          };
+          return this.props.dispatch(getUser(user));
+        })
+        .then((res) => {
+          console.log('res');
+          console.log(res);
+          const verified = res.payload.id;
           if (verified) {
             this.props.navigation.navigate('TeacherDashboard');
           }
@@ -88,7 +69,6 @@ class TeacherLogin extends React.Component {
           large
           title="GoogleSignIn"
         />
-        <Text>{this.state.user_id ? JSON.stringify(this.state) : ''}</Text>
       </View>
     );
   }
