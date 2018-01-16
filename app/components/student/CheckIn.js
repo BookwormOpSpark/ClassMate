@@ -5,8 +5,7 @@ import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 const CheckIn = ({ state }) => {
-  console.log(state);
-  console.log(state.user);
+  const student = state.user;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -18,7 +17,7 @@ const CheckIn = ({ state }) => {
   return (
     <View style={styles.container}>
       <Text h1>CheckIn</Text>
-      <Text>{state.user.email}</Text>
+      <Text>{`${student.First_name}`}</Text>
     </View>
   );
 };

@@ -24,23 +24,22 @@ class StudentLogin extends React.Component {
       scopes: ['profile', 'email'],
     }).then((info) => {
       const token = info.idToken;
-      const user = {
-        id: info.user.id,
-        name: info.user.name,
-        First_name: info.user.givenName,
-        Last_name: info.user.familyName,
-        verified: 'True',
-        email: info.user.email,
-        link: info.user.email,
-        picture: { data: { url: info.user.photoUrl } },
-      };
-      this.props.dispatch(getUser(user));
-      console.log(this.props.dispatch(getUser(user)));
-
       axios.post(`${SERVER_URI}/${loginRoute}`, { idtoken: token })
         .then((res) => {
-          console.log(res.data);
-          const verified = res.data.email_verified;
+          const user = {
+            // need the student id from the database
+            id: res.data.user.id,
+            name: res.data.user.name,
+            First_name: res.data.user.givenName,
+            Last_name: res.data.user.familyName,
+            email: res.data.user.email,
+            link: res.data.user.email,
+            picture: { data: { url: res.data.user.photoUrl } },
+          };
+          this.props.dispatch(getUser(user));
+        })
+        .then((res) => {
+          const verified = res.data.email;
           console.log(verified);
           if (verified) {
             this.props.navigation.navigate('StudentDashboard');
