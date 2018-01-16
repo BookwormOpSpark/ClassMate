@@ -12,6 +12,7 @@ import { getUser } from '../../actions/actions';
 class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
+    console.log('Teacher Login');
     console.log(props);
     this.onLogin = this.onLogin.bind(this);
   }
@@ -74,14 +75,20 @@ class TeacherLogin extends React.Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(getUser, dispatch),
-});
-
+// BIND ACTION CREATORS
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getUser }, dispatch);
+}
 export default connect(mapDispatchToProps)(TeacherLogin);
-
 
 TeacherLogin.propTypes = {
   navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
+
+// DOES NOT WORK
+// const mapDispatchToProps = dispatch => ({
+//   onUser: (user) => {
+//     dispatch(getUser(user));
+//   },
+// })
