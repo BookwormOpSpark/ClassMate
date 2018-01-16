@@ -6,7 +6,7 @@ import { Google } from 'expo';
 import { StyleSheet, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
-import { androidClientId, iosClientId, SERVER_URI, loginRoute } from '../../constant';
+import { androidClientId, iosClientId, SERVER_URI, TeacherLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 
 class TeacherLogin extends React.Component {
@@ -24,7 +24,7 @@ class TeacherLogin extends React.Component {
       scopes: ['profile', 'email'],
     }).then((info) => {
       const token = info.idToken;
-      axios.post(`${SERVER_URI}${loginRoute}`, { idtoken: token })
+      axios.post(`${SERVER_URI}${TeacherLoginRoute}`, { idtoken: token })
         .then((res) => {
           const user = {
             id: res.data.id,

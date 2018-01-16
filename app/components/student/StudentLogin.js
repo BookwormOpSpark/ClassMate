@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
-import { SERVER_URI, loginRoute } from '../../constant';
+import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 
 
@@ -22,7 +22,7 @@ class StudentLogin extends React.Component {
   onLogin() {
     const student = this.state;
     console.log(student);
-    axios.post(`${SERVER_URI}${loginRoute}`, { student })
+    axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
         const user = {
           id: res.data.id,
