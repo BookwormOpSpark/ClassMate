@@ -43,7 +43,7 @@ class JoinClass extends React.Component {
         justifyContent: 'center',
       },
     });
-    const student = this.props.state.user;
+    const student = this.props.user;
     return (
       <View style={styles.container}>
         <Text h4>{`Hello ${student.First_name} ${student.Last_name}`}</Text>
@@ -64,17 +64,39 @@ class JoinClass extends React.Component {
 
 
 const mapStateToProps = state => ({
-  state,
+  user: state.user,
 });
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getSession }, dispatch);
-}
+// Inject dispatch and user state
+export default connect(mapStateToProps)(JoinClass);
+
+JoinClass.propTypes = {
+  user: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+//* ****mapDispatchToProps function 1**********
 // const mapDispatchToProps = dispatch => ({
 //   actions: bindActionCreators(getSession, dispatch),
 // });
-export default connect(mapStateToProps, mapDispatchToProps)(JoinClass);
+//* ****mapDispatchToProps function 2**********
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ getSession }, dispatch);
+// }
 
-JoinClass.propTypes = {
-  state: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
+// JoinClass props
+// Object {
+// "dispatch": [Function dispatch],
+// "navigation": Object {
+// "dispatch": [Function anonymous],
+// "goBack": [Function goBack],
+// "navigate": [Function navigate],
+// "setParams": [Function setParams],
+// "state": Object {
+// "key": "id-1516133317353-3",
+// "params": undefined,
+// "routeName": "JoinClass",
+// },
+// },
+// "screenProps": undefined,
+// "user": Object { },
+// }
