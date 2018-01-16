@@ -17,15 +17,6 @@ class JoinClass extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // handleChange(event) {
-  //   const value = event.target.value;
-  //   console.log(value);
-  //   this.setState({
-  //     text: value,
-  //   });
-  // }
-
-
   handleSubmit() {
     const { text } = this.state;
     console.log(text);
@@ -52,10 +43,10 @@ class JoinClass extends React.Component {
         justifyContent: 'center',
       },
     });
-    //const student = this.props.state.user;
+    const student = this.props.state.user;
     return (
       <View style={styles.container}>
-        { /*       <Text h4>{`Hello ${student.First_name} ${student.Last_name}`}</Text>*/}
+        <Text h4>{`Hello ${student.First_name} ${student.Last_name}`}</Text>
         <FormLabel>Enter the Join Code for the class</FormLabel>
         <TextInput
           style={{ height: 40 }}
@@ -75,13 +66,15 @@ class JoinClass extends React.Component {
 const mapStateToProps = state => ({
   state,
 });
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(getSession, dispatch),
-});
-export default connect(mapDispatchToProps)(JoinClass);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getSession }, dispatch);
+}
+// const mapDispatchToProps = dispatch => ({
+//   actions: bindActionCreators(getSession, dispatch),
+// });
+export default connect(mapStateToProps, mapDispatchToProps)(JoinClass);
 
 JoinClass.propTypes = {
-  //state: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-
 };
