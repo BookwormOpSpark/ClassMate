@@ -21,6 +21,7 @@ class StudentLogin extends React.Component {
 
   onLogin() {
     const student = this.state;
+    console.log(student);
     axios.post(`${SERVER_URI}${loginRoute}`, { student })
       .then((res) => {
         const user = {

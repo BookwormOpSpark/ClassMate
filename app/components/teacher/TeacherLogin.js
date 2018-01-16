@@ -12,10 +12,11 @@ import { getUser } from '../../actions/actions';
 class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
-    this.onLoginPress = this.onLoginPress.bind(this);
+    console.log(props);
+    this.onLogin = this.onLogin.bind(this);
   }
 
-  onLoginPress() {
+  onLogin() {
     Google.logInAsync({
       behavior: 'web',
       androidClientId,
@@ -65,7 +66,7 @@ class TeacherLogin extends React.Component {
         <Text h3>Teacher Login</Text>
         <Text>Please sign in with Google Authentication</Text>
         <Button
-          onPress={this.onLoginPress}
+          onPress={this.onLogin}
           large
           title="GoogleSignIn"
         />

@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export default class TeacherDashboard extends React.Component {
+class TeacherDashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = {};
   }
   render() {
     const styles = StyleSheet.create({
@@ -16,15 +18,27 @@ export default class TeacherDashboard extends React.Component {
         justifyContent: 'center',
       },
     });
+    const teacher = this.props.state.user;
+    console.log('teacher dashboard');
+    console.log(this.props.state);
     return (
       <View style={styles.container}>
-        <Text h1>Class Mate</Text>
-        <Text h2>Teacher Dashboard</Text>
-        <Text h4>Teacher Name</Text>
-        <Text h4>Your Class Schedule</Text>
-        <Text h4>Upcoming Due Dates</Text>
-        <Text h4>Add a sidebar</Text>
+        <Text h4>{`${teacher.First_name} ${teacher.Last_name} Dashboard`}</Text>
+        <Text h5>Your Class Schedule</Text>
+        <Text h5>Upcoming Due Dates</Text>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  state,
+});
+
+
+export default connect(mapStateToProps)(TeacherDashboard);
+
+TeacherDashboard.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+};
