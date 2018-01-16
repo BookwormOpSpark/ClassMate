@@ -19,11 +19,13 @@ class StudentDashboard extends React.Component {
       },
     });
     const student = this.props.state.user;
+    console.log('student dashboard');
+    console.log(this.props.state);
     return (
       <View style={styles.container}>
-        <Text h2>{`${student.First_name} ${student.Last_name} Dashboard`}</Text>
-        <Text h4>Your Class Schedule</Text>
-        <Text h4>Upcoming Due Dates</Text>
+        <Text h4>{`${student.First_name} ${student.Last_name} Dashboard`}</Text>
+        <Text h5>Your Class Schedule</Text>
+        <Text h5>Upcoming Due Dates</Text>
         <Button
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           onPress={() => this.props.navigation.navigate('StudentClassNavigation')}

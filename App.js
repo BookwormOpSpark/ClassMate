@@ -8,12 +8,11 @@ import { getUser } from './app/actions/actions';
 
 export default function App() {
   const store = createStore(rootReducer);
-  //store.dispatch(getUser({ email: 'aurelie.lebec' }));
-  console.log(store.getState());
-  const unsubscribe = store.subscribe(() =>
-    console.log(store.getState())
-  )
-  unsubscribe();
+  // store.dispatch(getUser({ email: 'aurelie.lebec' }));
+  // const unsubscribe = store.subscribe(() =>
+  //   console.log(store.getState())
+  // )
+  // unsubscribe();
 
   return (
     <Provider store={store}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -10,18 +11,30 @@ import { SERVER_URI, JoinClassRoute } from '../../constant';
 class JoinClass extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { code: '' };
+    console.log('JoinClass');
+    console.log(props);
+    this.state = { text: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // handleChange(event) {
+  //   const value = event.target.value;
+  //   console.log(value);
+  //   this.setState({
+  //     text: value,
+  //   });
+  // }
+
+
   handleSubmit() {
-    const { code } = this.state;
-    console.log(code);
-    this.props.dispatch(getSession({ code }));
+    const { text } = this.state;
+    console.log(text);
+    this.props.dispatch(getSession({ text }));
+
 
     // need to post the class code and the student id => this.props.state.user.id
     // so that I get back a session id and a session name (biology...)
-    // axios.post(`${SERVER_URI}/${JoinClassRoute}`, { code })
+    // axios.post(`${SERVER_URI}${JoinClassRoute}`, { code })
     //   .then((res) => {
     //     console.log(res.data);
     //     const { sessionId, sessionName } = res.data;
@@ -39,19 +52,18 @@ class JoinClass extends React.Component {
         justifyContent: 'center',
       },
     });
-    const student = this.props.state.user;
+    //const student = this.props.state.user;
     return (
       <View style={styles.container}>
-        <Text h2>{`Hello ${student.First_name} ${student.Last_name}`}</Text>
+        { /*       <Text h4>{`Hello ${student.First_name} ${student.Last_name}`}</Text>*/}
         <FormLabel>Enter the Join Code for the class</FormLabel>
-        <FormInput
-          onChangeText={code => this.setState({ code })}
+        <TextInput
+          style={{ height: 40 }}
+          onChangeText={text => this.setState({ text })}
         />
         <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5, backgroundColor: 'blue' }]}
-          onClick={this.handleSubmit}
-          raised
-          large
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          onPress={this.handleSubmit}
           title="Join!"
         />
       </View>
@@ -64,11 +76,12 @@ const mapStateToProps = state => ({
   state,
 });
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(getUser, dispatch),
+  actions: bindActionCreators(getSession, dispatch),
 });
+export default connect(mapDispatchToProps)(JoinClass);
+
 JoinClass.propTypes = {
-  state: PropTypes.object.isRequired,
+  //state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 
 };
-export default connect(mapStateToProps, mapDispatchToProps)(JoinClass);
