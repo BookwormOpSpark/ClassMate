@@ -2,14 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { Google } from 'expo';
 import { StyleSheet, View, Button } from 'react-native';
+import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { androidClientId, iosClientId, SERVER_URI } from '../../constant';
+import { getUser } from '../../actions/actions';
 
-export default class TeacherLogin extends React.Component {
+class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     this.state = {
       user_id: '',
       user_name: '',
@@ -38,6 +42,10 @@ export default class TeacherLogin extends React.Component {
         link: info.user.email,
         picture: { data: { url: info.user.photoUrl } },
       };
+      this.props.dispatch(getUser(user));
+      console.log(this.props.dispatch(getUser(user)));
+
+
       this.setState({
         user_id: user.id,
         user_name: user.name,
@@ -85,7 +93,14 @@ export default class TeacherLogin extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(getUser, dispatch),
+});
+
+export default connect(mapDispatchToProps)(TeacherLogin);
+
 
 TeacherLogin.propTypes = {
   navigation: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
