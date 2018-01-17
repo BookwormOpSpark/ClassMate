@@ -43,9 +43,7 @@ class SubmitHomework extends React.Component {
     console.log(uri);
 
     const uriParts = uri.split('.');
-    console.log(uriParts);
     const fileType = uriParts[uriParts.length - 1];
-    console.log(fileType);
 
     let formData = new FormData();
     formData.append('photo', {
