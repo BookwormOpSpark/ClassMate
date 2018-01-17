@@ -13,8 +13,11 @@ class StudentLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
+      username: '',
       password: '',
+      nameFirst: '',
+      nameLast: '',
+      email: '',
     };
     this.onLogin = this.onLogin.bind(this);
   }
@@ -24,6 +27,7 @@ class StudentLogin extends React.Component {
     console.log(student);
     axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
+        console.log('res', res.data);
         const user = {
           id: res.data.id,
           First_name: res.data.nameFirst,
@@ -35,8 +39,6 @@ class StudentLogin extends React.Component {
         return this.props.dispatch(getUser(user));
       })
       .then((res) => {
-        console.log('res');
-        console.log(res);
         const verified = res.payload.id;
         if (verified) {
           this.props.navigation.navigate('StudentDashboard');
@@ -58,9 +60,21 @@ class StudentLogin extends React.Component {
       <View style={styles.container}>
         <Text h1>Class Mate</Text>
         <Text h4>Student Login</Text>
-        <FormLabel>Enter your Email</FormLabel>
+        <FormLabel>First Name</FormLabel>
         <FormInput
-          onChangeText={text => this.setState({ userName: text })}
+          onChangeText={text => this.setState({ nameFirst: text })}
+        />
+        <FormLabel>Last Name</FormLabel>
+        <FormInput
+          onChangeText={text => this.setState({ nameLast: text })}
+        />
+        <FormLabel>Userame</FormLabel>
+        <FormInput
+          onChangeText={text => this.setState({ username: text })}
+        />
+        <FormLabel>Email</FormLabel>
+        <FormInput
+          onChangeText={text => this.setState({ email: text })}
         />
         <FormLabel>Password</FormLabel>
         <FormInput

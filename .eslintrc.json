@@ -1,8 +1,7 @@
 {
     "parser": "babel-eslint",
     "extends": [
-        "airbnb",
-        "exponent"
+        "airbnb"
     ],
     "rules": {
         "no-underscore-dangle": 0,
