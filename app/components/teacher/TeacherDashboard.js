@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps)(TeacherDashboard);
-
+//eslint - disable - line react / forbid - prop - types
 TeacherDashboard.propTypes = {
   navigation: PropTypes.object.isRequired,
   state: PropTypes.object.isRequired,
