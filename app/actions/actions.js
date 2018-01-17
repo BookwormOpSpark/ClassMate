@@ -17,3 +17,7 @@ export const getBadges = badges => ({
   type: 'GET_BADGES',
   payload: badges,
 });
+
+export const logOut = () => ({
+  type: 'LOG_OUT',
+});

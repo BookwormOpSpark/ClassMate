@@ -1,14 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { logOut } from '../../actions/actions';
+
 
 class StudentDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.LogOut = this.LogOut.bind(this);
   }
+
+  LogOut() {
+    this.props.dispatch(logOut());
+  }
+
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -36,6 +44,11 @@ class StudentDashboard extends React.Component {
           onPress={() => this.props.navigation.navigate('JoinClass')}
           title="Join a Class"
         />
+        <Button
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          onPress={this.LogOut}
+          title="Log Out"
+        />
       </View>
     );
   }
@@ -51,4 +64,5 @@ export default connect(mapStateToProps)(StudentDashboard);
 StudentDashboard.propTypes = {
   navigation: PropTypes.object.isRequired,
   state: PropTypes.object.isRequired,
+  dispatch: PropTypes.object.isRequired,
 };
