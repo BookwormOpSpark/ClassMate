@@ -76,10 +76,11 @@ class TeacherLogin extends React.Component {
   }
 }
 // BIND ACTION CREATORS
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getUser }, dispatch);
-}
-export default connect(mapDispatchToProps)(TeacherLogin);
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ getUser }, dispatch);
+// }
+// export default connect(mapDispatchToProps)(TeacherLogin);
+export default connect()(TeacherLogin);
 
 TeacherLogin.propTypes = {
   navigation: PropTypes.object.isRequired,
