@@ -50,6 +50,7 @@ class StudentDashboard extends React.Component {
         <Button
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           onPress={() => this.props.navigation.navigate('StudentClassNavigation')}
+          iconRight={{ name: 'directions-run' }}
           backgroundColor="blue"
           rounded
           title="Go to Class Biology"
@@ -57,6 +58,7 @@ class StudentDashboard extends React.Component {
         <Button
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           onPress={() => this.props.navigation.navigate('JoinClass')}
+          iconRight={{ name: 'done' }}
           backgroundColor="blue"
           rounded
           title="Join a Class"
@@ -64,7 +66,7 @@ class StudentDashboard extends React.Component {
         <Button
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           onPress={this.LogOut}
-          icon={{ name: 'done' }}
+          iconRight={{ name: 'enhanced-encryption' }}
           backgroundColor="blue"
           rounded
           title="Log Out"
