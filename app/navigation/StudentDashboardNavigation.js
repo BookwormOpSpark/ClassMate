@@ -2,7 +2,6 @@ import { StackNavigator } from 'react-navigation';
 import StudentDashboard from '../components/student/StudentDashboard';
 import StudentClassNavigation from './StudentClassNavigation';
 import FirstPage from '../components/FirstPage';
-// import JoinClass from '../components/student/JoinClass';
 import JoinClassContainer from '../containers/JoinClassContainer';
 
 const StudentDashboardNavigation = StackNavigator({

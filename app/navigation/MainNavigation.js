@@ -3,7 +3,6 @@ import { Animated } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoginNavigation from './LoginNavigation';
-import StudentClassNavigation from './StudentClassNavigation';
 import StudentDashboardNavigation from './StudentDashboardNavigation';
 
 
@@ -28,20 +27,6 @@ const TabAnimations = TabNavigator(
       path: '/',
       navigationOptions: {
         tabBarLabel: 'StudentDashb',
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-settings' : 'ios-settings-outline'}
-            size={15}
-            style={{ color: tintColor }}
-          />
-        ),
-      },
-    },
-    ClassTab: {
-      screen: StudentClassNavigation,
-      path: '/',
-      navigationOptions: {
-        tabBarLabel: 'StudClassDashb',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}

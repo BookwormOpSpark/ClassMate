@@ -43,7 +43,7 @@ class StudentLogin extends React.Component {
       .then((res) => {
         const verified = res.payload.id;
         if (verified) {
-          this.props.navigation.navigate('StudentDashboard');
+          this.props.navigation.navigate('StudentDashboardNavigation');
         }
       })
       .catch(err => console.log(err));

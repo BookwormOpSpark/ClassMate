@@ -37,7 +37,7 @@ class StudentDashboard extends React.Component {
       <View style={styles.container}>
         <Header
           leftComponent={{ icon: 'menu', color: '#fff' }}
-          centerComponent={{ text: `${student.First_name} Dashboard`, style: { color: '#fff' } }}
+          centerComponent={{ text: `Student ${student.First_name} Dashboard`, style: { color: '#fff' } }}
           rightComponent={{ icon: 'home', color: '#fff' }}
           outerContainerStyles={{ width: Dimensions.get('window').width }}
         />

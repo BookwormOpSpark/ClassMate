@@ -43,7 +43,7 @@ class TeacherLogin extends React.Component {
           console.log(res);
           const verified = res.payload.id;
           if (verified) {
-            this.props.navigation.navigate('TeacherDashboard');
+            this.props.navigation.navigate('TeacherDashboardNavigation');
           }
         })
         .catch(err => console.log(err));
