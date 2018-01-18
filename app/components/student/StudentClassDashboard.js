@@ -24,7 +24,7 @@ export default class StudentClassDashboard extends React.Component {
         <Icon color="blue" name="rocket" size={30} />
         <Button
           onPress={() => this.props.navigation.navigate('CheckIn')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
           iconRight={{ name: 'done' }}
           backgroundColor="blue"
           rounded

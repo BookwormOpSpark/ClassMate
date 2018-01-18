@@ -40,7 +40,7 @@ export default class JoinClass extends React.Component {
       },
     });
     const student = this.props.state.user;
-    const { className } = this.props.state.session;
+    const { className } = this.props.state.session;//this will be an array
     return (
       <View style={styles.container}>
         <Text h2>{`Hello ${student.First_name}`}</Text>
