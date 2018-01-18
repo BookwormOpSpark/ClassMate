@@ -3,7 +3,7 @@ import { getSession } from '../actions/actions';
 import JoinClass from '../components/student/JoinClass';
 
 const mapStateToProps = state => ({
-  user: state.user,
+  state,
 });
 
 const mapDispatchToProps = dispatch => ({

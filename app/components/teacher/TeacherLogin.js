@@ -38,8 +38,6 @@ class TeacherLogin extends React.Component {
           return this.props.dispatch(getUser(user));
         })
         .then((res) => {
-          console.log('res');
-          console.log(res);
           const verified = res.payload.id;
           if (verified) {
             this.props.navigation.navigate('TeacherDashboard');
