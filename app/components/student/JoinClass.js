@@ -19,7 +19,6 @@ export default class JoinClass extends React.Component {
     const { joinCode } = this.state;
     this.state.code = '';
     const userId = this.props.state.user.id;
-    // this.props.onJoiningClass({ joinCode });
 
     axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId })
       .then((res) => {
@@ -40,7 +39,9 @@ export default class JoinClass extends React.Component {
       },
     });
     const student = this.props.state.user;
-    const { className } = this.props.state.session;//this will be an array
+    const sessions = this.props.state.session;
+    const index = sessions.length - 1;
+    const { className } = sessions[index];
     return (
       <View style={styles.container}>
         <Text h2>{`Hello ${student.First_name}`}</Text>
