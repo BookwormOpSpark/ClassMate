@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StyleSheet, View, ScrollView } from 'react-native';
@@ -37,6 +37,7 @@ class StudentLogin extends React.Component {
           picture: { data: { url: res.data.photoUrl } },
           emergencyContact: res.data.id_emergencyContact,
         };
+        console.log(this.props.dispatch(getUser(user)));
         return this.props.dispatch(getUser(user));
       })
       .then((res) => {
@@ -65,7 +66,7 @@ class StudentLogin extends React.Component {
         >
           <Text h1>Class Mate</Text>
           <Text h4>Student Login</Text>
-          <Icon color="grey" name="pets" size={30} />
+          <Icon color="blue" name="lock" size={30} />
           <FormLabel>First Name</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ nameFirst: text })}
@@ -92,6 +93,8 @@ class StudentLogin extends React.Component {
             onPress={this.onLogin}
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             icon={{ name: 'done' }}
+            rounded
+            backgroundColor="blue"
             title="Login"
           />
         </ScrollView>
