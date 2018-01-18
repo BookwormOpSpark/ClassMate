@@ -39,9 +39,13 @@ export default class JoinClass extends React.Component {
       },
     });
     const student = this.props.state.user;
-    const sessions = this.props.state.session;
-    const index = sessions.length - 1;
-    const { className } = sessions[index];
+    const { session } = this.props.state;
+    const index = session.length - 1;
+    console.log('index', index);
+    console.log('session', session);
+    console.log('sessionindex', session[index]);
+    const { className } = session[index] ? session[index] : '';
+    console.log('class', className);
     return (
       <View style={styles.container}>
         <Text h2>{`Hello ${student.First_name}`}</Text>
