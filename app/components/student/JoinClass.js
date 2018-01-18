@@ -16,9 +16,10 @@ export default class JoinClass extends React.Component {
 
   handleSubmit() {
     const { joinCode } = this.state;
+    const userId = this.props.state.user.id;
     // this.props.onJoiningClass({ joinCode });
 
-    axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId: this.props.user.id })
+    axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId })
       .then((res) => {
         console.log(res.data);
         const { sessionId, className, participantId } = res.data;
@@ -36,7 +37,7 @@ export default class JoinClass extends React.Component {
         justifyContent: 'center',
       },
     });
-    const student = this.props.user;
+    const student = this.props.state.user;
     return (
       <View style={styles.container}>
         <Text h4>{`Hello ${student.First_name} ${student.Last_name}`}</Text>
@@ -56,7 +57,7 @@ export default class JoinClass extends React.Component {
 
 
 JoinClass.propTypes = {
-  user: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
   onJoiningClass: PropTypes.func.isRequired,
 };
 

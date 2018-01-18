@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
@@ -49,42 +50,51 @@ class StudentLogin extends React.Component {
 
   render() {
     const styles = StyleSheet.create({
-      container: {
-        flex: 1,
+      contentContainer: {
+        flexGrow: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
       },
     });
     return (
-      <View style={styles.container}>
-        <Text h1>Class Mate</Text>
-        <Text h4>Student Login</Text>
-        <FormLabel>First Name</FormLabel>
-        <FormInput
-          onChangeText={text => this.setState({ nameFirst: text })}
-        />
-        <FormLabel>Last Name</FormLabel>
-        <FormInput
-          onChangeText={text => this.setState({ nameLast: text })}
-        />
-        <FormLabel>Userame</FormLabel>
-        <FormInput
-          onChangeText={text => this.setState({ username: text })}
-        />
-        <FormLabel>Email</FormLabel>
-        <FormInput
-          onChangeText={text => this.setState({ email: text })}
-        />
-        <FormLabel>Password</FormLabel>
-        <FormInput
-          onChangeText={text => this.setState({ password: text })}
-        />
-        <Button
-          onPress={this.onLogin}
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          title="Login"
-        />
+      <View>
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          scrollEnabled
+        >
+          <Text h1>Class Mate</Text>
+          <Text h4>Student Login</Text>
+          <Icon color="grey" name="pets" size={30} />
+          <FormLabel>First Name</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ nameFirst: text })}
+            placeholder="optional if already registered"
+          />
+          <FormLabel>Last Name</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ nameLast: text })}
+            placeholder="optional if already registered"
+          />
+          <FormLabel>User Name</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ username: text })}
+          />
+          <FormLabel>Email</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ email: text })}
+          />
+          <FormLabel>Password</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ password: text })}
+          />
+          <Button
+            onPress={this.onLogin}
+            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            icon={{ name: 'done' }}
+            title="Login"
+          />
+        </ScrollView>
       </View>
     );
   }
