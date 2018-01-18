@@ -9,6 +9,7 @@ import { logOut } from '../../actions/actions';
 class StudentDashboard extends React.Component {
   constructor(props) {
     super(props);
+    console.log('student dashboard', props);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
   }
@@ -27,7 +28,7 @@ class StudentDashboard extends React.Component {
       },
     });
     const student = this.props.state.user;
-    console.log('student dashboard');
+    console.log('student dashboard this.props.state');
     console.log(this.props.state);
     return (
       <View style={styles.container}>
@@ -64,5 +65,5 @@ export default connect(mapStateToProps)(StudentDashboard);
 StudentDashboard.propTypes = {
   navigation: PropTypes.object.isRequired,
   state: PropTypes.object.isRequired,
-  dispatch: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
