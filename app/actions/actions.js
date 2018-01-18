@@ -19,5 +19,5 @@ export const getBadges = badges => ({
 });
 
 export const logOut = () => ({
-  type: 'USER_LOGOUT',
+  type: 'LOG_OUT',
 });

@@ -1,11 +1,12 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Google } from 'expo';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { androidClientId, iosClientId, SERVER_URI, TeacherLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 
@@ -40,7 +41,7 @@ class TeacherLogin extends React.Component {
         .then((res) => {
           const verified = res.payload.id;
           if (verified) {
-            this.props.navigation.navigate('TeacherDashboard');
+            this.props.navigation.navigate('TeacherDashboardNavigation');
           }
         })
         .catch(err => console.log(err));
@@ -62,12 +63,16 @@ class TeacherLogin extends React.Component {
     return (
       <View style={styles.container}>
         <Text h1>Class Mate</Text>
-        <Text h3>Teacher Login</Text>
+        <Icon color="blue" name="lock" size={30} />
+        <Text h4 style={{ marginTop: 15 }}>Teacher Login</Text>
+        <Icon color="blue" name="google" size={30} />
         <Text>Please sign in with Google Authentication</Text>
         <Button
           onPress={this.onLogin}
-          large
-          title="GoogleSignIn"
+          buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
+          rounded
+          backgroundColor="blue"
+          title="Google SignIn"
         />
       </View>
     );

@@ -19,7 +19,7 @@ class SubmitHomework extends React.Component {
       base64: true,
     });
 
-    console.log('pickImage',result.uri);
+    console.log('pickImage', result.uri);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
@@ -78,18 +78,27 @@ class SubmitHomework extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
-          style={[{ marginBottom: 5, marginTop: 5 }]}
+          style={[{ marginBottom: 10, marginTop: 10 }]}
           title="Pick your homework from camera roll"
+          iconRight={{ name: 'attach-file' }}
+          backgroundColor="blue"
+          rounded
           onPress={this.pickImage}
         />
         <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
           title="Open Camera"
+          iconRight={{ name: 'camera' }}
+          backgroundColor="blue"
+          rounded
           onPress={this.openCamera}
         />
         <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
           title="Post to Homeworks!"
+          iconRight={{ name: 'done' }}
+          backgroundColor="blue"
+          rounded
           onPress={this.postHomework.bind(this)}
         />
         {image &&

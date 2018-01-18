@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 import StudentDashboard from '../components/student/StudentDashboard';
 import StudentClassNavigation from './StudentClassNavigation';
-// import JoinClass from '../components/student/JoinClass';
+import FirstPage from '../components/FirstPage';
 import JoinClassContainer from '../containers/JoinClassContainer';
 
 const StudentDashboardNavigation = StackNavigator({
@@ -10,6 +10,9 @@ const StudentDashboardNavigation = StackNavigator({
   },
   JoinClass: {
     screen: JoinClassContainer,
+  },
+  FirstPage: {
+    screen: FirstPage,
   },
   StudentClassNavigation: {
     screen: StudentClassNavigation,

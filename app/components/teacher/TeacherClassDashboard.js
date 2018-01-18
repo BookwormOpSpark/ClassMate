@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 
-export default class StudentClassDashboard extends React.Component {
+export default class TeacherClassDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -23,31 +23,31 @@ export default class StudentClassDashboard extends React.Component {
         <Text h1>Biology</Text>
         <Icon color="blue" name="rocket" size={30} />
         <Button
-          onPress={() => this.props.navigation.navigate('CheckIn')}
+          onPress={() => this.props.navigation.navigate('Assignment')}
           buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
           iconRight={{ name: 'done' }}
           backgroundColor="blue"
           rounded
-          title="CheckIn"
+          title="Assignment"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('RaiseHand')}
+          onPress={() => this.props.navigation.navigate('ClassRoster')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'thumb-up' }}
           backgroundColor="blue"
           rounded
-          title="Raise Hand"
+          title="Class Roster"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('SubmitHomework')}
+          onPress={() => this.props.navigation.navigate('GiveAQuizz')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'assignment' }}
           backgroundColor="blue"
           rounded
-          title="Submit Homework"
+          title="Give A Quizz"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
+          onPress={() => this.props.navigation.navigate('TeacherClassSchedule')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'schedule' }}
           backgroundColor="blue"
@@ -58,6 +58,6 @@ export default class StudentClassDashboard extends React.Component {
     );
   }
 }
-StudentClassDashboard.propTypes = {
+TeacherClassDashboard.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
