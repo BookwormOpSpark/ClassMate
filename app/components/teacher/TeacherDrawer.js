@@ -87,7 +87,7 @@ class TeacherDrawer extends Component {
             <View style={styles.addClassStyle}>
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-                onPress={this.AddClass}
+                onPress={this.navigateToScreen('AddClass')}
                 backgroundColor="green"
                 rounded
                 title="Add a Class"
