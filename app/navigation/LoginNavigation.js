@@ -3,7 +3,7 @@ import StudentLogin from '../components/student/StudentLogin';
 import TeacherLogin from '../components/teacher/TeacherLogin';
 import FirstPage from '../components/FirstPage';
 import StudentDashboardNavigation from './StudentDashboardNavigation';
-import TeacherDashboardNavigation from './TeacherDashboardNavigation';
+import TeacherDrawerNavigation from './TeacherDrawerNavigation';
 
 
 const LoginNavigation = StackNavigator({
@@ -22,11 +22,11 @@ const LoginNavigation = StackNavigator({
       header: null,
     }),
   },
-  TeacherDashboardNavigation: {
-    screen: TeacherDashboardNavigation,
-    navigationOptions: () => ({
-      header: null,
-    }),
+  TeacherDrawerNavigation: {
+    screen: TeacherDrawerNavigation,
+    // navigationOptions: () => ({
+    //   header: null,
+    // }),
   },
 });
 
