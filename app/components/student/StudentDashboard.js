@@ -58,8 +58,17 @@ class StudentDashboard extends React.Component {
       },
       list: {
         borderRadius: 5,
-        borderColor: 'blue',
-        backgroundColor: 'blue',
+        borderColor: 'darkblue',
+        backgroundColor: 'darkblue',
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 5,
+        marginRight: 5,
+      },
+      newlist: {
+        borderRadius: 5,
+        borderColor: 'cornflowerblue',
+        backgroundColor: 'cornflowerblue',
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
@@ -99,18 +108,9 @@ class StudentDashboard extends React.Component {
 
             <Button
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              onPress={() => this.props.navigation.navigate('StudentClassNavigation')}
-              iconRight={{ name: 'directions-run' }}
-              backgroundColor="blue"
-              rounded
-              title="Go to Class Biology"
-            />
-
-            <Button
-              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
               onPress={() => this.props.navigation.navigate('JoinClass')}
               iconRight={{ name: 'done' }}
-              backgroundColor="green"
+              backgroundColor="blue"
               rounded
               title="Join a Class"
             />
@@ -118,7 +118,7 @@ class StudentDashboard extends React.Component {
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
               onPress={this.onLogout}
               iconRight={{ name: 'enhanced-encryption' }}
-              backgroundColor="red"
+              backgroundColor="firebrick"
               rounded
               title="Log Out"
             />
@@ -151,11 +151,11 @@ class StudentDashboard extends React.Component {
             : <View style={{ flex: 1 }}>
               <List containerStyle={{ flex: 1 }}>
                 <Text>
-                  Your Newly Added Classes
+                  Your Newly Added Classes*** Do we want to keep this feature?
                 </Text>
                 {newSessions.map((item, id) => (
                   <ListItem
-                    containerStyle={styles.list}
+                    containerStyle={styles.newlist}
                     key={`bbbtn${id}`}
                     title={`${item.className}`}
                     leftIcon={{ name: 'book' }}

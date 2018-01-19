@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
-import { SERVER_URI, JoinClassRoute } from '../../constant';
+import { SERVER_URI, JoinClassRoute, DashboardRoute } from '../../constant';
 
 export default class JoinClass extends React.Component {
   constructor(props) {
@@ -15,17 +15,26 @@ export default class JoinClass extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
+  handleSubmit = async () => {
     const { joinCode } = this.state;
     const userId = this.props.state.user.id;
 
-    axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId })
+    await axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId })
       .then((res) => {
         console.log(res.data);
         const { sessionId, className, participantId } = res.data;
         this.props.onJoiningClass({ sessionId, className, participantId });
       })
       .catch(err => console.log(err));
+
+    axios.get(`${SERVER_URI}${DashboardRoute}`, {
+      params: {
+        userId: this.props.state.user.id,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      this.props.onDashboard(res.data);
+    });
   }
 
   render() {
@@ -68,5 +77,6 @@ export default class JoinClass extends React.Component {
 JoinClass.propTypes = {
   state: PropTypes.object.isRequired,
   onJoiningClass: PropTypes.func.isRequired,
+  onDashboard: PropTypes.func.isRequired,
 };
 
