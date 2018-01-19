@@ -18,6 +18,16 @@ export const getBadges = badges => ({
   payload: badges,
 });
 
+export const selectSession = session => ({
+  type: 'SELECT_SESSION',
+  payload: session,
+});
+
+export const getDashboard = session => ({
+  type: 'GET_DASHBOARD',
+  payload: session,
+});
+
 export const logOut = () => ({
   type: 'LOG_OUT',
 });

@@ -10,7 +10,7 @@ import { logOut } from '../../actions/actions';
 class TeacherDashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log('Teacher dashboard', props);
+    console.log('Teacher dashboard', this.props.state);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
   }
@@ -31,8 +31,6 @@ class TeacherDashboard extends React.Component {
       },
     });
     const teacher = this.props.state.user;
-    console.log('Teacher dashboard this.props.state');
-    console.log(this.props.state);
     return (
       <View style={styles.container}>
         <Header

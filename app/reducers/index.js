@@ -3,12 +3,16 @@ import user from './user';
 import session from './session';
 import homeworks from './homeworks';
 import badges from './badges';
+import selectSession from './selectSession';
+import dashboard from './dashboard';
 
 const appReducer = combineReducers({
   user,
   session,
   homeworks,
   badges,
+  selectSession,
+  dashboard,
 });
 
 const rootReducer = (state, action) => {

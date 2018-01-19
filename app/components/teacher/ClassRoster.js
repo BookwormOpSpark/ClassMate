@@ -12,7 +12,7 @@ export default class ClassRoster extends React.Component {
       container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',git 
+        alignItems: 'center',
         justifyContent: 'center',
       },
     });

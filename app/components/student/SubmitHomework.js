@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Image, View } from 'react-native';
 import { ImagePicker } from 'expo';
@@ -8,51 +7,57 @@ import { Button } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
 
 class SubmitHomework extends React.Component {
-  state = {
-    image: null,
-  };
-  postHomework = this.postHomework.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+    };
+    console.log('Homework', this.props.state);
+    this._postHomework = this._postHomework.bind(this);
+    this._pickImage = this._pickImage.bind(this);
+    this._openCamera = this._openCamera.bind(this);
+  }
 
-  pickImage = async () => {
+  _pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       base64: true,
     });
 
-    console.log('pickImage', result.uri);
-
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({
+        image: result.uri,
+      });
     }
   };
 
-  openCamera = async () => {
+  _openCamera = async () => {
     const result = await ImagePicker.launchCameraAsync({
     });
-    console.log('camera',result);
+    console.log('camera', result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
   }
-  postHomework() {
-    const apiUrl = `${SERVER_URI}${PostHomework}`;
-    const uri = this.state.image;
+  _postHomework() {
     // const participant = this.props.state.participant_id;
     // const assignment = this.props.state.assignment_id;
-    console.log(uri);
+    const apiUrl = `${SERVER_URI}${PostHomework}`;// need to update here 
+    const uri = this.state.image;
+    console.log('posturi', uri);
 
     const uriParts = uri.split('.');
     const fileType = uriParts[uriParts.length - 1];
 
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('photo', {
       uri,
       name: `photo.${fileType}`,
       type: `image/${fileType}`,
     });
 
-    let options = {
+    const options = {
       method: 'POST',
       body: formData,
       headers: {
@@ -62,14 +67,6 @@ class SubmitHomework extends React.Component {
     };
 
     return fetch(apiUrl, options);
-    // axios.post(`${SERVER_URI}${PostHomework}`, { uri, participant, assignment })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     return response.data;
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
   }
 
   render() {
@@ -83,7 +80,7 @@ class SubmitHomework extends React.Component {
           iconRight={{ name: 'attach-file' }}
           backgroundColor="blue"
           rounded
-          onPress={this.pickImage}
+          onPress={this._pickImage}
         />
         <Button
           buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
@@ -91,7 +88,7 @@ class SubmitHomework extends React.Component {
           iconRight={{ name: 'camera' }}
           backgroundColor="blue"
           rounded
-          onPress={this.openCamera}
+          onPress={this._openCamera}
         />
         <Button
           buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
@@ -99,7 +96,7 @@ class SubmitHomework extends React.Component {
           iconRight={{ name: 'done' }}
           backgroundColor="blue"
           rounded
-          onPress={this.postHomework.bind(this)}
+          onPress={this._postHomework}
         />
         {image &&
           <Image source={{ uri: image }} style={{ width: 250, height: 350 }} />}
