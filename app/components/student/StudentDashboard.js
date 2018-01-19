@@ -35,10 +35,10 @@ class StudentDashboard extends React.Component {
     this.props.navigation.navigate('FirstPage');
   }
 
-  onSelect(item) {
-    console.log('item',item);
-    // await this.props.dispatch(selectSession(item));
-    // this.props.navigation.navigate('StudentClassNavigation');
+  onSelect = async (item) => {
+    console.log('item', item);
+    await this.props.dispatch(selectSession(item));
+    this.props.navigation.navigate('StudentClassNavigation');
   }
 
   render() {
@@ -160,11 +160,7 @@ class StudentDashboard extends React.Component {
                     title={`${item.className}`}
                     leftIcon={{ name: 'book' }}
                     titleStyle={{ color: 'white' }}
-                    onPress={() => {
-                      console.log('item', item);
-                      this.setState({ selectedSession: item }).bind(this);
-                      this.onSelect();
-                      }}
+                    onPress={() => this.onSelect(item)}
                   />
                 ))}
               </List>

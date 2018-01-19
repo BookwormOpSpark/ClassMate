@@ -43,7 +43,7 @@ class SubmitHomework extends React.Component {
   _postHomework() {
     // const participant = this.props.state.participant_id;
     // const assignment = this.props.state.assignment_id;
-    const apiUrl = `${SERVER_URI}${PostHomework}`;
+    const apiUrl = `${SERVER_URI}${PostHomework}`;// need to update here 
     const uri = this.state.image;
     console.log('posturi', uri);
 

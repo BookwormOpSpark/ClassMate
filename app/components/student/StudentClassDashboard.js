@@ -3,13 +3,16 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default class StudentClassDashboard extends React.Component {
+class StudentClassDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
   }
+
   render() {
+    const className = this.props.state.selectSession.description;
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -18,9 +21,10 @@ export default class StudentClassDashboard extends React.Component {
         justifyContent: 'center',
       },
     });
+
     return (
       <View style={styles.container}>
-        <Text h1>Biology</Text>
+        <Text h1>{className || 'Class'}</Text>
         <Icon color="blue" name="rocket" size={30} />
         <Button
           onPress={() => this.props.navigation.navigate('CheckIn')}
@@ -58,6 +62,16 @@ export default class StudentClassDashboard extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(StudentClassDashboard);
+
+
 StudentClassDashboard.propTypes = {
   navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
