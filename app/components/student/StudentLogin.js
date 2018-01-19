@@ -18,7 +18,6 @@ class StudentLogin extends React.Component {
       password: '',
       nameFirst: '',
       nameLast: '',
-      email: '',
     };
     this.onLogin = this.onLogin.bind(this);
   }
@@ -80,10 +79,6 @@ class StudentLogin extends React.Component {
           <FormLabel>User Name</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ username: text })}
-          />
-          <FormLabel>Email</FormLabel>
-          <FormInput
-            onChangeText={text => this.setState({ email: text })}
           />
           <FormLabel>Password</FormLabel>
           <FormInput

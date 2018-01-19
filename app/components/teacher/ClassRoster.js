@@ -12,13 +12,13 @@ export default class ClassRoster extends React.Component {
       container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
+        alignItems: 'center',git 
         justifyContent: 'center',
       },
     });
     return (
       <View style={styles.container}>
-        <Text h1>ClassRoster</Text>
+        <Text h1>Class Roster</Text>
       </View>
     );
   }

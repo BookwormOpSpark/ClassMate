@@ -1,7 +1,9 @@
-const session = (state = {}, action) => {
+const session = (state = [], action) => {
   switch (action.type) {
     case 'GET_SESSION':
-      return action.payload;
+      return [
+        ...state,
+        action.payload];
     default:
       return state;
   }
