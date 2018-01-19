@@ -1,38 +1,72 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
+import { SERVER_URI, JoinClassRoute } from '../../constant';
 
 export default class JoinClass extends React.Component {
-  state = {
-    hasCameraPermission: null,
+  constructor(props) {
+    super(props);
+    console.log('JoinClass');
+    console.log(this.props.state);
+    this.state = { joinCode: '' };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentWillMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-  }
+  handleSubmit() {
+    const { joinCode } = this.state;
+    const userId = this.props.state.user.id;
 
-  _handleBarCodeRead = ({ type, data }) => {
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId })
+      .then((res) => {
+        console.log(res.data);
+        const { sessionId, className, participantId } = res.data;
+        this.props.onJoiningClass({ sessionId, className, participantId });
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
-    const { hasCameraPermission } = this.state;
-
-    if (hasCameraPermission === null) {
-      return <Text>Requesting for camera permission</Text>;
-    } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
-    }
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    });
+    const student = this.props.state.user;
+    const { session } = this.props.state;
+    const index = session.length - 1;
+    const { className } = session[index] ? session[index] : '';
     return (
-      <View style={{ flex: 1 }}>
-        <BarCodeScanner
-          onBarCodeRead={this._handleBarCodeRead}
-          style={StyleSheet.absoluteFill}
+      <View style={styles.container}>
+        <Text h2>{`Hello ${student.First_name}`}</Text>
+        <FormLabel>Enter the Join Code for the class</FormLabel>
+        <Icon color="blue" name="rocket" size={30} />
+        <FormInput
+          onChangeText={text => this.setState({ joinCode: text })}
         />
+        <Button
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          onPress={this.handleSubmit}
+          backgroundColor="blue"
+          rounded
+          title="Join!"
+        />
+        <Text h5>{className ? `You are now enrolled in ${className}` : ''}</Text>
+        <Text>{className ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
+
       </View>
     );
   }
-
-
 }
+
+
+JoinClass.propTypes = {
+  state: PropTypes.object.isRequired,
+  onJoiningClass: PropTypes.func.isRequired,
+};
+

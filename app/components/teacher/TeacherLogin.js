@@ -1,26 +1,24 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { Google } from 'expo';
-import { StyleSheet, View, Button } from 'react-native';
-import { Text } from 'react-native-elements';
-import { androidClientId, iosClientId, SERVER_URI } from '../../constant';
+import { StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
+import { Button, Text } from 'react-native-elements';
+import { androidClientId, iosClientId, SERVER_URI, TeacherLoginRoute } from '../../constant';
+import { getUser } from '../../actions/actions';
 
-export default class TeacherLogin extends React.Component {
+class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user_id: '',
-      user_name: '',
-      user_first_name: '',
-      user_last_name: '',
-      user_email: '',
-    };
-    this.onLoginPress = this.onLoginPress.bind(this);
+    console.log('Teacher Login');
+    console.log(props);
+    this.onLogin = this.onLogin.bind(this);
   }
 
-  onLoginPress() {
+  onLogin() {
     Google.logInAsync({
       behavior: 'web',
       androidClientId,
@@ -28,30 +26,28 @@ export default class TeacherLogin extends React.Component {
       scopes: ['profile', 'email'],
     }).then((info) => {
       const token = info.idToken;
-      const user = {
-        id: info.user.id,
-        name: info.user.name,
-        First_name: info.user.givenName,
-        Last_name: info.user.familyName,
-        verified: 'True',
-        email: info.user.email,
-        link: info.user.email,
-        picture: { data: { url: info.user.photoUrl } },
-      };
-      this.setState({
-        user_id: user.id,
-        user_name: user.name,
-        user_first_name: user.First_name,
-        user_last_name: user.Last_name,
-        user_email: user.email,
-      });
-      axios.post(`${SERVER_URI}/login`, { idtoken: token })
+      axios.post(`${SERVER_URI}${TeacherLoginRoute}`, { idtoken: token })
         .then((res) => {
+<<<<<<< HEAD
           console.log(res.data);
           const verified = res.data.email; 
           console.log(verified);
+=======
+          const user = {
+            id: res.data.id,
+            First_name: res.data.nameFirst,
+            Last_name: res.data.nameLast,
+            email: res.data.email,
+            picture: { data: { url: res.data.photoUrl } },
+            emergencyContact: res.data.id_emergencyContact,
+          };
+          return this.props.dispatch(getUser(user));
+        })
+        .then((res) => {
+          const verified = res.payload.id;
+>>>>>>> 1ae2ab5e4203bd8a42885d85aec10e17c215c2ae
           if (verified) {
-            this.props.navigation.navigate('TeacherDashboard');
+            this.props.navigation.navigate('TeacherDashboardNavigation');
           }
         })
         .catch(err => console.log(err));
@@ -73,19 +69,31 @@ export default class TeacherLogin extends React.Component {
     return (
       <View style={styles.container}>
         <Text h1>Class Mate</Text>
-        <Text h3>Teacher Login</Text>
+        <Icon color="blue" name="lock" size={30} />
+        <Text h4 style={{ marginTop: 15 }}>Teacher Login</Text>
+        <Icon color="blue" name="google" size={30} />
         <Text>Please sign in with Google Authentication</Text>
         <Button
-          onPress={this.onLoginPress}
-          large
-          title="GoogleSignIn"
+          onPress={this.onLogin}
+          buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
+          rounded
+          backgroundColor="blue"
+          title="Google SignIn"
         />
-        <Text>{this.state.user_id ? JSON.stringify(this.state) : ''}</Text>
       </View>
     );
   }
 }
 
+export default connect()(TeacherLogin);
+
 TeacherLogin.propTypes = {
   navigation: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
+
+// BIND ACTION CREATORS
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ getUser }, dispatch);
+// }
+// export default connect(mapDispatchToProps)(TeacherLogin);

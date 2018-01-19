@@ -11,7 +11,7 @@ export default class Dashboard1 extends React.Component {
           leftComponent={{ icon: 'menu', color: '#fff' }}
           centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
           rightComponent={{ icon: 'home', color: '#fff' }}
-        />  
+        />
       </View>
     );
   }
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'top',
     justifyContent: 'center',
   },
 

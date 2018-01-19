@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
-import PropTypes from 'prop-types';
 
 export default function FirstPage({ navigation }) {
   const styles = StyleSheet.create({
@@ -16,16 +17,22 @@ export default function FirstPage({ navigation }) {
   return (
     <View style={styles.container}>
       <Text h1>Class Mate</Text>
-      <Text>Are you a</Text>
+      <Icon color="blue" name="book-open-page-variant" size={40} />
+
+      <Text h3 style={{ marginTop: 15 }}>Are you a</Text>
       <Button
-        buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+        buttonStyle={[{ marginBottom: 5, marginTop: 15 }]}
         onPress={() => navigation.navigate('StudentLogin')}
+        rounded
+        backgroundColor="blue"
         title="Student?"
       />
 
       <Button
         buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
         onPress={() => navigation.navigate('TeacherLogin')}
+        rounded
+        backgroundColor="blue"
         title="Teacher?"
       />
     </View>

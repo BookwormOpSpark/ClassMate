@@ -3,8 +3,8 @@ import { Animated } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoginNavigation from './LoginNavigation';
-import StudentClassNavigation from './StudentClassNavigation';
 import StudentDashboardNavigation from './StudentDashboardNavigation';
+import TeacherDashboardNavigation from './TeacherDashboardNavigation';
 
 
 const TabAnimations = TabNavigator(
@@ -13,7 +13,7 @@ const TabAnimations = TabNavigator(
       screen: LoginNavigation,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'FirstPage',
+        tabBarLabel: 'LogIn',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-home' : 'ios-home-outline'}
@@ -23,11 +23,11 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
-    SettingsTab: {
+    StudentTab: {
       screen: StudentDashboardNavigation,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'StudentDashb',
+        tabBarLabel: 'Student',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
@@ -37,11 +37,11 @@ const TabAnimations = TabNavigator(
         ),
       },
     },
-    ClassTab: {
-      screen: StudentClassNavigation,
+    TeacherTab: {
+      screen: TeacherDashboardNavigation,
       path: '/',
       navigationOptions: {
-        tabBarLabel: 'StudClassDashb',
+        tabBarLabel: 'Teacher',
         tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
@@ -61,7 +61,7 @@ const TabAnimations = TabNavigator(
       friction: 35,
     }),
     swipeEnabled: false,
-  }
+  },
 );
 
 export default TabAnimations;

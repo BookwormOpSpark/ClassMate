@@ -1,16 +1,18 @@
 {
     "parser": "babel-eslint",
-    "extends": "airbnb",
+    "extends": [
+        "airbnb"
+    ],
     "rules": {
         "no-underscore-dangle": 0,
-            "react/jsx-filename-extension": [
-                "error",
-                {
-                    "extensions": [
-                        ".js",
-                        ".jsx"
-                    ]
-                }
-            ]
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ]
     }
 }
