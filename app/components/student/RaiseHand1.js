@@ -3,49 +3,36 @@ import io from 'socket.io-client';
 import { StyleSheet, View } from 'react-native';
 import { Accelerometer } from 'expo';
 import { Text } from 'react-native-elements';
-import { SERVER_URI, QueueRoute} from '../../constant';
+import { connect } from 'react-redux';
+import { SERVER_URI, QueueRoute } from '../../constant';
 
 
-export default class RaiseHand extends React.Component {
+class RaiseHand extends React.Component {
   state = {
     accelerometerData: {},
-    raisedHand: false,
   }
 
   componentDidMount() {
-    this._toggle();
+    this._subscribe();
 
     const socket = io(SERVER_URI, {
       transports: ['websocket'],
     });
 
     socket.on('connect', () => {
-      this.setState({ isConnected: true });
+      console.log('connected');
     });
 
-    socket.on('ping', data => {
-      this.setState(data);
-    });
+    const { y } = this.state.accelerometerData;
+    if (y > 0.7) {
+      socket.emit('raisedHand', {
+        student: this.props.state.user.First_name,
+      });
+    }
   }
 
   componentWillUnmount() {
     this._unsubscribe();
-  }
-
-  _toggle = () => {
-    if (this._subscription) {
-      this._unsubscribe();
-    } else {
-      this._subscribe();
-    }
-  }
-
-  _slow = () => {
-    Accelerometer.setUpdateInterval(1000);
-  }
-
-  _fast = () => {
-    Accelerometer.setUpdateInterval(16);
   }
 
   _subscribe = () => {
@@ -60,14 +47,14 @@ export default class RaiseHand extends React.Component {
   }
 
   render() {
-    const { x, y, z } = this.state.accelerometerData;
+    const { y } = this.state.accelerometerData;
+    const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
 
     return (
       <View style={styles.sensor}>
-        <Text h3>Class Name</Text>
+        <Text h3>{className || 'Class'}</Text>
         <Text h4>Lift up your phone to be added to the queue!</Text>
-        <Text>Accelerometer:</Text>
-        <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
+        <Text>y: {round(y)} </Text>
         <Text style={styles.red}>{y > 0.7 ? 'Added to the queue' : ''}</Text>
       </View>
     );
@@ -101,3 +88,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 });
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(RaiseHand);
+
+
+RaiseHand.propTypes = {
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
