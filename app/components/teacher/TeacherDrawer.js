@@ -11,12 +11,17 @@ class TeacherDrawer extends Component {
     console.log('TEACHER DRAWER PROPS', this.props);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
+    this.AddClass = this.AddClass.bind(this);
   }
 
   LogOut = async () => {
     await this.props.dispatch(logOut());
     this.props.navigation.navigate('FirstPage');
   }
+  AddClass = async () => {
+    console.log('\nADDING A CLAAAAAAAASS\n')
+  }
+
 
   navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
@@ -34,17 +39,24 @@ class TeacherDrawer extends Component {
       navItemStyle: {
         padding: 10,
       },
-      navSectionStyle: {
-        backgroundColor: 'lightgrey',
-      },
       sectionHeadingStyle: {
+        backgroundColor: 'lightgrey',
         paddingVertical: 10,
         paddingHorizontal: 5,
       },
-      footerContainer: {
-        padding: 20,
-        backgroundColor: 'lightgrey',
+      navSectionStyle: {
+        paddingHorizontal: 15,
       },
+      addClassStyle: {
+        backgroundColor: 'green',
+        alignItems: 'center',
+
+      },
+      footerContainer: {
+        padding: 10,
+        backgroundColor: 'red',
+      },
+
     });
     return (
       <View style={styles.container}>
@@ -71,6 +83,17 @@ class TeacherDrawer extends Component {
                 Class 2
               </Text>
             </View>
+            <View style={{ paddingVertical: 5 }} />
+            <View style={styles.addClassStyle}>
+              <Button
+                buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+                onPress={this.AddClass}
+                backgroundColor="green"
+                rounded
+                title="Add a Class"
+                color="white"
+              />
+            </View>
           </View>
         </ScrollView>
         <View style={styles.footerContainer}>
@@ -81,6 +104,7 @@ class TeacherDrawer extends Component {
             backgroundColor="red"
             rounded
             title="Log Out"
+            color="white"
           />
         </View>
       </View>
@@ -99,4 +123,3 @@ TeacherDrawer.propTypes = {
   navigation: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
 };
-
