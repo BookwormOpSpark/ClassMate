@@ -21,6 +21,7 @@ class StudentDashboard extends React.Component {
   }
 
   render() {
+    // styles is acting up w button
     const { height, width } = Dimensions.get('window');
     const styles = StyleSheet.create({
       bigcontainer: {
@@ -55,7 +56,7 @@ class StudentDashboard extends React.Component {
     console.log('student dashboard this.props.state');
     console.log(this.props.state);
     return (
-      <View style={styles.container}>
+      <View style={styles.bigcontainer}>
         <Header
           leftComponent={{ icon: 'menu', color: '#fff' }}
           centerComponent={{ text: `Student ${user.First_name} Dashboard`, style: { color: '#fff' } }}
