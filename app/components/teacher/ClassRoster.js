@@ -18,7 +18,7 @@ export default class ClassRoster extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>ClassRoster</Text>
+        <Text h1>Class Roster</Text>
       </View>
     );
   }
