@@ -1,5 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
+import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View } from 'react-native';
 import { Accelerometer } from 'expo';
 import { Text } from 'react-native-elements';
@@ -27,6 +29,7 @@ class RaiseHand extends React.Component {
     if (y > 0.7) {
       socket.emit('raisedHand', {
         student: this.props.state.user.First_name,
+        time: Date.now(),
       });
     }
   }
@@ -55,7 +58,9 @@ class RaiseHand extends React.Component {
         <Text h3>{className || 'Class'}</Text>
         <Text h4>Lift up your phone to be added to the queue!</Text>
         <Text>y: {round(y)} </Text>
-        <Text style={styles.red}>{y > 0.7 ? 'Added to the queue' : ''}</Text>
+        <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
+        <Text>{y > 0.7 ? <Icon color="blue" name="human-handsup" size={40} /> : ''}</Text>
+
       </View>
     );
   }
