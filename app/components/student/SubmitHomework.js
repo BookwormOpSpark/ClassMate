@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Image, View } from 'react-native';
 import { ImagePicker } from 'expo';
@@ -8,11 +7,16 @@ import { Button } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
 
 class SubmitHomework extends React.Component {
-  state = {
-    image: null,
-    base64: null,
-  };
-  _postHomework = this._postHomework.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+    };
+    console.log('Homework', this.props.state);
+    this._postHomework = this._postHomework.bind(this);
+    this._pickImage = this._pickImage.bind(this);
+    this._openCamera = this._openCamera.bind(this);
+  }
 
   _pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -20,12 +24,9 @@ class SubmitHomework extends React.Component {
       base64: true,
     });
 
-    console.log('pickImage', result.uri);
-
     if (!result.cancelled) {
       this.setState({
         image: result.uri,
-        base64: result.base64,
       });
     }
   };
@@ -33,7 +34,7 @@ class SubmitHomework extends React.Component {
   _openCamera = async () => {
     const result = await ImagePicker.launchCameraAsync({
     });
-    console.log('camera',result);
+    console.log('camera', result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
@@ -49,14 +50,14 @@ class SubmitHomework extends React.Component {
     const uriParts = uri.split('.');
     const fileType = uriParts[uriParts.length - 1];
 
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('photo', {
       uri,
       name: `photo.${fileType}`,
       type: `image/${fileType}`,
     });
 
-    let options = {
+    const options = {
       method: 'POST',
       body: formData,
       headers: {
