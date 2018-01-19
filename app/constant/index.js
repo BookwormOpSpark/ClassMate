@@ -14,3 +14,4 @@ export const ClassRoster = '/classRoster'; // send session_id => get back all th
 export const GetAssignments = '/getAssignment'; // send session_id => get back all the assignments
 export const CreateAssignments = '/createAssignment'; // send session_id => get back all the assignments
 export const StudentInformation = '/studentInformation'; // send student_id and get back specific student info 
+export const QueueRoute = '/queue'; // send student_id and get back specific student info 
