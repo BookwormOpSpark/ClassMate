@@ -28,11 +28,6 @@ class TeacherLogin extends React.Component {
       const token = info.idToken;
       axios.post(`${SERVER_URI}${TeacherLoginRoute}`, { idtoken: token })
         .then((res) => {
-<<<<<<< HEAD
-          console.log(res.data);
-          const verified = res.data.email; 
-          console.log(verified);
-=======
           const user = {
             id: res.data.id,
             First_name: res.data.nameFirst,
@@ -45,7 +40,6 @@ class TeacherLogin extends React.Component {
         })
         .then((res) => {
           const verified = res.payload.id;
->>>>>>> 1ae2ab5e4203bd8a42885d85aec10e17c215c2ae
           if (verified) {
             this.props.navigation.navigate('TeacherDashboardNavigation');
           }

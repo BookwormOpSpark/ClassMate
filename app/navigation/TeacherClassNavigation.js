@@ -5,13 +5,18 @@ import ClassRoster from '../components/teacher/ClassRoster';
 import Queue from '../components/teacher/Queue';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 import GiveAQuizz from '../components/teacher/GiveAQuizz';
+import AssignmentNavigation from './AssignmentNavigation';
 
 const TeacherClassNavigation = StackNavigator({
   Home: {
     screen: TeacherClassDashboard,
   },
-  Assignment: {
-    screen: Assignment,
+  AssignmentNavigation: {
+    screen: AssignmentNavigation,
+    // Only current solution to avoid double stacking
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   Queue: {
     screen: Queue,
