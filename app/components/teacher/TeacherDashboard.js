@@ -4,17 +4,28 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { Text, Button, Header } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { logOut } from '../../actions/actions';
+import axios from 'axios';
+import { logOut, getDashboard } from '../../actions/actions';
+import { SERVER_URI, DashboardRoute } from '../../constant';
 
 
 class TeacherDashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log('Teacher dashboard', this.props.state);
+    // console.log('Teacher dashboard', this.props.state);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
   }
-
+  componentWillMount() {
+    axios.get(`${SERVER_URI}${DashboardRoute}`, {
+      params: {
+        userId: this.props.state.user.id,
+      },
+    }).then((res) => {
+      // console.log('\n\n\n HELLLLLLOOOOOOO\n\n\nDATA DUMP\nDATA DUMP\nDATA DUMP\n\n\n', res.data);
+      this.props.dispatch(getDashboard(res.data));
+    });
+  }
   LogOut = async () => {
     await this.props.dispatch(logOut());
     this.props.navigation.navigate('FirstPage');
