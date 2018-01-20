@@ -19,3 +19,5 @@ yarn.lock
 
 learn
 app/comp-not-used
+
+.package-lock.json
