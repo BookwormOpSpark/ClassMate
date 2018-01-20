@@ -47,6 +47,14 @@ export default class TeacherClassDashboard extends React.Component {
           title="Give A Quizz"
         />
         <Button
+          onPress={() => this.props.navigation.navigate('RosterNavigation')}
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          iconRight={{ name: 'assignment' }}
+          backgroundColor="blue"
+          rounded
+          title="Class Roster"
+        />
+        <Button
           onPress={() => this.props.navigation.navigate('TeacherClassSchedule')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'schedule' }}

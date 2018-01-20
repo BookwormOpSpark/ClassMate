@@ -44,9 +44,9 @@ class TeacherLogin extends React.Component {
             this.props.navigation.navigate('TeacherDrawerNavigation');
           }
         })
-        // .catch(err => console.log(err));
+        .catch(err => console.error(err));
     })
-      // .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
 

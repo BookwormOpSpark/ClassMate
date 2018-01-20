@@ -45,7 +45,7 @@ class StudentLogin extends React.Component {
           this.props.navigation.navigate('StudentDashboardNavigation');
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   render() {

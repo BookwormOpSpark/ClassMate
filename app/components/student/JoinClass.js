@@ -25,7 +25,7 @@ export default class JoinClass extends React.Component {
         const { sessionId, className, participantId } = res.data;
         this.props.onJoiningClass({ sessionId, className, participantId });
       })
-      // .catch(err => console.log(err));
+      .catch(err => console.error(err));
 
     axios.get(`${SERVER_URI}${DashboardRoute}`, {
       params: {
