@@ -2,7 +2,9 @@ import React from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View } from 'react-native';
+import moment from 'moment';
+import _ from 'lodash';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Accelerometer } from 'expo';
 import { connect } from 'react-redux';
 import { List, ListItem, Text } from 'react-native-elements';
@@ -14,6 +16,7 @@ class RaiseHand extends React.Component {
     super(props);
     this.state = {
       isConnected: false,
+      now: '',
       accelerometerData: {},
       messages: [],
     };
@@ -26,19 +29,18 @@ class RaiseHand extends React.Component {
     this._subscribe();
 
     this.socket.on('connect', () => {
-      console.log('connected');
-      this.setState({ isConnected: true });
+      this.setState({
+        isConnected: true,
+        now: Date.now(),
+      });
     });
 
     this.socket.emit('raise-hand', {
-      student: this.props.state.user.First_name,
-      name: 'Lili',
+      student: 'Lili',
     });
 
     this.socket.on('new-message', (data) => {
-      console.log(data);
       this.setState({ messages: [...this.state.messages, data.message] });
-      console.log('state');
       console.log(this.state.messages);
     });
   }
@@ -52,7 +54,6 @@ class RaiseHand extends React.Component {
   }
 
   getInQueue() {
-    console.log('hello');
     const { y } = this.state.accelerometerData;
     if (y > 0.7) {
       console.log('winner');
@@ -78,38 +79,42 @@ class RaiseHand extends React.Component {
   render() {
     const { y } = this.state.accelerometerData;
     const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
-    const { messages } = this.state;
+    const { messages, now } = this.state;
+    // filter the students by name
+    const filterMsg = _.uniqBy(messages, 'student');
 
     return (
       <View style={styles.sensor}>
-        <Text h1>{className || 'Class'}</Text>
-        <Text h4>Lift up your phone to be added to the queue!</Text>
-        <Text>y: {round(y)} </Text>
-        <Text>connected: {this.state.isConnected ? 'true' : 'false'}</Text>
-        <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
-        <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
-        <Text>{messages.length > 0 ? messages[0].student : ''}</Text>
-        <Text>{messages.length > 1 ? messages[1].student : ''}</Text>
-        <Text>{messages.length > 2 ? messages[2].student : ''}</Text>
-        <Text>{messages.length > 3 ? messages[3].student : ''}</Text>
-        <View style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          scrollEnabled
+        >
+          <Text h1 style={{ color: 'blue' }}>{className || 'Class'}</Text>
+          <Text h4 style={{ color: 'blue' }}>Lift up your phone to be added to the queue!</Text>
+          <Text>y: {round(y)} </Text>
+          <Text>connected: {this.state.isConnected ? 'true' : 'false'}</Text>
+          <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
+          <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
 
-          {(messages.length > 0) ?
-            <View style={{ flex: 1 }}>
-              <List containerStyle={{ flex: 1 }}>
-                {messages.map((item, id) => (
-                  <ListItem
-                    containerStyle={styles.list}
-                    key={`bbbtn${id}`}
-                    title={`${item.student}`}
-                    leftIcon={{ name: 'star' }}
-                    titleStyle={{ color: 'white' }}
-                  />
+          <View style={{ flex: 1 }}>
+            {(messages.length > 0) ?
+              <View style={{ flex: 1 }}>
+                <List containerStyle={{ flex: 1 }}>
+                  {messages.map((item, id) => (
+                    <ListItem
+                      containerStyle={styles.list}
+                      key={`bbbtn${id}`}
+                      title={`${item.student}`}
+                      subtitle={moment(this.state.now).from(moment(item.time))}
+                      subtitleStyle={{ color: 'white' }}
+                      leftIcon={{ name: 'star', color: 'white' }}
+                      titleStyle={{ color: 'white' }}
+                    />
               ))}
-              </List>
-            </View> : null}
-        </View>
-
+                </List>
+              </View> : null}
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -124,24 +129,22 @@ function round(n) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   sensor: {
+    flex: 1,
     marginTop: 15,
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
-    // alignItems: 'center',
-  },
-  red: {
-    color: 'red',
-    fontWeight: 'bold',
-    fontSize: 50,
+    backgroundColor: '#fff',
   },
   blue: {
     color: 'blue',
     fontWeight: 'bold',
     fontSize: 30,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    backgroundColor: '#fff',
+
   },
   list: {
     borderRadius: 10,
