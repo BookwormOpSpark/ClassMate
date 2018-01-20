@@ -31,12 +31,12 @@ export default class TeacherClassDashboard extends React.Component {
           title="Assignment"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('ClassRoster')}
+          onPress={() => this.props.navigation.navigate('Queue')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'thumb-up' }}
           backgroundColor="blue"
           rounded
-          title="Class Roster"
+          title="Queue"
         />
         <Button
           onPress={() => this.props.navigation.navigate('GiveAQuizz')}
