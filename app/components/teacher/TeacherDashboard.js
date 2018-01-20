@@ -17,13 +17,14 @@ class TeacherDashboard extends React.Component {
     this.LogOut = this.LogOut.bind(this);
   }
   componentWillMount() {
+    console.log('\n\n\nTEACHER DASHBOARD MOUNTING\n\n\n')
     axios.get(`${SERVER_URI}${DashboardRoute}`, {
       params: {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      // console.log('\n\n\n HELLLLLLOOOOOOO\n\n\nDATA DUMP\nDATA DUMP\nDATA DUMP\n\n\n', res.data);
       this.props.dispatch(getDashboard(res.data));
+      console.log('\n\n\nTEACHER DASHBOARD DISPATCHED, here are the prop\n\n\n', this.props.state)
     });
   }
   LogOut = async () => {
