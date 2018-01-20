@@ -21,6 +21,9 @@ const TeacherClassNavigation = StackNavigator({
     screen: TeacherClassDashboard,
   },
   GiveAQuizz: {
+    screen: GiveAQuizz,
+  },
+  RosterNavigation: {
     screen: RosterNavigation,
   },
   TeacherClassSchedule: {

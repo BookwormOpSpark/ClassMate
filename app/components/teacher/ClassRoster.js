@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import axios from 'axios';
-import { SERVER_URI, classRoster } from '../../constant';
+// import { SERVER_URI, classRoster } from '../../constant';
 
 export default class ClassRoster extends React.Component {
   constructor(props) {
@@ -21,7 +21,18 @@ export default class ClassRoster extends React.Component {
         { nameFirst: 'Charlie', nameLast: 'Checkers' },
       ],
     };
+    this.compileStudents.bind(this);
   }
+  compileStudents = studentArray => studentArray.map(student => (
+    <Button
+      buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+      // onPress={this.LogOut}
+      iconRight={{ name: 'v-card' }}
+      backgroundColor="blue"
+      rounded
+      title={`${student.nameFirst} ${student.nameLast}`}
+    />
+  ));
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -31,23 +42,15 @@ export default class ClassRoster extends React.Component {
         justifyContent: 'center',
       },
     });
-    axios.get(`${SERVER_URI}${classRoster}`)
-      .then((res) => {
-        console.error('res from classRoster post: ', res);
-      })
-      .catch(err => console.error(err));
+    // axios.get(`${SERVER_URI}${classRoster}`)
+    //   .then((res) => {
+    //     console.error('res from classRoster post: ', res);
+    //   })
+    //   .catch(err => console.error(err));
     return (
       <View style={styles.container}>
         <Text h5>Your Class Roster</Text>
-
-        <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          // onPress={this.LogOut}
-          iconRight={{ name: 'enhanced-encryption' }}
-          backgroundColor="blue"
-          rounded
-          title="Button"
-        />
+        {this.compileStudents(this.state.roster)}
       </View>
     );
   }
