@@ -24,10 +24,10 @@ class StudentLogin extends React.Component {
 
   onLogin() {
     const student = this.state;
-    console.log(student);
+    // console.log(student);
     axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
-        console.log('res', res.data);
+        // console.log('res', res.data);
         const user = {
           id: res.data.id,
           First_name: res.data.nameFirst,
@@ -36,7 +36,7 @@ class StudentLogin extends React.Component {
           picture: { data: { url: res.data.photoUrl } },
           emergencyContact: res.data.id_emergencyContact,
         };
-        console.log(this.props.dispatch(getUser(user)));
+        // console.log(this.props.dispatch(getUser(user)));
         return this.props.dispatch(getUser(user));
       })
       .then((res) => {
