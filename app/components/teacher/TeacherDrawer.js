@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { StyleSheet, ScrollView, Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { logOut } from '../../actions/actions';
+import axios from 'axios';
+import { SERVER_URI, DashboardRoute } from '../../constant';
+import { logOut, getDashboard } from '../../actions/actions';
 
 class TeacherDrawer extends Component {
   constructor(props) {
@@ -13,9 +15,7 @@ class TeacherDrawer extends Component {
     this.LogOut = this.LogOut.bind(this);
     this.AddClass = this.AddClass.bind(this);
   }
-  componentWillMount() {
-    // console.log('\n\n\n HELLLLLLOOOOOOO\n\n\nDATA DUMP\nDATA DUMP\nDATA DUMP\n\n\n THIS DOT PROPSSSssssssssssssssssss', this.props.state.dashboard);
-  }
+
   LogOut = async () => {
     await this.props.dispatch(logOut());
     this.props.navigation.navigate('FirstPage');
@@ -33,8 +33,8 @@ class TeacherDrawer extends Component {
   }
 
   render() {
-    const { user } = this.props.state;
-    const prevSessions = this.props.state.dashboard.sessions;
+    const { user, dashboard } = this.props.state;
+    const prevSessions = dashboard.sessionInfo ? dashboard.sessionInfo.sessions : [];
     const styles = StyleSheet.create({
       container: {
         paddingTop: 20,
@@ -79,7 +79,7 @@ class TeacherDrawer extends Component {
             <Text style={styles.sectionHeadingStyle}>
               Classes
             </Text>
-            {prevSessions && prevSessions.length &&
+            {!!prevSessions && !!prevSessions.length &&
               <View style={styles.navSectionStyle}>
                 {prevSessions.map((session, id) => (
                   <Text
@@ -87,15 +87,9 @@ class TeacherDrawer extends Component {
                     onPress={this.navigateToScreen('TeacherClassNavigation')}
                     key={id}
                   >
-                    {session.description}
+                    {session.sessionName}
                   </Text>
                 ))}
-                <Text style={styles.navItemStyle} onPress={this.navigateToScreen('TeacherClassNavigation')}>
-                  Class 1
-                </Text>
-                <Text style={styles.navItemStyle} onPress={this.navigateToScreen('TeacherClassNavigation')}>
-                  Class 2
-                </Text>
               </View>
             }
             <View style={{ paddingVertical: 5 }} />
