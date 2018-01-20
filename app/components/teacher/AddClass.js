@@ -18,7 +18,7 @@ export default class AddClass extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>Add A Class</Text>
+        <Text h1>Assignment</Text>
       </View>
     );
   }

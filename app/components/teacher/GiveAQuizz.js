@@ -18,7 +18,7 @@ export default class GiveAQuizz extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>Give a quizz</Text>
+        <Text h1>Assignment</Text>
       </View>
     );
   }

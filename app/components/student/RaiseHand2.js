@@ -1,10 +1,7 @@
 import React from 'react';
-import io from 'socket.io-client';
 import { StyleSheet, View } from 'react-native';
 import { Accelerometer } from 'expo';
 import { Text } from 'react-native-elements';
-import { SERVER_URI, QueueRoute} from '../../constant';
-
 
 export default class RaiseHand extends React.Component {
   state = {
@@ -14,18 +11,6 @@ export default class RaiseHand extends React.Component {
 
   componentDidMount() {
     this._toggle();
-
-    const socket = io(SERVER_URI, {
-      transports: ['websocket'],
-    });
-
-    socket.on('connect', () => {
-      this.setState({ isConnected: true });
-    });
-
-    socket.on('ping', data => {
-      this.setState(data);
-    });
   }
 
   componentWillUnmount() {
