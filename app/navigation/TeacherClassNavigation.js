@@ -11,8 +11,12 @@ const TeacherClassNavigation = StackNavigator({
   Home: {
     screen: TeacherClassDashboard,
   },
-  Assignment: {
-    screen: Assignment,
+  AssignmentNavigation: {
+    screen: AssignmentNavigation,
+    // Only current solution to avoid double stacking
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   Queue: {
     screen: Queue,
