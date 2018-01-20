@@ -16,11 +16,11 @@ class Queue extends React.Component {
 
   componentDidMount() {
     this.socket.on('connect', () => {
-      console.log('connected');
+      // console.log('connected');
     });
 
     this.socket.on('new-message', (data) => {
-      console.log(data);
+      // console.log(data);
       this.setState({ messages: [...data.message] });
     });
   }

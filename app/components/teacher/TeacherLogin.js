@@ -13,8 +13,8 @@ import { getUser } from '../../actions/actions';
 class TeacherLogin extends React.Component {
   constructor(props) {
     super(props);
-    console.log('Teacher Login');
-    console.log(props);
+    // console.log('Teacher Login');
+    // console.log(props);
     this.onLogin = this.onLogin.bind(this);
   }
 
@@ -41,12 +41,12 @@ class TeacherLogin extends React.Component {
         .then((res) => {
           const verified = res.payload.id;
           if (verified) {
-            this.props.navigation.navigate('TeacherDashboardNavigation');
+            this.props.navigation.navigate('TeacherDrawerNavigation');
           }
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   }
 
 
