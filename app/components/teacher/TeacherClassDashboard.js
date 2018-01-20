@@ -23,7 +23,7 @@ export default class TeacherClassDashboard extends React.Component {
         <Text h1>Biology</Text>
         <Icon color="blue" name="rocket" size={30} />
         <Button
-          onPress={() => this.props.navigation.navigate('Assignment')}
+          onPress={() => this.props.navigation.navigate('AssignmentNavigation')}
           buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
           iconRight={{ name: 'done' }}
           backgroundColor="blue"
