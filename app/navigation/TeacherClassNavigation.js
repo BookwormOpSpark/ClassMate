@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation';
 import TeacherClassDashboard from '../components/teacher/TeacherClassDashboard';
-import Assignment from '../components/teacher/Assignment';
+import AssignmentNavigation from './AssignmentNavigation';
 import ClassRoster from '../components/teacher/ClassRoster';
 import Queue from '../components/teacher/Queue';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
