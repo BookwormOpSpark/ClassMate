@@ -25,7 +25,7 @@ class RaiseHand extends React.Component {
     this._subscribe();
 
     this.socket.on('connect', () => {
-      console.log('connected');
+      // console.log('connected');
       this.setState({ isConnected: true });
     });
 
@@ -44,10 +44,10 @@ class RaiseHand extends React.Component {
   }
 
   getInQueue() {
-    console.log('hello');
+    // console.log('hello');
     const { y } = this.state.accelerometerData;
     if (y > 0.7) {
-      console.log('winner');
+      // console.log('winner');
       this.socket.emit('raise-hand', {
         student: this.props.state.user.First_name,
         time: Date.now(),
