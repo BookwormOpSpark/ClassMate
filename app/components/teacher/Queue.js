@@ -11,7 +11,7 @@ class Queue extends React.Component {
   constructor(props) {
     super(props);
     this.state = { messages: [] };
-    this.socket = io('https://a4d36169.ngrok.io');
+    this.socket = io(SERVER_URI);
   }
 
   componentDidMount() {

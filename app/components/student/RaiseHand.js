@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View } from 'react-native';
 import { Accelerometer } from 'expo';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { List, ListItem, Text } from 'react-native-elements';
 import { SERVER_URI, QueueRoute } from '../../constant';
 
 
@@ -15,9 +15,10 @@ class RaiseHand extends React.Component {
     this.state = {
       isConnected: false,
       accelerometerData: {},
+      messages: [],
     };
 
-    this.socket = io('https://a4d36169.ngrok.io');
+    this.socket = io(SERVER_URI);
     this.getInQueue = this.getInQueue.bind(this);
   }
 
@@ -32,6 +33,13 @@ class RaiseHand extends React.Component {
     this.socket.emit('raise-hand', {
       student: this.props.state.user.First_name,
       name: 'Lili',
+    });
+
+    this.socket.on('new-message', (data) => {
+      console.log(data);
+      this.setState({ messages: [...this.state.messages, data.message] });
+      console.log('state');
+      console.log(this.state.messages);
     });
   }
 
@@ -70,6 +78,7 @@ class RaiseHand extends React.Component {
   render() {
     const { y } = this.state.accelerometerData;
     const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
+    const { messages } = this.state;
 
     return (
       <View style={styles.sensor}>
@@ -79,6 +88,27 @@ class RaiseHand extends React.Component {
         <Text>connected: {this.state.isConnected ? 'true' : 'false'}</Text>
         <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
         <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
+        <Text>{messages.length > 0 ? messages[0].student : ''}</Text>
+        <Text>{messages.length > 1 ? messages[1].student : ''}</Text>
+        <Text>{messages.length > 2 ? messages[2].student : ''}</Text>
+        <Text>{messages.length > 3 ? messages[3].student : ''}</Text>
+        <View style={{ flex: 1 }}>
+
+          {(messages.length > 0) ?
+            <View style={{ flex: 1 }}>
+              <List containerStyle={{ flex: 1 }}>
+                {messages.map((item, id) => (
+                  <ListItem
+                    containerStyle={styles.list}
+                    key={`bbbtn${id}`}
+                    title={`${item.student}`}
+                    leftIcon={{ name: 'star' }}
+                    titleStyle={{ color: 'white' }}
+                  />
+              ))}
+              </List>
+            </View> : null}
+        </View>
 
       </View>
     );
@@ -101,7 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   red: {
     color: 'red',
@@ -112,6 +142,15 @@ const styles = StyleSheet.create({
     color: 'blue',
     fontWeight: 'bold',
     fontSize: 30,
+  },
+  list: {
+    borderRadius: 10,
+    borderColor: 'cornflowerblue',
+    backgroundColor: 'cornflowerblue',
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
 });
 
