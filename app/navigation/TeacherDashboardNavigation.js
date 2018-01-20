@@ -8,19 +8,19 @@ const TeacherDashboardNavigation = StackNavigator({
   Home: {
     screen: TeacherDashboard,
   },
-  AddClass: {
-    screen: AddClass,
-  },
-  FirstPage: {
-    screen: FirstPage,
-  },
-  TeacherClassNavigation: {
-    screen: TeacherClassNavigation,
-    // Only current solution to avoid double stacking
-    navigationOptions: () => ({
-      header: null,
-    }),
-  },
+  // AddClass: {
+  //   screen: AddClass,
+  // },
+  // FirstPage: {
+  //   screen: FirstPage,
+  // },
+  // TeacherClassNavigation: {
+  //   screen: TeacherClassNavigation,
+  //   // Only current solution to avoid double stacking
+  //   navigationOptions: () => ({
+  //     header: null,
+  //   }),
+  // },
 
 });
 
