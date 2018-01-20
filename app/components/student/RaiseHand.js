@@ -10,32 +10,49 @@ import { SERVER_URI, QueueRoute } from '../../constant';
 
 
 class RaiseHand extends React.Component {
-  state = {
-    accelerometerData: {},
+  constructor(props) {
+    super(props);
+    this.state = {
+      isConnected: false,
+      accelerometerData: {},
+    };
+
+    this.socket = io('https://a4d36169.ngrok.io');
+    this.getInQueue = this.getInQueue.bind(this);
   }
 
   componentDidMount() {
     this._subscribe();
 
-    const socket = io(SERVER_URI, {
-      transports: ['websocket'],
-    });
-
-    socket.on('connect', () => {
+    this.socket.on('connect', () => {
       console.log('connected');
+      this.setState({ isConnected: true });
     });
 
-    const { y } = this.state.accelerometerData;
-    if (y > 0.7) {
-      socket.emit('raise-hand', {
-        student: this.props.state.user.First_name,
-        time: Date.now(),
-      });
-    }
+    this.socket.emit('raise-hand', {
+      student: this.props.state.user.First_name,
+      name: 'Lili',
+    });
+  }
+
+  componentWillUpdate() {
+    this.getInQueue();
   }
 
   componentWillUnmount() {
     this._unsubscribe();
+  }
+
+  getInQueue() {
+    console.log('hello');
+    const { y } = this.state.accelerometerData;
+    if (y > 0.7) {
+      console.log('winner');
+      this.socket.emit('raise-hand', {
+        student: this.props.state.user.First_name,
+        time: Date.now(),
+      });
+    }
   }
 
   _subscribe = () => {
@@ -49,6 +66,7 @@ class RaiseHand extends React.Component {
     this._subscription = null;
   }
 
+
   render() {
     const { y } = this.state.accelerometerData;
     const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
@@ -58,8 +76,9 @@ class RaiseHand extends React.Component {
         <Text h1>{className || 'Class'}</Text>
         <Text h4>Lift up your phone to be added to the queue!</Text>
         <Text>y: {round(y)} </Text>
+        <Text>connected: {this.state.isConnected ? 'true' : 'false'}</Text>
         <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
-        <Text>{y > 0.7 ? <Icon color="blue" name="human-handsup" size={40} /> : ''}</Text>
+        <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
 
       </View>
     );
@@ -83,7 +102,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    color: 'blue',
   },
   red: {
     color: 'red',

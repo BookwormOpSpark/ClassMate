@@ -11,18 +11,15 @@ class Queue extends React.Component {
   constructor(props) {
     super(props);
     this.state = { messages: [] };
+    this.socket = io('https://a4d36169.ngrok.io');
   }
 
   componentDidMount() {
-    const socket = io(SERVER_URI, {
-      transports: ['websocket'],
-    });
-
-    socket.on('connect', () => {
+    this.socket.on('connect', () => {
       console.log('connected');
     });
 
-    socket.on('new-message', (data) => {
+    this.socket.on('new-message', (data) => {
       console.log(data);
       this.setState({ messages: [...data.message] });
     });
