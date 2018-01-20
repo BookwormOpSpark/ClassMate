@@ -24,9 +24,9 @@ const LoginNavigation = StackNavigator({
   },
   TeacherDrawerNavigation: {
     screen: TeacherDrawerNavigation,
-    // navigationOptions: () => ({
-    //   header: null,
-    // }),
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
 });
 
