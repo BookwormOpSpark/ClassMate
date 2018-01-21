@@ -2,36 +2,31 @@ import React from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View } from 'react-native';
+import _ from 'lodash';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Accelerometer } from 'expo';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { SERVER_URI, QueueRoute } from '../../constant';
+import { Text } from 'react-native-elements';
+import { SERVER_URI } from '../../constant';
 
 
 class RaiseHand extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isConnected: false,
       accelerometerData: {},
     };
 
-    this.socket = io('https://a4d36169.ngrok.io');
+    this.socket = io(SERVER_URI);
     this.getInQueue = this.getInQueue.bind(this);
+    this.sendSocket = this.sendSocket.bind(this);
   }
 
   componentDidMount() {
     this._subscribe();
 
     this.socket.on('connect', () => {
-      // console.log('connected');
-      this.setState({ isConnected: true });
-    });
-
-    this.socket.emit('raise-hand', {
-      student: this.props.state.user.First_name,
-      name: 'Lili',
+      console.log('connected');
     });
   }
 
@@ -41,18 +36,23 @@ class RaiseHand extends React.Component {
 
   componentWillUnmount() {
     this._unsubscribe();
+    this.socket.close();
   }
 
   getInQueue() {
-    // console.log('hello');
     const { y } = this.state.accelerometerData;
+    const debounced = _.debounce(this.sendSocket, 2000);
+    Accelerometer.setUpdateInterval(1000);
     if (y > 0.7) {
-      // console.log('winner');
-      this.socket.emit('raise-hand', {
-        student: this.props.state.user.First_name,
-        time: Date.now(),
-      });
+      debounced();
     }
+  }
+
+  sendSocket() {
+    this.socket.emit('raise-hand', {
+      student: this.props.state.user.First_name,
+      time: Date.now(),
+    });
   }
 
   _subscribe = () => {
@@ -68,18 +68,22 @@ class RaiseHand extends React.Component {
 
 
   render() {
-    const { y } = this.state.accelerometerData;
-    const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
+    const { x, y, z } = this.state.accelerometerData;
+    const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
 
     return (
       <View style={styles.sensor}>
-        <Text h1>{className || 'Class'}</Text>
-        <Text h4>Lift up your phone to be added to the queue!</Text>
-        <Text>y: {round(y)} </Text>
-        <Text>connected: {this.state.isConnected ? 'true' : 'false'}</Text>
-        <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
-        <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
-
+        <ScrollView
+          contentContainerStyle={styles.contentContainer}
+          scrollEnabled
+        >
+          <View style={{ alignItems: 'center' }}>
+            <Text h1 style={{ color: 'blue' }}>{className || 'Class'}</Text>
+            <Text h6 style={{ color: 'blue' }}>Lift up your phone to be added to the queue!</Text>
+            <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
+            <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -94,24 +98,31 @@ function round(n) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   sensor: {
+    flex: 1,
     marginTop: 15,
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  red: {
-    color: 'red',
-    fontWeight: 'bold',
-    fontSize: 50,
+    backgroundColor: '#fff',
   },
   blue: {
     color: 'blue',
     fontWeight: 'bold',
     fontSize: 30,
+  },
+  contentContainer: {
+    flexGrow: 1,
+    backgroundColor: '#fff',
+
+  },
+  list: {
+    borderRadius: 10,
+    borderColor: 'cornflowerblue',
+    backgroundColor: 'cornflowerblue',
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
 });
 

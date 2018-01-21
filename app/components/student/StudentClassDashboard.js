@@ -12,7 +12,7 @@ class StudentClassDashboard extends React.Component {
   }
 
   render() {
-    const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
+    const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
     const styles = StyleSheet.create({
       container: {
         flex: 1,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView, ActivityIndicator } from 'react-native';
 import { Text, Button, Header, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logOut, getDashboard, selectSession } from '../../actions/actions';
@@ -12,6 +12,8 @@ import { SERVER_URI, DashboardRoute } from '../../constant';
 class StudentDashboard extends React.Component {
   constructor(props) {
     super(props);
+    console.log('student dashboard this.props.state');
+    console.log(this.props.state);
     this.state = {
       selectedSession: '',
     };
@@ -54,12 +56,11 @@ class StudentDashboard extends React.Component {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'flex-start',
       },
       list: {
         borderRadius: 5,
-        borderColor: 'darkblue',
-        backgroundColor: 'darkblue',
+        borderColor: '#0000ff',
+        backgroundColor: '#0000ff',
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
@@ -80,12 +81,8 @@ class StudentDashboard extends React.Component {
         justifyContent: 'center',
       },
     });
-    const { user } = this.props.state;
-    const newSessions = this.props.state.session;
-    const prevSessions = this.props.state.dashboard.sessions;
-
-    // console.log('student dashboard this.props.state');
-    // console.log(this.props.state);
+    const { user, dashboard } = this.props.state;
+    const sessions = dashboard.sessionInfo ? dashboard.sessionInfo.sessions : [];
 
     return (
       <View style={styles.bigcontainer}>
@@ -125,46 +122,24 @@ class StudentDashboard extends React.Component {
           </View>
 
           <View style={{ flex: 1 }}>
-            {(prevSessions && prevSessions.length > 0) ?
+            {(sessions && sessions.length > 0) ?
               <View style={{ flex: 1 }}>
                 <List containerStyle={{ flex: 1 }}>
                   <Text>
                     Your Current Classes
                   </Text>
-                  {prevSessions.map((item, id) => (
+                  {sessions.map((item, id) => (
                     <ListItem
                       containerStyle={styles.list}
                       key={`bbbtn${id}`}
-                      title={`${item.description}`}
-                      leftIcon={{ name: 'book' }}
+                      title={`${item.sessionName}`}
+                      leftIcon={{ name: 'book', color: 'white' }}
                       titleStyle={{ color: 'white' }}
                       onPress={() => this.onSelect(item)}
                     />
                   ))}
                 </List>
               </View> : null}
-          </View>
-
-          <View style={{ flex: 1 }}>
-            {newSessions.length === 0
-            ? null
-            : <View style={{ flex: 1 }}>
-              <List containerStyle={{ flex: 1 }}>
-                <Text>
-                  Your Newly Added Classes*** Do we want to keep this feature?
-                </Text>
-                {newSessions.map((item, id) => (
-                  <ListItem
-                    containerStyle={styles.newlist}
-                    key={`bbbtn${id}`}
-                    title={`${item.className}`}
-                    leftIcon={{ name: 'book' }}
-                    titleStyle={{ color: 'white' }}
-                    onPress={() => this.onSelect(item)}
-                  />
-                ))}
-              </List>
-              </View>}
           </View>
         </ScrollView>
       </View>
