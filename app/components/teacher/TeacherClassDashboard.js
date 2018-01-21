@@ -11,9 +11,9 @@ class TeacherClassDashboard extends React.Component {
     this.state = { text: '' };
   }
 
-  componentDidMount() {
-    console.log('\n\n\nHELLLLOOOOOOO FROM TEACHER CLASS VIEW !!!!\n\n\n\nHERE IS THIS.PROPS.STATE\n', this.props.state);
-  }
+  // componentDidMount() {
+  //   console.log('\n\n\nHELLLLOOOOOOO FROM TEACHER CLASS VIEW !!!!\n\n\n\nHERE IS THIS.PROPS.STATE\n', this.props.state);
+  // }
 
   render() {
     const className = this.props.state.selectSession.sessionName;
