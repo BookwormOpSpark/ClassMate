@@ -1,8 +1,8 @@
 import { StackNavigator } from 'react-navigation';
 import TeacherDashboard from '../components/teacher/TeacherDashboard';
-import TeacherClassNavigation from './TeacherClassNavigation';
-import FirstPage from '../components/FirstPage';
-import AddClass from '../components/teacher/AddClass';
+// import TeacherClassNavigation from './TeacherClassNavigation';
+// import FirstPage from '../components/FirstPage';
+// import AddClass from '../components/teacher/AddClass';
 
 const TeacherDashboardNavigation = StackNavigator({
   Home: {

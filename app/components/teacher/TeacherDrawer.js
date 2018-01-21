@@ -5,7 +5,7 @@ import { StyleSheet, ScrollView, Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { SERVER_URI, DashboardRoute } from '../../constant';
-import { logOut, getDashboard } from '../../actions/actions';
+import { logOut, getDashboard, selectSession } from '../../actions/actions';
 
 class TeacherDrawer extends Component {
   constructor(props) {
@@ -13,17 +13,18 @@ class TeacherDrawer extends Component {
     // console.log('TEACHER DRAWER PROPS', this.props);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
-    this.AddClass = this.AddClass.bind(this);
+  }
+
+  onSelect = async (item) => {
+    // console.log('item', item);
+    await this.props.dispatch(selectSession(item));
+    this.props.navigation.navigate('TeacherClassNavigation');
   }
 
   LogOut = async () => {
     await this.props.dispatch(logOut());
     this.props.navigation.navigate('FirstPage');
   }
-  AddClass = async () => {
-    // console.log('\nADDING A CLAAAAAAAASS\n  looool Gareth is crazy wih loggings')
-  }
-
 
   navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
@@ -84,7 +85,8 @@ class TeacherDrawer extends Component {
                 {prevSessions.map((session, id) => (
                   <Text
                     style={styles.navItemStyle}
-                    onPress={this.navigateToScreen('TeacherClassNavigation')}
+                    // onPress={this.navigateToScreen('TeacherClassNavigation')}
+                    onPress={() => this.onSelect(session)}
                     key={id}
                   >
                     {session.sessionName}
@@ -100,6 +102,7 @@ class TeacherDrawer extends Component {
                 backgroundColor="green"
                 rounded
                 title="Add a Class"
+                // color="white"
               />
             </View>
           </View>
@@ -112,6 +115,7 @@ class TeacherDrawer extends Component {
             backgroundColor="red"
             rounded
             title="Log Out"
+            // color="white"
           />
         </View>
       </View>
