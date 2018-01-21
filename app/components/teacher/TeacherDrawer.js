@@ -25,10 +25,6 @@ class TeacherDrawer extends Component {
     await this.props.dispatch(logOut());
     this.props.navigation.navigate('FirstPage');
   }
-  AddClass = async () => {
-    // console.log('\nADDING A CLAAAAAAAASS\n  looool Gareth is crazy wih loggings')
-  }
-
 
   navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
@@ -106,6 +102,7 @@ class TeacherDrawer extends Component {
                 backgroundColor="green"
                 rounded
                 title="Add a Class"
+                // color="white"
               />
             </View>
           </View>
@@ -118,6 +115,7 @@ class TeacherDrawer extends Component {
             backgroundColor="red"
             rounded
             title="Log Out"
+            // color="white"
           />
         </View>
       </View>
