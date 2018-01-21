@@ -11,8 +11,8 @@ import { SERVER_URI, AddClassRoute, DashboardRoute } from '../../constant';
 class AddClass extends React.Component {
   constructor(props) {
     super(props);
-    console.log('AddClass');
-    console.log(this.props.state);
+    // console.log('AddClass');
+    // console.log(this.props.state);
     this.state = {
       joinCode: '',
       description: '',
@@ -22,12 +22,12 @@ class AddClass extends React.Component {
 
   handleSubmit = async () => {
     const { joinCode, description } = this.state;
-    console.log(this.state);
+    // console.log(this.state);
     const userId = this.props.state.user.id;
 
     await axios.post(`${SERVER_URI}${AddClassRoute}`, { description, joinCode, userId })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const { description, id, participantId } = res.data;
         const classId = res.data.id;
         this.props.dispatch(getSession({ description, classId, participantId }));
@@ -39,7 +39,7 @@ class AddClass extends React.Component {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.props.dispatch(getDashboard(res.data));
     });
   }

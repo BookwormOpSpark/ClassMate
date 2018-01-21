@@ -7,10 +7,10 @@ import axios from 'axios';
 import { SERVER_URI, DashboardRoute } from '../../constant';
 import { logOut, getDashboard, selectSession } from '../../actions/actions';
 
-class TeacherDrawer extends Component {
+class StudentDrawer extends Component {
   constructor(props) {
     super(props);
-    // console.log('TEACHER DRAWER PROPS', this.props);
+    // console.log('Student DRAWER PROPS', this.props);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
   }
@@ -18,7 +18,7 @@ class TeacherDrawer extends Component {
   onSelect = async (item) => {
     // console.log('item', item);
     await this.props.dispatch(selectSession(item));
-    this.props.navigation.navigate('TeacherClassNavigation');
+    this.props.navigation.navigate('StudentClassNavigation');
   }
 
   LogOut = async () => {
@@ -71,7 +71,7 @@ class TeacherDrawer extends Component {
               {user.First_name} {user.Last_name}
             </Text>
             <View style={styles.navSectionStyle}>
-              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('TeacherDashboardNavigation')}>
+              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('StudentDashboardNavigation')}>
                 Dashboard
               </Text>
             </View>
@@ -85,7 +85,7 @@ class TeacherDrawer extends Component {
                 {prevSessions.map((session, id) => (
                   <Text
                     style={styles.navItemStyle}
-                    // onPress={this.navigateToScreen('TeacherClassNavigation')}
+                    // onPress={this.navigateToScreen('StudentClassNavigation')}
                     onPress={() => this.onSelect(session)}
                     key={id}
                   >
@@ -98,11 +98,11 @@ class TeacherDrawer extends Component {
             <View style={styles.addClassStyle}>
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-                onPress={this.navigateToScreen('AddClass')}
+                onPress={this.navigateToScreen('JoinClass')}
                 backgroundColor="green"
                 rounded
-                title="Create a Class"
-                // color="white"
+                title="Join a Class"
+              // color="white"
               />
             </View>
           </View>
@@ -115,7 +115,7 @@ class TeacherDrawer extends Component {
             backgroundColor="red"
             rounded
             title="Log Out"
-            // color="white"
+          // color="white"
           />
         </View>
       </View>
@@ -128,9 +128,9 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(TeacherDrawer);
+export default connect(mapStateToProps)(StudentDrawer);
 
-TeacherDrawer.propTypes = {
+StudentDrawer.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
