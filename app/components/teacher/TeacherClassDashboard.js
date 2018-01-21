@@ -3,13 +3,16 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default class TeacherClassDashboard extends React.Component {
+class TeacherClassDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
   }
+
   render() {
+    const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -68,4 +71,6 @@ export default class TeacherClassDashboard extends React.Component {
 }
 TeacherClassDashboard.propTypes = {
   navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
