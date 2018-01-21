@@ -21,7 +21,7 @@ class TeacherDrawer extends Component {
     this.props.navigation.navigate('FirstPage');
   }
   AddClass = async () => {
-    // console.log('\nADDING A CLAAAAAAAASS\n')
+    // console.log('\nADDING A CLAAAAAAAASS\n  looool Gareth is crazy wih loggings')
   }
 
 
@@ -100,7 +100,6 @@ class TeacherDrawer extends Component {
                 backgroundColor="green"
                 rounded
                 title="Add a Class"
-                color="white"
               />
             </View>
           </View>
@@ -113,7 +112,6 @@ class TeacherDrawer extends Component {
             backgroundColor="red"
             rounded
             title="Log Out"
-            color="white"
           />
         </View>
       </View>

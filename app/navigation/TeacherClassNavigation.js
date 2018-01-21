@@ -29,6 +29,9 @@ const TeacherClassNavigation = StackNavigator({
   },
   RosterNavigation: {
     screen: RosterNavigation,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   TeacherClassSchedule: {
     screen: TeacherClassSchedule,

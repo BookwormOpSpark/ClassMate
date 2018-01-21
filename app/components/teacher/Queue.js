@@ -16,12 +16,19 @@ class Queue extends React.Component {
       messages: [],
     };
 
-    this.socket = io(SERVER_URI);
+    // this.socket = io(SERVER_URI);
+    this.socket = io(SERVER_URI, {
+      autoConnect: false,
+    });
+
     this.onSelect = this.onSelect.bind(this);
   }
 
   componentDidMount() {
+    this.socket.open();
+
     this.socket.on('connect', () => {
+      console.log('connected');
       this.setState({
         now: Date.now(),
       });
@@ -32,6 +39,10 @@ class Queue extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    this.socket.close();
+  }
+
   onSelect(item) {
     console.log('item', item);
     const { messages } = this.state;
@@ -39,6 +50,8 @@ class Queue extends React.Component {
     messages.splice(index, 1);
     this.setState({ messages });
   }
+  
+
 
   render() {
     const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;

@@ -1,177 +1,99 @@
 import React from 'react';
-import io from 'socket.io-client';
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
-import { List, ListItem, Text } from 'react-native-elements';
-import { SERVER_URI } from '../../constant';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
+import { getDashboard, getSession } from '../../actions/actions';
+import { SERVER_URI, AddClassRoute, DashboardRoute } from '../../constant';
 
-
-class Queue extends React.Component {
+class AddClass extends React.Component {
   constructor(props) {
     super(props);
+    console.log('AddClass');
+    console.log(this.props.state);
     this.state = {
-      now: '',
-      messages: [{
-        student: 'Lola',
-        time: 1516487925455,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516487990513,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516487993072,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488012588,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488013515,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488014462,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488015543,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488016473,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488017514,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488046116,
-
-      },
-      {
-        student: 'Lola',
-        time: 1516488047351,
-
-      },
-      ],
+      joinCode: '',
+      description: '',
     };
-
-    this.socket = io(SERVER_URI);
-    this.onSelect = this.onSelect.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.socket.on('connect', () => {
-      this.setState({
-        now: Date.now(),
-      });
-    });
+  handleSubmit = async () => {
+    const { joinCode, description } = this.state;
+    console.log(this.state);
+    const userId = this.props.state.user.id;
 
-    this.socket.on('new-message', (data) => {
-      this.setState({ messages: [...this.state.messages, data.message] });
-    });
-  }
+    await axios.post(`${SERVER_URI}${AddClassRoute}`, { description, joinCode, userId })
+      .then((res) => {
+        console.log(res.data);
+        const { description, id, participantId } = res.data;
+        const classId = res.data.id;
+        this.props.dispatch(getSession({ description, classId, participantId }));
+      })
+      .catch(err => console.error(err));
 
-  onSelect(item) {
-    console.log('item', item);
-    const { messages } = this.state;
-    const index = messages.indexOf(item);
-    messages.splice(index, 1);
-    this.setState({ messages });
+    axios.get(`${SERVER_URI}${DashboardRoute}`, {
+      params: {
+        userId: this.props.state.user.id,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      this.props.dispatch(getDashboard(res.data));
+    });
   }
 
   render() {
-    const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
-    const { messages } = this.state;
-
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    });
+    const teacher = this.props.state.user;
+    const { session } = this.props.state;
+    const index = session.length - 1;
+    const { description } = session[index] ? session[index] : '';
     return (
-      <View style={styles.sensor}>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          scrollEnabled
-        >
-          <View style={{ alignItems: 'center' }}>
-            <Text h1 style={{ color: 'blue' }}>{className || 'Class'}</Text>
-            <Text h4 style={{ color: 'blue' }}>Hands Raised</Text>
-          </View>
+      <View style={styles.container}>
+        <Text h2>{`Teacher ${teacher.First_name}`}</Text>
+        <Text h4>Create a New Class!</Text>
+        <Icon color="blue" name="rocket" size={30} />
+        <FormLabel>Enter the Join Code for the class</FormLabel>
+        <FormInput
+          onChangeText={text => this.setState({ joinCode: text })}
+        />
+        <FormLabel>Enter the class description</FormLabel>
+        <FormInput
+          onChangeText={text => this.setState({ description: text })}
+        />
+        <Button
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          onPress={this.handleSubmit}
+          backgroundColor="blue"
+          rounded
+          title="Create Class!"
+        />
+        <Text h5>{description ? `You just created class ${description}` : ''}</Text>
+        <Text>{description ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
 
-          <View style={{ flex: 1 }}>
-            {(messages.length > 0) ?
-              <View style={{ flex: 1 }}>
-                <List containerStyle={{ flex: 1 }}>
-                  {messages.map((item, id) => (
-                    <ListItem
-                      containerStyle={styles.list}
-                      key={`bbbtn${id}`}
-                      title={`${item.student}`}
-                      subtitle={moment(this.state.now).from(moment(item.time))}
-                      subtitleStyle={{ color: 'white' }}
-                      leftIcon={{ name: 'star', color: 'white' }}
-                      titleStyle={{ color: 'white' }}
-                      onPress={() => this.onSelect(item)}
-                    />
-                  ))}
-                </List>
-              </View> : null}
-          </View>
-        </ScrollView>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  sensor: {
-    flex: 1,
-    marginTop: 15,
-    paddingHorizontal: 10,
-    justifyContent: 'flex-start',
-    backgroundColor: '#fff',
-  },
-  blue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    backgroundColor: '#fff',
-
-  },
-  list: {
-    borderRadius: 10,
-    borderColor: 'cornflowerblue',
-    backgroundColor: 'cornflowerblue',
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-});
-
 const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps)(Queue);
 
+export default connect(mapStateToProps)(AddClass);
 
-Queue.propTypes = {
+AddClass.propTypes = {
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
+

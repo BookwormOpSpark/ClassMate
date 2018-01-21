@@ -12,6 +12,8 @@ import { SERVER_URI, DashboardRoute } from '../../constant';
 class StudentDashboard extends React.Component {
   constructor(props) {
     super(props);
+    console.log('student dashboard this.props.state');
+    console.log(this.props.state);
     this.state = {
       selectedSession: '',
     };
@@ -79,11 +81,8 @@ class StudentDashboard extends React.Component {
         justifyContent: 'center',
       },
     });
-    const { user } = this.props.state;
-    const prevSessions = this.props.state.dashboard.sessionInfo.sessions;
-
-    // console.log('student dashboard this.props.state');
-    // console.log(this.props.state);
+    const { user, dashboard } = this.props.state;
+    const sessions = dashboard.sessionInfo ? dashboard.sessionInfo.sessions : [];
 
     return (
       <View style={styles.bigcontainer}>
@@ -123,13 +122,13 @@ class StudentDashboard extends React.Component {
           </View>
 
           <View style={{ flex: 1 }}>
-            {(prevSessions && prevSessions.length > 0) ?
+            {(sessions && sessions.length > 0) ?
               <View style={{ flex: 1 }}>
                 <List containerStyle={{ flex: 1 }}>
                   <Text>
                     Your Current Classes
                   </Text>
-                  {prevSessions.map((item, id) => (
+                  {sessions.map((item, id) => (
                     <ListItem
                       containerStyle={styles.list}
                       key={`bbbtn${id}`}

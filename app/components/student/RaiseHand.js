@@ -36,6 +36,7 @@ class RaiseHand extends React.Component {
 
   componentWillUnmount() {
     this._unsubscribe();
+    this.socket.close();
   }
 
   getInQueue() {
