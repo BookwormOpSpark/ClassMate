@@ -18,6 +18,7 @@ export default class Assignment extends React.Component {
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        marginLeft: 110,
       },
       list: {
         borderRadius: 5,
@@ -34,7 +35,7 @@ export default class Assignment extends React.Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Text h1 style={styles.container}>{this.state.sessionName}</Text>
+        <Text h1>{this.state.sessionName}</Text>
 
         <Text h2 style={styles.container}>Assignments</Text>
         <List style={{ backgroundColor: '#fff' }}>
@@ -45,7 +46,7 @@ export default class Assignment extends React.Component {
               title={`${assignment}`}
               leftIcon={{ name: 'book' }}
               titleStyle={{ color: 'white' }}
-              // onPress={() => this.onSelect(item)}
+              onPress={() => this.props.navigation.navigate('SpecificAssignment')}
             />
         ))}
         </List>
@@ -53,3 +54,7 @@ export default class Assignment extends React.Component {
     );
   }
 }
+
+Assignment.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
