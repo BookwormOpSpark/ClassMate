@@ -1,17 +1,22 @@
 import { StackNavigator } from 'react-navigation';
 import TeacherClassDashboard from '../components/teacher/TeacherClassDashboard';
-import Assignment from '../components/teacher/Assignment';
+import AssignmentNavigation from './AssignmentNavigation';
 import ClassRoster from '../components/teacher/ClassRoster';
 import Queue from '../components/teacher/Queue';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 import GiveAQuizz from '../components/teacher/GiveAQuizz';
+import RosterNavigation from './RosterNavigation';
 
 const TeacherClassNavigation = StackNavigator({
   Home: {
     screen: TeacherClassDashboard,
   },
-  Assignment: {
-    screen: Assignment,
+  AssignmentNavigation: {
+    screen: AssignmentNavigation,
+    // Only current solution to avoid double stacking
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   Queue: {
     screen: Queue,
@@ -21,6 +26,9 @@ const TeacherClassNavigation = StackNavigator({
   },
   GiveAQuizz: {
     screen: GiveAQuizz,
+  },
+  RosterNavigation: {
+    screen: RosterNavigation,
   },
   TeacherClassSchedule: {
     screen: TeacherClassSchedule,

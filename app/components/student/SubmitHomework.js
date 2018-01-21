@@ -12,7 +12,7 @@ class SubmitHomework extends React.Component {
     this.state = {
       image: null,
     };
-    console.log('Homework', this.props.state);
+    // console.log('Homework', this.props.state);
     this._postHomework = this._postHomework.bind(this);
     this._pickImage = this._pickImage.bind(this);
     this._openCamera = this._openCamera.bind(this);
@@ -34,7 +34,7 @@ class SubmitHomework extends React.Component {
   _openCamera = async () => {
     const result = await ImagePicker.launchCameraAsync({
     });
-    console.log('camera', result);
+    // console.log('camera', result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
@@ -45,7 +45,7 @@ class SubmitHomework extends React.Component {
     // const assignment = this.props.state.assignment_id;
     const apiUrl = `${SERVER_URI}${PostHomework}`;// need to update here 
     const uri = this.state.image;
-    console.log('posturi', uri);
+    // console.log('posturi', uri);
 
     const uriParts = uri.split('.');
     const fileType = uriParts[uriParts.length - 1];

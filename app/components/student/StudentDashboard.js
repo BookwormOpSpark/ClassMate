@@ -25,7 +25,7 @@ class StudentDashboard extends React.Component {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.props.dispatch(getDashboard(res.data));
     });
   }
@@ -36,7 +36,7 @@ class StudentDashboard extends React.Component {
   }
 
   onSelect = async (item) => {
-    console.log('item', item);
+    // console.log('item', item);
     await this.props.dispatch(selectSession(item));
     this.props.navigation.navigate('StudentClassNavigation');
   }
@@ -82,8 +82,8 @@ class StudentDashboard extends React.Component {
     const { user } = this.props.state;
     const prevSessions = this.props.state.dashboard.sessionInfo.sessions;
 
-    console.log('student dashboard this.props.state');
-    console.log(this.props.state);
+    // console.log('student dashboard this.props.state');
+    // console.log(this.props.state);
 
     return (
       <View style={styles.bigcontainer}>

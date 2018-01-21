@@ -9,8 +9,8 @@ import { SERVER_URI, JoinClassRoute, DashboardRoute } from '../../constant';
 export default class JoinClass extends React.Component {
   constructor(props) {
     super(props);
-    console.log('JoinClass');
-    console.log(this.props.state);
+    // console.log('JoinClass');
+    // console.log(this.props.state);
     this.state = { joinCode: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -21,18 +21,18 @@ export default class JoinClass extends React.Component {
 
     await axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const { sessionId, className, participantId } = res.data;
         this.props.onJoiningClass({ sessionId, className, participantId });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
 
     axios.get(`${SERVER_URI}${DashboardRoute}`, {
       params: {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.props.onDashboard(res.data);
     });
   }
