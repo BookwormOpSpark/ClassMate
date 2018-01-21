@@ -11,8 +11,12 @@ class TeacherClassDashboard extends React.Component {
     this.state = { text: '' };
   }
 
+  componentDidMount() {
+    console.log('\n\n\nHELLLLOOOOOOO FROM TEACHER CLASS VIEW !!!!\n\n\n\nHERE IS THIS.PROPS.STATE\n', this.props.state);
+  }
+
   render() {
-    const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
+    const className = this.props.state.selectSession.sessionName;
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -21,9 +25,10 @@ class TeacherClassDashboard extends React.Component {
         justifyContent: 'center',
       },
     });
+
     return (
       <View style={styles.container}>
-        <Text h1>Biology</Text>
+        <Text h1>{className || 'Class'}</Text>
         <Icon color="blue" name="rocket" size={30} />
         <Button
           onPress={() => this.props.navigation.navigate('AssignmentNavigation')}
@@ -69,6 +74,13 @@ class TeacherClassDashboard extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(TeacherClassDashboard);
+
 TeacherClassDashboard.propTypes = {
   navigation: PropTypes.object.isRequired,
   state: PropTypes.object.isRequired,
