@@ -68,7 +68,7 @@ class RaiseHand extends React.Component {
 
   render() {
     const { x, y, z } = this.state.accelerometerData;
-    const className = this.props.state.selectSession.description || this.props.state.selectSession.className;
+    const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
 
     return (
       <View style={styles.sensor}>

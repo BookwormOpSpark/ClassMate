@@ -80,7 +80,7 @@ class StudentDashboard extends React.Component {
       },
     });
     const { user } = this.props.state;
-    const prevSessions = this.props.state.dashboard.sessions;
+    const prevSessions = this.props.state.dashboard.sessionInfo.sessions;
 
     console.log('student dashboard this.props.state');
     console.log(this.props.state);
@@ -133,7 +133,7 @@ class StudentDashboard extends React.Component {
                     <ListItem
                       containerStyle={styles.list}
                       key={`bbbtn${id}`}
-                      title={`${item.description}`}
+                      title={`${item.sessionName}`}
                       leftIcon={{ name: 'book', color: 'white' }}
                       titleStyle={{ color: 'white' }}
                       onPress={() => this.onSelect(item)}
