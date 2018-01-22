@@ -12,8 +12,8 @@ import { SERVER_URI, DashboardRoute } from '../../constant';
 class StudentDashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log('student dashboard this.props.state');
-    console.log(this.props.state);
+    // console.log('student dashboard this.props.state');
+    // console.log(this.props.state);
     this.state = {
       selectedSession: '',
     };

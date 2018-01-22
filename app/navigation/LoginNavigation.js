@@ -2,7 +2,7 @@ import { StackNavigator } from 'react-navigation';
 import StudentLogin from '../components/student/StudentLogin';
 import TeacherLogin from '../components/teacher/TeacherLogin';
 import FirstPage from '../components/FirstPage';
-import StudentDashboardNavigation from './StudentDashboardNavigation';
+import StudentDrawerNavigation from './StudentDrawerNavigation';
 import TeacherDrawerNavigation from './TeacherDrawerNavigation';
 
 
@@ -16,8 +16,8 @@ const LoginNavigation = StackNavigator({
   TeacherLogin: {
     screen: TeacherLogin,
   },
-  StudentDashboardNavigation: {
-    screen: StudentDashboardNavigation,
+  StudentDrawerNavigation: {
+    screen: StudentDrawerNavigation,
     navigationOptions: () => ({
       header: null,
     }),
