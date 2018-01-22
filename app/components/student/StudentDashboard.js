@@ -120,27 +120,6 @@ class StudentDashboard extends React.Component {
               title="Log Out"
             />
           </View>
-
-          <View style={{ flex: 1 }}>
-            {(sessions && sessions.length > 0) ?
-              <View style={{ flex: 1 }}>
-                <List containerStyle={{ flex: 1 }}>
-                  <Text>
-                    Your Current Classes
-                  </Text>
-                  {sessions.map((item, id) => (
-                    <ListItem
-                      containerStyle={styles.list}
-                      key={`bbbtn${id}`}
-                      title={`${item.sessionName}`}
-                      leftIcon={{ name: 'book', color: 'white' }}
-                      titleStyle={{ color: 'white' }}
-                      onPress={() => this.onSelect(item)}
-                    />
-                  ))}
-                </List>
-              </View> : null}
-          </View>
         </ScrollView>
       </View>
     );

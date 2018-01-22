@@ -79,7 +79,7 @@ class RaiseHand extends React.Component {
         >
           <View style={{ alignItems: 'center' }}>
             <Text h1 style={{ color: 'blue' }}>{className || 'Class'}</Text>
-            <Text h6 style={{ color: 'blue' }}>Lift up your phone to be added to the queue!</Text>
+            <Text h6 style={{ color: 'blue' }}>Stand up your phone to be added to the queue!</Text>
             <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
             <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
           </View>
