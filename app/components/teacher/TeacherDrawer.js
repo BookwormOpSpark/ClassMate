@@ -52,13 +52,13 @@ class TeacherDrawer extends Component {
         paddingHorizontal: 15,
       },
       addClassStyle: {
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         alignItems: 'center',
 
       },
       footerContainer: {
         padding: 10,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
       },
 
     });
