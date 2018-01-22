@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, Image } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 
-export default function FirstPage({ navigation }) {
+export default function SpecificStudent({ navigation }) {
     const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -38,6 +38,6 @@ export default function FirstPage({ navigation }) {
 }
 
 
-// SpecificStudent.propTypes = {
-//   navigation: PropTypes.object.isRequired,
-// };
+SpecificStudent.propTypes = {
+    navigation: PropTypes.object.isRequired,
+};
