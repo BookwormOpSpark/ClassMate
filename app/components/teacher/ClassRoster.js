@@ -2,9 +2,11 @@ import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, List, ListItem } from 'react-native-elements';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 // import { SERVER_URI, classRoster } from '../../constant';
 
-export default class ClassRoster extends React.Component {
+class ClassRoster extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,18 +26,8 @@ export default class ClassRoster extends React.Component {
         { nameFirst: 'Harry', nameLast: 'Peter', studentId: 9 },
       ],
     };
-    // this.compileStudents.bind(this);
   }
-  // compileStudents = studentArray => studentArray.map(student => (
-  //   <ListItem
-  //   containerStyle={styles.list}
-  //   key={`bbbtn${id}`}
-  //   leftIcon={{ name: 'torso' }}
-  //   titleStyle={{ color: 'white' }}
-  //   title={`${student.nameFirst} ${student.nameLast}`}
-  //   onPress={() => this.props.navigation.navigate('SpecificStudent')}
-  //   />
-  // ));
+
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -76,3 +68,15 @@ export default class ClassRoster extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(ClassRoster);
+
+ClassRoster.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};

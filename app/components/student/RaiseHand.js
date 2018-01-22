@@ -26,7 +26,7 @@ class RaiseHand extends React.Component {
     this._subscribe();
 
     this.socket.on('connect', () => {
-      console.log('connected');
+      // console.log('connected');
     });
   }
 
