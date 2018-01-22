@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Text, Button, List, ListItem } from 'react-native-elements';
 import axios from 'axios';
 // import { SERVER_URI, classRoster } from '../../constant';
 
@@ -9,48 +9,69 @@ export default class ClassRoster extends React.Component {
     super(props);
     this.state = {
       roster: [
-        { nameFirst: 'Susy', nameLast: 'Sunshine' },
-        { nameFirst: 'Abby', nameLast: 'Applebottom' },
-        { nameFirst: 'Peter', nameLast: 'Peppers' },
-        { nameFirst: 'Timmy', nameLast: 'Toochi' },
-        { nameFirst: 'Billy', nameLast: 'Bangers' },
-        { nameFirst: 'Laura', nameLast: 'Lizard' },
-        { nameFirst: 'Maggie', nameLast: 'Moonpie' },
-        { nameFirst: 'Jimmy', nameLast: 'Junktown' },
-        { nameFirst: 'Carli', nameLast: 'Cockwood' },
-        { nameFirst: 'Charlie', nameLast: 'Checkers' },
+        { nameFirst: 'Susy', nameLast: 'Sunshine', studentId: 0 },
+        { nameFirst: 'Abby', nameLast: 'Applebottom', studentId: 1 },
+        { nameFirst: 'Peter', nameLast: 'Peppers', studentId: 2 },
+        { nameFirst: 'Timmy', nameLast: 'Toochi', studentId: 3 },
+        { nameFirst: 'Billy', nameLast: 'Bangers', studentId: 4 },
+        { nameFirst: 'Laura', nameLast: 'Lizard', studentId: 5 },
+        { nameFirst: 'Maggie', nameLast: 'Moonpie', studentId: 6 },
+        { nameFirst: 'Jimmy', nameLast: 'Junktown', studentId: 7 },
+        { nameFirst: 'Carli', nameLast: 'Cockwood', studentId: 8 },
+        { nameFirst: 'Charlie', nameLast: 'Checkers', studentId: 9 },
+        { nameFirst: 'Margie', nameLast: 'Maggy', studentId: 9 },
+        { nameFirst: 'Jared', nameLast: 'Jenkins', studentId: 9 },
+        { nameFirst: 'Harry', nameLast: 'Peter', studentId: 9 },
       ],
     };
-    this.compileStudents.bind(this);
+    // this.compileStudents.bind(this);
   }
-  compileStudents = studentArray => studentArray.map(student => (
-    <Button
-      buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-      // onPress={this.LogOut}
-      iconRight={{ name: 'v-card' }}
-      backgroundColor="blue"
-      rounded
-      title={`${student.nameFirst} ${student.nameLast}`}
-    />
-  ));
+  // compileStudents = studentArray => studentArray.map(student => (
+  //   <ListItem
+  //   containerStyle={styles.list}
+  //   key={`bbbtn${id}`}
+  //   leftIcon={{ name: 'torso' }}
+  //   titleStyle={{ color: 'white' }}
+  //   title={`${student.nameFirst} ${student.nameLast}`}
+  //   onPress={() => this.props.navigation.navigate('SpecificStudent')}
+  //   />
+  // ));
   render() {
     const styles = StyleSheet.create({
       container: {
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        marginLeft: 110,
+      },
+      list: {
+        borderRadius: 5,
+        borderColor: 'cornflowerblue',
+        backgroundColor: 'cornflowerblue',
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 5,
+        marginRight: 5,
       },
     });
-    // axios.get(`${SERVER_URI}${classRoster}`)
-    //   .then((res) => {
-    //     console.error('res from classRoster post: ', res);
-    //   })
-    //   .catch(err => console.error(err));
     return (
-      <View style={styles.container}>
-        <Text h5>Your Class Roster</Text>
-        {this.compileStudents(this.state.roster)}
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <Text h1>{this.state.sessionName}</Text>
+        <Text h2 style={styles.container}>Class Roster</Text>
+        <ScrollView>
+        <List style={{ backgroundColor: '#fff' }}>
+          {this.state.roster.map((student, id) => (
+            <ListItem
+              containerStyle={styles.list}
+              key={`bbbtn${id}`}
+              leftIcon={{ name: 'image' }}
+              titleStyle={{ color: 'white' }}
+              title={`${student.nameFirst} ${student.nameLast}`}
+              onPress={() => this.props.navigation.navigate('SpecificStudent')}
+              />
+            ))}          
+        </List>
+        </ScrollView>
       </View>
     );
   }
