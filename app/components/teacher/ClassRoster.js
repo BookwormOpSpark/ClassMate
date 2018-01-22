@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, List, ListItem } from 'react-native-elements';
 import axios from 'axios';
 // import { SERVER_URI, classRoster } from '../../constant';
@@ -19,6 +19,9 @@ export default class ClassRoster extends React.Component {
         { nameFirst: 'Jimmy', nameLast: 'Junktown', studentId: 7 },
         { nameFirst: 'Carli', nameLast: 'Cockwood', studentId: 8 },
         { nameFirst: 'Charlie', nameLast: 'Checkers', studentId: 9 },
+        { nameFirst: 'Margie', nameLast: 'Maggy', studentId: 9 },
+        { nameFirst: 'Jared', nameLast: 'Jenkins', studentId: 9 },
+        { nameFirst: 'Harry', nameLast: 'Peter', studentId: 9 },
       ],
     };
     // this.compileStudents.bind(this);
@@ -54,8 +57,8 @@ export default class ClassRoster extends React.Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Text h1>{this.state.sessionName}</Text>
-
         <Text h2 style={styles.container}>Class Roster</Text>
+        <ScrollView>
         <List style={{ backgroundColor: '#fff' }}>
           {this.state.roster.map((student, id) => (
             <ListItem
@@ -68,6 +71,7 @@ export default class ClassRoster extends React.Component {
               />
             ))}          
         </List>
+        </ScrollView>
       </View>
     );
   }
