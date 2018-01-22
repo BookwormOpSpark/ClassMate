@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
-import { StyleSheet, ScrollView, Text, View, Button } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { SERVER_URI, DashboardRoute } from '../../constant';
-import { logOut, getDashboard, selectSession } from '../../actions/actions';
+import { logOut, selectSession } from '../../actions/actions';
 
 class StudentDrawer extends Component {
   constructor(props) {
@@ -53,13 +52,14 @@ class StudentDrawer extends Component {
         paddingHorizontal: 15,
       },
       addClassStyle: {
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         alignItems: 'center',
+        padding: 10,
 
       },
       footerContainer: {
         padding: 10,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
       },
 
     });
@@ -99,10 +99,10 @@ class StudentDrawer extends Component {
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('JoinClass')}
-                backgroundColor="green"
+                iconRight={{ name: 'done' }}
+                backgroundColor="blue"
                 rounded
                 title="Join a Class"
-              // color="white"
               />
             </View>
           </View>
@@ -110,12 +110,11 @@ class StudentDrawer extends Component {
         <View style={styles.footerContainer}>
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            onPress={this.LogOut}
+            onPress={this.Logout}
             iconRight={{ name: 'enhanced-encryption' }}
-            backgroundColor="red"
+            backgroundColor="firebrick"
             rounded
             title="Log Out"
-          // color="white"
           />
         </View>
       </View>

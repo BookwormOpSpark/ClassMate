@@ -102,23 +102,6 @@ class StudentDashboard extends React.Component {
 
             <Text h5>Upcoming Due Dates</Text>
             <Icon color="blue" name="bell" size={30} />
-
-            <Button
-              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              onPress={() => this.props.navigation.navigate('JoinClass')}
-              iconRight={{ name: 'done' }}
-              backgroundColor="blue"
-              rounded
-              title="Join a Class"
-            />
-            <Button
-              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              onPress={this.onLogout}
-              iconRight={{ name: 'enhanced-encryption' }}
-              backgroundColor="firebrick"
-              rounded
-              title="Log Out"
-            />
           </View>
         </ScrollView>
       </View>

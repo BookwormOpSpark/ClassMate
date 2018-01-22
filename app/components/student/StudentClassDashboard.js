@@ -26,14 +26,18 @@ class StudentClassDashboard extends React.Component {
       <View style={styles.container}>
         <Text h1>{className || 'Class'}</Text>
         <Icon color="blue" name="rocket" size={30} />
+
+        <Icon color="green" name="marker-check" size={60} />
         <Button
           onPress={() => this.props.navigation.navigate('CheckIn')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
+          buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
           iconRight={{ name: 'done' }}
           backgroundColor="blue"
           rounded
           title="CheckIn"
         />
+
+        <Icon color="green" name="marker-check" size={60} />
         <Button
           onPress={() => this.props.navigation.navigate('RaiseHand')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
@@ -42,6 +46,8 @@ class StudentClassDashboard extends React.Component {
           rounded
           title="Raise Hand"
         />
+
+        <Icon color="green" name="marker-check" size={60} />
         <Button
           onPress={() => this.props.navigation.navigate('SubmitHomework')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
@@ -50,6 +56,8 @@ class StudentClassDashboard extends React.Component {
           rounded
           title="Submit Homework"
         />
+
+        <Icon color="green" name="marker-check" size={60} />
         <Button
           onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
