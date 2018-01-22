@@ -3,13 +3,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, List, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default class Assignment extends React.Component {
+class Assignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sessionName: "Mr. Ledet's Fifth Grade",
-      assignments: ['Algebra Worksheet', 'Book Report', 'History Worksheet'],
+      assignments: ['Algebra Worksheet', 'Book Report', 'Math Worksheet'],
     };
   }
   render() {
@@ -31,15 +32,18 @@ export default class Assignment extends React.Component {
       },
     });
 
+    // const lessons = this.props.state.dashboard.assignments;
     const lessons = this.state.assignments;
+    const className = this.props.state.selectSession.sessionName;
+
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Text h1>{this.state.sessionName}</Text>
+        <Text h1>{className || 'Class'}</Text>
 
         <Text h2 style={styles.container}>Assignments</Text>
         <List style={{ backgroundColor: '#fff' }}>
-          {lessons.map((assignment, id) => (
+          {lessons && lessons.length > 0 ? lessons.map((assignment, id) => (
             <ListItem
               containerStyle={styles.list}
               key={`bbbtn${id}`}
@@ -48,13 +52,21 @@ export default class Assignment extends React.Component {
               titleStyle={{ color: 'white' }}
               onPress={() => this.props.navigation.navigate('SpecificAssignment')}
             />
-        ))}
+        )) : ''}
         </List>
       </View>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(Assignment);
+
 Assignment.propTypes = {
   navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };

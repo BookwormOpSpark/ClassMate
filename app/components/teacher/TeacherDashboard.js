@@ -59,14 +59,6 @@ class TeacherDashboard extends React.Component {
 
         <Button
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          onPress={() => this.props.navigation.navigate('TeacherClassNavigation')}
-          iconRight={{ name: 'directions-run' }}
-          backgroundColor="blue"
-          rounded
-          title="Go to Class Biology"
-        />
-        <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           onPress={() => this.props.navigation.navigate('AddClass')}
           iconRight={{ name: 'done' }}
           backgroundColor="blue"

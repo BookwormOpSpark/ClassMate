@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 // import appReducer from './app/reducers';
 import RootReducer from './app/reducers';
 import MainNavigation from './app/navigation/MainNavigation';
+import LoginNavigation from './app/navigation/LoginNavigation';
 
 
 export default function App() {
@@ -11,7 +12,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <MainNavigation />
+      <LoginNavigation />
     </Provider>
   );
 }
