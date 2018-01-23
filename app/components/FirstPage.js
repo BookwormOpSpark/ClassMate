@@ -10,16 +10,16 @@ export default function FirstPage({ navigation }) {
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
     },
 
   });
   return (
     <View style={styles.container}>
-      <Text h1>Class Mate</Text>
-      <Icon color="blue" name="book-open-page-variant" size={40} />
+      <Text h1 style={{ color: 'black' }}>Class Mate</Text>
+      <Icon color="blue" name="book-open-page-variant" size={120} />
 
-      <Text h3 style={{ marginTop: 15 }}>Are you a</Text>
+      <Text h3 style={{ marginTop: 50, color: 'blue' }}>Are you a</Text>
       <Button
         buttonStyle={[{ marginBottom: 5, marginTop: 15 }]}
         onPress={() => navigation.navigate('StudentLogin')}
