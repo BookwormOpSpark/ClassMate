@@ -2,41 +2,20 @@ import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, List, ListItem } from 'react-native-elements';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 // import { SERVER_URI, classRoster } from '../../constant';
 
-export default class ClassRoster extends React.Component {
+class ClassRoster extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      roster: [
-        { nameFirst: 'Susy', nameLast: 'Sunshine', studentId: 0 },
-        { nameFirst: 'Abby', nameLast: 'Applebottom', studentId: 1 },
-        { nameFirst: 'Peter', nameLast: 'Peppers', studentId: 2 },
-        { nameFirst: 'Timmy', nameLast: 'Toochi', studentId: 3 },
-        { nameFirst: 'Billy', nameLast: 'Bangers', studentId: 4 },
-        { nameFirst: 'Laura', nameLast: 'Lizard', studentId: 5 },
-        { nameFirst: 'Maggie', nameLast: 'Moonpie', studentId: 6 },
-        { nameFirst: 'Jimmy', nameLast: 'Junktown', studentId: 7 },
-        { nameFirst: 'Carli', nameLast: 'Cockwood', studentId: 8 },
-        { nameFirst: 'Charlie', nameLast: 'Checkers', studentId: 9 },
-        { nameFirst: 'Margie', nameLast: 'Maggy', studentId: 9 },
-        { nameFirst: 'Jared', nameLast: 'Jenkins', studentId: 9 },
-        { nameFirst: 'Harry', nameLast: 'Peter', studentId: 9 },
-      ],
+      roster: this.props.state.classInfo.students,
     };
-    // this.compileStudents.bind(this);
   }
-  // compileStudents = studentArray => studentArray.map(student => (
-  //   <ListItem
-  //   containerStyle={styles.list}
-  //   key={`bbbtn${id}`}
-  //   leftIcon={{ name: 'torso' }}
-  //   titleStyle={{ color: 'white' }}
-  //   title={`${student.nameFirst} ${student.nameLast}`}
-  //   onPress={() => this.props.navigation.navigate('SpecificStudent')}
-  //   />
-  // ));
+
   render() {
+    console.log('this.props.state:', this.props.state.classInfo.students);
     const styles = StyleSheet.create({
       container: {
         backgroundColor: '#fff',
@@ -59,20 +38,32 @@ export default class ClassRoster extends React.Component {
         <Text h1>{this.state.sessionName}</Text>
         <Text h2 style={styles.container}>Class Roster</Text>
         <ScrollView>
-        <List style={{ backgroundColor: '#fff' }}>
-          {this.state.roster.map((student, id) => (
-            <ListItem
-              containerStyle={styles.list}
-              key={`bbbtn${id}`}
-              leftIcon={{ name: 'image' }}
-              titleStyle={{ color: 'white' }}
-              title={`${student.nameFirst} ${student.nameLast}`}
-              onPress={() => this.props.navigation.navigate('SpecificStudent')}
+          <List style={{ backgroundColor: '#fff' }}>
+            {this.state.roster.map((student, id) => (
+              <ListItem
+                containerStyle={styles.list}
+                key={`bbbtn${id}`}
+                leftIcon={{ name: 'image' }}
+                titleStyle={{ color: 'white' }}
+                title={`${student.nameFirst} ${student.nameLast}`}
+                onPress={() => this.props.navigation.navigate('SpecificStudent')}
               />
-            ))}          
-        </List>
+            ))}
+          </List>
         </ScrollView>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(ClassRoster);
+
+ClassRoster.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
