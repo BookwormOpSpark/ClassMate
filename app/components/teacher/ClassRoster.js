@@ -15,7 +15,6 @@ class ClassRoster extends React.Component {
   }
 
   render() {
-    console.log('this.props.state:', this.props.state.classInfo.students);
     const styles = StyleSheet.create({
       container: {
         backgroundColor: '#fff',
