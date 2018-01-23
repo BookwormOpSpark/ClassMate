@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
-import { StyleSheet, ScrollView, Text, View, Button } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { SERVER_URI, DashboardRoute } from '../../constant';
+import { Button } from 'react-native-elements';
 import { logOut, getDashboard, selectSession } from '../../actions/actions';
 
 class TeacherDrawer extends Component {
@@ -53,13 +52,13 @@ class TeacherDrawer extends Component {
         paddingHorizontal: 15,
       },
       addClassStyle: {
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         alignItems: 'center',
 
       },
       footerContainer: {
         padding: 10,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
       },
 
     });
@@ -99,10 +98,10 @@ class TeacherDrawer extends Component {
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('AddClass')}
-                backgroundColor="green"
+                iconRight={{ name: 'done' }}
+                backgroundColor="blue"
                 rounded
-                title="Create a Class"
-                // color="white"
+                title="Add a Class"
               />
             </View>
           </View>
@@ -115,7 +114,6 @@ class TeacherDrawer extends Component {
             backgroundColor="red"
             rounded
             title="Log Out"
-            // color="white"
           />
         </View>
       </View>
