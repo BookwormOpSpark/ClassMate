@@ -50,11 +50,11 @@ class StudentClassDashboard extends React.Component {
         <View style={styles.badges}>
 
           <View style={styles.item}>
-            <Icon color="gold" name="paw" size={100} />
+            <Icon color="#FF9F1C" name="paw" size={100} />
             <Button
               onPress={() => this.props.navigation.navigate('RaiseHand')}
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              backgroundColor="gold"
+              backgroundColor="#FF9F1C"
               rounded
               small
               color="black"
@@ -63,11 +63,11 @@ class StudentClassDashboard extends React.Component {
           </View>
 
           <View style={styles.item}>
-            <Icon color="blue" name="book-open-variant" size={100} />
+            <Icon color="#2EC4B6" name="book-open-variant" size={100} />
             <Button
               onPress={() => this.props.navigation.navigate('SubmitHomework')}
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              backgroundColor="blue"
+              backgroundColor="#2EC4B6"
               small
               rounded
               title="Submit Homework"
@@ -75,11 +75,11 @@ class StudentClassDashboard extends React.Component {
           </View>
 
           <View style={styles.item}>
-            <Icon color="blue" name="calendar" size={100} />
+            <Icon color="#E71D36" name="calendar" size={100} />
             <Button
               onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              backgroundColor="blue"
+              backgroundColor="#E71D36"
               small
               rounded
               title="Daily Schedule"
