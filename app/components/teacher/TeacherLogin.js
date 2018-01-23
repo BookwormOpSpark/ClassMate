@@ -25,6 +25,7 @@ class TeacherLogin extends React.Component {
       iosClientId,
       scopes: ['profile', 'email'],
     }).then((info) => {
+      this.props.navigation.navigate('Spinner');
       const token = info.idToken;
       axios.post(`${SERVER_URI}${TeacherLoginRoute}`, { idtoken: token })
         .then((res) => {
