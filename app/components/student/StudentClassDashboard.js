@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 class StudentClassDashboard extends React.Component {
   constructor(props) {
     super(props);
+    // console.log('student class dashboard', this.props.state)
     this.state = { text: '' };
   }
 
