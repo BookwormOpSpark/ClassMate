@@ -48,11 +48,7 @@ class ClassRoster extends React.Component {
                 onPress={() => this.props.navigation.navigate('SpecificStudent')}
               />
             ))}
-<<<<<<< HEAD
-        </List>
-=======
           </List>
->>>>>>> 4f0bd6c490324d49e43da1bc847eb15affeb5dd0
         </ScrollView>
       </View>
     );
