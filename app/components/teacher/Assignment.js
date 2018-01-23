@@ -59,7 +59,6 @@ class Assignment extends React.Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Text h1>{className}</Text>
-
         <Text h2 style={styles.container}>Assignments</Text>
         <List style={{ backgroundColor: '#fff' }}>
           {lessons && lessons.length > 0 ? lessons.map(assignment => (
