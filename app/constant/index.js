@@ -1,6 +1,6 @@
 export const androidClientId = '29245857360-gi2ilv6b04e6mpn9icn9ngiq0buq4elr.apps.googleusercontent.com';
 export const iosClientId = '766434726628-1guelram8v9kr9mtapqa2587ss7bc6sl.apps.googleusercontent.com';
-export const SERVER_URI = 'http://f6891216.ngrok.io';
+export const SERVER_URI = 'https://ad7997cf.ngrok.io';
 // *********Route************//
 export const TeacherLoginRoute = '/login';
 export const StudentLoginRoute = '/studentCreate';
@@ -15,3 +15,4 @@ export const GetAssignments = '/getAssignment'; // send session_id => get back a
 export const CreateAssignments = '/createAssignment'; // send session_id => get back all the assignments
 export const StudentInformation = '/studentInformation'; // send student_id and get back specific student info 
 export const QueueRoute = '/queue'; // send student_id and get back specific student info 
+export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info 
