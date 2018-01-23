@@ -37,18 +37,22 @@ class ClassRoster extends React.Component {
         <Text h1>{this.state.sessionName}</Text>
         <Text h2 style={styles.container}>Class Roster</Text>
         <ScrollView>
-        <List style={{ backgroundColor: '#fff' }}>
-          {this.state.roster.map((student, id) => (
-            <ListItem
-              containerStyle={styles.list}
-              key={`bbbtn${id}`}
-              leftIcon={{ name: 'image' }}
-              titleStyle={{ color: 'white' }}
-              title={`${student.nameFirst} ${student.nameLast}`}
-              onPress={() => this.props.navigation.navigate('SpecificStudent')}
+          <List style={{ backgroundColor: '#fff' }}>
+            {this.state.roster.map((student, id) => (
+              <ListItem
+                containerStyle={styles.list}
+                key={`bbbtn${id}`}
+                leftIcon={{ name: 'image' }}
+                titleStyle={{ color: 'white' }}
+                title={`${student.nameFirst} ${student.nameLast}`}
+                onPress={() => this.props.navigation.navigate('SpecificStudent')}
               />
             ))}
+<<<<<<< HEAD
         </List>
+=======
+          </List>
+>>>>>>> 4f0bd6c490324d49e43da1bc847eb15affeb5dd0
         </ScrollView>
       </View>
     );
