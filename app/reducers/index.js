@@ -5,6 +5,8 @@ import classInfo from './classInfo';
 import badges from './badges';
 import selectSession from './selectSession';
 import dashboard from './dashboard';
+import assignmentCheck from './assignmentCheck';
+import specificAssignment from './specificAssignment';
 
 const appReducer = combineReducers({
   user,

@@ -43,25 +43,26 @@ class SpecificAssignment extends React.Component {
       },
     });
 
-    const students = this.state.students;
+    const students = this.props.state.assignmentCheck;
+    console.log(this.props.state, 'this is props.state');
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Text h2 style={styles.container}>Assignment</Text>
         <List style={{ backgroundColor: '#fff' }}>
-          {students.map((student, id) => (
+          {students.map(student => (
             student.photoUrl ?
               <ListItem
                 containerStyle={styles.list}
-                key={`bbbtn${id}`}
-                title={`${student.name}`}
+                key={`bbbtn${student.id}`}
+                title={`${student.nameFirst} ${student.nameLast}`}
                 leftIcon={{ name: 'book' }}
                 titleStyle={{ color: 'white' }}
               />
             :
               <ListItem
                 containerStyle={styles.list2}
-                key={`bbbtn${id}`}
-                title={`${student.name}`}
+                key={`bbbtn${student.id}`}
+                title={`${student.nameFirst} ${student.nameLast}`}
                 leftIcon={{ name: 'book' }}
                 titleStyle={{ color: 'white' }}
               />
