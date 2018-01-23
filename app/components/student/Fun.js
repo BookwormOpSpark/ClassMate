@@ -47,16 +47,6 @@ export default class StudentClassSchedule extends React.Component {
 
           <Image source={{ uri: 'https://static.boredpanda.com/blog/wp-content/uploads/2016/08/bunny8-57a2765cf139e__880.jpg' }} style={{ width: 250, height: 350 }} />
 
-          <View style={{ height: 300 }}>
-
-            <WebView
-              style={styles.WebViewContainer}
-              javaScriptEnabled
-              domStorageEnabled
-              source={{ uri: 'https://www.youtube.com/embed/dFKhWe2bBkM' }}
-            />
-
-          </View>
 
           <Text
             style={{ color: 'blue' }}
@@ -64,6 +54,16 @@ export default class StudentClassSchedule extends React.Component {
           >
             Google
           </Text>
+
+
+
+          <View style={{ flex: 1 }}>
+            <WebView
+              style={{ flex: 1 }}
+              javaScriptEnabled={true}
+              source={{ uri: 'https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&autoplay=0&showinfo=0&controls=0' }}
+            />
+          </View>
 
           <WebView
             ref={(ref) => { this.videoPlayer = ref; }}

@@ -5,6 +5,7 @@ import ClassRoster from '../components/teacher/ClassRoster';
 import Queue from '../components/teacher/Queue';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 import GiveAQuizz from '../components/teacher/GiveAQuizz';
+import FunPost from '../components/teacher/FunPost';
 import RosterNavigation from './RosterNavigation';
 
 const TeacherClassNavigation = StackNavigator({
@@ -26,6 +27,9 @@ const TeacherClassNavigation = StackNavigator({
   },
   GiveAQuizz: {
     screen: GiveAQuizz,
+  },
+  FunPost: {
+    screen: FunPost,
   },
   RosterNavigation: {
     screen: RosterNavigation,

@@ -57,6 +57,15 @@ class TeacherDashboard extends React.Component {
 
         <Text h5>Upcoming Due Dates</Text>
         <Icon color="blue" name="bell" size={30} />
+
+        <Button
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          onPress={() => this.props.navigation.navigate('TeacherClassNavigation')}
+          iconRight={{ name: 'done' }}
+          backgroundColor="blue"
+          rounded
+          title="Class"
+        />
       </View>
     );
   }

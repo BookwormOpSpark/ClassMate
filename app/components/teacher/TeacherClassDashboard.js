@@ -71,6 +71,14 @@ class TeacherClassDashboard extends React.Component {
           rounded
           title="Daily Schedule"
         />
+        <Button
+          onPress={() => this.props.navigation.navigate('FunPost')}
+          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+          iconRight={{ name: 'schedule' }}
+          backgroundColor="blue"
+          rounded
+          title="Student Engaged!"
+        />
       </View>
     );
   }
