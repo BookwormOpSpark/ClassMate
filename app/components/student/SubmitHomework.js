@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Image, View } from 'react-native';
+import { StyleSheet, Image, View } from 'react-native';
 import { ImagePicker } from 'expo';
-import { Button } from 'react-native-elements';
+import { Button, Text, Header } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
 
 class SubmitHomework extends React.Component {
@@ -43,7 +43,7 @@ class SubmitHomework extends React.Component {
   _postHomework() {
     // const participant = this.props.state.participant_id;
     // const assignment = this.props.state.assignment_id;
-    const apiUrl = `${SERVER_URI}${PostHomework}`;// need to update here 
+    const apiUrl = `${SERVER_URI}${PostHomework}`;// need to update here
     const uri = this.state.image;
     // console.log('posturi', uri);
 
@@ -70,12 +70,27 @@ class SubmitHomework extends React.Component {
   }
 
   render() {
+    const styles = StyleSheet.create({
+      bigcontainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      },
+    });
+
     const { image } = this.state;
+    const className = this.props.state.selectSession.sessionName;
+
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.bigcontainer}>
+        <Text h3 style={{ color: 'blue', textAlign: 'center', marginBottom: 50 }}>
+          Submit Homeworks for Class {className}
+        </Text>
+
         <Button
-          style={[{ marginBottom: 10, marginTop: 10 }]}
+          style={[{ marginBottom: 10, marginTop: 40 }]}
           title="Pick your homework from camera roll"
           iconRight={{ name: 'attach-file' }}
           backgroundColor="blue"

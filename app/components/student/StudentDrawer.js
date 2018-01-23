@@ -109,6 +109,14 @@ class StudentDrawer extends Component {
         </ScrollView>
         <View style={styles.footerContainer}>
           <Button
+            onPress={this.navigateToScreen('CheckIn')}
+            buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
+            iconRight={{ name: 'done' }}
+            backgroundColor="green"
+            rounded
+            title="CheckIn"
+          />
+          <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.Logout}
             iconRight={{ name: 'enhanced-encryption' }}
