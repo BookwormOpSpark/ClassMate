@@ -37,7 +37,7 @@ class Assignment extends React.Component {
       container: {
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         marginLeft: 110,
       },
       list: {
