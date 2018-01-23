@@ -57,22 +57,18 @@ class TeacherDashboard extends React.Component {
             </Button>
           </Left>
           <Body>
-            <Title>{teacher.First_name} {teacher.Last_name}</Title>
+            <Title>Dashboard</Title>
           </Body>
           <Right>
-            <Icon color="red" name="food-apple" size={30}/>
+            <Icon color="red" name="food-apple" size={30} />
           </Right>
         </Header>
         <Content padder>
+          <Text style={{ fontSize: 30 }} > {teacher.First_name} {teacher.Last_name}</Text>
           <Card>
             <CardItem header>
-              <Left>
-                <Icon color="blue" name="calendar" size={25} />
-              </Left>
-              <Body>
-                <Text h5>Your Class Schedule</Text>
-              </Body>
-              <Right />
+              <Icon color="blue" name="calendar" size={25} />
+              <Text>  Your Class Schedule</Text>
             </CardItem>
             <CardItem>
               <Text>(hardcoded) Biology</Text>
@@ -83,13 +79,8 @@ class TeacherDashboard extends React.Component {
           </Card>
           <Card>
             <CardItem header>
-              <Left>
-                <Icon color="blue" name="bell" size={25} />
-              </Left>
-              <Body>
-                <Text h5>Upcoming Due Dates</Text>
-              </Body>
-              <Right />
+              <Icon color="blue" name="bell" size={25} />
+              <Text>  Upcoming Due Dates</Text>
             </CardItem>
             <CardItem>
               <Text>(hardcoded) Worksheet 1</Text>

@@ -15,12 +15,15 @@ const LoginNavigation = StackNavigator({
   },
   StudentLogin: {
     screen: StudentLogin,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   TeacherLogin: {
     screen: TeacherLogin,
-    // navigationOptions: () => ({
-    //   header: null,
-    // }),
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   StudentDrawerNavigation: {
     screen: StudentDrawerNavigation,
