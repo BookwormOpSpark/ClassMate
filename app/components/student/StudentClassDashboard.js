@@ -76,11 +76,11 @@ class StudentClassDashboard extends React.Component {
           </View>
 
           <View style={styles.item}>
-            <Icon color="#E71D36" name="calendar" size={100} />
+            <Icon color="#01BAEF" name="calendar" size={100} />
             <Button
               onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              backgroundColor="#E71D36"
+              backgroundColor="#01BAEF"
               small
               rounded
               title="Daily Schedule"
@@ -90,7 +90,7 @@ class StudentClassDashboard extends React.Component {
           <View style={styles.item}>
             <Icon color="gold" name="lightbulb-on" size={100} />
             <Button
-              onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
+              onPress={() => this.props.navigation.navigate('Fun')}
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
               backgroundColor="gold"
               small
