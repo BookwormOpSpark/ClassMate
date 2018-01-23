@@ -88,3 +88,4 @@ Assignment.propTypes = {
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
+
