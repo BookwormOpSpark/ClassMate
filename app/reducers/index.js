@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import user from './user';
 import session from './session';
-import homeworks from './homeworks';
+import classInfo from './classInfo';
 import badges from './badges';
 import selectSession from './selectSession';
 import dashboard from './dashboard';
@@ -9,7 +9,7 @@ import dashboard from './dashboard';
 const appReducer = combineReducers({
   user,
   session,
-  homeworks,
+  classInfo,
   badges,
   selectSession,
   dashboard,

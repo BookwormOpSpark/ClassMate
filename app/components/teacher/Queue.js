@@ -28,7 +28,7 @@ class Queue extends React.Component {
     this.socket.open();
 
     this.socket.on('connect', () => {
-      console.log('connected');
+      // console.log('connected');
       this.setState({
         now: Date.now(),
       });
@@ -44,7 +44,7 @@ class Queue extends React.Component {
   }
 
   onSelect(item) {
-    console.log('item', item);
+    // console.log('item', item);
     const { messages } = this.state;
     const index = messages.indexOf(item);
     messages.splice(index, 1);

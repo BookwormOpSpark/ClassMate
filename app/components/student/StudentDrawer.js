@@ -8,10 +8,10 @@ import { connect } from 'react-redux';
 import { logOut, selectSession, getClassInfo } from '../../actions/actions';
 import { SERVER_URI, ClassInfoRoute } from '../../constant';
 
-class TeacherDrawer extends Component {
+class StudentDrawer extends Component {
   constructor(props) {
     super(props);
-    // console.log('TEACHER DRAWER PROPS', this.props);
+    // console.log('Student DRAWER PROPS', this.props);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
   }
@@ -27,7 +27,7 @@ class TeacherDrawer extends Component {
       // console.log('classInfo', res.data);
       this.props.dispatch(getClassInfo(res.data));
     });
-    this.props.navigation.navigate('TeacherClassNavigation');
+    this.props.navigation.navigate('StudentClassNavigation');
   }
 
   LogOut = async () => {
@@ -64,6 +64,7 @@ class TeacherDrawer extends Component {
       addClassStyle: {
         // backgroundColor: 'green',
         alignItems: 'center',
+        padding: 10,
 
       },
       footerContainer: {
@@ -80,7 +81,7 @@ class TeacherDrawer extends Component {
               {user.First_name} {user.Last_name}
             </Text>
             <View style={styles.navSectionStyle}>
-              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('TeacherDashboardNavigation')}>
+              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('StudentDashboardNavigation')}>
                 Dashboard
               </Text>
             </View>
@@ -94,7 +95,7 @@ class TeacherDrawer extends Component {
                 {prevSessions.map((session, id) => (
                   <Text
                     style={styles.navItemStyle}
-                    // onPress={this.navigateToScreen('TeacherClassNavigation')}
+                    // onPress={this.navigateToScreen('StudentClassNavigation')}
                     onPress={() => this.onSelect(session)}
                     key={id}
                   >
@@ -107,21 +108,29 @@ class TeacherDrawer extends Component {
             <View style={styles.addClassStyle}>
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-                onPress={this.navigateToScreen('AddClass')}
+                onPress={this.navigateToScreen('JoinClass')}
                 iconRight={{ name: 'done' }}
                 backgroundColor="blue"
                 rounded
-                title="Add a Class"
+                title="Join a Class"
               />
             </View>
           </View>
         </ScrollView>
         <View style={styles.footerContainer}>
           <Button
+            onPress={this.navigateToScreen('CheckIn')}
+            buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
+            iconRight={{ name: 'done' }}
+            backgroundColor="green"
+            rounded
+            title="CheckIn"
+          />
+          <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            onPress={this.LogOut}
+            onPress={this.Logout}
             iconRight={{ name: 'enhanced-encryption' }}
-            backgroundColor="red"
+            backgroundColor="firebrick"
             rounded
             title="Log Out"
           />
@@ -136,9 +145,9 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(TeacherDrawer);
+export default connect(mapStateToProps)(StudentDrawer);
 
-TeacherDrawer.propTypes = {
+StudentDrawer.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,

@@ -44,6 +44,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
+    "native-base": "^2.3.7",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
     "react-native": "0.50.3",

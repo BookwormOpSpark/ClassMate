@@ -23,6 +23,7 @@ class TeacherDashboard extends React.Component {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
+      // console.log(res.data);
       this.props.dispatch(getDashboard(res.data));
       // console.log('\n\n\nTEACHER DASHBOARD DISPATCHED, here are the prop\n\n\n', this.props.state)
     });
@@ -56,31 +57,6 @@ class TeacherDashboard extends React.Component {
 
         <Text h5>Upcoming Due Dates</Text>
         <Icon color="blue" name="bell" size={30} />
-
-        <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          onPress={() => this.props.navigation.navigate('TeacherClassNavigation')}
-          iconRight={{ name: 'directions-run' }}
-          backgroundColor="blue"
-          rounded
-          title="Go to Class Biology"
-        />
-        <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          onPress={() => this.props.navigation.navigate('AddClass')}
-          iconRight={{ name: 'done' }}
-          backgroundColor="blue"
-          rounded
-          title="Add a Class"
-        />
-        <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          onPress={this.LogOut}
-          iconRight={{ name: 'enhanced-encryption' }}
-          backgroundColor="blue"
-          rounded
-          title="Log Out"
-        />
       </View>
     );
   }

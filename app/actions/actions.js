@@ -8,9 +8,9 @@ export const getSession = session => ({
   payload: session,
 });
 
-export const getHomeworks = homeworks => ({
-  type: 'GET_HOMEWORKS',
-  payload: homeworks,
+export const getClassInfo = info => ({
+  type: 'GET_CLASS_INFO',
+  payload: info,
 });
 
 export const getBadges = badges => ({

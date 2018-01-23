@@ -1,26 +1,26 @@
 import { StackNavigator } from 'react-navigation';
 import StudentDashboard from '../components/student/StudentDashboard';
-import StudentClassNavigation from './StudentClassNavigation';
-import FirstPage from '../components/FirstPage';
-import JoinClassContainer from '../containers/JoinClassContainer';
+// import StudentClassNavigation from './StudentClassNavigation';
+// import FirstPage from '../components/FirstPage';
+// import JoinClassContainer from '../containers/JoinClassContainer';
 
 const StudentDashboardNavigation = StackNavigator({
   Home: {
     screen: StudentDashboard,
   },
-  JoinClass: {
-    screen: JoinClassContainer,
-  },
-  FirstPage: {
-    screen: FirstPage,
-  },
-  StudentClassNavigation: {
-    screen: StudentClassNavigation,
-    // Only current solution to avoid double stacking
-    navigationOptions: () => ({
-      header: null,
-    }),
-  },
+  // JoinClass: {
+  //   screen: JoinClassContainer,
+  // },
+  // FirstPage: {
+  //   screen: FirstPage,
+  // },
+  // StudentClassNavigation: {
+  //   screen: StudentClassNavigation,
+  //   // Only current solution to avoid double stacking
+  //   navigationOptions: () => ({
+  //     header: null,
+  //   }),
+  // },
 
 });
 

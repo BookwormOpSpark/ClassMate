@@ -12,8 +12,8 @@ import { SERVER_URI, DashboardRoute } from '../../constant';
 class StudentDashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log('student dashboard this.props.state');
-    console.log(this.props.state);
+    // console.log('student dashboard this.props.state');
+    // console.log(this.props.state);
     this.state = {
       selectedSession: '',
     };
@@ -81,8 +81,7 @@ class StudentDashboard extends React.Component {
         justifyContent: 'center',
       },
     });
-    const { user, dashboard } = this.props.state;
-    const sessions = dashboard.sessionInfo ? dashboard.sessionInfo.sessions : [];
+    const { user } = this.props.state;
 
     return (
       <View style={styles.bigcontainer}>
@@ -105,41 +104,12 @@ class StudentDashboard extends React.Component {
 
             <Button
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              onPress={() => this.props.navigation.navigate('JoinClass')}
+              onPress={() => this.props.navigation.navigate('StudentClassNavigation')}
               iconRight={{ name: 'done' }}
               backgroundColor="blue"
               rounded
-              title="Join a Class"
+              title="Class"
             />
-            <Button
-              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              onPress={this.onLogout}
-              iconRight={{ name: 'enhanced-encryption' }}
-              backgroundColor="firebrick"
-              rounded
-              title="Log Out"
-            />
-          </View>
-
-          <View style={{ flex: 1 }}>
-            {(sessions && sessions.length > 0) ?
-              <View style={{ flex: 1 }}>
-                <List containerStyle={{ flex: 1 }}>
-                  <Text>
-                    Your Current Classes
-                  </Text>
-                  {sessions.map((item, id) => (
-                    <ListItem
-                      containerStyle={styles.list}
-                      key={`bbbtn${id}`}
-                      title={`${item.sessionName}`}
-                      leftIcon={{ name: 'book', color: 'white' }}
-                      titleStyle={{ color: 'white' }}
-                      onPress={() => this.onSelect(item)}
-                    />
-                  ))}
-                </List>
-              </View> : null}
           </View>
         </ScrollView>
       </View>

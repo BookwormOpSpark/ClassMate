@@ -3,8 +3,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, List, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default class SpecificAssignment extends React.Component {
+class SpecificAssignment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,3 +71,15 @@ export default class SpecificAssignment extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(SpecificAssignment);
+
+SpecificAssignment.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};

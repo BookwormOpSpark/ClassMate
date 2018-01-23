@@ -1,33 +1,71 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, StyleSheet } from 'react-native';
+import { Constants, Location, Permissions } from 'expo';
 import { Text } from 'react-native-elements';
-import { connect } from 'react-redux';
 
-const CheckIn = ({ state }) => {
-  const student = state.user;
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
-  return (
-    <View style={styles.container}>
-      <Text h1>CheckIn</Text>
-      <Text>{`${student.First_name}`}</Text>
-    </View>
-  );
-};
+export default class CheckIn extends Component {
+  state = {
+    location: null,
+    errorMessage: null,
+  };
 
+  componentWillMount() {
+    this._getLocationAsync();
+  }
 
-const mapStateToProps = state => ({
-  state,
+  _getLocationAsync = async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    const location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  };
+
+  render() {
+    let text = 'Waiting..';
+    if (this.state.errorMessage) {
+      text = this.state.errorMessage;
+    } else if (this.state.location) {
+      const { longitude, latitude } = this.state.location.coords;
+      const longitude1 = JSON.parse(longitude);
+      const latitude1 = JSON.parse(latitude);
+      if (longitude1 > -91 && longitude1 < -89 && latitude1 > 28 && latitude1 < 30) {
+        text = 'You are checked in';
+      }
+    }
+
+    const { longitude, latitude } = this.state.location ? this.state.location.coords : { longitude: '', latitude: '' };
+
+    return (
+      <View style={styles.container}>
+        <Text h1 style={{ color: 'green' }}>Check In</Text>
+        <Icon color="green" name="marker-check" size={30} />
+
+        <Text style={styles.paragraph}>{this.state.location ? longitude : ''}</Text>
+        <Text style={styles.paragraph}>{this.state.location ? latitude : ''}</Text>
+        <Text style={styles.paragraph}>{text}</Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#fff',
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'green',
+  },
 });
-
-CheckIn.propTypes = {
-  state: PropTypes.object.isRequired,
-};
-export default connect(mapStateToProps)(CheckIn);
