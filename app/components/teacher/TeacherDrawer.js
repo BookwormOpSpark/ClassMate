@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
-import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
-import { logOut, getDashboard, selectSession } from '../../actions/actions';
+import { connect } from 'react-redux';
+import { logOut, selectSession, getClassInfo } from '../../actions/actions';
+import { SERVER_URI, ClassInfoRoute } from '../../constant';
 
 class TeacherDrawer extends Component {
   constructor(props) {
@@ -17,6 +19,14 @@ class TeacherDrawer extends Component {
   onSelect = async (item) => {
     // console.log('item', item);
     await this.props.dispatch(selectSession(item));
+    await axios.get(`${SERVER_URI}${ClassInfoRoute}`, {
+      params: {
+        sessionId: item.sessionID,
+      },
+    }).then((res) => {
+      // console.log('classInfo', res.data);
+      this.props.dispatch(getClassInfo(res.data));
+    });
     this.props.navigation.navigate('TeacherClassNavigation');
   }
 

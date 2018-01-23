@@ -23,7 +23,7 @@ class TeacherDashboard extends React.Component {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.props.dispatch(getDashboard(res.data));
       // console.log('\n\n\nTEACHER DASHBOARD DISPATCHED, here are the prop\n\n\n', this.props.state)
     });

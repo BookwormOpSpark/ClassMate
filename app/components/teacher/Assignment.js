@@ -33,8 +33,9 @@ class Assignment extends React.Component {
     });
 
     // const lessons = this.props.state.dashboard.assignments;
-    const lessons = this.state.assignments;
+    const lessons = this.props.state.dashboard.sessionInfo.assignments;
     const className = this.props.state.selectSession.sessionName;
+    console.log(this.props.state, 'Assignment Props')
 
 
     return (
@@ -46,8 +47,8 @@ class Assignment extends React.Component {
           {lessons && lessons.length > 0 ? lessons.map((assignment, id) => (
             <ListItem
               containerStyle={styles.list}
-              key={`bbbtn${id}`}
-              title={`${assignment}`}
+              key={`bbbtn${id.id}`}
+              title={`${assignment.title}`}
               leftIcon={{ name: 'book' }}
               titleStyle={{ color: 'white' }}
               onPress={() => this.props.navigation.navigate('SpecificAssignment')}
