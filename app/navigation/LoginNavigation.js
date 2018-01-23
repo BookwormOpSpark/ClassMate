@@ -9,12 +9,18 @@ import TeacherDrawerNavigation from './TeacherDrawerNavigation';
 const LoginNavigation = StackNavigator({
   Home: {
     screen: FirstPage,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   StudentLogin: {
     screen: StudentLogin,
   },
   TeacherLogin: {
     screen: TeacherLogin,
+    // navigationOptions: () => ({
+    //   header: null,
+    // }),
   },
   StudentDrawerNavigation: {
     screen: StudentDrawerNavigation,
