@@ -5,22 +5,27 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, Image } from 'react-native';
 import { Button, Text } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default function SpecificStudent({ navigation }) {
-    const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    image: {
-        width: 200,
-        height: 200,
-        borderRadius: 100, 
-    },
-
+class SpecificStudent extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        image: {
+            width: 200,
+            height: 200,
+            borderRadius: 100, 
+        },
     });
+
     return (
         <View style={styles.container}>
             <Image
@@ -35,9 +40,17 @@ export default function SpecificStudent({ navigation }) {
             <Text p style={{ marginTop: 2 }}>(123)-456-7890</Text>
         </View>
     );
+    }
 }
 
+const mapStateToProps = state => ({
+    state,
+});
+
+export default connect(mapStateToProps)(SpecificStudent);
 
 SpecificStudent.propTypes = {
     navigation: PropTypes.object.isRequired,
+    state: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
