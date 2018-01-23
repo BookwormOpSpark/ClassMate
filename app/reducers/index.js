@@ -15,6 +15,8 @@ const appReducer = combineReducers({
   badges,
   selectSession,
   dashboard,
+  assignmentCheck,
+  specificAssignment,
 });
 
 const rootReducer = (state, action) => {
