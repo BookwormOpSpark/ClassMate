@@ -71,7 +71,7 @@ class Assignment extends React.Component {
               titleStyle={{ color: 'white' }}
               onPress={() => this.onSelect(assignment)}
             />
-        )) : null }
+        )) : null}
         </List>
       </View>
     );
