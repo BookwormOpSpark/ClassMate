@@ -7,6 +7,9 @@ import TeacherDashboard from '../components/teacher/TeacherDashboard';
 const TeacherDashboardNavigation = StackNavigator({
   Home: {
     screen: TeacherDashboard,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   // AddClass: {
   //   screen: AddClass,

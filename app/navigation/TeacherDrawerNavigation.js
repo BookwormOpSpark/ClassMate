@@ -7,6 +7,9 @@ import AddClass from '../components/teacher/AddClass';
 const TeacherDrawerNavigator = DrawerNavigator({
   TeacherDashboardNavigation: {
     screen: TeacherDashboardNavigation,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   TeacherClassNavigation: {
     screen: TeacherClassNavigation,
