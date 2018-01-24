@@ -16,3 +16,4 @@ export const CreateAssignments = '/createAssignment'; // send session_id => get 
 export const StudentInformation = '/studentInformation'; // send student_id and get back specific student info 
 export const QueueRoute = '/queue'; // send student_id and get back specific student info 
 export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info 
+export const PostFunStuff = '/funStuff'; // send student_id and get back specific student info 

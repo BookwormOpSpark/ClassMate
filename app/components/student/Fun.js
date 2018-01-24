@@ -45,6 +45,12 @@ export default class StudentClassSchedule extends React.Component {
             style={{ width: 300, height: 300 }}
           />
 
+
+          <Image
+            style={{ width: 300, height: 200 }}
+            source={{ uri: 'https://media.giphy.com/media/fT2symKaq961i/giphy.gif' }}
+          />
+
           <Image source={{ uri: 'https://static.boredpanda.com/blog/wp-content/uploads/2016/08/bunny8-57a2765cf139e__880.jpg' }} style={{ width: 250, height: 350 }} />
 
 
@@ -54,35 +60,27 @@ export default class StudentClassSchedule extends React.Component {
           >
             Google
           </Text>
+          <WebView
+            style={{ width: 300, height: 300 }}
+            source={{ html: '<html><body>Look Ma a video! <br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/RJa4kG1N3d0" frameborder="0" allowfullscreen></iframe></body></html>' }}
+          />
 
-
-
-          <View style={{ flex: 1 }}>
-            <WebView
-              style={{ flex: 1 }}
-              javaScriptEnabled={true}
-              source={{ uri: 'https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&autoplay=0&showinfo=0&controls=0' }}
-            />
-          </View>
 
           <WebView
+            style={{ width: 300, height: 300 }}
+            javaScriptEnabled
+            source={{ uri: 'https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&autoplay=0&showinfo=0&controls=0' }}
+          />
+
+
+          <WebView
+            style={{ width: 300, height: 300 }}
             ref={(ref) => { this.videoPlayer = ref; }}
             scalesPageToFit
             source={{ html: '<html><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /><iframe src="https://www.youtube.com/embed/' + '2d7s3spWAzo' + '?modestbranding=1&playsinline=1&showinfo=0&rel=0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe></html>' }}
             // onNavigationStateChange={this.onShouldStartLoadWithRequest} //for Android
           />
 
-
-          <Video
-            source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
-            rate={1.0}
-            volume={1.0}
-            isMuted={false}
-            resizeMode="cover"
-            shouldPlay
-            isLooping
-            style={{ width: 300, height: 300 }}
-          />
 
         </ScrollView>
 
