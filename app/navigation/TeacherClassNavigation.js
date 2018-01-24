@@ -1,37 +1,37 @@
 import { StackNavigator } from 'react-navigation';
 import TeacherClassDashboard from '../components/teacher/TeacherClassDashboard';
-import AssignmentNavigation from './AssignmentNavigation';
-import ClassRoster from '../components/teacher/ClassRoster';
+import Assignment from '../components/teacher/Assignment';
+import SpecificAssignment from '../components/teacher/SpecificAssignment';
 import Queue from '../components/teacher/Queue';
-import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 import GiveAQuizz from '../components/teacher/GiveAQuizz';
-import RosterNavigation from './RosterNavigation';
+import ClassRoster from '../components/teacher/ClassRoster';
+import SpecificStudent from '../components/teacher/SpecificStudent';
+import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 
 const TeacherClassNavigation = StackNavigator({
-  Home: {
+  // Home: {
+  //   screen: TeacherClassDashboard,
+  // },
+  TeacherClassDashboard: {
     screen: TeacherClassDashboard,
   },
-  AssignmentNavigation: {
-    screen: AssignmentNavigation,
-    // Only current solution to avoid double stacking
-    navigationOptions: () => ({
-      header: null,
-    }),
+  Assignment: {
+    screen: Assignment,
+  },
+  SpecificAssignment: {
+    screen: SpecificAssignment,
   },
   Queue: {
     screen: Queue,
   },
-  TeacherClassDashboard: {
-    screen: TeacherClassDashboard,
-  },
   GiveAQuizz: {
     screen: GiveAQuizz,
   },
-  RosterNavigation: {
-    screen: RosterNavigation,
-    navigationOptions: () => ({
-      header: null,
-    }),
+  ClassRoster: {
+    screen: ClassRoster,
+  },
+  SpecificStudent: {
+    screen: SpecificStudent,
   },
   TeacherClassSchedule: {
     screen: TeacherClassSchedule,
