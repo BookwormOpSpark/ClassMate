@@ -15,7 +15,10 @@ class TeacherDrawer extends Component {
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
   }
-
+  componentDidMount() {
+    console.log('HERE IS THE TEACHER DRAWER PROPS');
+    console.log(this.props);
+  }
   onSelect = async (item) => {
     // console.log('item', item);
     await this.props.dispatch(selectSession(item));
@@ -32,7 +35,13 @@ class TeacherDrawer extends Component {
 
   LogOut = async () => {
     await this.props.dispatch(logOut());
-    this.props.navigation.navigate('FirstPage');
+    console.log('HEY!!!\n\n\n Im LOGGIN OUT !!!\n\n\n!!!!!')
+    this.props.screenProps.rootNavigation.dispatch(
+      NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Home' })]
+      })
+    )
   }
 
   navigateToScreen = route => () => {
@@ -153,4 +162,5 @@ TeacherDrawer.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  screenProps: screenProps.object.isRequired,
 };

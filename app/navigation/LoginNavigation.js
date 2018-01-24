@@ -35,14 +35,16 @@ const LoginNavigation = StackNavigator({
     }),
   },
   TeacherDrawerNavigation: {
-    screen: TeacherDrawerNavigation,
+    screen: ({ navigation }) => (
+      <TeacherDrawerNavigation screenProps={{ rootNavigation: navigation }} />
+    ),
     navigationOptions: () => ({
       header: null,
     }),
   },
   Spinner: {
     screen: ({ navigation }) => (
-      <Container screenProps={{ rootNavigation: navigation }} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Spinner color="blue" />
       </Container>
     ),
