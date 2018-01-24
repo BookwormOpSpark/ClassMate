@@ -37,7 +37,7 @@ class Assignment extends React.Component {
       container: {
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         marginLeft: 110,
       },
       list: {
@@ -59,6 +59,7 @@ class Assignment extends React.Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Text h1>{className}</Text>
+
         <Text h2 style={styles.container}>Assignments</Text>
         <List style={{ backgroundColor: '#fff' }}>
           {lessons && lessons.length > 0 ? lessons.map(assignment => (
@@ -70,7 +71,7 @@ class Assignment extends React.Component {
               titleStyle={{ color: 'white' }}
               onPress={() => this.onSelect(assignment)}
             />
-        )) : null }
+        )) : null}
         </List>
       </View>
     );
@@ -88,4 +89,3 @@ Assignment.propTypes = {
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
-

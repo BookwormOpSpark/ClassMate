@@ -29,7 +29,7 @@ class SpecificAssignment extends React.Component {
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 110,
+        marginLeft: 75,
       },
       list: {
         borderRadius: 5,
@@ -64,7 +64,7 @@ class SpecificAssignment extends React.Component {
     const students = this.props.state.assignmentCheck;
     const current = this.state.currentUrl;
     // console.log(current, 'this is current photoUrl');
-    // console.log(this.props.state, 'this is props.state');
+    console.log(this.props.state, 'this is props.state');
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Modal
@@ -86,7 +86,7 @@ class SpecificAssignment extends React.Component {
             </View>
           </View>
         </Modal>
-        <Text h2 style={styles.container}>Assignment</Text>
+        <Text h2 style={styles.container}>{this.props.state.specificAssignment.title}</Text>
         <List style={{ backgroundColor: '#fff' }}>
           {students.map(student => (
             student.photoUrl ?
