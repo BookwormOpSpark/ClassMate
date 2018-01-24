@@ -25,8 +25,8 @@ class TeacherDashboard extends React.Component {
       },
     }).then((res) => {
       this.props.dispatch(getDashboard(res.data));
-      let classInfo = this.props.state.classInfo;
-      console.log('this.props.state.classInfo:', util.inspect(this.props.state.classInfo, {showHidden: false, depth: null}));
+      let dashboard = this.props.state.dashboard;
+      console.log('dashboard:', dashboard);
     });
   }
   LogOut = async () => {
