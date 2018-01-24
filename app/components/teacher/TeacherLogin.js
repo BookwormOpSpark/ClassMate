@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { Google } from 'expo';
+import { Google, Font, AppLoading } from 'expo';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Text } from 'react-native-elements';
@@ -16,7 +16,16 @@ class TeacherLogin extends React.Component {
     super(props);
     // console.log('Teacher Login');
     // console.log(props);
+    this.state = { loading: true };
     this.onLogin = this.onLogin.bind(this);
+  }
+
+  async componentWillMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
+    });
+    this.setState({ loading: false });
   }
 
   onLogin() {

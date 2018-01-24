@@ -76,7 +76,7 @@ class SpecificAssignment extends React.Component {
             <Image
               style={{ width: 375, height: 700, justifyContent: 'center', marginTop: -625 }}
               // need to simply replace URI with variable current to get chosen photoUrl from student
-              source={{ uri: 'http://res.cloudinary.com/fido/image/upload/v1516338431/osxdjtj2mpm9pmhrhbfr.jpg' }}
+              source={{ uri: current }}
             />
             <View style={styles.innerContainer}>
               <Button
