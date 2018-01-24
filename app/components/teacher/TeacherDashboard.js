@@ -5,6 +5,7 @@ import { StyleSheet, View, Dimensions } from 'react-native';
 import { Text, Button, Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import util from 'util';
 import { logOut, getDashboard } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
 
@@ -12,20 +13,18 @@ import { SERVER_URI, DashboardRoute } from '../../constant';
 class TeacherDashboard extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('Teacher dashboard', this.props.state);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
   }
   componentWillMount() {
-    // console.log('\n\n\nTEACHER DASHBOARD MOUNTING\n\n\n')
     axios.get(`${SERVER_URI}${DashboardRoute}`, {
       params: {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      // console.log(res.data);
       this.props.dispatch(getDashboard(res.data));
-      // console.log('\n\n\nTEACHER DASHBOARD DISPATCHED, here are the prop\n\n\n', this.props.state)
+      let classInfo = this.props.state.classInfo;
+      console.log('this.props.state.classInfo:', util.inspect(this.props.state.classInfo, {showHidden: false, depth: null}));
     });
   }
   LogOut = async () => {
