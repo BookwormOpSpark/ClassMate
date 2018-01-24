@@ -50,6 +50,10 @@ export default class StudentClassSchedule extends React.Component {
             style={{ width: 300, height: 200 }}
             source={{ uri: 'https://media.giphy.com/media/fT2symKaq961i/giphy.gif' }}
           />
+          <Image
+            style={{ width: 300, height: 200 }}
+            source={{ uri: 'https://media4.giphy.com/avatars/nikdudukovic/ylDRTR05sy6M.gif' }}
+          />
 
           <Image source={{ uri: 'https://static.boredpanda.com/blog/wp-content/uploads/2016/08/bunny8-57a2765cf139e__880.jpg' }} style={{ width: 250, height: 350 }} />
 

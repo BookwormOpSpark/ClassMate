@@ -15,6 +15,8 @@ class FunPost extends React.Component {
     };
     this.postFunStuff = this.postFunStuff.bind(this);
     this.pickDocument = this.pickDocument.bind(this);
+    this.pickImage = this.pickImage.bind(this);
+    this.postPic = this.postPic.bind(this);
   }
 
 
@@ -26,6 +28,48 @@ class FunPost extends React.Component {
         image: result,
       });
     }
+  }
+
+  pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      base64: true,
+    });
+
+    if (!result.cancelled) {
+      this.setState({
+        image: result.uri,
+      });
+    }
+  };
+
+  postPic() {
+    // const participant = this.props.state.participant_id;
+    // const assignment = this.props.state.assignment_id;
+    const apiUrl = `${SERVER_URI}${PostFunStuff}`;// need to update here
+    const uri = this.state.image;
+    console.log('posturi', uri);
+
+    const uriParts = uri.split('.');
+    const fileType = uriParts[uriParts.length - 1];
+
+    const formData = new FormData();
+    formData.append('photo', {
+      uri,
+      name: `photo.${fileType}`,
+      type: `image/${fileType}`,
+    });
+
+    const options = {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    return fetch(apiUrl, options);
   }
 
   postFunStuff() {
@@ -84,12 +128,28 @@ class FunPost extends React.Component {
           onPress={this.pickDocument}
         />
         <Button
+          style={[{ marginBottom: 10, marginTop: 40 }]}
+          title="Pick your image from camera roll"
+          iconRight={{ name: 'attach-file' }}
+          backgroundColor="blue"
+          rounded
+          onPress={this.pickImage}
+        />
+        <Button
           buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
           title="Post to FunStuffs!"
           iconRight={{ name: 'done' }}
           backgroundColor="blue"
           rounded
           onPress={this.postFunStuff}
+        />
+        <Button
+          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
+          title="Post to FunStuffW3!"
+          iconRight={{ name: 'done' }}
+          backgroundColor="blue"
+          rounded
+          onPress={this.postPic}
         />
       </View>
     );
