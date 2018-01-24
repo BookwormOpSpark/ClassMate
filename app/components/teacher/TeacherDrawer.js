@@ -21,7 +21,9 @@ class TeacherDrawer extends Component {
   }
   onSelect = async (item) => {
     // console.log('item', item);
+    this.props.navigation.navigate('DrawerClose');
     await this.props.dispatch(selectSession(item));
+    this.props.navigation.navigate('TeacherClassNavigation');
     await axios.get(`${SERVER_URI}${ClassInfoRoute}`, {
       params: {
         sessionId: item.sessionID,
@@ -30,18 +32,15 @@ class TeacherDrawer extends Component {
       // console.log('classInfo', res.data);
       this.props.dispatch(getClassInfo(res.data));
     });
-    this.props.navigation.navigate('TeacherClassNavigation');
   }
 
   LogOut = async () => {
     await this.props.dispatch(logOut());
-    console.log('HEY!!!\n\n\n Im LOGGIN OUT !!!\n\n\n!!!!!')
-    this.props.screenProps.rootNavigation.dispatch(
-      NavigationActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'Home' })]
-      })
-    )
+    console.log('HEY!!!\n\n\n Im LOGGIN OUT !!!\n\n\n!!!!!');
+    this.props.screenProps.rootNavigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Home' })],
+    }));
   }
 
   navigateToScreen = route => () => {
@@ -162,5 +161,5 @@ TeacherDrawer.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  screenProps: screenProps.object.isRequired,
+  // screenProps: screenProps.object.isRequired,
 };
