@@ -31,3 +31,13 @@ export const getDashboard = session => ({
 export const logOut = () => ({
   type: 'LOG_OUT',
 });
+
+export const selectAssignment = assignment => ({
+  type: 'GET_ASSIGNMENT',
+  payload: assignment,
+});
+
+export const specificAssignment = assignment => ({
+  type: 'GET_SPECIFIC_ASSIGNMENT',
+  payload: assignment,
+});
