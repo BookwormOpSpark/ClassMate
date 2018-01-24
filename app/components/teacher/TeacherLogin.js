@@ -7,6 +7,7 @@ import { Google } from 'expo';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Text } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation';
 import { androidClientId, iosClientId, SERVER_URI, TeacherLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 
@@ -25,6 +26,7 @@ class TeacherLogin extends React.Component {
       iosClientId,
       scopes: ['profile', 'email'],
     }).then((info) => {
+      this.props.navigation.navigate('Spinner');
       const token = info.idToken;
       axios.post(`${SERVER_URI}${TeacherLoginRoute}`, { idtoken: token })
         .then((res) => {
@@ -41,7 +43,13 @@ class TeacherLogin extends React.Component {
         .then((res) => {
           const verified = res.payload.id;
           if (verified) {
-            this.props.navigation.navigate('TeacherDrawerNavigation');
+            const resetStack = NavigationActions.reset({
+              index: 0,
+              actions: [
+                NavigationActions.navigate({ routeName: 'TeacherDrawerNavigation' }),
+              ],
+            });
+            this.props.navigation.dispatch(resetStack);
           }
         })
         .catch(err => console.error(err));
