@@ -16,8 +16,8 @@ class TeacherDrawer extends Component {
     this.LogOut = this.LogOut.bind(this);
   }
   componentDidMount() {
-    console.log('HERE IS THE TEACHER DRAWER PROPS');
-    console.log(this.props);
+    // console.log('HERE IS THE TEACHER DRAWER PROPS');
+    // console.log(this.props);
   }
   onSelect = async (item) => {
     // console.log('item', item);
@@ -144,6 +144,14 @@ class TeacherDrawer extends Component {
           </View>
         </ScrollView>
         <View style={styles.footerContainer}>
+          <Button
+            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            onPress={() => this.props.navigation.navigate('TeacherClassNavigation')}
+            iconRight={{ name: 'done' }}
+            backgroundColor="blue"
+            rounded
+            title="Class"
+          />
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.LogOut}

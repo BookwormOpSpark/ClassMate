@@ -26,7 +26,7 @@ class EmergencyContact extends React.Component {
     const info = { emergencyContact, userId };
     await axios.post(`${SERVER_URI}${CreateEmergencyContact}`, info)
       .then((res) => {
-        console.log('created Contact');
+        // console.log('created Contact');
         Alert.alert(
           'Success!',
           'Emergency Contact has been created',
