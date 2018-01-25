@@ -119,6 +119,14 @@ class TeacherDrawer extends Component {
         <View style={styles.footerContainer}>
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            onPress={() => this.props.navigation.navigate('TeacherClassNavigation')}
+            iconRight={{ name: 'done' }}
+            backgroundColor="blue"
+            rounded
+            title="Class"
+          />
+          <Button
+            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.LogOut}
             iconRight={{ name: 'enhanced-encryption' }}
             backgroundColor="red"
