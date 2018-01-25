@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
-  Alert,
-  Linking,
   Dimensions,
   LayoutAnimation,
   View,
@@ -10,16 +8,21 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { Constants, Location, Permissions, BarCodeScanner } from 'expo';
+import { Permissions, BarCodeScanner } from 'expo';
+import PropTypes from 'prop-types';
+import { NavigationActions } from 'react-navigation';
 import { Text } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { selectSession } from '../../actions/actions';
 
-export default class CheckIn extends Component {
-  state = {
-    location: null,
-    errorMessage: null,
-    hasCameraPermission: null,
-    lastScannedUrl: null,
-  };
+class CheckIn extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasCameraPermission: null,
+      lastScannedUrl: null,
+    };
+  }
 
   componentWillMount() {
     // this._getLocationAsync();
@@ -36,12 +39,51 @@ export default class CheckIn extends Component {
   _handleBarCodeRead = (result) => {
     if (result.data !== this.state.lastScannedUrl) {
       LayoutAnimation.spring();
-      console.log('scanner result: ', result.data);
+      const sessions = this.props.state.dashboard.sessionInfo.sessions;
+      let checkInSession = {};
+      for (let i = 0; i < sessions.length; i++) {
+        if (sessions[i].sessionID === JSON.parse(result.data)) {
+          checkInSession = sessions[i];
+        }
+      }
+      this.props.dispatch(selectSession(checkInSession));
+      const navigateAction = NavigationActions.navigate({
+        routeName: 'TeacherClassNavigation',
+        action: NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'TeacherClassDashboard' })],
+        }),
+      });
+      this.props.navigation.dispatch(navigateAction);
     }
   };
 
   _handlePressCancel = () => {
     this.setState({ lastScannedUrl: null });
+  };
+
+  _maybeRenderUrl = () => {
+    if (!this.state.lastScannedUrl) {
+      return;
+    }
+
+    return (
+      <View style={styles.bottomBar}>
+        <TouchableOpacity style={styles.url} onPress={this._handlePressUrl}>
+          <Text numberOfLines={1} style={styles.urlText}>
+            {`Checked-in to: ${this.state.lastScannedUrl}`}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.cancelButton}
+          onPress={this._handlePressCancel}
+        >
+          <Text style={styles.cancelButtonText}>
+            Cancel
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
   // _getLocationAsync = async () => {
@@ -64,7 +106,7 @@ export default class CheckIn extends Component {
         : this.state.hasCameraPermission === false
         ? <Text style={{ color: '#fff' }}>
             Camera permission is not granted
-        </Text>
+          </Text>
           : <BarCodeScanner
             onBarCodeRead={this._handleBarCodeRead}
             style={{
@@ -72,7 +114,7 @@ export default class CheckIn extends Component {
               width: Dimensions.get('window').width,
             }}
           />}
-
+        {this._maybeRenderUrl()}
         <StatusBar hidden />
       </View>
     );
@@ -112,3 +154,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(CheckIn);
+
+CheckIn.propTypes = {
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+

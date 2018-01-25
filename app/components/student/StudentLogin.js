@@ -45,7 +45,7 @@ class StudentLogin extends React.Component {
         return this.props.dispatch(getUser(user));
       })
       .then((res) => {
-        console.log(res, 'bottom res');
+        // console.log(res, 'bottom res');
         const verified = res.payload.id;
         if (verified) {
           this.props.navigation.navigate('StudentDashboardNavigation');
