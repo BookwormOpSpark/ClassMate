@@ -38,7 +38,7 @@ class TeacherDashboard extends React.Component {
   }
 
   render() {
-    // console.log(this.props.state.dashboard.formattedCalendar);
+    // console.log(this.props.state);
     // const { height, width } = Dimensions.get('window');
     // const styles = StyleSheet.create({
     //   container: {
