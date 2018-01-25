@@ -2,9 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, Form, View, Item, Input, Content } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { DocumentPicker } from 'expo';
-import { Button, Text, Header } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
+import { Container, Header, Content, Item, Input, Form, Icon } from 'native-base';
+
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
 class FunPost extends React.Component {
@@ -15,24 +17,25 @@ class FunPost extends React.Component {
       image: null,
       text: '',
     };
-    this.postFunStuff = this.postFunStuff.bind(this);
+    this.postDocument = this.postDocument.bind(this);
+    this.postLink = this.postLink.bind(this);
     this.pickDocument = this.pickDocument.bind(this);
   }
 
 
   pickDocument = async () => {
     const result = await DocumentPicker.getDocumentAsync({});
-    console.log('result', result);
     if (!result.cancelled) {
       this.setState({
         image: result,
         text: '',
       });
     }
-    alert(`${this.state.image} selected!`);
+    console.log('result', this.state.image);
+    alert(`${this.state.image.name} selected!`);
   }
 
-  postFunStuff() {
+  postDocument() {
     const session = this.props.state.selectSession.sessionID || 2;
 
     const apiUrl = `${SERVER_URI}${PostFunStuff}/${session}`;// need to update here
@@ -65,7 +68,6 @@ class FunPost extends React.Component {
       bigcontainer: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
         justifyContent: 'flex-start',
       },
     });
@@ -93,9 +95,28 @@ class FunPost extends React.Component {
           iconRight={{ name: 'done' }}
           backgroundColor="green"
           rounded
-          onPress={this.postFunStuff}
+          onPress={this.postDocument}
+        />
+        <Icon name="home" />
+        <Form>
+          <Item rounded>
+            <Input
+              placeholder="Paste your link (youTube, gif, doc ...)"
+              onChangeText={text => this.setState({ text })}
+            />
+          </Item>
+        </Form>
+        <Button
+          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
+          title="Post Link!"
+          iconRight={{ name: 'done' }}
+          backgroundColor="green"
+          rounded
+          small
+          onPress={this.postLink}
         />
       </View>
+
     );
   }
 }
