@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
+import { Spinner } from 'native-base';
 import { getDashboard, getSession, selectSession } from '../../actions/actions';
 import { SERVER_URI, AddClassRoute, DashboardRoute } from '../../constant';
 
@@ -92,7 +93,7 @@ class AddClass extends React.Component {
         />
         <Text h5>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
         <Text>{this.state.added ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
-
+        <View>{this.state.added ? <Spinner color="blue" /> : null}</View>
       </View>
     );
   }
