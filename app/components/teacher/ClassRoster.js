@@ -32,6 +32,7 @@ class ClassRoster extends React.Component {
         marginRight: 5,
       },
     });
+    
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Text h1>{this.state.sessionName}</Text>
