@@ -1,13 +1,38 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, WebView, Platform, Linking } from 'react-native';
-import { Text } from 'react-native-elements';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { StyleSheet, View, ScrollView, Image, WebView, Linking } from 'react-native';
+import { Text, List, ListItem } from 'react-native-elements';
 import { Video } from 'expo';
+import { Card, CardItem, Body } from 'native-base';
+import { SERVER_URI, PostFunStuff } from '../../constant';
 
-export default class StudentClassSchedule extends React.Component {
+class Fun extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = {
+      fun: [
+        { type: 'video', link: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' },
+        { type: 'youtube', link: 'https://youtu.be/90CCjgX0n20' },
+        { type: 'internet', link: 'http://google.com' },
+        { type: 'image', link: 'https://media4.giphy.com/avatars/nikdudukovic/ylDRTR05sy6M.gif' },
+        { type: 'youtube', link: 'https://www.youtube.com/watch?v=QSF89VAZqHI&t=3012s' },
+        { type: 'image', link: 'https://s3.amazonaws.com/classmate2/largetree.jpg' },
+        { type: 'youtube', link: 'https://www.youtube.com/embed/2d7s3spWAzo?rel=0&autoplay=0&showinfo=0&controls=0' },
+      ],
+    };
   }
+
+  // componentDidMount() {
+  //   const session = this.props.state.selectSession.sessionID || 2;
+  //   axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
+  //     .then((res) => {
+  //       this.setState({fun: res.data});
+  //     .catch(err => console.error(err));
+  // }
+  // }
+
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -19,73 +44,76 @@ export default class StudentClassSchedule extends React.Component {
       contentContainer: {
         flexGrow: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'space-between',
       },
-      WebViewContainer: {
-        marginTop: (Platform.OS == 'ios') ? 20 : 0,
+      item: {
+        width: 300,
+        height: 300,
+        marginBottom: 40,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
+
+    const list = this.state.fun;
+    const videoList = list.filter(item => item.type === 'video') || [];
+    const imageList = list.filter(item => item.type === 'image') || [];
+    const youtubeList = list.filter(item => item.type === 'youtube') || [];
+    const internetList = list.filter(item => item.type === 'internet') || [];
+    console.log(videoList);
+
     return (
       <View style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           scrollEnabled
         >
-          <Text h1>Class Mate</Text>
-          <Text h4>Student Class Sharing</Text>
+          <Text h1 style={{ textAlign: 'center', color: 'blue' }}>{`Class ${className}`}</Text>
+          <Text
+            h4
+            style={{ textAlign: 'center', color: 'blue', marginBottom: 40 }}
+          >
+            Interesting things to check out!
+          </Text>
+
+
           <Video
-            // source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
-            source={{ uri: 'https://s3.amazonaws.com/classmate2/20180123_144356.mp4' }}
+            source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
             rate={1.0}
             volume={1.0}
             isMuted={false}
             resizeMode="cover"
             shouldPlay
             isLooping
-            style={{ width: 300, height: 300 }}
+            style={styles.item}
           />
 
-
           <Image
-            style={{ width: 300, height: 200 }}
-            source={{ uri: 'https://media.giphy.com/media/fT2symKaq961i/giphy.gif' }}
-          />
-          <Image
-            style={{ width: 300, height: 200 }}
+            style={styles.item}
             source={{ uri: 'https://media4.giphy.com/avatars/nikdudukovic/ylDRTR05sy6M.gif' }}
           />
 
-          <Image source={{ uri: 'https://s3.amazonaws.com/classmate2/largetree.jpg' }} style={{ width: 250, height: 350 }} />
-
-
-          <Text
-            style={{ color: 'blue' }}
-            onPress={() => Linking.openURL('http://google.com')}
-          >
-            Google
-          </Text>
-          <WebView
-            style={{ width: 300, height: 300 }}
-            source={{ html: '<html><body>Look Ma a video! <br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/RJa4kG1N3d0" frameborder="0" allowfullscreen></iframe></body></html>' }}
+          <Image
+            source={{ uri: 'https://s3.amazonaws.com/classmate2/largetree.jpg' }}
+            style={styles.item}
           />
 
+          <Card style={{ marginBottom: 15 }}>
+            <CardItem>
+              <Body>
+                <Text
+                  style={{ color: 'blue', fontWeight: 'bold' }}
+                  onPress={() => Linking.openURL('http://google.com')}
+                >
+                  Link to open to wonders!
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
 
           <WebView
-            style={{ width: 300, height: 300 }}
+            style={styles.item}
             javaScriptEnabled
-            source={{ uri: 'https://www.youtube.com/embed/2d7s3spWAzo?rel=0&autoplay=0&showinfo=0&controls=0' }}
+            source={{ uri: 'https://www.youtube.com/watch?v=QSF89VAZqHI&t=3012s' }}
           />
-
-
-          <WebView
-            style={{ width: 300, height: 300 }}
-            ref={(ref) => { this.videoPlayer = ref; }}
-            scalesPageToFit
-            source={{ html: '<html><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /><iframe src="https://www.youtube.com/embed/' + '2d7s3spWAzo' + '?modestbranding=1&playsinline=1&showinfo=0&rel=0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe></html>' }}
-            // onNavigationStateChange={this.onShouldStartLoadWithRequest} //for Android
-          />
-
 
         </ScrollView>
 
@@ -93,3 +121,13 @@ export default class StudentClassSchedule extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(Fun);
+Fun.propTypes = {
+  state: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+};

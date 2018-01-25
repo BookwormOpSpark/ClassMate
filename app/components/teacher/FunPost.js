@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import { DocumentPicker } from 'expo';
 import { Button, Text } from 'react-native-elements';
-import { Container, Header, Content, Item, Input, Form, Icon } from 'native-base';
+import { Container, Header, Content, Item, Input, Form, Icon, Spinner } from 'native-base';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
 class FunPost extends React.Component {
@@ -16,11 +16,13 @@ class FunPost extends React.Component {
     this.state = {
       image: null,
       link: '',
+      loading: false,
     };
     this.postDocument = this.postDocument.bind(this);
     this.postLink = this.postLink.bind(this);
     this.postFinal = this.postFinal.bind(this);
     this.pickDocument = this.pickDocument.bind(this);
+    this.whatType = this.whatType.bind(this);
   }
 
 
@@ -35,33 +37,43 @@ class FunPost extends React.Component {
     alert(`${this.state.image.name} selected!`);
   }
 
+  whatType = (link) => {
+    const imgArr = ['gif', 'jpg', 'jpeg', 'png', 'tiff', 'tif'];
+    const linkArr = link.split('.');
+    let type = '';
+    const youTubev1 = new RegExp('https://youtu');
+    const youTubev2 = new RegExp('https://www.youtube.com');
+    if (youTubev1.test(link) || youTubev2.test(link)) {
+      type = 'youtube';
+    } else if (imgArr.includes(linkArr[linkArr.length - 1])) {
+      type = 'image';
+    } else if (/gph.is/.test(link)) {
+      type = 'image';
+    } else {
+      type = 'internet';
+    }
+    return type;
+  };
+
   postLink() {
-    // https://youtu.be/90CCjgX0n20
-    // https://gph.is/2xj2gLH
-    // https://media.giphy.com/media/fT2symKaq961i/giphy.gif
-    // https://github.com/BookwormOpSpark
-
-
-
-    const session = this.props.state.selectSession.sessionID || 2;
     const { link } = this.state;
-    // console.log(link);
-    axios.post(`${SERVER_URI}${PostFunStuff}/${session}`, { link })
+    const type = this.whatType(link);
+    const session = this.props.state.selectSession.sessionID || 2;
+    axios.post(`${SERVER_URI}${PostFunStuff}/${session}`, { link, type })
       .then((res) => {
-        // console.log('res', res.data);
         this.props.navigation.navigate('Fun');
       })
       .catch(err => console.error(err));
   }
 
   postDocument() {
+    this.setState({ loading: true });
     const session = this.props.state.selectSession.sessionID || 2;
 
     const apiUrl = `${SERVER_URI}${PostFunStuff}/${session}`;// need to update here
     const { name, uri } = this.state.image;
     const uriParts = name.split('.');
     const fileType = uriParts[uriParts.length - 1];
-    // console.log(fileType);
 
     const formData = new FormData();
     formData.append('document', {
@@ -80,6 +92,7 @@ class FunPost extends React.Component {
     };
 
     return fetch(apiUrl, options).then((res) => {
+      this.setState({ loading: false });
       this.props.navigation.navigate('Fun');
     });
   }
@@ -140,6 +153,8 @@ class FunPost extends React.Component {
           small
           onPress={this.postFinal}
         />
+        <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
+        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Video Loading' : ''}</Text>
       </View>
 
     );

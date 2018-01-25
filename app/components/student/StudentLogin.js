@@ -31,7 +31,7 @@ class StudentLogin extends React.Component {
         if (res.data.emergencyContact !== null) {
           emergencyContactInfo = res.data.emergencyContact;
         }
-        // console.log('res', res.data);
+        console.log('res', res.data);
         const user = {
           id: res.data.user.id,
           First_name: res.data.user.nameFirst,
