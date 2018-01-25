@@ -55,7 +55,7 @@ export default class StudentClassSchedule extends React.Component {
             source={{ uri: 'https://media4.giphy.com/avatars/nikdudukovic/ylDRTR05sy6M.gif' }}
           />
 
-          <Image source={{ uri: 'https://static.boredpanda.com/blog/wp-content/uploads/2016/08/bunny8-57a2765cf139e__880.jpg' }} style={{ width: 250, height: 350 }} />
+          <Image source={{ uri: 'https://s3.amazonaws.com/classmate2/largetree.jpg' }} style={{ width: 250, height: 350 }} />
 
 
           <Text
@@ -73,7 +73,7 @@ export default class StudentClassSchedule extends React.Component {
           <WebView
             style={{ width: 300, height: 300 }}
             javaScriptEnabled
-            source={{ uri: 'https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&autoplay=0&showinfo=0&controls=0' }}
+            source={{ uri: 'https://www.youtube.com/embed/2d7s3spWAzo?rel=0&autoplay=0&showinfo=0&controls=0' }}
           />
 
 

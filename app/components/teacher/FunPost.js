@@ -1,12 +1,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import { DocumentPicker } from 'expo';
 import { Button, Text } from 'react-native-elements';
 import { Container, Header, Content, Item, Input, Form, Icon } from 'native-base';
-
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
 class FunPost extends React.Component {
@@ -15,7 +15,7 @@ class FunPost extends React.Component {
     console.log('state', this.props.state);
     this.state = {
       image: null,
-      text: '',
+      link: '',
     };
     this.postDocument = this.postDocument.bind(this);
     this.postLink = this.postLink.bind(this);
@@ -28,11 +28,22 @@ class FunPost extends React.Component {
     if (!result.cancelled) {
       this.setState({
         image: result,
-        text: '',
       });
     }
     console.log('result', this.state.image);
     alert(`${this.state.image.name} selected!`);
+  }
+
+  postLink() {
+    const session = this.props.state.selectSession.sessionID || 2;
+    const { link } = this.state;
+    console.log(link);
+    axios.post(`${SERVER_URI}${PostFunStuff}/${session}`, { link })
+      .then((res) => {
+        console.log('res', res.data);
+        this.props.navigation.navigate('Fun');
+      })
+      .catch(err => console.error(err));
   }
 
   postDocument() {
@@ -60,7 +71,9 @@ class FunPost extends React.Component {
       },
     };
 
-    return fetch(apiUrl, options);
+    return fetch(apiUrl, options).then((res) => {
+      this.props.navigation.navigate('Fun');
+    });
   }
 
   render() {
@@ -97,12 +110,12 @@ class FunPost extends React.Component {
           rounded
           onPress={this.postDocument}
         />
-        <Icon name="home" />
+        <Icon name="nutrition" color="red" />
         <Form>
           <Item rounded>
             <Input
               placeholder="Paste your link (youTube, gif, doc ...)"
-              onChangeText={text => this.setState({ text })}
+              onChangeText={text => this.setState({ link: text })}
             />
           </Item>
         </Form>
