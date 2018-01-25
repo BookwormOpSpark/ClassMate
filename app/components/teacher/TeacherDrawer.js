@@ -16,8 +16,8 @@ class TeacherDrawer extends Component {
     this.LogOut = this.LogOut.bind(this);
   }
   componentDidMount() {
-    console.log('HERE IS THE TEACHER DRAWER PROPS');
-    console.log(this.props);
+    // console.log('HERE IS THE TEACHER DRAWER PROPS');
+    // console.log(this.props);
   }
   onSelect = async (item) => {
     // console.log('item', item);

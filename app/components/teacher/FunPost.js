@@ -12,7 +12,7 @@ import { SERVER_URI, PostFunStuff } from '../../constant';
 class FunPost extends React.Component {
   constructor(props) {
     super(props);
-    console.log('state Fun Post', this.props.state);
+    // console.log('state Fun Post', this.props.state);
     this.state = {
       image: null,
       link: '',
@@ -31,7 +31,7 @@ class FunPost extends React.Component {
         image: result,
       });
     }
-    console.log('result', this.state.image);
+    // console.log('result', this.state.image);
     alert(`${this.state.image.name} selected!`);
   }
 
@@ -45,10 +45,10 @@ class FunPost extends React.Component {
 
     const session = this.props.state.selectSession.sessionID || 2;
     const { link } = this.state;
-    console.log(link);
+    // console.log(link);
     axios.post(`${SERVER_URI}${PostFunStuff}/${session}`, { link })
       .then((res) => {
-        console.log('res', res.data);
+        // console.log('res', res.data);
         this.props.navigation.navigate('Fun');
       })
       .catch(err => console.error(err));
@@ -61,7 +61,7 @@ class FunPost extends React.Component {
     const { name, uri } = this.state.image;
     const uriParts = name.split('.');
     const fileType = uriParts[uriParts.length - 1];
-    console.log(fileType);
+    // console.log(fileType);
 
     const formData = new FormData();
     formData.append('document', {
