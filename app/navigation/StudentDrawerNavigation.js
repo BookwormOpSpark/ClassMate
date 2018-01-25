@@ -19,9 +19,6 @@ const StudentDrawerNavigator = DrawerNavigator({
   CheckIn: {
     screen: CheckIn,
   },
-  EmergencyContact: {
-    screen: EmergencyContact,
-  },
 }, {
   contentComponent: StudentDrawer,
   drawerWidth: 200,

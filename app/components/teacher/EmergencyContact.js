@@ -105,7 +105,8 @@ class EmergencyContact extends React.Component {
               <CardItem>
                 <Text>(hardcoded) ScienceProject</Text>
               </CardItem>
-            </Card>}
+            </Card>
+          }
         </Content>
       </Container>
     );
