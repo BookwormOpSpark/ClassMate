@@ -1,6 +1,6 @@
 export const androidClientId = '29245857360-gi2ilv6b04e6mpn9icn9ngiq0buq4elr.apps.googleusercontent.com';
 export const iosClientId = '766434726628-1guelram8v9kr9mtapqa2587ss7bc6sl.apps.googleusercontent.com';
-export const SERVER_URI = 'http://bae44da8.ngrok.io';
+export const SERVER_URI = 'https://75bb4eb0.ngrok.io';
 // *********Route************//
 export const TeacherLoginRoute = '/login';
 export const StudentLoginRoute = '/studentCreate';
@@ -16,5 +16,4 @@ export const CreateAssignments = '/createAssignment'; // send session_id => get 
 export const StudentInformation = '/studentInformation'; // send student_id and get back specific student info 
 export const QueueRoute = '/queue'; // send student_id and get back specific student info 
 export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info 
-export const CheckAssignment = '/checkAssignment'; // send sessionID and assignmentID - get back list of associated students and their associated HW upload
-export const CreateEmergencyContact = '/createEmergencyContact'; // sends userID and input fields to create emergency contact and associate that with user
+export const PostFunStuff = '/funStuff'; // send student_id and get back specific student info 

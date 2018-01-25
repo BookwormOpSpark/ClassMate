@@ -5,7 +5,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
-import { getDashboard, getSession } from '../../actions/actions';
+import { NavigationActions } from 'react-navigation';
+import { Spinner } from 'native-base';
+import { getDashboard, getSession, selectSession } from '../../actions/actions';
 import { SERVER_URI, AddClassRoute, DashboardRoute } from '../../constant';
 
 class AddClass extends React.Component {
@@ -16,6 +18,7 @@ class AddClass extends React.Component {
     this.state = {
       joinCode: '',
       description: '',
+      added: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,6 +26,7 @@ class AddClass extends React.Component {
   handleSubmit = async () => {
     const { joinCode, description } = this.state;
     // console.log(this.state);
+    this.setState({ added: true });
     const userId = this.props.state.user.id;
 
     await axios.post(`${SERVER_URI}${AddClassRoute}`, { description, joinCode, userId })
@@ -41,6 +45,16 @@ class AddClass extends React.Component {
     }).then((res) => {
       // console.log(res.data);
       this.props.dispatch(getDashboard(res.data));
+      const { sessions } = this.props.state.dashboard.sessionInfo;
+      this.props.dispatch(selectSession(sessions[sessions.length - 1]));
+      const navigateAction = NavigationActions.navigate({
+        routeName: 'TeacherClassNavigation',
+        action: NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'TeacherClassDashboard' })],
+        }),
+      });
+      this.props.navigation.dispatch(navigateAction);
     });
   }
 
@@ -77,9 +91,9 @@ class AddClass extends React.Component {
           rounded
           title="Create Class!"
         />
-        <Text h5>{description ? `You just created class ${description}` : ''}</Text>
-        <Text>{description ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
-
+        <Text h5>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
+        <Text>{this.state.added ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
+        <View>{this.state.added ? <Spinner color="blue" /> : null}</View>
       </View>
     );
   }
