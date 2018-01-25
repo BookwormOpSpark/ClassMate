@@ -46,7 +46,7 @@ class Queue extends React.Component {
   onSelect(item) {
     // console.log('item', item);
     const { messages } = this.state;
-    // const index = messages.indexOf(item);
+    const index = messages.indexOf(item);
     messages.splice(index, 1);
     this.setState({ messages });
   }
