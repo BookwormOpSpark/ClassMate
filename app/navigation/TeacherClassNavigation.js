@@ -7,6 +7,7 @@ import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 import GiveAQuizz from '../components/teacher/GiveAQuizz';
 import FunPost from '../components/teacher/FunPost';
 import RosterNavigation from './RosterNavigation';
+import TeacherFunNavigation from './TeacherFunNavigation';
 
 const TeacherClassNavigation = StackNavigator({
   Home: {
@@ -14,7 +15,12 @@ const TeacherClassNavigation = StackNavigator({
   },
   AssignmentNavigation: {
     screen: AssignmentNavigation,
-    // Only current solution to avoid double stacking
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  TeacherFunNavigation: {
+    screen: TeacherFunNavigation,
     navigationOptions: () => ({
       header: null,
     }),

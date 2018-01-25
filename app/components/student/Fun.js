@@ -35,7 +35,8 @@ export default class StudentClassSchedule extends React.Component {
           <Text h1>Class Mate</Text>
           <Text h4>Student Class Sharing</Text>
           <Video
-            source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+            // source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+            source={{ uri: 'https://s3.amazonaws.com/classmate2/20180123_144356.mp4' }}
             rate={1.0}
             volume={1.0}
             isMuted={false}

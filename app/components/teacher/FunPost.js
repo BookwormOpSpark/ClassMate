@@ -12,13 +12,14 @@ import { SERVER_URI, PostFunStuff } from '../../constant';
 class FunPost extends React.Component {
   constructor(props) {
     super(props);
-    console.log('state', this.props.state);
+    console.log('state Fun Post', this.props.state);
     this.state = {
       image: null,
       link: '',
     };
     this.postDocument = this.postDocument.bind(this);
     this.postLink = this.postLink.bind(this);
+    this.postFinal = this.postFinal.bind(this);
     this.pickDocument = this.pickDocument.bind(this);
   }
 
@@ -35,6 +36,13 @@ class FunPost extends React.Component {
   }
 
   postLink() {
+    // https://youtu.be/90CCjgX0n20
+    // https://gph.is/2xj2gLH
+    // https://media.giphy.com/media/fT2symKaq961i/giphy.gif
+    // https://github.com/BookwormOpSpark
+
+
+
     const session = this.props.state.selectSession.sessionID || 2;
     const { link } = this.state;
     console.log(link);
@@ -74,6 +82,10 @@ class FunPost extends React.Component {
     return fetch(apiUrl, options).then((res) => {
       this.props.navigation.navigate('Fun');
     });
+  }
+
+  postFinal() {
+    this.state.link ? this.postLink() : this.postDocument();
   }
 
   render() {
@@ -121,12 +133,12 @@ class FunPost extends React.Component {
         </Form>
         <Button
           buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-          title="Post Link!"
+          title="Post Link or Document!"
           iconRight={{ name: 'done' }}
           backgroundColor="green"
           rounded
           small
-          onPress={this.postLink}
+          onPress={this.postFinal}
         />
       </View>
 
@@ -141,4 +153,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(FunPost);
 FunPost.propTypes = {
   state: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
