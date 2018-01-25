@@ -94,7 +94,8 @@ class FunPost extends React.Component {
     return fetch(apiUrl, options).then((res) => {
       this.setState({ loading: false });
       this.props.navigation.navigate('Fun');
-    });
+    })
+      .catch(err => console.error(err));
   }
 
   postFinal() {
@@ -154,7 +155,7 @@ class FunPost extends React.Component {
           onPress={this.postFinal}
         />
         <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
-        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Video Loading' : ''}</Text>
+        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Uploading...' : ''}</Text>
       </View>
 
     );
