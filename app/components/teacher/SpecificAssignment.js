@@ -29,7 +29,7 @@ class SpecificAssignment extends React.Component {
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 110,
+        marginLeft: 75,
       },
       list: {
         borderRadius: 5,
@@ -76,7 +76,7 @@ class SpecificAssignment extends React.Component {
             <Image
               style={{ width: 375, height: 700, justifyContent: 'center', marginTop: -625 }}
               // need to simply replace URI with variable current to get chosen photoUrl from student
-              source={{ uri: 'http://res.cloudinary.com/fido/image/upload/v1516338431/osxdjtj2mpm9pmhrhbfr.jpg' }}
+              source={{ uri: current }}
             />
             <View style={styles.innerContainer}>
               <Button
@@ -86,7 +86,7 @@ class SpecificAssignment extends React.Component {
             </View>
           </View>
         </Modal>
-        <Text h2 style={styles.container}>Assignment</Text>
+        <Text h2 style={styles.container}>{this.props.state.specificAssignment.title}</Text>
         <List style={{ backgroundColor: '#fff' }}>
           {students.map(student => (
             student.photoUrl ?

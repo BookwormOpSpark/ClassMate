@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { Google } from 'expo';
+import { Google, Font, AppLoading } from 'expo';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Text } from 'react-native-elements';
@@ -16,7 +16,16 @@ class TeacherLogin extends React.Component {
     super(props);
     // console.log('Teacher Login');
     // console.log(props);
+    this.state = { loading: true };
     this.onLogin = this.onLogin.bind(this);
+  }
+
+  async componentWillMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
+    });
+    this.setState({ loading: false });
   }
 
   onLogin() {
@@ -30,13 +39,19 @@ class TeacherLogin extends React.Component {
       const token = info.idToken;
       axios.post(`${SERVER_URI}${TeacherLoginRoute}`, { idtoken: token })
         .then((res) => {
+          console.log(res.data, 'top res');
+          let emergencyContactInfo = null;
+          if (res.data.emergencyContact !== null) {
+            emergencyContactInfo = res.data.emergencyContact;
+          }
           const user = {
-            id: res.data.id,
-            First_name: res.data.nameFirst,
-            Last_name: res.data.nameLast,
-            email: res.data.email,
-            picture: { data: { url: res.data.photoUrl } },
-            emergencyContact: res.data.id_emergencyContact,
+            id: res.data.user.id,
+            First_name: res.data.user.nameFirst,
+            Last_name: res.data.user.nameLast,
+            email: res.data.user.email,
+            picture: { data: { url: res.data.user.photoUrl } },
+            emergencyContact: res.data.user.id_emergencyContact,
+            emergencyContactInfo,
           };
           return this.props.dispatch(getUser(user));
         })

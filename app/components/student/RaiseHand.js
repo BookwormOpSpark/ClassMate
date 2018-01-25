@@ -19,32 +19,17 @@ class RaiseHand extends React.Component {
 
     this.socket = io(SERVER_URI);
     this.getInQueue = this.getInQueue.bind(this);
-    this.sendSocket = this.sendSocket.bind(this);
+    this.sendSocket = _.debounce(this.sendSocket.bind(this), 2000);
   }
 
   componentDidMount() {
     this._subscribe();
-
-    this.socket.on('connect', () => {
-      // console.log('connected');
-    });
-  }
-
-  componentWillUpdate() {
-    this.getInQueue();
-  }
-
-  componentWillUnmount() {
-    this._unsubscribe();
-    this.socket.close();
   }
 
   getInQueue() {
     const { y } = this.state.accelerometerData;
-    const debounced = _.debounce(this.sendSocket, 2000);
-    Accelerometer.setUpdateInterval(1000);
     if (y > 0.7) {
-      debounced();
+      this.sendSocket();
     }
   }
 
@@ -56,8 +41,10 @@ class RaiseHand extends React.Component {
   }
 
   _subscribe = () => {
+    // When invoked, the listener is provided a single argumument that is an object containing keys x, y, z.
     this._subscription = Accelerometer.addListener((accelerometerData) => {
       this.setState({ accelerometerData });
+      this.getInQueue();
     });
   }
 

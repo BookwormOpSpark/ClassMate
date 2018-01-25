@@ -9,12 +9,12 @@ import { Container, Header, Title, Left, Right, Button, Body, Content, Text, Car
 import { logOut, getDashboard } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
 
-
 class TeacherDashboard extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('Teacher dashboard', this.props.state);
-    this.state = {};
+    this.state = {
+      isLoaded: false,
+    };
     this.LogOut = this.LogOut.bind(this);
   }
   componentWillMount() {
@@ -23,11 +23,14 @@ class TeacherDashboard extends React.Component {
       params: {
         userId: this.props.state.user.id,
       },
-    }).then((res) => {
-      // console.log(res.data);
-      this.props.dispatch(getDashboard(res.data));
-      // console.log('\n\n\nTEACHER DASHBOARD DISPATCHED, here are the prop\n\n\n', this.props);
-    });
+    })
+      .then((res) => {
+        this.props.dispatch(getDashboard(res.data));
+        this.state.isLoaded = true;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   LogOut = async () => {
     await this.props.dispatch(logOut());
@@ -35,6 +38,7 @@ class TeacherDashboard extends React.Component {
   }
 
   render() {
+    // console.log(this.props.state);
     // const { height, width } = Dimensions.get('window');
     // const styles = StyleSheet.create({
     //   container: {
@@ -53,7 +57,7 @@ class TeacherDashboard extends React.Component {
               transparent
               onPress={() => this.props.navigation.navigate('DrawerOpen')}
             >
-              <Icon name="menu" size={30}/>
+              <Icon name="menu" size={30} />
             </Button>
           </Left>
           <Body>
@@ -68,14 +72,23 @@ class TeacherDashboard extends React.Component {
           <Card>
             <CardItem header>
               <Icon color="blue" name="calendar" size={25} />
-              <Text>  Your Class Schedule</Text>
+              <Text>Your Schedule Today</Text>
             </CardItem>
-            <CardItem>
-              <Text>(hardcoded) Biology</Text>
-            </CardItem>
-            <CardItem>
-              <Text>(hardcoded) Maths</Text>
-            </CardItem>
+            {
+              this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
+                <CardItem key={index}>
+                  <Text>
+                    {`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}
+                  </Text>
+                  <Text>
+                    {'\t\t\t\t\t\t\t\t\t\t'}
+                  </Text>
+                  <Text>
+                    {`${event.summary}`}
+                  </Text>
+                </CardItem>
+              )) : null
+            }
           </Card>
           <Card>
             <CardItem header>
