@@ -42,6 +42,8 @@ class EmergencyContact extends React.Component {
   }
 
   render() {
+    console.log(this.props.state.user)
+    const contactInfo = this.props.state.user.emergencyContactInfo[0];
     const styles = StyleSheet.create({
       container: {
         // flex: 1,
@@ -97,13 +99,13 @@ class EmergencyContact extends React.Component {
           :
             <Card>
               <CardItem header>
-                <Icon color="blue" name="bell" size={25} />
+                <Text>{`${contactInfo.nameFirst} ${contactInfo.nameLast}`}</Text>
               </CardItem>
               <CardItem>
-                <Text>(hardcoded) Worksheet 1</Text>
+                <Text>{`${contactInfo.address}`}</Text>
               </CardItem>
               <CardItem>
-                <Text>(hardcoded) ScienceProject</Text>
+                <Text>{`${contactInfo.email}`}</Text>
               </CardItem>
             </Card>
           }

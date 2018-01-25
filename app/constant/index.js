@@ -17,3 +17,5 @@ export const StudentInformation = '/studentInformation'; // send student_id and 
 export const QueueRoute = '/queue'; // send student_id and get back specific student info 
 export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info 
 export const PostFunStuff = '/funStuff'; // send student_id and get back specific student info 
+export const CreateEmergencyContact = '/createEmergencyContact'; // sends userID and batch of info and creates emergencyContact for user
+export const CheckAssignment = '/checkAssignment'; // sends sesssionID and assignmentID to get back list of students and whether or not they have completed the assignment
