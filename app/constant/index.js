@@ -16,3 +16,4 @@ export const CreateAssignments = '/createAssignment'; // send session_id => get 
 export const StudentInformation = '/studentInformation'; // send student_id and get back specific student info 
 export const QueueRoute = '/queue'; // send student_id and get back specific student info 
 export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info 
+export const CheckAssignment = '/checkAssignment'; // send sessionID and assignmentID - get back list of associated students and their associated HW upload
