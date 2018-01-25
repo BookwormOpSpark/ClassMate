@@ -66,6 +66,9 @@ class TeacherDrawer extends Component {
         alignItems: 'center',
 
       },
+      emergencyContactStyle: {
+        alignItems: 'center',
+      },
       footerContainer: {
         padding: 10,
         // backgroundColor: 'red',
@@ -115,14 +118,14 @@ class TeacherDrawer extends Component {
               />
             </View>
             <View style={{ paddingVertical: 5 }} />
-            <View style={styles.addClassStyle}>
+            <View style={styles.emergencyContactStyle}>
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('EmergencyContact')}
                 iconRight={{ name: 'done' }}
                 backgroundColor="blue"
                 rounded
-                title="Add an Emergency Contact"
+                title="Emergency Contact"
               />
             </View>
           </View>
