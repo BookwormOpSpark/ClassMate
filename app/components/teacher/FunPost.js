@@ -59,10 +59,8 @@ class FunPost extends React.Component {
     const { link } = this.state;
     const type = this.whatType(link);
     const session = this.props.state.selectSession.sessionID || 2;
-    // console.log(type);
     axios.post(`${SERVER_URI}${PostFunStuff}/${session}`, { link, type })
       .then((res) => {
-        // console.log('res', res.data);
         this.props.navigation.navigate('Fun');
       })
       .catch(err => console.error(err));
