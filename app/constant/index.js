@@ -17,3 +17,4 @@ export const StudentInformation = '/studentInformation'; // send student_id and 
 export const QueueRoute = '/queue'; // send student_id and get back specific student info 
 export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info 
 export const CheckAssignment = '/checkAssignment'; // send sessionID and assignmentID - get back list of associated students and their associated HW upload
+export const CreateEmergencyContact = '/createEmergencyContact'; // sends userID and input fields to create emergency contact and associate that with user
