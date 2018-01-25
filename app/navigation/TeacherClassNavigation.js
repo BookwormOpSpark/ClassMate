@@ -1,47 +1,37 @@
 import { StackNavigator } from 'react-navigation';
 import TeacherClassDashboard from '../components/teacher/TeacherClassDashboard';
-import AssignmentNavigation from './AssignmentNavigation';
-import ClassRoster from '../components/teacher/ClassRoster';
+import Assignment from '../components/teacher/Assignment';
+import SpecificAssignment from '../components/teacher/SpecificAssignment';
 import Queue from '../components/teacher/Queue';
-import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 import GiveAQuizz from '../components/teacher/GiveAQuizz';
-import FunPost from '../components/teacher/FunPost';
-import RosterNavigation from './RosterNavigation';
-import TeacherFunNavigation from './TeacherFunNavigation';
+import ClassRoster from '../components/teacher/ClassRoster';
+import SpecificStudent from '../components/teacher/SpecificStudent';
+import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 
 const TeacherClassNavigation = StackNavigator({
-  Home: {
+  // Home: {
+  //   screen: TeacherClassDashboard,
+  // },
+  TeacherClassDashboard: {
     screen: TeacherClassDashboard,
   },
-  AssignmentNavigation: {
-    screen: AssignmentNavigation,
-    navigationOptions: () => ({
-      header: null,
-    }),
+  Assignment: {
+    screen: Assignment,
   },
-  TeacherFunNavigation: {
-    screen: TeacherFunNavigation,
-    navigationOptions: () => ({
-      header: null,
-    }),
+  SpecificAssignment: {
+    screen: SpecificAssignment,
   },
   Queue: {
     screen: Queue,
   },
-  TeacherClassDashboard: {
-    screen: TeacherClassDashboard,
-  },
   GiveAQuizz: {
     screen: GiveAQuizz,
   },
-  FunPost: {
-    screen: FunPost,
+  ClassRoster: {
+    screen: ClassRoster,
   },
-  RosterNavigation: {
-    screen: RosterNavigation,
-    navigationOptions: () => ({
-      header: null,
-    }),
+  SpecificStudent: {
+    screen: SpecificStudent,
   },
   TeacherClassSchedule: {
     screen: TeacherClassSchedule,

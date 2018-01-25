@@ -32,7 +32,7 @@ class TeacherClassDashboard extends React.Component {
         <Text h1>{className || 'Class'}</Text>
         <Icon color="blue" name="rocket" size={30} />
         <Button
-          onPress={() => this.props.navigation.navigate('AssignmentNavigation')}
+          onPress={() => this.props.navigation.navigate('Assignment')}
           buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
           iconRight={{ name: 'done' }}
           backgroundColor="blue"
@@ -56,7 +56,7 @@ class TeacherClassDashboard extends React.Component {
           title="Give A Quizz"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('RosterNavigation')}
+          onPress={() => this.props.navigation.navigate('ClassRoster')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'assignment' }}
           backgroundColor="blue"
