@@ -42,7 +42,7 @@ class EmergencyContact extends React.Component {
   }
 
   render() {
-    console.log(this.props.state.user)
+    // console.log(this.props.state.user)
     const contactInfo = this.props.state.user.emergencyContactInfo[0];
     const styles = StyleSheet.create({
       container: {

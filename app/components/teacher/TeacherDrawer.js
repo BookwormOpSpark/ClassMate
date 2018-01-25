@@ -44,7 +44,7 @@ class TeacherDrawer extends Component {
 
   LogOut = async () => {
     await this.props.dispatch(logOut());
-    console.log('HEY!!!\n\n\n Im LOGGIN OUT !!!\n\n\n!!!!!');
+    // console.log('HEY!!!\n\n\n Im LOGGIN OUT !!!\n\n\n!!!!!');
     this.props.screenProps.rootNavigation.dispatch(NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: 'Home' })],
