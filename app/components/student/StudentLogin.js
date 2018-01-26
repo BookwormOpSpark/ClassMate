@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
+import blackboard from '../../assets/blackboard.jpg';
+import logo from '../../assets/logo.png';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 import {blue, white, yellow, orange, red, green } from '../../style/colors';
@@ -59,18 +61,37 @@ class StudentLogin extends React.Component {
     const styles = StyleSheet.create({
       contentContainer: {
         flexGrow: 1,
-        backgroundColor: white,
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center',
       },
     });
     return (
-      <View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           scrollEnabled
         >
-          <Text h1>Class Mate</Text>
+          {/* <Image
+            source={logo}
+            resizeMode="contain"
+            style={{
+              backgroundColor: '#000000',
+              flex: 1,
+              height: undefined,
+              width: undefined,
+            }}
+          /> */}
           <Text h4>Student Login</Text>
           <Icon color={blue} name="lock" size={30} />
           <FormLabel>First Name</FormLabel>
@@ -100,7 +121,7 @@ class StudentLogin extends React.Component {
             title="Login"
           />
         </ScrollView>
-      </View>
+      </ImageBackground>
     );
   }
 }
