@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { instanceOf } from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList } from 'react-native';
@@ -49,7 +49,7 @@ class Fun extends React.Component {
       },
       video: {
         width: 310,
-        height: 220,
+        height: 210,
         marginBottom: 40,
       },
       text: {
@@ -83,7 +83,8 @@ class Fun extends React.Component {
         isMuted={false}
         resizeMode="cover"
         shouldPlay
-        isLooping
+        paused
+        progressUpdateIntervalMillis={1000}
       />
     );
   }
@@ -109,15 +110,16 @@ class Fun extends React.Component {
 
   renderInternetLink(item) {
     const { link } = item;
+    const about = link.split('/')[2];
     return (
-      <Card>
+      <Card style={{ marginBottom: 15 }}>
         <CardItem>
           <Body>
             <Text
               style={this.styles.text}
-              onPress={() => Linking.openURL({ link })}
+              onPress={() => Linking.openURL(link)}
             >
-              Link to open to wonders!
+              Link Recommended by Teacher about {about}
             </Text>
           </Body>
         </CardItem>
@@ -167,7 +169,6 @@ class Fun extends React.Component {
             keyExtractor={this.keyExtractor}
           />
           <FlatList
-            contentContainerStyle={this.styles.container}
             renderItem={({ item }) => this.renderInternetLink(item)}
             data={internetList}
             keyExtractor={this.keyExtractor}
