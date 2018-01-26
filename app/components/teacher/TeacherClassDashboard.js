@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import QRCode from 'react-native-qrcode';
 
 class TeacherClassDashboard extends React.Component {
   constructor(props) {
     super(props);
     // console.log(this.props.state);
-    this.state = { text: '' };
+    this.state = {};
   }
 
   // componentDidMount() {
@@ -17,6 +18,7 @@ class TeacherClassDashboard extends React.Component {
   // }
 
   render() {
+    console.log('session id: ', this.props.state.selectSession.sessionID);
     const className = this.props.state.selectSession.sessionName;
     const styles = StyleSheet.create({
       container: {
@@ -30,7 +32,6 @@ class TeacherClassDashboard extends React.Component {
     return (
       <View style={styles.container}>
         <Text h1>{className || 'Class'}</Text>
-        <Icon color="blue" name="rocket" size={30} />
         <Button
           onPress={() => this.props.navigation.navigate('Assignment')}
           buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
@@ -78,6 +79,12 @@ class TeacherClassDashboard extends React.Component {
           backgroundColor="blue"
           rounded
           title="Student Engaged!"
+        />
+        <QRCode
+          value={`${this.props.state.selectSession.sessionID}`}
+          size={150}
+          bgColor="blue"
+          fgColor="white"
         />
       </View>
     );
