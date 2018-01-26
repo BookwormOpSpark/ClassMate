@@ -6,6 +6,7 @@ import { ImagePicker } from 'expo';
 import { Spinner } from 'native-base';
 import { Button, Text, Header } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
+import { blue } from '../../style/colors';
 
 class SubmitHomework extends React.Component {
   constructor(props) {
@@ -92,15 +93,15 @@ class SubmitHomework extends React.Component {
 
     return (
       <View style={styles.bigcontainer}>
-        <Text h3 style={{ color: 'blue', textAlign: 'center', marginBottom: 50 }}>
-          Submit Homeworks for Class {className}
+        <Text h3 style={{ color: blue, textAlign: 'center', marginBottom: 50 }}>
+          Submit Homeworks for {className}
         </Text>
 
         <Button
           style={[{ marginBottom: 10, marginTop: 40 }]}
           title="Pick your homework from camera roll"
           iconRight={{ name: 'attach-file' }}
-          backgroundColor="blue"
+          backgroundColor={blue}
           rounded
           onPress={this._pickImage}
         />
@@ -108,7 +109,7 @@ class SubmitHomework extends React.Component {
           buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
           title="Open Camera"
           iconRight={{ name: 'camera' }}
-          backgroundColor="blue"
+          backgroundColor={blue}
           rounded
           onPress={this._openCamera}
         />
@@ -116,11 +117,11 @@ class SubmitHomework extends React.Component {
           buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
           title="Post to Homeworks!"
           iconRight={{ name: 'done' }}
-          backgroundColor="blue"
+          backgroundColor={blue}
           rounded
           onPress={this._postHomework}
         />
-        <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
+        <View>{this.state.loading ? <Spinner color={blue} /> : null}</View>
         <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
         {image &&
           <Image source={{ uri: image }} style={{ width: 250, height: 350 }} />}

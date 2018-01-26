@@ -5,6 +5,7 @@ import { StyleSheet, View, Modal, Image } from 'react-native';
 import { Text, List, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Spinner } from 'native-base';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class SpecificAssignment extends React.Component {
   constructor(props) {
@@ -30,12 +31,12 @@ class SpecificAssignment extends React.Component {
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 75,
+        textAlign: 'center',
       },
       list: {
         borderRadius: 5,
-        borderColor: 'cornflowerblue',
-        backgroundColor: 'cornflowerblue',
+        borderColor: blue,
+        backgroundColor: blue,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
@@ -43,8 +44,8 @@ class SpecificAssignment extends React.Component {
       },
       list2: {
         borderRadius: 5,
-        borderColor: 'red',
-        backgroundColor: 'red',
+        borderColor: red,
+        backgroundColor: red,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
@@ -75,7 +76,7 @@ class SpecificAssignment extends React.Component {
         >
           <View style={styles.modalContainer}>
             <Image
-              style={{ width: 375, height: 700, justifyContent: 'center', marginTop: -625 }}
+              style={{ width: 350, height: 650, justifyContent: 'center', marginTop: -600 }}
               // need to simply replace URI with variable current to get chosen photoUrl from student
               source={{ uri: current }}
             />

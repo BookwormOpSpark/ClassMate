@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { Text, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 import { specificAssignment, selectAssignment } from '../../actions/actions';
 import { SERVER_URI, CheckAssignment } from '../../constant';
 
@@ -42,8 +43,8 @@ class Assignment extends React.Component {
       },
       list: {
         borderRadius: 5,
-        borderColor: 'cornflowerblue',
-        backgroundColor: 'cornflowerblue',
+        borderColor: blue,
+        backgroundColor: blue,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
@@ -53,14 +54,12 @@ class Assignment extends React.Component {
 
     // const lessons = this.props.state.dashboard.assignments;
     const lessons = this.props.state.classInfo.assignments;
-    const className = this.props.state.selectSession.sessionName;
 
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Text h1 style={{ flex: 0.25, marginLeft: 145 }}>{className}</Text>
 
-        <Text h2 style={styles.container}>Assignments</Text>
+        <Text h2 style={{ textAlign: 'center', alignItems: 'center' }}>Assignments</Text>
         <List style={{ backgroundColor: '#fff' }}>
           {lessons && lessons.length > 0 ? lessons.map(assignment => (
             <ListItem
