@@ -43,7 +43,7 @@ class FunPost extends React.Component {
     let type = '';
     const youTubev1 = new RegExp('https://youtu');
     const youTubev2 = new RegExp('https://www.youtube.com');
-    if (youTubev1.test(link) || youTubev2.test(link)) {
+    if (youTubev1.test(link) || youTubev2.test(link) || /youtube/.test(link) || /vimeo/.test(link)) {
       type = 'youtube';
     } else if (imgArr.includes(linkArr[linkArr.length - 1])) {
       type = 'image';
@@ -56,6 +56,7 @@ class FunPost extends React.Component {
   };
 
   postLink() {
+    this.setState({ loading: true });
     const { link } = this.state;
     const type = this.whatType(link);
     const session = this.props.state.selectSession.sessionID || 2;
@@ -155,7 +156,7 @@ class FunPost extends React.Component {
           onPress={this.postFinal}
         />
         <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
-        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Uploading...' : ''}</Text>
+        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
       </View>
 
     );
