@@ -25,7 +25,6 @@ class CheckIn extends Component {
   }
 
   componentWillMount() {
-    // this._getLocationAsync();
     this._requestCameraPermission();
   }
 
@@ -42,16 +41,16 @@ class CheckIn extends Component {
       const sessions = this.props.state.dashboard.sessionInfo.sessions;
       let checkInSession = {};
       for (let i = 0; i < sessions.length; i++) {
-        if (sessions[i].sessionID === JSON.parse(result.data)) {
+        if (sessions[i].sessionID == result.data) {
           checkInSession = sessions[i];
         }
       }
       this.props.dispatch(selectSession(checkInSession));
       const navigateAction = NavigationActions.navigate({
-        routeName: 'TeacherClassNavigation',
+        routeName: 'StudentClassNavigation',
         action: NavigationActions.reset({
           index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'TeacherClassDashboard' })],
+          actions: [NavigationActions.navigate({ routeName: 'StudentClassDashboard' })],
         }),
       });
       this.props.navigation.dispatch(navigateAction);
