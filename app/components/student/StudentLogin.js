@@ -8,6 +8,7 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
+import {blue, white, yellow, orange, red, green } from '../../style/colors';
 
 
 class StudentLogin extends React.Component {
@@ -58,7 +59,7 @@ class StudentLogin extends React.Component {
     const styles = StyleSheet.create({
       contentContainer: {
         flexGrow: 1,
-        backgroundColor: '#fff',
+        backgroundColor: white,
         alignItems: 'center',
         justifyContent: 'center',
       },
@@ -71,7 +72,7 @@ class StudentLogin extends React.Component {
         >
           <Text h1>Class Mate</Text>
           <Text h4>Student Login</Text>
-          <Icon color="blue" name="lock" size={30} />
+          <Icon color={blue} name="lock" size={30} />
           <FormLabel>First Name</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ nameFirst: text })}
@@ -95,7 +96,7 @@ class StudentLogin extends React.Component {
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             icon={{ name: 'done' }}
             rounded
-            backgroundColor="blue"
+            backgroundColor={green}
             title="Login"
           />
         </ScrollView>
