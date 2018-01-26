@@ -24,14 +24,12 @@ class Fun extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   const session = this.props.state.selectSession.sessionID || 2;
-  //   axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
-  //     .then((res) => {
-  //       this.setState({fun: res.data});
-  //     .catch(err => console.error(err));
-  // }
-  // }
+  componentDidMount() {
+    const session = this.props.state.selectSession.sessionID || 2;
+    axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
+      .then(res => this.setState({ fun: res.data }))
+      .catch(err => console.error(err));
+  }
 
   render() {
     const styles = StyleSheet.create({
@@ -58,7 +56,8 @@ class Fun extends React.Component {
     const imageList = list.filter(item => item.type === 'image') || [];
     const youtubeList = list.filter(item => item.type === 'youtube') || [];
     const internetList = list.filter(item => item.type === 'internet') || [];
-    console.log(videoList);
+    // console.log(videoList);
+    // console.log(this.state, 'this is state in FUN');
 
     return (
       <View style={styles.container}>
