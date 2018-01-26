@@ -64,8 +64,7 @@ class Fun extends React.Component {
     const session = this.props.state.selectSession.sessionID || 5;
     axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
       .then((res) => {
-        console.log('res.data');
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ fun: res.data });
       })
       .catch(err => console.error(err));
