@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, Linking } from 'react-native';
 // import { Text } from 'react-native-elements';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -17,6 +17,8 @@ class EmergencyContact extends React.Component {
       address: '',
       phone: '',
     };
+    this.callNumber = this.callNumber.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   onSelect = async () => {
@@ -41,12 +43,22 @@ class EmergencyContact extends React.Component {
     // this.props.navigation.navigate('SpecificAssignment');
   }
 
+  callNumber = (url) => {
+    Linking.canOpenURL(url).then((supported) => {
+      if (!supported) {
+        // console.log(`Can't handle url: ${url}`);
+      } else {
+        return Linking.openURL(url);
+      }
+    }).catch(err => console.error('An error occurred', err));
+  }
+
   render() {
     // console.log(this.props.state.user)
     const contactInfo = this.props.state.user.emergencyContactInfo[0];
     const styles = StyleSheet.create({
       container: {
-        // flex: 1,
+        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
@@ -55,6 +67,12 @@ class EmergencyContact extends React.Component {
         color: 'white',
         marginTop: 10,
         fontSize: 30,
+      },
+      card: {
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        marginTop: 50,
+        padding: 10,
       },
     });
     return (
@@ -97,15 +115,22 @@ class EmergencyContact extends React.Component {
               </Button>
             </Form>
           :
-            <Card>
+            <Card style={styles.card}>
               <CardItem header>
+                <Text style={{ fontWeight: 'bold', fontSize: 18 }}> Name : </Text>
                 <Text>{`${contactInfo.nameFirst} ${contactInfo.nameLast}`}</Text>
               </CardItem>
               <CardItem>
+                <Text style={{ fontWeight: 'bold', fontSize: 18 }}> Address : </Text>
                 <Text>{`${contactInfo.address}`}</Text>
               </CardItem>
               <CardItem>
-                <Text>{`${contactInfo.email}`}</Text>
+                <Text style={{ fontWeight: 'bold', fontSize: 18 }}> Phone Number : </Text>
+                <Text
+                  onPress={() => this.callNumber(`tel:1-${contactInfo.email}`)}
+                  style={{ textDecorationLine: 'underline' }}
+                >{`1-${contactInfo.email}`}
+                </Text>
               </CardItem>
             </Card>
           }

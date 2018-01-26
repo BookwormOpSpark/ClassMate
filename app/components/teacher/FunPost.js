@@ -95,7 +95,8 @@ class FunPost extends React.Component {
     return fetch(apiUrl, options).then((res) => {
       this.setState({ loading: false });
       this.props.navigation.navigate('Fun');
-    });
+    })
+      .catch(err => console.error(err));
   }
 
   postFinal() {

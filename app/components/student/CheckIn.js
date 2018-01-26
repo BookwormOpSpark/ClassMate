@@ -1,54 +1,120 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, StyleSheet } from 'react-native';
-import { Constants, Location, Permissions } from 'expo';
+import {
+  Dimensions,
+  LayoutAnimation,
+  View,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import { Permissions, BarCodeScanner } from 'expo';
+import PropTypes from 'prop-types';
+import { NavigationActions } from 'react-navigation';
 import { Text } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { selectSession } from '../../actions/actions';
 
-export default class CheckIn extends Component {
-  state = {
-    location: null,
-    errorMessage: null,
-  };
-
-  componentWillMount() {
-    this._getLocationAsync();
+class CheckIn extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasCameraPermission: null,
+      lastScannedUrl: null,
+    };
   }
 
-  _getLocationAsync = async () => {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access location was denied',
-      });
-    }
+  componentWillMount() {
+    this._requestCameraPermission();
+  }
 
-    const location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
+  _requestCameraPermission = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({
+      hasCameraPermission: status === 'granted',
+    });
   };
 
-  render() {
-    let text = 'Waiting..';
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      const { longitude, latitude } = this.state.location.coords;
-      const longitude1 = JSON.parse(longitude);
-      const latitude1 = JSON.parse(latitude);
-      if (longitude1 > -91 && longitude1 < -89 && latitude1 > 28 && latitude1 < 30) {
-        text = 'You are checked in';
+  _handleBarCodeRead = (result) => {
+    if (result.data !== this.state.lastScannedUrl) {
+      LayoutAnimation.spring();
+      const sessions = this.props.state.dashboard.sessionInfo.sessions;
+      let checkInSession = {};
+      for (let i = 0; i < sessions.length; i++) {
+        if (sessions[i].sessionID == result.data) {
+          checkInSession = sessions[i];
+        }
       }
+      this.props.dispatch(selectSession(checkInSession));
+      const navigateAction = NavigationActions.navigate({
+        routeName: 'StudentClassNavigation',
+        action: NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'StudentClassDashboard' })],
+        }),
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
+  };
+
+  _handlePressCancel = () => {
+    this.setState({ lastScannedUrl: null });
+  };
+
+  _maybeRenderUrl = () => {
+    if (!this.state.lastScannedUrl) {
+      return;
     }
 
-    const { longitude, latitude } = this.state.location ? this.state.location.coords : { longitude: '', latitude: '' };
+    return (
+      <View style={styles.bottomBar}>
+        <TouchableOpacity style={styles.url} onPress={this._handlePressUrl}>
+          <Text numberOfLines={1} style={styles.urlText}>
+            {`Checked-in to: ${this.state.lastScannedUrl}`}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.cancelButton}
+          onPress={this._handlePressCancel}
+        >
+          <Text style={styles.cancelButtonText}>
+            Cancel
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
+  // _getLocationAsync = async () => {
+  //   const { status } = await Permissions.askAsync(Permissions.LOCATION);
+  //   if (status !== 'granted') {
+  //     this.setState({
+  //       errorMessage: 'Permission to access location was denied',
+  //     });
+  //   }
+
+  // const location = await Location.getCurrentPositionAsync({});
+  // this.setState({ location });
+  // };
+
+  render() {
     return (
       <View style={styles.container}>
-        <Text h1 style={{ color: 'green' }}>Check In</Text>
-        <Icon color="green" name="marker-check" size={30} />
-
-        <Text style={styles.paragraph}>{this.state.location ? longitude : ''}</Text>
-        <Text style={styles.paragraph}>{this.state.location ? latitude : ''}</Text>
-        <Text style={styles.paragraph}>{text}</Text>
+        {this.state.hasCameraPermission === null
+        ? <Text>Requesting for camera permission</Text>
+        : this.state.hasCameraPermission === false
+        ? <Text style={{ color: '#fff' }}>
+            Camera permission is not granted
+          </Text>
+          : <BarCodeScanner
+            onBarCodeRead={this._handleBarCodeRead}
+            style={{
+              height: Dimensions.get('window').height,
+              width: Dimensions.get('window').width,
+            }}
+          />}
+        {this._maybeRenderUrl()}
+        <StatusBar hidden />
       </View>
     );
   }
@@ -58,14 +124,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    backgroundColor: '#000',
   },
-  paragraph: {
-    margin: 24,
+  bottomBar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 15,
+    flexDirection: 'row',
+  },
+  url: {
+    flex: 1,
+  },
+  urlText: {
+    color: '#fff',
+    fontSize: 20,
+  },
+  cancelButton: {
+    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cancelButtonText: {
+    color: 'rgba(255,255,255,0.8)',
     fontSize: 18,
-    textAlign: 'center',
-    color: 'green',
   },
 });
+
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(CheckIn);
+
+CheckIn.propTypes = {
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
