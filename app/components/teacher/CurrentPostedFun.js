@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, SwipeRow, Icon, Button } from 'react-native';
-import { Text } from 'react-native-elements';
+import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, SwipeRow, Icon } from 'react-native';
+import { Text, Button } from 'react-native-elements';
 import { Video } from 'expo';
 import { Card, CardItem, Body } from 'native-base';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
-class Fun extends React.Component {
+class CurrentPostedFun extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,7 +59,7 @@ class Fun extends React.Component {
     const session = this.props.state.selectSession.sessionID || 5;
     axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         this.setState({ fun: res.data });
       })
       .catch(err => console.error(err));
@@ -125,11 +125,10 @@ class Fun extends React.Component {
     const className = this.props.state.selectSession.sessionName;
 
     const list = this.state.fun;
-    // console.log(list);
-    const videoList = list.filter(item => item.type === 'video') || [];
-    const imageList = list.filter(item => item.type === 'image') || [];
-    const youtubeList = list.filter(item => item.type === 'youtube') || [];
-    const internetList = list.filter(item => item.type === 'internet') || [];
+    const videoList = list.length > 0 ? list.filter(item => item.type === 'video') : [];
+    const imageList = list.length > 0 ? list.filter(item => item.type === 'image') : [];
+    const youtubeList = list.length > 0 ? list.filter(item => item.type === 'youtube') : [];
+    const internetList = list.length > 0 ? list.filter(item => item.type === 'internet') : [];
 
     return (
       <View style={this.styles.container}>
@@ -142,8 +141,16 @@ class Fun extends React.Component {
             h4
             style={{ textAlign: 'center', color: 'blue', marginBottom: 40 }}
           >
-            Interesting things to check out!
+            Currently Posted Fun Stuff for students!
           </Text>
+
+          <Button
+            onPress={() => this.props.navigation.navigate('FunPost')}
+            buttonStyle={[{ marginBottom: 40, marginTop: 10 }]}
+            iconRight={{ name: 'done' }}
+            backgroundColor="green"
+            title="Add more stuff!"
+          />
 
           <FlatList
             contentContainerStyle={this.styles.container}
@@ -178,8 +185,8 @@ const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps)(Fun);
-Fun.propTypes = {
+export default connect(mapStateToProps)(CurrentPostedFun);
+CurrentPostedFun.propTypes = {
   state: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
 };

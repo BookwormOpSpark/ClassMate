@@ -7,7 +7,7 @@ import GiveAQuizz from '../components/teacher/GiveAQuizz';
 import ClassRoster from '../components/teacher/ClassRoster';
 import SpecificStudent from '../components/teacher/SpecificStudent';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
-import FunPost from '../components/teacher/FunPost';
+import CurrentPostedFunNavigation from './CurrentPostedFunNavigation';
 
 const TeacherClassNavigation = StackNavigator({
   // Home: {
@@ -25,8 +25,11 @@ const TeacherClassNavigation = StackNavigator({
   Queue: {
     screen: Queue,
   },
-  FunPost: {
-    screen: FunPost,
+  CurrentPostedFunNavigation: {
+    screen: CurrentPostedFunNavigation,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   GiveAQuizz: {
     screen: GiveAQuizz,

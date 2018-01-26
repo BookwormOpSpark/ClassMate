@@ -72,7 +72,7 @@ class TeacherClassDashboard extends React.Component {
           title="Daily Schedule"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('FunPost')}
+          onPress={() => this.props.navigation.navigate('CurrentPostedFunNavigation')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'schedule' }}
           backgroundColor="blue"
