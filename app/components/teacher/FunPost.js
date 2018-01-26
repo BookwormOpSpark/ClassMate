@@ -43,7 +43,7 @@ class FunPost extends React.Component {
     let type = '';
     const youTubev1 = new RegExp('https://youtu');
     const youTubev2 = new RegExp('https://www.youtube.com');
-    if (youTubev1.test(link) || youTubev2.test(link)) {
+    if (youTubev1.test(link) || youTubev2.test(link) || /youtube/.test(link)) {
       type = 'youtube';
     } else if (imgArr.includes(linkArr[linkArr.length - 1])) {
       type = 'image';
@@ -154,7 +154,7 @@ class FunPost extends React.Component {
           onPress={this.postFinal}
         />
         <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
-        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Video Loading' : ''}</Text>
+        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
       </View>
 
     );
