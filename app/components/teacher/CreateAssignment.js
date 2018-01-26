@@ -4,7 +4,8 @@ import { Container, Header, Content, Form, Item, Input, Label, Button, Text } fr
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SERVER_URI, CreateAssignment } from '../../constant';
+import { SERVER_URI, CreateAssignments } from '../../constant';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 // import { Text } from 'react-native-elements';
 
 class CreateAssignment extends React.Component {
@@ -53,7 +54,7 @@ class CreateAssignment extends React.Component {
     });
     return (
       <Container style={{ backgroundColor: '#fff' }}>
-        <Header>
+        <Header style={{ backgroundColor: blue }}>
           <Text style={styles.headerText}>Create a New Assignment</Text>
         </Header>
         <Content>
@@ -69,6 +70,7 @@ class CreateAssignment extends React.Component {
           </Form>
           <Button
             block
+            style={{ backgroundColor: blue }}
             onPress={() => this.onSelect()}
           >
             <Text>Create Assignment</Text>

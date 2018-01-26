@@ -8,6 +8,7 @@ import ClassRoster from '../components/teacher/ClassRoster';
 import SpecificStudent from '../components/teacher/SpecificStudent';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
 import FunPost from '../components/teacher/FunPost';
+import CreateAssignment from '../components/teacher/CreateAssignment';
 
 const TeacherClassNavigation = StackNavigator({
   // Home: {
@@ -28,8 +29,8 @@ const TeacherClassNavigation = StackNavigator({
   FunPost: {
     screen: FunPost,
   },
-  GiveAQuizz: {
-    screen: GiveAQuizz,
+  CreateAssignment: {
+    screen: CreateAssignment,
   },
   ClassRoster: {
     screen: ClassRoster,
