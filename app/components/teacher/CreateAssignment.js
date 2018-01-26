@@ -18,13 +18,13 @@ class CreateAssignment extends React.Component {
   }
 
   onSelect = async () => {
-    console.log(this.props.state.selectSession.sessionID)
+    // console.log(this.props.state.selectSession.sessionID)
     const assignment = this.state;
     const sessionId = this.props.state.selectSession.sessionID;
     const info = { assignment, sessionId };
     await axios.post(`${SERVER_URI}${CreateAssignment}`, info)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         Alert.alert(
           'Success!',
           'Assignment has been created!',
