@@ -8,7 +8,7 @@ import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-nati
 import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-elements';
 import { Header, Title, Left, Right, Body, Button } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
-import logo from '../../assets/classMateLogoIcon';
+import logo from '../../assets/logo.png';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
@@ -122,15 +122,10 @@ class NewStudent extends React.Component {
     );
   }
 }
-
-
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(getUser, dispatch),
 });
-
 export default connect(mapDispatchToProps)(NewStudent);
-
-
 NewStudent.propTypes = {
   navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
