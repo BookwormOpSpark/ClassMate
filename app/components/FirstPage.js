@@ -104,7 +104,7 @@ class FirstPage extends React.Component {
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.onLogin}
-            backgroundColor={blue}
+            backgroundColor={'#dd4b39'}
             title="Teacher Login"
             icon={{ name: 'person' }}
           />
