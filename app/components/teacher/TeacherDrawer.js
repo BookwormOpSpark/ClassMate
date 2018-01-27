@@ -37,7 +37,7 @@ class TeacherDrawer extends Component {
         sessionId: item.sessionID,
       },
     }).then((res) => {
-      // console.log('classInfo', res.data);
+      // console.log('classInfo teacherDrawer', res.data);
       this.props.dispatch(getClassInfo(res.data));
     });
   }

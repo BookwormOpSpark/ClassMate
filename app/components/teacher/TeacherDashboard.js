@@ -15,6 +15,7 @@ class TeacherDashboard extends React.Component {
     this.state = {
       isLoaded: false,
       assignments: [],
+      calendar: [],
     };
     this.LogOut = this.LogOut.bind(this);
   }
@@ -29,6 +30,7 @@ class TeacherDashboard extends React.Component {
         this.props.dispatch(getDashboard(res.data));
         this.state.isLoaded = true;
         this.setState({ assignments: res.data.sessionInfo.assignments });
+        this.setState({ calendar: res.data.formattedCalendar });
       })
       .catch((err) => {
         console.error(err);
@@ -51,7 +53,7 @@ class TeacherDashboard extends React.Component {
     //   },
     // });
     const teacher = this.props.state.user;
-    console.log(this.props.state.dashboard, 'this.props....assignments');
+    // console.log(this.props.state.dashboard, 'this.props....assignments');
 
 
     return (

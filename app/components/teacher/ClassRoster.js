@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Text, Button, List, ListItem } from 'react-native-elements';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -53,13 +53,12 @@ class ClassRoster extends React.Component {
         <Text h2 style={styles.container}>Class Roster</Text>
         <ScrollView>
           <View style={styles.badges}>
-            {this.state.roster.map((student, id) => (
+            {this.state.roster.map(student => (
               <View style={styles.item}>
-                <Image source={{ uri: student.photoUrl }} size={100} />
+                <Icon name="logo-octocat" color="black" size={100} />
                 <Button
                   small
-                  key={`bbbtn${id}`}
-                  leftIcon={{ name: 'image' }}
+                  key={`bbbtn${student.id}`}
                   backgroundColor={blue}
                   color="white"
                   buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
