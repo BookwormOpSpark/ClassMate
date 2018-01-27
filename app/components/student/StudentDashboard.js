@@ -115,11 +115,43 @@ class StudentDashboard extends React.Component {
           </Header>
 
           <Content padder>
-            <Text style={{ fontSize: 30 }} > {user.First_name} {user.Last_name}</Text>
+            <Text style={{ fontSize: 30, color: white }} > {user.First_name} {user.Last_name}</Text>
+            <Button
+              iconRight
+              success
+              // onPress={this.props.navigation.navigate('CheckIn')}
+            >
+              <Icon name="check" size={20} />
+              <Text>Check In</Text>
+            </Button>
+            {/* <Button
+              onPress={this.props.navigation.navigate('CheckIn')}
+              buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
+              iconRight={{ name: 'done' }}
+              backgroundColor="green"
+              rounded
+              title="CheckIn"
+            /> */}
+            <Button
+              iconLeft
+              danger
+              // onPress={this.props.navigation.navigate('EmergencyContact')}
+            >
+              <Icon name="account" size={20} />
+              <Text>Contact</Text>
+            </Button>
+            {/* <Button
+              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+              onPress={this.navigateToScreen('EmergencyContact')}
+              iconRight={{ name: 'done' }}
+              backgroundColor="blue"
+              rounded
+              title="Emergency Contact"
+            /> */}
             <Card>
               <CardItem header>
-                <Icon color="blue" name="calendar" size={25} />
-                <Text>Your Schedule Today</Text>
+                <Icon color={blue} name="calendar" size={25} />
+                <Text>  Your Schedule Today</Text>
               </CardItem>
               {
                 this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
@@ -139,7 +171,7 @@ class StudentDashboard extends React.Component {
             </Card>
             <Card>
               <CardItem header>
-                <Icon color="blue" name="bell" size={25} />
+                <Icon color={blue} name="bell" size={25} />
                 <Text>  Upcoming Due Dates</Text>
               </CardItem>
               {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.map((el, index) => (
