@@ -3,11 +3,12 @@ import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import _ from 'lodash';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, ImageBackground } from 'react-native';
 import { Accelerometer } from 'expo';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
+import blackboard from '../../assets/blackboard.jpg';
 
 
 class RaiseHand extends React.Component {
@@ -55,64 +56,56 @@ class RaiseHand extends React.Component {
 
 
   render() {
-    const { x, y, z } = this.state.accelerometerData;
+    const styles = StyleSheet.create({
+      sensor: {
+        flex: 1,
+        marginTop: 15,
+        paddingHorizontal: 10,
+        justifyContent: 'flex-start',
+      },
+      yellow: {
+        color: '#f4d35e',
+        fontWeight: 'bold',
+        fontSize: 30,
+      },
+      contentContainer: {
+        flexGrow: 1,
+      },
+    });
+    const { y } = this.state.accelerometerData;
     const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
 
     return (
-      <View style={styles.sensor}>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          scrollEnabled
-        >
-          <View style={{ alignItems: 'center' }}>
-            <Text h1 style={{ color: 'blue' }}>{`${className} Class` || 'Class'}</Text>
-            <Text h6 style={{ color: 'blue' }}>Stand up your phone to be added to the queue!</Text>
-            <Icon color="blue" name="paw" size={40} />
-            <Text style={styles.blue}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
-            <Text>{y > 0.7 ? <Icon color="blue" name="hand-pointing-right" size={200} /> : ''}</Text>
-          </View>
-        </ScrollView>
-      </View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={styles.sensor}>
+          <ScrollView
+            contentContainerStyle={styles.contentContainer}
+            scrollEnabled
+          >
+            <View style={{ alignItems: 'center' }}>
+              <Text h6 style={{ color: '#f4d35e' }}>{`Stand up your phone to be added to the ${className} queue!`}</Text>
+              <Icon color="#f4d35e" name="paw" size={40} />
+              <Text style={styles.yellow}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
+              <Text>{y > 0.7 ? <Icon color="#f4d35e" name="hand-pointing-right" size={200} /> : ''}</Text>
+            </View>
+          </ScrollView>
+        </View>
+      </ImageBackground>
+
     );
   }
 }
 
-function round(n) {
-  if (!n) {
-    return 0;
-  }
-
-  return Math.floor(n * 100) / 100;
-}
-
-const styles = StyleSheet.create({
-  sensor: {
-    flex: 1,
-    marginTop: 15,
-    paddingHorizontal: 10,
-    justifyContent: 'flex-start',
-    backgroundColor: '#fff',
-  },
-  blue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    backgroundColor: '#fff',
-
-  },
-  list: {
-    borderRadius: 10,
-    borderColor: 'cornflowerblue',
-    backgroundColor: 'cornflowerblue',
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-});
 
 const mapStateToProps = state => ({
   state,

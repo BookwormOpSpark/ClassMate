@@ -3,11 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import { DocumentPicker } from 'expo';
 import { Button, Text } from 'react-native-elements';
-import { Container, Header, Content, Item, Input, Form, Icon, Spinner } from 'native-base';
+import { Item, Input, Form, Spinner } from 'native-base';
 import { SERVER_URI, PostFunStuff } from '../../constant';
+import blackboard from '../../assets/blackboard.jpg';
+
 
 class FunPost extends React.Component {
   constructor(props) {
@@ -107,7 +109,6 @@ class FunPost extends React.Component {
     const styles = StyleSheet.create({
       bigcontainer: {
         flex: 1,
-        backgroundColor: '#fff',
         justifyContent: 'flex-start',
       },
     });
@@ -116,48 +117,56 @@ class FunPost extends React.Component {
 
 
     return (
-      <View style={styles.bigcontainer}>
-        <Text h3 style={{ color: 'blue', textAlign: 'center', marginBottom: 50 }}>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={styles.bigcontainer}>
+          <Text h3 style={{ color: '#faf0ca', textAlign: 'center', marginBottom: 50 }}>
           Post Fun Stuffs for Class {className}
-        </Text>
+          </Text>
 
-        <Button
-          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-          title="Pick Documents"
-          iconRight={{ name: 'attach-file' }}
-          backgroundColor="blue"
-          rounded
-          onPress={this.pickDocument}
-        />
-        <Button
-          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-          title="Post Documents!"
-          iconRight={{ name: 'done' }}
-          backgroundColor="green"
-          rounded
-          onPress={this.postDocument}
-        />
-        <Icon name="nutrition" color="red" />
-        <Form>
-          <Item rounded>
-            <Input
-              placeholder="Paste your link (youTube, gif, doc ...)"
-              onChangeText={text => this.setState({ link: text })}
-            />
-          </Item>
-        </Form>
-        <Button
-          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-          title="Post Link or Document!"
-          iconRight={{ name: 'done' }}
-          backgroundColor="green"
-          rounded
-          small
-          onPress={this.postFinal}
-        />
-        <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
-        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
-      </View>
+          <Button
+            buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
+            title="Pick Documents"
+            color="black"
+            iconRight={{ name: 'attach-file', color: 'black' }}
+            backgroundColor="#f4d35e"
+            borderRadius={5}
+            onPress={this.pickDocument}
+          />
+          <Text h4 style={{ color: '#f4d35e', marginTop: 20, marginBottom: 20, alignSelf: 'center' }}> OR </Text>
+
+          <Form>
+            <Item rounded>
+              <Input
+                placeholder="Paste your link (youTube, gif, doc ...)"
+                placeholderTextColor="#f4d35e"
+                color="yellow"
+                onChangeText={text => this.setState({ link: text })}
+              />
+            </Item>
+          </Form>
+          <Button
+            buttonStyle={[{ marginBottom: 10, marginTop: 70 }]}
+            title="Post Link or Document!"
+            iconRight={{ name: 'done' }}
+            backgroundColor="#5fad56"
+            borderRadius={5}
+            onPress={this.postFinal}
+          />
+          <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
+          <Text style={{ textAlign: 'center', color: 'white' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
+        </View>
+      </ImageBackground>
+
 
     );
   }

@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { Video } from 'expo';
-import { Card, CardItem, Body } from 'native-base';
+import { Card, CardItem, Body, Button, Icon } from 'native-base';
 import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
-class Fun extends React.Component {
+class CurrentPostedFun extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,18 +31,15 @@ class Fun extends React.Component {
     this.styles = StyleSheet.create({
       container: {
         flex: 1,
-        // backgroundColor: '#0d3b66',
         alignItems: 'center',
         justifyContent: 'center',
       },
       contentContainer: {
         flexGrow: 1,
-        // backgroundColor: '#0d3b66',
       },
       item: {
         width: 310,
         height: 280,
-        // marginBottom: 40,
       },
       view: {
         marginBottom: 40,
@@ -62,7 +60,6 @@ class Fun extends React.Component {
         color: '#f4d35e',
         fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: 30,
       },
       button: {
         marginTop: 10,
@@ -93,6 +90,7 @@ class Fun extends React.Component {
   keyExtractor = item => item.link;
 
   renderVideo(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
     return (
       <View style={this.styles.view}>
         <Video
@@ -106,22 +104,53 @@ class Fun extends React.Component {
           paused
           progressUpdateIntervalMillis={1000}
         />
+
+        <Button
+          onPress={() => this.onDelete(item)}
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
       </View>
     );
   }
 
   renderImage(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
+
     return (
       <View style={this.styles.view}>
         <Image
           style={this.styles.item}
           source={{ uri: item.link }}
         />
+        <Button
+          onPress={() => this.onDelete(item)}
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
       </View>
     );
   }
 
   renderYouTube(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
+
     return (
       <View style={this.styles.view}>
         <WebView
@@ -129,11 +158,26 @@ class Fun extends React.Component {
           javaScriptEnabled
           source={{ uri: item.link }}
         />
+        <Button
+          onPress={() => this.onDelete(item)}
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
       </View>
     );
   }
 
   renderInternetLink(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
+
     const { link } = item;
     const about = link.split('/')[2];
     return (
@@ -145,11 +189,24 @@ class Fun extends React.Component {
                 style={this.styles.link}
                 onPress={() => Linking.openURL(link)}
               >
-                Link Recommended by Teacher about {about}
+              Link Recommended by Teacher about {about}
               </Text>
             </Body>
           </CardItem>
         </Card>
+        <Button
+          onPress={() => this.onDelete(item)}
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
       </View>
     );
   }
@@ -184,8 +241,18 @@ class Fun extends React.Component {
               h3
               style={this.styles.text}
             >
-              {`Interesting stuff to check out for class ${className}`}
+              {`Posted Fun Stuff for class ${className}`}
             </Text>
+
+            <Button
+              iconLeft
+              success
+              style={this.styles.buttonAdd}
+              onPress={() => this.props.navigation.navigate('TeacherFunNavigation')}
+            >
+              <Icon active name="ios-add-circle-outline" />
+              <Text>      Add More Fun Stuff</Text>
+            </Button>
 
             <FlatList
               contentContainerStyle={this.styles.container}
@@ -222,8 +289,8 @@ const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps)(Fun);
-Fun.propTypes = {
+export default connect(mapStateToProps)(CurrentPostedFun);
+CurrentPostedFun.propTypes = {
   state: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
 };
