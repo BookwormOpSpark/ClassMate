@@ -7,6 +7,8 @@ import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logOut, selectSession, getClassInfo } from '../../actions/actions';
 import { SERVER_URI, ClassInfoRoute } from '../../constant';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
+
 
 class StudentDrawer extends Component {
   constructor(props) {
@@ -41,7 +43,11 @@ class StudentDrawer extends Component {
 
   LogOut = async () => {
     await this.props.dispatch(logOut());
-    this.props.navigation.navigate('FirstPage');
+    // this.props.navigation.navigate('FirstPage');
+    this.props.screenProps.rootNavigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Home' })],
+    }));
   }
 
   navigateToScreen = route => () => {
@@ -58,27 +64,29 @@ class StudentDrawer extends Component {
       container: {
         paddingTop: 20,
         flex: 1,
+        backgroundColor: white,
       },
       navItemStyle: {
         padding: 10,
       },
       sectionHeadingStyle: {
-        backgroundColor: 'lightgrey',
+        backgroundColor: yellow,
         paddingVertical: 10,
         paddingHorizontal: 5,
       },
       navSectionStyle: {
         paddingHorizontal: 15,
+        backgroundColor: white,
       },
       addClassStyle: {
-        // backgroundColor: 'green',
+        backgroundColor: white,
         alignItems: 'center',
         padding: 10,
 
       },
       footerContainer: {
         padding: 10,
-        // backgroundColor: 'red',
+        backgroundColor: white,
       },
 
     });
@@ -119,7 +127,7 @@ class StudentDrawer extends Component {
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('JoinClass')}
                 iconRight={{ name: 'done' }}
-                backgroundColor="blue"
+                backgroundColor="green"
                 rounded
                 title="Join a Class"
               />
@@ -127,14 +135,14 @@ class StudentDrawer extends Component {
           </View>
         </ScrollView>
         <View style={styles.footerContainer}>
-          <Button
+          {/* <Button
             onPress={this.navigateToScreen('CheckIn')}
             buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
             iconRight={{ name: 'done' }}
             backgroundColor="green"
             rounded
             title="CheckIn"
-          />
+          /> */}
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.Logout}
