@@ -18,7 +18,7 @@ export default class TeacherClassSchedule extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>Give A Quizz</Text>
+        <Text h1>Class Schedule</Text>
       </View>
     );
   }
