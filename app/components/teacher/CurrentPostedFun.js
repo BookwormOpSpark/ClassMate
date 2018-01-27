@@ -31,18 +31,15 @@ class CurrentPostedFun extends React.Component {
     this.styles = StyleSheet.create({
       container: {
         flex: 1,
-        // backgroundColor: '#0d3b66',
         alignItems: 'center',
         justifyContent: 'center',
       },
       contentContainer: {
         flexGrow: 1,
-        // backgroundColor: '#0d3b66',
       },
       item: {
         width: 310,
         height: 280,
-        // marginBottom: 40,
       },
       view: {
         marginBottom: 40,
