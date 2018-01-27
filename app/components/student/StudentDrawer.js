@@ -18,7 +18,17 @@ class StudentDrawer extends Component {
 
   onSelect = async (item) => {
     // console.log('item', item);
+    this.props.navigation.navigate('DrawerClose');
     await this.props.dispatch(selectSession(item));
+    // this.props.navigation.navigate('TeacherClassNavigation');
+    const navigateAction = NavigationActions.navigate({
+      routeName: 'StudentClassNavigation',
+      action: NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'StudentClassDashboard' })],
+      }),
+    });
+    this.props.navigation.dispatch(navigateAction);
     await axios.get(`${SERVER_URI}${ClassInfoRoute}`, {
       params: {
         sessionId: item.sessionID,
@@ -27,7 +37,6 @@ class StudentDrawer extends Component {
       // console.log('classInfo studentDrawer', res.data);
       this.props.dispatch(getClassInfo(res.data));
     });
-    this.props.navigation.navigate('StudentClassNavigation');
   }
 
   LogOut = async () => {

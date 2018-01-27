@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { NavigationActions } from 'react-navigation';
 import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-native';
 import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-elements';
 import { Header, Title, Left, Right, Body, Button } from 'native-base';
@@ -52,7 +53,14 @@ class NewStudent extends React.Component {
         // console.log(res, 'bottom res');
         const verified = res.payload.id;
         if (verified) {
-          this.props.navigation.navigate('StudentDashboardNavigation');
+          // this.props.navigation.navigate('StudentDashboardNavigation');
+          const resetStack = NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
+            ],
+          });
+          this.props.navigation.dispatch(resetStack);
         }
       })
       .catch(err => console.error(err));

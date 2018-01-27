@@ -36,7 +36,9 @@ const LoginNavigation = StackNavigator({
     }),
   },
   StudentDrawerNavigation: {
-    screen: StudentDrawerNavigation,
+    screen: ({ navigation }) => (
+      <StudentDrawerNavigation screenProps={{ rootNavigation: navigation }} />
+    ),
     navigationOptions: () => ({
       header: null,
     }),
