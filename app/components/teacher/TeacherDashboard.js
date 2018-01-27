@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions, Image } from 'react-native';
 // import { Text, Button, Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Container, Header, Title, Left, Right, Button, Body, Content, Text, Card, CardItem } from 'native-base';
+import logo from '../../assets/classmatelogoicon.png';
 import { logOut, getDashboard } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
 
@@ -20,7 +21,6 @@ class TeacherDashboard extends React.Component {
     this.LogOut = this.LogOut.bind(this);
   }
   componentWillMount() {
-    // console.log('\n\n\nTEACHER DASHBOARD MOUNTING\n\n\n');
     axios.get(`${SERVER_URI}${DashboardRoute}`, {
       params: {
         userId: this.props.state.user.id,
@@ -71,7 +71,8 @@ class TeacherDashboard extends React.Component {
             <Title>Dashboard</Title>
           </Body>
           <Right>
-            <Icon color="red" name="food-apple" size={30} />
+            {/* <Icon color="red" name="food-apple" size={30} /> */}
+            <Image source={logo} style={{ width: 30, height: 30 }} />
           </Right>
         </Header>
         <Content padder>
