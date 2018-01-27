@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { specificAssignment, selectAssignment } from '../../actions/actions';
-import { SERVER_URI, CheckAssignment } from '../../constant';
 
 class Assignment extends React.Component {
   constructor(props) {
@@ -17,19 +15,13 @@ class Assignment extends React.Component {
   }
 
   onSelect = async (item) => {
-    // console.log('item', item);
     await this.props.dispatch(selectAssignment(item));
-    await axios.get(`${SERVER_URI}${CheckAssignment}`, {
-      params: {
-        sessionId: this.state.sessionId,
-        assignmentId: item.id,
-      },
-    }).then((res) => {
-      // console.log('classInfo', res.data);
-      this.props.dispatch(specificAssignment(res.data));
-    })
-      .catch(err => console.error(err));
-    this.props.navigation.navigate('SpecificAssignment');
+    const format = {
+      sessionId: this.state.sessionId,
+      assignmentId: item.id,
+    };
+    await this.props.dispatch(specificAssignment(format));
+    this.props.navigation.navigate('SubmitHomework');
   }
 
   render() {
@@ -53,14 +45,12 @@ class Assignment extends React.Component {
 
     // const lessons = this.props.state.dashboard.assignments;
     const lessons = this.props.state.classInfo.assignments;
-    const className = this.props.state.selectSession.sessionName;
 
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Text h1 style={{ flex: 0.25, marginLeft: 145 }}>{className}</Text>
 
-        <Text h2 style={styles.container}>Assignments</Text>
+        <Text h2 style={{ textAlign: 'center', alignItems: 'center' }}>Assignments</Text>
         <List style={{ backgroundColor: '#fff' }}>
           {lessons && lessons.length > 0 ? lessons.map(assignment => (
             <ListItem

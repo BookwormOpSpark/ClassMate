@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View, Modal, Image } from 'react-native';
 import { Text, List, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { Spinner } from 'native-base';
 
 class SpecificAssignment extends React.Component {
   constructor(props) {
