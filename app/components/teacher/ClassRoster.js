@@ -6,7 +6,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
-// import { SERVER_URI, classRoster } from '../../constant';
+import { SERVER_URI, StudentInformation } from '../../constant';
+import { specificStudent } from '../../actions/actions';
 
 class ClassRoster extends React.Component {
   constructor(props) {
@@ -14,10 +15,25 @@ class ClassRoster extends React.Component {
     this.state = {
       roster: this.props.state.classInfo.students,
     };
+    this.onSelect = this.onSelect.bind(this);
   }
 
+  onSelect = async (item) => {
+    console.log('item', item);
+    await axios.get(`${SERVER_URI}${StudentInformation}`, {
+      params: {
+        id: item.id,
+      },
+    }).then((res) => {
+      console.log(res.data, 'res.data from axios');
+      this.props.dispatch(specificStudent(res.data));
+    })
+      .catch(err => console.error(err));
+    this.props.navigation.navigate('SpecificStudent');
+  };
+
   render() {
-    console.log(this.state.roster, 'this is roster');
+    console.log(this.props.state, 'props...state');
     const styles = StyleSheet.create({
       container: {
         backgroundColor: '#fff',
@@ -53,20 +69,22 @@ class ClassRoster extends React.Component {
         <Text h2 style={styles.container}>Class Roster</Text>
         <ScrollView>
           <View style={styles.badges}>
-            {this.state.roster.map(student => (
-              <View style={styles.item}>
-                <Icon name="logo-octocat" color="black" size={100} />
-                <Button
-                  small
-                  key={`bbbtn${student.id}`}
-                  backgroundColor={blue}
-                  color="white"
-                  buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-                  title={`${student.nameFirst} ${student.nameLast}`}
-                  onPress={() => this.props.navigation.navigate('SpecificStudent')}
-                />
-              </View>
-              ))}
+            {
+              this.state.roster && this.state.roster.length > 0 ? this.state.roster.map((student, id) => (
+                <View key={`${id}`} style={styles.item}>
+                  <Icon key={`${id}`} name="logo-octocat" color="black" size={100} />
+                  <Button
+                    small
+                    key={`bbbtn${id}`}
+                    backgroundColor={blue}
+                    color="white"
+                    buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+                    title={`${student.nameFirst} ${student.nameLast}`}
+                    onPress={() => this.onSelect(student)}
+                  />
+                </View>
+                ))
+              : null}
           </View>
         </ScrollView>
       </View>

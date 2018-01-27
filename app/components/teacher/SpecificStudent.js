@@ -10,8 +10,24 @@ import { connect } from 'react-redux';
 class SpecificStudent extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            emergencyContact: [],
+        }
+        this.callNumber = this.callNumber.bind(this);
     }
+
+    callNumber = (url) => {
+        Linking.canOpenURL(url).then((supported) => {
+          if (!supported) {
+            // console.log(`Can't handle url: ${url}`);
+          } else {
+            return Linking.openURL(url);
+          }
+        }).catch(err => console.error('An error occurred', err));
+      }
+
     render(){
+        // this.props.state.specificStudent.emergencyContact ? this.setState({ emergencyContact: this.props.state.specificStudent.emergencyContact }) : null;
         const styles = StyleSheet.create({
         container: {
             flex: 1,
@@ -24,20 +40,32 @@ class SpecificStudent extends React.Component {
             height: 200,
             borderRadius: 100, 
         },
+        text: {
+            textAlign: 'center',
+            marginTop: 10,
+        },
     });
 
     return (
         <View style={styles.container}>
             <Image
                 style={styles.image}
-                source={{ uri: 'https://vignette.wikia.nocookie.net/docmcstuffins/images/1/10/Cranky_Susie_Sunshine.png/revision/latest?cb=20150101235424' }}
+                source={{ uri: this.props.state.specificStudent.photoUrl }}
             />
-            <Text h3 style={{ marginTop: 15 }}>Susy Sunshine</Text>
-            <Text h4 style={{ marginTop: 10 }}>5th Grade</Text>
-            <Text h5 style={{ marginTop: 30 }}>Emergency Contact</Text>
-            <Text p style={{ marginTop: 10 }}>Sarah Sunshine</Text>
-            <Text p style={{ marginTop: 2 }}>ssunshine@gmail.com</Text>
-            <Text p style={{ marginTop: 2 }}>(123)-456-7890</Text>
+            <Text h3 style={{ marginTop: 15 }}>{`${this.props.state.specificStudent.nameFirst} ${this.props.state.specificStudent.nameLast}`}</Text>
+            <Text h4>5th Grade</Text>
+            {this.props.state.specificStudent.emergencyContact ? 
+                <View>
+                <Text h5 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }}>Emergency Contact</Text>
+                <Text p style={styles.text}>{`${this.props.state.specificStudent.emergencyContact.nameFirst} ${this.props.state.specificStudent.emergencyContact.nameLast}`}</Text>
+                <Text p style={styles.text}>{`${this.props.state.specificStudent.emergencyContact.address}`}</Text>
+                <Text p style={styles.text}
+                onPress={() => this.callNumber(`tel:1-${this.props.state.specificStudent.emergencyContact.phone}`)}
+                >{`${this.props.state.specificStudent.emergencyContact.phone}`}</Text>
+                </View>
+                : 
+                <Text h5 style={{ marginTop: 30 }}>This student has yet to create an Emergency Contact</Text> 
+            }
         </View>
     );
     }
