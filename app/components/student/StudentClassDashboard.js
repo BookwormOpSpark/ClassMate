@@ -66,12 +66,12 @@ class StudentClassDashboard extends React.Component {
           <View style={styles.item}>
             <Icon color="#2EC4B6" name="book-open-variant" size={100} />
             <Button
-              onPress={() => this.props.navigation.navigate('SubmitHomework')}
+              onPress={() => this.props.navigation.navigate('Assignment')}
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
               backgroundColor="#2EC4B6"
               small
               rounded
-              title="Submit Homework"
+              title="Homework"
             />
           </View>
 

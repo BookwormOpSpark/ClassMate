@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StyleSheet, Image, View } from 'react-native';
 import { ImagePicker } from 'expo';
+import { Spinner } from 'native-base';
 import { Button, Text, Header } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
 
@@ -11,6 +12,7 @@ class SubmitHomework extends React.Component {
     super(props);
     this.state = {
       image: null,
+      loading: false,
     };
     // console.log('Homework', this.props.state);
     this._postHomework = this._postHomework.bind(this);
@@ -41,9 +43,11 @@ class SubmitHomework extends React.Component {
     }
   }
   _postHomework() {
-    // const participant = this.props.state.participant_id;
-    // const assignment = this.props.state.assignment_id;
-    const apiUrl = `${SERVER_URI}${PostHomework}`;// need to update here
+    this.setState({ loading: true });
+    const participant = this.props.state.selectSession.participantID;
+    const assignment = this.props.state.specificAssignment.id;
+    // console.log(participant, 'participant before APIURL');
+    const apiUrl = `${SERVER_URI}${PostHomework}/${participant}/${assignment}`;// need to update here
     const uri = this.state.image;
     // console.log('posturi', uri);
 
@@ -66,7 +70,10 @@ class SubmitHomework extends React.Component {
       },
     };
 
-    return fetch(apiUrl, options);
+    return fetch(apiUrl, options)
+      .then((res) => {
+        this.setState({ loading: false });
+      });
   }
 
   render() {
@@ -113,6 +120,8 @@ class SubmitHomework extends React.Component {
           rounded
           onPress={this._postHomework}
         />
+        <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
+        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
         {image &&
           <Image source={{ uri: image }} style={{ width: 250, height: 350 }} />}
       </View>

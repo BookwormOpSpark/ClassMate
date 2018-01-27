@@ -11,10 +11,10 @@ import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/logo.png';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
-import {blue, white, yellow, orange, red, green } from '../../style/colors';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 
-class StudentLogin extends React.Component {
+class NewStudent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +24,6 @@ class StudentLogin extends React.Component {
       nameLast: '',
     };
     this.onLogin = this.onLogin.bind(this);
-    this.newStudent = this.newStudent.bind(this);
   }
 
   onLogin() {
@@ -59,10 +58,6 @@ class StudentLogin extends React.Component {
       .catch(err => console.error(err));
   }
 
-  newStudent() {
-    this.props.navigation.navigate('NewStudent');
-  }
-
   render() {
     const styles = StyleSheet.create({
       contentContainer: {
@@ -95,18 +90,24 @@ class StudentLogin extends React.Component {
         <View
           style={styles.contentContainer}
         >
-          <Text h3 style={{ color: white, paddingTop: 15 }}>
-            Student Login
+          <Text h3 style={{ color: white, paddingTop: 0 }}>
+            New Student!
           </Text>
+          <FormLabel>First Name</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ nameFirst: text })}
+          />
+          <FormLabel>Last Name</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ nameLast: text })}
+          />
           <FormLabel>User Name</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ username: text })}
-            style={{ paddingHorizontal: 10 }}
           />
           <FormLabel>Password</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ password: text })}
-            style={{ paddingHorizontal: 10 }}
           />
           <View style={{ paddingTop: 20, paddingHorizontal: 10 }} />
           <Button
@@ -114,18 +115,7 @@ class StudentLogin extends React.Component {
             success
             onPress={this.onLogin}
           >
-            <Text>LOGIN</Text>
-          </Button>
-          <Text style={{ padding: 20, color: yellow }} >
-            OR
-          </Text>
-          <Button
-            block
-            transparent
-            style={{ backgroundColor: white }}
-            onPress={this.newStudent}
-          >
-            <Text>create new account</Text>
+            <Text>LET'S GO!</Text>
           </Button>
         </View>
       </ImageBackground>
@@ -138,10 +128,10 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(getUser, dispatch),
 });
 
-export default connect(mapDispatchToProps)(StudentLogin);
+export default connect(mapDispatchToProps)(NewStudent);
 
 
-StudentLogin.propTypes = {
+NewStudent.propTypes = {
   navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };

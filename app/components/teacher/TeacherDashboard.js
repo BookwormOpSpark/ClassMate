@@ -14,6 +14,7 @@ class TeacherDashboard extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
+      assignments: [],
     };
     this.LogOut = this.LogOut.bind(this);
   }
@@ -27,6 +28,7 @@ class TeacherDashboard extends React.Component {
       .then((res) => {
         this.props.dispatch(getDashboard(res.data));
         this.state.isLoaded = true;
+        this.state.assignments = res.data.sessionInfo.assignments;
       })
       .catch((err) => {
         console.error(err);
@@ -49,6 +51,8 @@ class TeacherDashboard extends React.Component {
     //   },
     // });
     const teacher = this.props.state.user;
+
+
     return (
       <Container>
         <Header>
@@ -95,12 +99,12 @@ class TeacherDashboard extends React.Component {
               <Icon color="blue" name="bell" size={25} />
               <Text>  Upcoming Due Dates</Text>
             </CardItem>
-            <CardItem>
-              <Text>(hardcoded) Worksheet 1</Text>
-            </CardItem>
-            <CardItem>
-              <Text>(hardcoded) ScienceProject</Text>
-            </CardItem>
+            {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.map((el, index) => (
+              <CardItem key={index}>
+                <Text>{`${el.title} --  ${el.dueDate}`}</Text>
+              </CardItem>
+            )) : null
+          }
           </Card>
         </Content>
       </Container>
