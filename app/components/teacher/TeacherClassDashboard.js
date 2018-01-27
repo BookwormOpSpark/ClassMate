@@ -48,12 +48,12 @@ class TeacherClassDashboard extends React.Component {
           title="Queue"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('GiveAQuizz')}
+          onPress={() => this.props.navigation.navigate('CreateAssignment')}
           buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
           iconRight={{ name: 'assignment' }}
           backgroundColor="blue"
           rounded
-          title="Give A Quizz"
+          title="Create an Assignment"
         />
         <Button
           onPress={() => this.props.navigation.navigate('ClassRoster')}

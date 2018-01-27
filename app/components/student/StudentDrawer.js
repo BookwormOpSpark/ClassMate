@@ -24,7 +24,7 @@ class StudentDrawer extends Component {
         sessionId: item.sessionID,
       },
     }).then((res) => {
-      // console.log('classInfo', res.data);
+      // console.log('classInfo studentDrawer', res.data);
       this.props.dispatch(getClassInfo(res.data));
     });
     this.props.navigation.navigate('StudentClassNavigation');

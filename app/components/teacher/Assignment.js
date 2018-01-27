@@ -1,10 +1,12 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Text, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
+import blackboard from '../../assets/blackboard.jpg';
 import { specificAssignment, selectAssignment } from '../../actions/actions';
 import { SERVER_URI, CheckAssignment } from '../../constant';
 
@@ -35,45 +37,59 @@ class Assignment extends React.Component {
   render() {
     const styles = StyleSheet.create({
       container: {
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginLeft: 110,
       },
       list: {
         borderRadius: 5,
-        borderColor: 'cornflowerblue',
-        backgroundColor: 'cornflowerblue',
+        borderColor: blue,
+        backgroundColor: blue,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
         marginRight: 5,
       },
+      contentContainer: {
+        flexGrow: 1,
+        backgroundColor: 'transparent',
+        paddingHorizontal: 10,
+      },
     });
 
     // const lessons = this.props.state.dashboard.assignments;
     const lessons = this.props.state.classInfo.assignments;
-    const className = this.props.state.selectSession.sessionName;
 
 
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Text h1 style={{ flex: 0.25, marginLeft: 145 }}>{className}</Text>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <View style={styles.contentContainer}>
 
-        <Text h2 style={styles.container}>Assignments</Text>
-        <List style={{ backgroundColor: '#fff' }}>
-          {lessons && lessons.length > 0 ? lessons.map(assignment => (
-            <ListItem
-              containerStyle={styles.list}
-              key={`bbbtn${assignment.id}`}
-              title={`${assignment.title}`}
-              leftIcon={{ name: 'book' }}
-              titleStyle={{ color: 'white' }}
-              onPress={() => this.onSelect(assignment)}
-            />
-        )) : null}
-        </List>
-      </View>
+          <Text h2 style={{ textAlign: 'center', alignItems: 'center', color: 'white' }}>Assignments</Text>
+          <List containerStyle={styles.contentContainer}>
+            {lessons && lessons.length > 0 ? lessons.map(assignment => (
+              <ListItem
+                containerStyle={styles.list}
+                key={`bbbtn${assignment.id}`}
+                title={`${assignment.title}`}
+                leftIcon={{ name: 'book' }}
+                titleStyle={{ color: 'white' }}
+                onPress={() => this.onSelect(assignment)}
+              />
+          )) : null}
+          </List>
+        </View>
+      </ImageBackground>
     );
   }
 }
