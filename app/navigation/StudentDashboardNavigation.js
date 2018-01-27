@@ -7,6 +7,9 @@ import StudentDashboard from '../components/student/StudentDashboard';
 const StudentDashboardNavigation = StackNavigator({
   Home: {
     screen: StudentDashboard,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   // JoinClass: {
   //   screen: JoinClassContainer,

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import logo from '../../assets/classmatelogoicon.png';
+import { StyleSheet, View, Dimensions, Image } from 'react-native';
 // import { Text, Button, Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -71,7 +72,8 @@ class TeacherDashboard extends React.Component {
             <Title>Dashboard</Title>
           </Body>
           <Right>
-            <Icon color="red" name="food-apple" size={30} />
+            {/* <Icon color="red" name="food-apple" size={30} /> */}
+            <Image source={logo} style={{ width: 30, height: 30 }} />
           </Right>
         </Header>
         <Content padder>

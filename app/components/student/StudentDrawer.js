@@ -127,7 +127,7 @@ class StudentDrawer extends Component {
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('JoinClass')}
                 iconRight={{ name: 'done' }}
-                backgroundColor="green"
+                backgroundColor={green}
                 rounded
                 title="Join a Class"
               />
@@ -147,7 +147,7 @@ class StudentDrawer extends Component {
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.LogOut}
             iconRight={{ name: 'enhanced-encryption' }}
-            backgroundColor="firebrick"
+            backgroundColor={red}
             rounded
             title="Log Out"
           />
