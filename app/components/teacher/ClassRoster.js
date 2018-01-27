@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Text, Button, List, ListItem } from 'react-native-elements';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 // import { SERVER_URI, classRoster } from '../../constant';
 
 class ClassRoster extends React.Component {
@@ -15,6 +17,7 @@ class ClassRoster extends React.Component {
   }
 
   render() {
+    console.log(this.state.roster, 'this is roster');
     const styles = StyleSheet.create({
       container: {
         backgroundColor: '#fff',
@@ -31,25 +34,41 @@ class ClassRoster extends React.Component {
         marginLeft: 5,
         marginRight: 5,
       },
+      item: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+      },
+      badges: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+      },
     });
-    
+
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Text h1>{this.state.sessionName}</Text>
         <Text h2 style={styles.container}>Class Roster</Text>
         <ScrollView>
-          <List style={{ backgroundColor: '#fff' }}>
+          <View style={styles.badges}>
             {this.state.roster.map((student, id) => (
-              <ListItem
-                containerStyle={styles.list}
-                key={`bbbtn${id}`}
-                leftIcon={{ name: 'image' }}
-                titleStyle={{ color: 'white' }}
-                title={`${student.nameFirst} ${student.nameLast}`}
-                onPress={() => this.props.navigation.navigate('SpecificStudent')}
-              />
-            ))}
-          </List>
+              <View style={styles.item}>
+                <Image source={{ uri: student.photoUrl }} size={100} />
+                <Button
+                  small
+                  key={`bbbtn${id}`}
+                  leftIcon={{ name: 'image' }}
+                  backgroundColor={blue}
+                  color="white"
+                  buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+                  title={`${student.nameFirst} ${student.nameLast}`}
+                  onPress={() => this.props.navigation.navigate('SpecificStudent')}
+                />
+              </View>
+              ))}
+          </View>
         </ScrollView>
       </View>
     );
