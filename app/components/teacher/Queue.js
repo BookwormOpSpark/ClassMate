@@ -61,7 +61,7 @@ class Queue extends React.Component {
       <ImageBackground
         source={blackboard}
         style={{
-          // backgroundColor: '#000000',
+          backgroundColor: '#000000',
           flex: 1,
           position: 'absolute',
           width: '100%',
