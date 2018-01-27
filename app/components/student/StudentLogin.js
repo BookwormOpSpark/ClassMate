@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-native';
-import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
+import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-elements';
+import { Header, Title, Left, Right, Body, Button } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/logo.png';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
@@ -63,7 +64,12 @@ class StudentLogin extends React.Component {
         flexGrow: 1,
         backgroundColor: 'transparent',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+      },
+      card: {
+        // padding: 10,
+        paddingTop: 50,
+        opacity: 0.8,
       },
     });
     return (
@@ -78,9 +84,15 @@ class StudentLogin extends React.Component {
           justifyContent: 'center',
         }}
       >
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          scrollEnabled
+        <Button
+          transparent
+          onPress={() => this.props.navigation.goBack()}
+          style={{ paddingTop: 50, paddingHorizontal: 10 }}
+        >
+          <Icon name="arrow-left" size={50} color={yellow} />
+        </Button>
+        <View
+          style={styles.contentContainer}
         >
           {/* <Image
             source={logo}
@@ -92,7 +104,28 @@ class StudentLogin extends React.Component {
               width: undefined,
             }}
           /> */}
-          <Text h4>Student Login</Text>
+          <Text h3 style={{ color: white, paddingTop: 100 }}>
+            Student Login
+          </Text>
+          <FormLabel>User Name</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ username: text })}
+            style={{ paddingHorizontal: 10 }}
+          />
+          <FormLabel>Password</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ password: text })}
+            style={{ paddingHorizontal: 10 }}
+          />
+          <Button
+            onPress={this.onLogin}
+            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            icon={{ name: 'done' }}
+            rounded
+            backgroundColor={green}
+            title="Login"
+          />
+
           <Icon color={blue} name="lock" size={30} />
           <FormLabel>First Name</FormLabel>
           <FormInput
@@ -104,23 +137,7 @@ class StudentLogin extends React.Component {
             onChangeText={text => this.setState({ nameLast: text })}
             placeholder="optional if already registered"
           />
-          <FormLabel>User Name</FormLabel>
-          <FormInput
-            onChangeText={text => this.setState({ username: text })}
-          />
-          <FormLabel>Password</FormLabel>
-          <FormInput
-            onChangeText={text => this.setState({ password: text })}
-          />
-          <Button
-            onPress={this.onLogin}
-            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            icon={{ name: 'done' }}
-            rounded
-            backgroundColor={green}
-            title="Login"
-          />
-        </ScrollView>
+        </View>
       </ImageBackground>
     );
   }
