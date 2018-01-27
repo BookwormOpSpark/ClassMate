@@ -3,7 +3,7 @@ import TeacherClassDashboard from '../components/teacher/TeacherClassDashboard';
 import Assignment from '../components/teacher/Assignment';
 import SpecificAssignment from '../components/teacher/SpecificAssignment';
 import Queue from '../components/teacher/Queue';
-import GiveAQuizz from '../components/teacher/GiveAQuizz';
+import QRcode from '../components/teacher/QRcode';
 import ClassRoster from '../components/teacher/ClassRoster';
 import SpecificStudent from '../components/teacher/SpecificStudent';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
@@ -31,8 +31,8 @@ const TeacherClassNavigation = StackNavigator({
       header: null,
     }),
   },
-  GiveAQuizz: {
-    screen: GiveAQuizz,
+  QRcode: {
+    screen: QRcode,
   },
   ClassRoster: {
     screen: ClassRoster,

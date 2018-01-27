@@ -1,91 +1,134 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import QRCode from 'react-native-qrcode';
+import blackboard from '../../assets/blackboard.jpg';
 
 class TeacherClassDashboard extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.state);
     this.state = {};
   }
-
-  // componentDidMount() {
-  //   console.log('\n\n\nHELLLLOOOOOOO FROM TEACHER CLASS VIEW !!!!\n\n\n\nHERE IS THIS.PROPS.STATE\n', this.props.state);
-  // }
 
   render() {
     const className = this.props.state.selectSession.sessionName;
     const styles = StyleSheet.create({
+      bigContainer: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+      },
       container: {
         flex: 1,
-        backgroundColor: '#fff',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        justifyContent: 'center',
+        flexWrap: 'wrap',
+      },
+      button: {
+        marginBottom: 15,
+        marginTop: 15,
+        width: 150,
+        height: 100,
+      },
+      shadow: {
+        borderWidth: 1,
+        borderRadius: 2,
+        shadowColor: 'white',
+        shadowOffset: { width: 5, height: 3 },
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        elevation: 1,
       },
     });
 
     return (
-      <View style={styles.container}>
-        <Text h1>{className || 'Class'}</Text>
-        <Button
-          onPress={() => this.props.navigation.navigate('Assignment')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 30 }]}
-          iconRight={{ name: 'done' }}
-          backgroundColor="blue"
-          rounded
-          title="Assignment"
-        />
-        <Button
-          onPress={() => this.props.navigation.navigate('Queue')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          iconRight={{ name: 'thumb-up' }}
-          backgroundColor="blue"
-          rounded
-          title="Queue"
-        />
-        <Button
-          onPress={() => this.props.navigation.navigate('GiveAQuizz')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          iconRight={{ name: 'assignment' }}
-          backgroundColor="blue"
-          rounded
-          title="Give A Quizz"
-        />
-        <Button
-          onPress={() => this.props.navigation.navigate('ClassRoster')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          iconRight={{ name: 'assignment' }}
-          backgroundColor="blue"
-          rounded
-          title="Class Roster"
-        />
-        <Button
-          onPress={() => this.props.navigation.navigate('TeacherClassSchedule')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          iconRight={{ name: 'schedule' }}
-          backgroundColor="blue"
-          rounded
-          title="Daily Schedule"
-        />
-        <Button
-          onPress={() => this.props.navigation.navigate('CurrentPostedFunNavigation')}
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          iconRight={{ name: 'schedule' }}
-          backgroundColor="blue"
-          rounded
-          title="Student Engaged!"
-        />
-        <QRCode
-          value={`${this.props.state.selectSession.sessionID}`}
-          size={150}
-          bgColor="blue"
-          fgColor="white"
-        />
-      </View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={styles.bigContainer}>
+          <Text style={{ marginBottom: 30 }}> Hi </Text>
+          <View style={styles.container}>
+            <Button
+              onPress={() => this.props.navigation.navigate('Assignment')}
+              buttonStyle={styles.button}
+              fontWeight="bold"
+              fontFamily="monospace"
+              iconRight={{ name: 'assignment', color: 'black' }}
+              backgroundColor="#f4d35e"
+              borderRadius={5}
+              color="black"
+              title="Assignment"
+            />
+            <Button
+              onPress={() => this.props.navigation.navigate('Queue')}
+              buttonStyle={styles.button}
+              fontWeight="bold"
+              fontFamily="monospace"
+              iconRight={{ name: 'thumb-up', color: 'black' }}
+              backgroundColor="#f4d35e"
+              borderRadius={5}
+              color="black"
+              title="Queue"
+            />
+            <Button
+              onPress={() => this.props.navigation.navigate('QRcode')}
+              buttonStyle={styles.button}
+              fontWeight="bold"
+              fontFamily="monospace"
+              iconRight={{ name: 'code', color: 'black' }}
+              backgroundColor="#f4d35e"
+              borderRadius={5}
+              color="black"
+              title="QR code"
+            />
+            <Button
+              onPress={() => this.props.navigation.navigate('ClassRoster')}
+              buttonStyle={styles.button}
+              fontWeight="bold"
+              fontFamily="monospace"
+              iconRight={{ name: 'person', color: 'black' }}
+              backgroundColor="#f4d35e"
+              borderRadius={5}
+              color="black"
+              title="Class Roster"
+            />
+            <Button
+              onPress={() => this.props.navigation.navigate('TeacherClassSchedule')}
+              buttonStyle={styles.button}
+              fontWeight="bold"
+              fontFamily="monospace"
+              iconRight={{ name: 'schedule', color: 'black' }}
+              backgroundColor="#f4d35e"
+              borderRadius={5}
+              color="black"
+              title="Daily Schedule"
+            />
+            <Button
+              onPress={() => this.props.navigation.navigate('CurrentPostedFunNavigation')}
+              buttonStyle={styles.button}
+              fontWeight="bold"
+              fontFamily="monospace"
+              iconRight={{ name: 'movie', color: 'black' }}
+              backgroundColor="#f4d35e"
+              borderRadius={5}
+              color="black"
+              title="Fun Stuff"
+            />
+          </View>
+        </View>
+      </ImageBackground>
+
     );
   }
 }
