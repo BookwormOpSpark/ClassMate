@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import moment from 'moment';
 import { connect } from 'react-redux';
-import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, SwipeRow, Icon } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { Video } from 'expo';
 import { Card, CardItem, Body } from 'native-base';
@@ -42,10 +43,13 @@ class CurrentPostedFun extends React.Component {
         height: 280,
         marginBottom: 40,
       },
+      view: {
+        marginBottom: 40,
+        alignItems: 'center',
+      },
       video: {
         width: 310,
         height: 210,
-        marginBottom: 40,
       },
       text: {
         color: 'blue',
@@ -68,18 +72,28 @@ class CurrentPostedFun extends React.Component {
   keyExtractor = item => item.link;
 
   renderVideo(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
     return (
-      <Video
-        style={this.styles.video}
-        source={{ uri: item.link }}
-        rate={1.0}
-        volume={1.0}
-        isMuted={false}
-        resizeMode="cover"
-        shouldPlay
-        paused
-        progressUpdateIntervalMillis={1000}
-      />
+      <View style={this.styles.view}>
+        <Video
+          style={this.styles.video}
+          source={{ uri: item.link }}
+          rate={1.0}
+          volume={1.0}
+          isMuted={false}
+          resizeMode="cover"
+          shouldPlay
+          paused
+          progressUpdateIntervalMillis={1000}
+        />
+        <Button
+          onPress={() => this.onDelete(item)}
+          buttonStyle={[{ height: 20, width: 310 }]}
+          iconRight={{ name: 'remove-circle-outline' }}
+          backgroundColor="red"
+          title={`Uploaded ${dateUpload}   DELETE`}
+        />
+      </View>
     );
   }
 
@@ -139,17 +153,18 @@ class CurrentPostedFun extends React.Component {
           <Text h1 style={this.styles.text}>{`Class ${className}`}</Text>
           <Text
             h4
-            style={{ textAlign: 'center', color: 'blue', marginBottom: 40 }}
+            style={{ textAlign: 'center', color: 'blue', marginBottom: 30 }}
           >
             Currently Posted Fun Stuff for students!
           </Text>
 
           <Button
-            onPress={() => this.props.navigation.navigate('FunPost')}
+            onPress={() => this.props.navigation.navigate('TeacherFunNavigation')}
             buttonStyle={[{ marginBottom: 40, marginTop: 10 }]}
             iconRight={{ name: 'done' }}
             backgroundColor="green"
             title="Add more stuff!"
+            small
           />
 
           <FlatList
