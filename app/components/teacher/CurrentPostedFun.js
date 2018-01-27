@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import { Video } from 'expo';
-import { Card, CardItem, Body } from 'native-base';
+import { Card, CardItem, Body, Button, Icon } from 'native-base';
+import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
+import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
 class CurrentPostedFun extends React.Component {
@@ -30,29 +31,49 @@ class CurrentPostedFun extends React.Component {
     this.styles = StyleSheet.create({
       container: {
         flex: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#0d3b66',
         alignItems: 'center',
         justifyContent: 'center',
       },
       contentContainer: {
         flexGrow: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#0d3b66',
       },
       item: {
         width: 310,
         height: 280,
-        marginBottom: 40,
+        // marginBottom: 40,
       },
       view: {
         marginBottom: 40,
         alignItems: 'center',
+      },
+      buttonAdd: {
+        marginBottom: 30,
+        marginTop: 30,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: 300,
       },
       video: {
         width: 310,
         height: 210,
       },
       text: {
-        color: 'blue',
+        color: '#f4d35e',
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+      button: {
+        marginTop: 10,
+        height: 30,
+        width: 310,
+        backgroundColor: 'red',
+        opacity: 0.6,
+        alignSelf: 'center',
+      },
+      link: {
+        color: '#0d3b66',
         fontWeight: 'bold',
         textAlign: 'center',
       },
@@ -86,52 +107,110 @@ class CurrentPostedFun extends React.Component {
           paused
           progressUpdateIntervalMillis={1000}
         />
+
         <Button
           onPress={() => this.onDelete(item)}
-          buttonStyle={[{ height: 20, width: 310 }]}
-          iconRight={{ name: 'remove-circle-outline' }}
-          backgroundColor="red"
-          title={`Uploaded ${dateUpload}   DELETE`}
-        />
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
       </View>
     );
   }
 
   renderImage(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
+
     return (
-      <Image
-        style={this.styles.item}
-        source={{ uri: item.link }}
-      />
+      <View style={this.styles.view}>
+        <Image
+          style={this.styles.item}
+          source={{ uri: item.link }}
+        />
+        <Button
+          onPress={() => this.onDelete(item)}
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
+      </View>
     );
   }
 
   renderYouTube(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
+
     return (
-      <WebView
-        style={this.styles.item}
-        javaScriptEnabled
-        source={{ uri: item.link }}
-      />
+      <View style={this.styles.view}>
+        <WebView
+          style={this.styles.item}
+          javaScriptEnabled
+          source={{ uri: item.link }}
+        />
+        <Button
+          onPress={() => this.onDelete(item)}
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
+      </View>
     );
   }
 
   renderInternetLink(item) {
+    const dateUpload = moment(item.createdAt).format('MMM Do YY');
+
     const { link } = item;
     const about = link.split('/')[2];
     return (
-      <Card style={{ marginBottom: 15 }}>
-        <CardItem>
-          <Body>
-            <Text
-              style={this.styles.text}
-              onPress={() => Linking.openURL(link)}
-            >
+      <View style={{ marginBottom: 40 }}>
+        <Card style={{ width: 300, alignSelf: 'center' }}>
+          <CardItem>
+            <Body>
+              <Text
+                style={this.styles.link}
+                onPress={() => Linking.openURL(link)}
+              >
               Link Recommended by Teacher about {about}
-            </Text>
-          </Body>
-        </CardItem>
-      </Card>
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
+        <Button
+          onPress={() => this.onDelete(item)}
+          danger
+          bordered
+          style={this.styles.button}
+        >
+          <Text style={{ color: 'white' }}>{`Uploaded ${dateUpload}`}</Text>
+          <Icon
+            active
+            name="trash"
+            style={{ color: 'white' }}
+          />
+        </Button>
+      </View>
     );
   }
 
@@ -145,53 +224,66 @@ class CurrentPostedFun extends React.Component {
     const internetList = list.length > 0 ? list.filter(item => item.type === 'internet') : [];
 
     return (
-      <View style={this.styles.container}>
-        <ScrollView
-          contentContainerStyle={this.styles.contentContainer}
-          scrollEnabled
-        >
-          <Text h1 style={this.styles.text}>{`Class ${className}`}</Text>
-          <Text
-            h4
-            style={{ textAlign: 'center', color: 'blue', marginBottom: 30 }}
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={this.styles.container}>
+          <ScrollView
+            contentContainerStyle={this.styles.contentContainer}
+            scrollEnabled
           >
-            Currently Posted Fun Stuff for students!
-          </Text>
+            <Text
+              h3
+              style={this.styles.text}
+            >
+              {`Posted Fun Stuff for class ${className}`}
+            </Text>
 
-          <Button
-            onPress={() => this.props.navigation.navigate('TeacherFunNavigation')}
-            buttonStyle={[{ marginBottom: 40, marginTop: 10 }]}
-            iconRight={{ name: 'done' }}
-            backgroundColor="green"
-            title="Add more stuff!"
-            small
-          />
+            <Button
+              iconLeft
+              success
+              style={this.styles.buttonAdd}
+              onPress={() => this.props.navigation.navigate('TeacherFunNavigation')}
+            >
+              <Icon active name="ios-add-circle-outline" />
+              <Text>      Add More Fun Stuff</Text>
+            </Button>
 
-          <FlatList
-            contentContainerStyle={this.styles.container}
-            renderItem={({ item }) => this.renderVideo(item)}
-            data={videoList}
-            keyExtractor={this.keyExtractor}
-          />
-          <FlatList
-            contentContainerStyle={this.styles.container}
-            renderItem={({ item }) => this.renderImage(item)}
-            data={imageList}
-            keyExtractor={this.keyExtractor}
-          />
-          <FlatList
-            contentContainerStyle={this.styles.container}
-            renderItem={({ item }) => this.renderYouTube(item)}
-            data={youtubeList}
-            keyExtractor={this.keyExtractor}
-          />
-          <FlatList
-            renderItem={({ item }) => this.renderInternetLink(item)}
-            data={internetList}
-            keyExtractor={this.keyExtractor}
-          />
-        </ScrollView>
-      </View>
+            <FlatList
+              contentContainerStyle={this.styles.container}
+              renderItem={({ item }) => this.renderVideo(item)}
+              data={videoList}
+              keyExtractor={this.keyExtractor}
+            />
+            <FlatList
+              contentContainerStyle={this.styles.container}
+              renderItem={({ item }) => this.renderImage(item)}
+              data={imageList}
+              keyExtractor={this.keyExtractor}
+            />
+            <FlatList
+              contentContainerStyle={this.styles.container}
+              renderItem={({ item }) => this.renderYouTube(item)}
+              data={youtubeList}
+              keyExtractor={this.keyExtractor}
+            />
+            <FlatList
+              renderItem={({ item }) => this.renderInternetLink(item)}
+              data={internetList}
+              keyExtractor={this.keyExtractor}
+            />
+          </ScrollView>
+        </View>
+      </ImageBackground>
+
     );
   }
 }

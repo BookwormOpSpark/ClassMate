@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, SwipeRow, Icon, Button } from 'react-native';
 import { Text } from 'react-native-elements';
 import { Video } from 'expo';
 import { Card, CardItem, Body } from 'native-base';
+import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
+import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
 class Fun extends React.Component {
@@ -29,26 +30,50 @@ class Fun extends React.Component {
     this.styles = StyleSheet.create({
       container: {
         flex: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#0d3b66',
         alignItems: 'center',
         justifyContent: 'center',
       },
       contentContainer: {
         flexGrow: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#0d3b66',
       },
       item: {
         width: 310,
         height: 280,
+        // marginBottom: 40,
+      },
+      view: {
         marginBottom: 40,
+        alignItems: 'center',
+      },
+      buttonAdd: {
+        marginBottom: 30,
+        marginTop: 30,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: 300,
       },
       video: {
         width: 310,
         height: 210,
-        marginBottom: 40,
       },
       text: {
-        color: 'blue',
+        color: '#f4d35e',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 30,
+      },
+      button: {
+        marginTop: 10,
+        height: 30,
+        width: 310,
+        backgroundColor: 'red',
+        opacity: 0.6,
+        alignSelf: 'center',
+      },
+      link: {
+        color: '#0d3b66',
         fontWeight: 'bold',
         textAlign: 'center',
       },
@@ -59,7 +84,7 @@ class Fun extends React.Component {
     const session = this.props.state.selectSession.sessionID || 5;
     axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         this.setState({ fun: res.data });
       })
       .catch(err => console.error(err));
@@ -69,36 +94,42 @@ class Fun extends React.Component {
 
   renderVideo(item) {
     return (
-      <Video
-        style={this.styles.video}
-        source={{ uri: item.link }}
-        rate={1.0}
-        volume={1.0}
-        isMuted={false}
-        resizeMode="cover"
-        shouldPlay
-        paused
-        progressUpdateIntervalMillis={1000}
-      />
+      <View style={this.styles.view}>
+        <Video
+          style={this.styles.video}
+          source={{ uri: item.link }}
+          rate={1.0}
+          volume={1.0}
+          isMuted={false}
+          resizeMode="cover"
+          shouldPlay
+          paused
+          progressUpdateIntervalMillis={1000}
+        />
+      </View>
     );
   }
 
   renderImage(item) {
     return (
-      <Image
-        style={this.styles.item}
-        source={{ uri: item.link }}
-      />
+      <View style={this.styles.view}>
+        <Image
+          style={this.styles.item}
+          source={{ uri: item.link }}
+        />
+      </View>
     );
   }
 
   renderYouTube(item) {
     return (
-      <WebView
-        style={this.styles.item}
-        javaScriptEnabled
-        source={{ uri: item.link }}
-      />
+      <View style={this.styles.view}>
+        <WebView
+          style={this.styles.item}
+          javaScriptEnabled
+          source={{ uri: item.link }}
+        />
+      </View>
     );
   }
 
@@ -106,18 +137,20 @@ class Fun extends React.Component {
     const { link } = item;
     const about = link.split('/')[2];
     return (
-      <Card style={{ marginBottom: 15 }}>
-        <CardItem>
-          <Body>
-            <Text
-              style={this.styles.text}
-              onPress={() => Linking.openURL(link)}
-            >
-              Link Recommended by Teacher about {about}
-            </Text>
-          </Body>
-        </CardItem>
-      </Card>
+      <View style={{ marginBottom: 40 }}>
+        <Card style={{ width: 300, alignSelf: 'center' }}>
+          <CardItem>
+            <Body>
+              <Text
+                style={this.styles.link}
+                onPress={() => Linking.openURL(link)}
+              >
+                Link Recommended by Teacher about {about}
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
+      </View>
     );
   }
 
@@ -125,51 +158,62 @@ class Fun extends React.Component {
     const className = this.props.state.selectSession.sessionName;
 
     const list = this.state.fun;
-    // console.log(list);
-    const videoList = list.filter(item => item.type === 'video') || [];
-    const imageList = list.filter(item => item.type === 'image') || [];
-    const youtubeList = list.filter(item => item.type === 'youtube') || [];
-    const internetList = list.filter(item => item.type === 'internet') || [];
+    const videoList = list.length > 0 ? list.filter(item => item.type === 'video') : [];
+    const imageList = list.length > 0 ? list.filter(item => item.type === 'image') : [];
+    const youtubeList = list.length > 0 ? list.filter(item => item.type === 'youtube') : [];
+    const internetList = list.length > 0 ? list.filter(item => item.type === 'internet') : [];
 
     return (
-      <View style={this.styles.container}>
-        <ScrollView
-          contentContainerStyle={this.styles.contentContainer}
-          scrollEnabled
-        >
-          <Text h1 style={this.styles.text}>{`Class ${className}`}</Text>
-          <Text
-            h4
-            style={{ textAlign: 'center', color: 'blue', marginBottom: 40 }}
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={this.styles.container}>
+          <ScrollView
+            contentContainerStyle={this.styles.contentContainer}
+            scrollEnabled
           >
-            Interesting things to check out!
-          </Text>
+            <Text
+              h3
+              style={this.styles.text}
+            >
+              {`Interesting stuff to check out for class ${className}`}
+            </Text>
 
-          <FlatList
-            contentContainerStyle={this.styles.container}
-            renderItem={({ item }) => this.renderVideo(item)}
-            data={videoList}
-            keyExtractor={this.keyExtractor}
-          />
-          <FlatList
-            contentContainerStyle={this.styles.container}
-            renderItem={({ item }) => this.renderImage(item)}
-            data={imageList}
-            keyExtractor={this.keyExtractor}
-          />
-          <FlatList
-            contentContainerStyle={this.styles.container}
-            renderItem={({ item }) => this.renderYouTube(item)}
-            data={youtubeList}
-            keyExtractor={this.keyExtractor}
-          />
-          <FlatList
-            renderItem={({ item }) => this.renderInternetLink(item)}
-            data={internetList}
-            keyExtractor={this.keyExtractor}
-          />
-        </ScrollView>
-      </View>
+            <FlatList
+              contentContainerStyle={this.styles.container}
+              renderItem={({ item }) => this.renderVideo(item)}
+              data={videoList}
+              keyExtractor={this.keyExtractor}
+            />
+            <FlatList
+              contentContainerStyle={this.styles.container}
+              renderItem={({ item }) => this.renderImage(item)}
+              data={imageList}
+              keyExtractor={this.keyExtractor}
+            />
+            <FlatList
+              contentContainerStyle={this.styles.container}
+              renderItem={({ item }) => this.renderYouTube(item)}
+              data={youtubeList}
+              keyExtractor={this.keyExtractor}
+            />
+            <FlatList
+              renderItem={({ item }) => this.renderInternetLink(item)}
+              data={internetList}
+              keyExtractor={this.keyExtractor}
+            />
+          </ScrollView>
+        </View>
+      </ImageBackground>
+
     );
   }
 }

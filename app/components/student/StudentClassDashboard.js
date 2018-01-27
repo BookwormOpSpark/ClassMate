@@ -51,7 +51,15 @@ class StudentClassDashboard extends React.Component {
         <View style={styles.badges}>
 
           <View style={styles.item}>
-            <Icon color="#FF9F1C" name="paw" size={100} />
+            <Icon
+              color="#FF9F1C"
+              name="paw"
+              size={100}
+              shadowColor="#000"
+              // shadowOffset={width: 0, height: 2 }
+              shadowOpacity={0.8}
+              shadowRadius={2}
+            />
             <Button
               onPress={() => this.props.navigation.navigate('RaiseHand')}
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
