@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { Text, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { blue, white, yellow, orange, red, green } from '../../style/colors.js'
 import { specificAssignment, selectAssignment } from '../../actions/actions';
 
 class Assignment extends React.Component {
@@ -34,8 +35,8 @@ class Assignment extends React.Component {
       },
       list: {
         borderRadius: 5,
-        borderColor: 'cornflowerblue',
-        backgroundColor: 'cornflowerblue',
+        borderColor: blue,
+        backgroundColor: blue,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,

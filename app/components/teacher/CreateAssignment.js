@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet, Alert, ImageBackground } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SERVER_URI, CreateAssignment } from '../../constant';
+import blackboard from '../../assets/blackboard.jpg';
+import { SERVER_URI, CreateAssignments } from '../../constant';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 // import { Text } from 'react-native-elements';
 
 class CreateAssignment extends React.Component {
@@ -22,7 +24,7 @@ class CreateAssignment extends React.Component {
     const assignment = this.state;
     const sessionId = this.props.state.selectSession.sessionID;
     const info = { assignment, sessionId };
-    await axios.post(`${SERVER_URI}${CreateAssignment}`, info)
+    await axios.post(`${SERVER_URI}${CreateAssignments}`, info)
       .then((res) => {
         // console.log(res.data);
         Alert.alert(
@@ -50,31 +52,51 @@ class CreateAssignment extends React.Component {
         marginTop: 10,
         fontSize: 30,
       },
+      contentContainer: {
+        flexGrow: 1,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 10,
+      },
     });
     return (
-      <Container style={{ backgroundColor: '#fff' }}>
-        <Header>
-          <Text style={styles.headerText}>Create a New Assignment</Text>
-        </Header>
-        <Content>
-          <Form>
-            <Item stackedLabel>
-              <Label style={{ fontWeight: 'bold' }}>Title</Label>
-              <Input onChangeText={text => this.setState({ title: text })} />
-            </Item>
-            <Item stackedLabel last>
-              <Label style={{ fontWeight: 'bold' }}>Due Date - Please format MM/DD/YYYY</Label>
-              <Input onChangeText={text => this.setState({ dueDate: text })} />
-            </Item>
-          </Form>
-          <Button
-            block
-            onPress={() => this.onSelect()}
-          >
-            <Text>Create Assignment</Text>
-          </Button>
-        </Content>
-      </Container>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <Container style={styles.contentContainer}>
+          <Header style={{ backgroundColor: 'transparent' }}>
+            <Text style={styles.headerText}>Create a New Assignment</Text>
+          </Header>
+          <Content>
+            <Form>
+              <Item stackedLabel>
+                <Label style={{ fontWeight: 'bold', color: 'white' }}>Title</Label>
+                <Input onChangeText={text => this.setState({ title: text })} />
+              </Item>
+              <Item stackedLabel last>
+                <Label style={{ fontWeight: 'bold', color: 'white' }}>Due Date - Please format MM/DD/YYYY</Label>
+                <Input onChangeText={text => this.setState({ dueDate: text })} />
+              </Item>
+            </Form>
+            <Button
+              block
+              style={{ backgroundColor: blue }}
+              onPress={() => this.onSelect()}
+            >
+              <Text>Create Assignment</Text>
+            </Button>
+          </Content>
+        </Container>
+      </ImageBackground>
     );
   }
 }

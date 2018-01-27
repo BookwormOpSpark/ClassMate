@@ -7,6 +7,7 @@ import selectSession from './selectSession';
 import dashboard from './dashboard';
 import assignmentCheck from './assignmentCheck';
 import specificAssignment from './specificAssignment';
+import specificStudent from './specificStudent';
 
 const appReducer = combineReducers({
   user,
@@ -17,6 +18,7 @@ const appReducer = combineReducers({
   dashboard,
   assignmentCheck,
   specificAssignment,
+  specificStudent,
 });
 
 const rootReducer = (state, action) => {

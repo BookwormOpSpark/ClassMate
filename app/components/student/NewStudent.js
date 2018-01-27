@@ -122,15 +122,10 @@ class NewStudent extends React.Component {
     );
   }
 }
-
-
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(getUser, dispatch),
 });
-
 export default connect(mapDispatchToProps)(NewStudent);
-
-
 NewStudent.propTypes = {
   navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
