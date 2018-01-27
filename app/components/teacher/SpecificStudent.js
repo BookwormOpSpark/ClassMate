@@ -1,56 +1,108 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, View, Image, Linking, ImageBackground } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
+import blackboard from '../../assets/blackboard.jpg';
 
 class SpecificStudent extends React.Component {
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      emergencyContact: [],
+    };
+    this.callNumber = this.callNumber.bind(this);
+  }
+
+    callNumber = (url) => {
+      Linking.canOpenURL(url).then((supported) => {
+        if (!supported) {
+          // console.log(`Can't handle url: ${url}`);
+        } else {
+          return Linking.openURL(url);
+        }
+      }).catch(err => console.error('An error occurred', err));
     }
-    render(){
-        const styles = StyleSheet.create({
+
+    render() {
+      // this.props.state.specificStudent.emergencyContact ? this.setState({ emergencyContact: this.props.state.specificStudent.emergencyContact }) : null;
+      const styles = StyleSheet.create({
         container: {
-            flex: 1,
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            justifyContent: 'center',
+          flex: 1,
+          backgroundColor: '#fff',
+          alignItems: 'center',
+          justifyContent: 'center',
         },
         image: {
-            width: 200,
-            height: 200,
-            borderRadius: 100, 
+          width: 200,
+          height: 200,
+          borderRadius: 100,
         },
-    });
+        text: {
+          textAlign: 'center',
+          marginTop: 10,
+          color: 'white',
+        },
+        contentContainer: {
+          flexGrow: 1,
+          backgroundColor: 'transparent',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingHorizontal: 10,
+        },
+      });
 
-    return (
-        <View style={styles.container}>
+      return (
+        <ImageBackground
+          source={blackboard}
+          style={{
+            backgroundColor: '#000000',
+            flex: 1,
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            }}
+        >
+          <View style={styles.contentContainer}>
             <Image
-                style={styles.image}
-                source={{ uri: 'https://vignette.wikia.nocookie.net/docmcstuffins/images/1/10/Cranky_Susie_Sunshine.png/revision/latest?cb=20150101235424' }}
+              style={styles.image}
+              source={{ uri: this.props.state.specificStudent.photoUrl }}
             />
-            <Text h3 style={{ marginTop: 15 }}>Susy Sunshine</Text>
-            <Text h4 style={{ marginTop: 10 }}>5th Grade</Text>
-            <Text h5 style={{ marginTop: 30 }}>Emergency Contact</Text>
-            <Text p style={{ marginTop: 10 }}>Sarah Sunshine</Text>
-            <Text p style={{ marginTop: 2 }}>ssunshine@gmail.com</Text>
-            <Text p style={{ marginTop: 2 }}>(123)-456-7890</Text>
-        </View>
-    );
+            <Text h3 style={{ marginTop: 15, color: 'white' }}>{`${this.props.state.specificStudent.nameFirst} ${this.props.state.specificStudent.nameLast}`}</Text>
+            <Text h4 style={{ color: 'white' }}>5th Grade</Text>
+            {this.props.state.specificStudent.emergencyContact ?
+              <View>
+                <Text h5 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold', color: 'white' }}>Emergency Contact</Text>
+                <Text p style={styles.text}>{`${this.props.state.specificStudent.emergencyContact.nameFirst} ${this.props.state.specificStudent.emergencyContact.nameLast}`}</Text>
+                <Text p style={styles.text} leftIcon="ios-call-outline" >{`${this.props.state.specificStudent.emergencyContact.address}`}</Text>
+                <Text
+                  p
+                  style={{ textAlign: 'center', marginTop: 10, fontWeight: 'bold', color: 'white' }}
+                  onPress={() => this.callNumber(`tel:1-${this.props.state.specificStudent.emergencyContact.phone}`)}
+                >
+                  <Icon name="ios-call" color="green" size={25} />
+                  {`    ${this.props.state.specificStudent.emergencyContact.phone}`}
+                </Text>
+              </View>
+                    :
+              <Text h5 style={{ marginTop: 30, color: 'white' }}>This student has yet to create an Emergency Contact</Text>
+                }
+          </View>
+        </ImageBackground>
+      );
     }
 }
 
 const mapStateToProps = state => ({
-    state,
+  state,
 });
 
 export default connect(mapStateToProps)(SpecificStudent);
 
 SpecificStudent.propTypes = {
-    navigation: PropTypes.object.isRequired,
-    state: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
