@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Text, Button, List, ListItem } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
+import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, StudentInformation } from '../../constant';
 import { specificStudent } from '../../actions/actions';
 
@@ -61,33 +62,52 @@ class ClassRoster extends React.Component {
         alignItems: 'center',
         flexWrap: 'wrap',
       },
+      contentContainer: {
+        flexGrow: 1,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+      },
     });
 
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Text h1>{this.state.sessionName}</Text>
-        <Text h2 style={styles.container}>Class Roster</Text>
-        <ScrollView>
-          <View style={styles.badges}>
-            {
-              this.state.roster && this.state.roster.length > 0 ? this.state.roster.map((student, id) => (
-                <View key={`${id}`} style={styles.item}>
-                  <Icon key={`${id}`} name="logo-octocat" color="black" size={100} />
-                  <Button
-                    small
-                    key={`bbbtn${id}`}
-                    backgroundColor={blue}
-                    color="white"
-                    buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-                    title={`${student.nameFirst} ${student.nameLast}`}
-                    onPress={() => this.onSelect(student)}
-                  />
-                </View>
-                ))
-              : null}
-          </View>
-        </ScrollView>
-      </View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={styles.contentContainer}>
+          <Text h1>{this.state.sessionName}</Text>
+          <Text h2 style={{ backgroundColor: 'transparent', textAlign: 'center', color: 'white' }}>Class Roster</Text>
+          <ScrollView>
+            <View style={styles.badges}>
+              {
+                this.state.roster && this.state.roster.length > 0 ? this.state.roster.map((student, id) => (
+                  <View key={`${id}`} style={styles.item}>
+                    <Icon key={`${id}`} name="logo-octocat" color="white" size={100} />
+                    <Button
+                      small
+                      key={`bbbtn${id}`}
+                      backgroundColor={blue}
+                      color="white"
+                      buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+                      title={`${student.nameFirst} ${student.nameLast}`}
+                      onPress={() => this.onSelect(student)}
+                    />
+                  </View>
+                  ))
+                : null}
+            </View>
+          </ScrollView>
+        </View>
+      </ImageBackground>
     );
   }
 }

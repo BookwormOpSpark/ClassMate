@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, View, Image, Linking } from 'react-native';
+import { StyleSheet, View, Image, Linking, ImageBackground } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
+import blackboard from '../../assets/blackboard.jpg';
 
 class SpecificStudent extends React.Component {
   constructor(props) {
@@ -41,35 +42,55 @@ class SpecificStudent extends React.Component {
         text: {
           textAlign: 'center',
           marginTop: 10,
+          color: 'white',
+        },
+        contentContainer: {
+          flexGrow: 1,
+          backgroundColor: 'transparent',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingHorizontal: 10,
         },
       });
 
       return (
-        <View style={styles.container}>
-          <Image
-            style={styles.image}
-            source={{ uri: this.props.state.specificStudent.photoUrl }}
-          />
-          <Text h3 style={{ marginTop: 15 }}>{`${this.props.state.specificStudent.nameFirst} ${this.props.state.specificStudent.nameLast}`}</Text>
-          <Text h4>5th Grade</Text>
-          {this.props.state.specificStudent.emergencyContact ?
-            <View>
-              <Text h5 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }}>Emergency Contact</Text>
-              <Text p style={styles.text}>{`${this.props.state.specificStudent.emergencyContact.nameFirst} ${this.props.state.specificStudent.emergencyContact.nameLast}`}</Text>
-              <Text p style={styles.text} leftIcon="ios-call-outline" >{`${this.props.state.specificStudent.emergencyContact.address}`}</Text>
-              <Text
-                p
-                style={{ textAlign: 'center', marginTop: 10, fontWeight: 'bold' }}
-                onPress={() => this.callNumber(`tel:1-${this.props.state.specificStudent.emergencyContact.phone}`)}
-              >
-                <Icon name="ios-call" color="green" size={25} />
-                {`    ${this.props.state.specificStudent.emergencyContact.phone}`}
-              </Text>
-            </View>
-                :
-            <Text h5 style={{ marginTop: 30 }}>This student has yet to create an Emergency Contact</Text>
-            }
-        </View>
+        <ImageBackground
+          source={blackboard}
+          style={{
+            backgroundColor: '#000000',
+            flex: 1,
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            }}
+        >
+          <View style={styles.contentContainer}>
+            <Image
+              style={styles.image}
+              source={{ uri: this.props.state.specificStudent.photoUrl }}
+            />
+            <Text h3 style={{ marginTop: 15, color: 'white' }}>{`${this.props.state.specificStudent.nameFirst} ${this.props.state.specificStudent.nameLast}`}</Text>
+            <Text h4 style={{ color: 'white' }}>5th Grade</Text>
+            {this.props.state.specificStudent.emergencyContact ?
+              <View>
+                <Text h5 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold', color: 'white' }}>Emergency Contact</Text>
+                <Text p style={styles.text}>{`${this.props.state.specificStudent.emergencyContact.nameFirst} ${this.props.state.specificStudent.emergencyContact.nameLast}`}</Text>
+                <Text p style={styles.text} leftIcon="ios-call-outline" >{`${this.props.state.specificStudent.emergencyContact.address}`}</Text>
+                <Text
+                  p
+                  style={{ textAlign: 'center', marginTop: 10, fontWeight: 'bold', color: 'white' }}
+                  onPress={() => this.callNumber(`tel:1-${this.props.state.specificStudent.emergencyContact.phone}`)}
+                >
+                  <Icon name="ios-call" color="green" size={25} />
+                  {`    ${this.props.state.specificStudent.emergencyContact.phone}`}
+                </Text>
+              </View>
+                    :
+              <Text h5 style={{ marginTop: 30, color: 'white' }}>This student has yet to create an Emergency Contact</Text>
+                }
+          </View>
+        </ImageBackground>
       );
     }
 }

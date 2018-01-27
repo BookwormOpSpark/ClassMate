@@ -1,10 +1,11 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Modal, Image } from 'react-native';
+import { StyleSheet, View, Modal, Image, ImageBackground } from 'react-native';
 import { Text, List, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Spinner } from 'native-base';
+import blackboard from '../../assets/blackboard.jpg';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class SpecificAssignment extends React.Component {
@@ -28,7 +29,7 @@ class SpecificAssignment extends React.Component {
   render() {
     const styles = StyleSheet.create({
       container: {
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
@@ -61,6 +62,11 @@ class SpecificAssignment extends React.Component {
         alignItems: 'center',
         marginBottom: -650,
       },
+      contentContainer: {
+        flexGrow: 1,
+        backgroundColor: 'transparent',
+        paddingHorizontal: 10,
+      },
     });
 
     const students = this.props.state.assignmentCheck;
@@ -68,52 +74,63 @@ class SpecificAssignment extends React.Component {
     // console.log(current, 'this is current photoUrl');
     // console.log(this.props.state, 'this is props.state');
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Modal
-          visible={this.state.modalVisible}
-          animationType="slide"
-          onRequestClose={() => this.closeModal()}
-        >
-          <View style={styles.modalContainer}>
-            <Image
-              style={{ width: 350, height: 650, justifyContent: 'center', marginTop: -600 }}
-              // need to simply replace URI with variable current to get chosen photoUrl from student
-              source={{ uri: current }}
-            />
-            <View style={styles.innerContainer}>
-              <Button
-                onPress={() => this.closeModal()}
-                title="Close"
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <View style={styles.contentContainer}>
+          <Modal
+            visible={this.state.modalVisible}
+            animationType="slide"
+            onRequestClose={() => this.closeModal()}
+          >
+            <View style={styles.modalContainer}>
+              <Image
+                style={{ width: 350, height: 650, justifyContent: 'center', marginTop: -600 }}
+                // need to simply replace URI with variable current to get chosen photoUrl from student
+                source={{ uri: current }}
               />
+              <View style={styles.innerContainer}>
+                <Button
+                  onPress={() => this.closeModal()}
+                  title="Close"
+                />
+              </View>
             </View>
-          </View>
-        </Modal>
-        <Text h2 style={styles.container}>{this.props.state.specificAssignment.title}</Text>
-        <List style={{ backgroundColor: '#fff' }}>
-          {students.map(student => (
-            student.photoUrl ?
-              <ListItem
-                containerStyle={styles.list}
-                key={`bbbtn${student.id}`}
-                title={`${student.nameFirst} ${student.nameLast}`}
-                leftIcon={{ name: 'book' }}
-                titleStyle={{ color: 'white' }}
-                onPress={() => {
-                  this.openModal();
-                  this.state.currentUrl = student.photoUrl;
-                }}
-              />
-            :
-              <ListItem
-                containerStyle={styles.list2}
-                key={`bbbtn${student.id}`}
-                title={`${student.nameFirst} ${student.nameLast}`}
-                leftIcon={{ name: 'book' }}
-                titleStyle={{ color: 'white' }}
-              />
-      ))}
-        </List>
-      </View>
+          </Modal>
+          <Text h2 style={{ backgroundColor: 'transparent', color: 'white', textAlign: 'center' }}>{this.props.state.specificAssignment.title}</Text>
+          <List containerStyle={styles.contentContainer}>
+            {students.map(student => (
+              student.photoUrl ?
+                <ListItem
+                  containerStyle={styles.list}
+                  key={`bbbtn${student.id}`}
+                  title={`${student.nameFirst} ${student.nameLast}`}
+                  leftIcon={{ name: 'book' }}
+                  titleStyle={{ color: 'white' }}
+                  onPress={() => {
+                    this.openModal();
+                    this.state.currentUrl = student.photoUrl;
+                  }}
+                />
+              :
+                <ListItem
+                  containerStyle={styles.list2}
+                  key={`bbbtn${student.id}`}
+                  title={`${student.nameFirst} ${student.nameLast}`}
+                  leftIcon={{ name: 'book' }}
+                  titleStyle={{ color: 'white' }}
+                />
+        ))}
+          </List>
+        </View>
+      </ImageBackground>
     );
   }
 }
