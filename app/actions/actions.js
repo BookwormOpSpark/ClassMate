@@ -41,3 +41,8 @@ export const specificAssignment = assignment => ({
   type: 'GET_SPECIFIC_ASSIGNMENT',
   payload: assignment,
 });
+
+export const specificStudent = student => ({
+  type: 'GET_STUDENT',
+  payload: student,
+});

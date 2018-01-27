@@ -3,11 +3,12 @@ import TeacherClassDashboard from '../components/teacher/TeacherClassDashboard';
 import Assignment from '../components/teacher/Assignment';
 import SpecificAssignment from '../components/teacher/SpecificAssignment';
 import Queue from '../components/teacher/Queue';
-import GiveAQuizz from '../components/teacher/GiveAQuizz';
+import QRcode from '../components/teacher/QRcode';
 import ClassRoster from '../components/teacher/ClassRoster';
 import SpecificStudent from '../components/teacher/SpecificStudent';
 import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
-import FunPost from '../components/teacher/FunPost';
+import CreateAssignment from '../components/teacher/CreateAssignment';
+import CurrentPostedFunNavigation from './CurrentPostedFunNavigation';
 
 const TeacherClassNavigation = StackNavigator({
   // Home: {
@@ -25,14 +26,20 @@ const TeacherClassNavigation = StackNavigator({
   Queue: {
     screen: Queue,
   },
-  FunPost: {
-    screen: FunPost,
+  CurrentPostedFunNavigation: {
+    screen: CurrentPostedFunNavigation,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
-  GiveAQuizz: {
-    screen: GiveAQuizz,
+  CreateAssignment: {
+    screen: CreateAssignment,
   },
   ClassRoster: {
     screen: ClassRoster,
+  },
+  QRcode: {
+    screen: QRcode,
   },
   SpecificStudent: {
     screen: SpecificStudent,

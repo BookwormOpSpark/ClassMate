@@ -37,7 +37,7 @@ class TeacherDrawer extends Component {
         sessionId: item.sessionID,
       },
     }).then((res) => {
-      // console.log('classInfo', res.data);
+      // console.log('classInfo teacherDrawer', res.data);
       this.props.dispatch(getClassInfo(res.data));
     });
   }
@@ -130,7 +130,7 @@ class TeacherDrawer extends Component {
                 iconRight={{ name: 'done' }}
                 backgroundColor="blue"
                 rounded
-                title="Add a Class"
+                title="Create a Class"
               />
             </View>
             <View style={{ paddingVertical: 5 }} />
