@@ -40,6 +40,8 @@
     "exp": "^47.4.4",
     "expo": "^23.0.4",
     "inherits": "^2.0.3",
+    "ionicons": "^3.0.0",
+    "jest-expo": "23.0.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
@@ -50,13 +52,12 @@
     "react-native-config": "^0.11.5",
     "react-native-elements": "^0.18.5",
     "react-native-qrcode": "^0.2.6",
+    "react-native-scripts": "1.8.1",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "socket.io-client": "^2.0.4",
-    "util": "^0.10.3",
-    "jest-expo": "23.0.0",
-    "react-native-scripts": "1.8.1"
+    "util": "^0.10.3"
   }
 }

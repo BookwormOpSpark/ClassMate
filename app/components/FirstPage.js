@@ -2,9 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View, ImageBackground, Image } from 'react-native';
-import { Button, Text } from 'react-native-elements';
+import { Button, Text, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import gifBackground from '../assets/reallySmall.gif'
 import logo from '../assets/frontLogo.png'
@@ -19,12 +18,11 @@ class FirstPage extends React.Component {
     const styles = StyleSheet.create({
       container: {
         backgroundColor: 'transparent',
-        paddingVertical: 150,
+        paddingVertical: 130,
         paddingLeft: 20,
         paddingRight: 20,
       },
       image: {
-        position: 'absolute',
         width: '100%',
         height: '100%',
         justifyContent: 'center',
@@ -38,16 +36,16 @@ class FirstPage extends React.Component {
       >
       <View style={styles.container}>
           <Image 
-            style={{width:'100%', height:'50%'}}
+            style={{width: '95%', height: '23%', marginTop: 150}}
             source={logo}
           />
 
           <Button
-            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            buttonStyle={[{ marginBottom: 5, marginTop: 200}]}
             onPress={() => navigation.navigate('StudentLogin')}
             backgroundColor={blue}
             title="Student Login"
-            leftIcon={{ name: 'ion-person' }}
+            icon={{name: 'face'}}
           />
 
           <Button
@@ -55,7 +53,7 @@ class FirstPage extends React.Component {
             onPress={() => navigation.navigate('TeacherLogin')}
             backgroundColor={blue}
             title="Teacher Login"
-            leftIcon={{ name: 'logo-google' }}
+            icon={{ name: 'person' }}
           />
       </View>
       </ImageBackground>
