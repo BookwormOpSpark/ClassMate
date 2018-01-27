@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Spinner } from 'native-base';
 import PropTypes from 'prop-types';
 import StudentLogin from '../components/student/StudentLogin';
+import NewStudent from '../components/student/NewStudent';
 import TeacherLogin from '../components/teacher/TeacherLogin';
 import FirstPage from '../components/FirstPage';
 import StudentDrawerNavigation from './StudentDrawerNavigation';
@@ -18,6 +19,12 @@ const LoginNavigation = StackNavigator({
   },
   StudentLogin: {
     screen: StudentLogin,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  NewStudent: {
+    screen: NewStudent,
     navigationOptions: () => ({
       header: null,
     }),
