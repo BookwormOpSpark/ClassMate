@@ -8,7 +8,7 @@ import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-nati
 import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-elements';
 import { Header, Title, Left, Right, Body, Button } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/classMateLogoIcon';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
