@@ -2,10 +2,11 @@ import React from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import { List, ListItem, Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
+import blackboard from '../../assets/blackboard.jpg';
 
 
 class Queue extends React.Component {
@@ -50,7 +51,6 @@ class Queue extends React.Component {
     messages.splice(index, 1);
     this.setState({ messages });
   }
-  
 
 
   render() {
@@ -58,37 +58,52 @@ class Queue extends React.Component {
     const { messages } = this.state;
 
     return (
-      <View style={styles.sensor}>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          scrollEnabled
-        >
-          <View style={{ alignItems: 'center' }}>
-            <Text h1 style={{ color: 'blue' }}>{className || 'Class'}</Text>
-            <Text h4 style={{ color: 'blue' }}>Hands Raised</Text>
-          </View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          // backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={styles.sensor}>
+          <ScrollView
+            contentContainerStyle={styles.contentContainer}
+            scrollEnabled
+          >
+            <View style={{ alignItems: 'center' }}>
+              <Text h1 style={{ color: '#f4d35e' }}>{className || 'Class'}</Text>
+              <Text h4 style={{ color: '#f4d35e' }}>
+                {this.state.messages.length > 0 ? 'Hands Raised' : 'No Hands Currently Raised' }
+              </Text>
+            </View>
 
-          <View style={{ flex: 1 }}>
-            {(messages.length > 0) ?
-              <View style={{ flex: 1 }}>
-                <List containerStyle={{ flex: 1 }}>
-                  {messages.map((item, id) => (
-                    <ListItem
-                      containerStyle={styles.list}
-                      key={`bbbtn${id}`}
-                      title={`${item.student}`}
-                      subtitle={moment(this.state.now).from(moment(item.time))}
-                      subtitleStyle={{ color: 'white' }}
-                      leftIcon={{ name: 'star', color: 'white' }}
-                      titleStyle={{ color: 'white' }}
-                      onPress={() => this.onSelect(item)}
-                    />
+            <View style={{ flex: 1 }}>
+              {(messages.length > 0) ?
+                <View style={{ flex: 1 }}>
+                  <List containerStyle={{ flex: 1 }}>
+                    {messages.map((item, id) => (
+                      <ListItem
+                        containerStyle={styles.list}
+                        key={`bbbtn${id}`}
+                        title={`${item.student}`}
+                        subtitle={moment(this.state.now).from(moment(item.time))}
+                        subtitleStyle={{ color: 'black' }}
+                        leftIcon={{ name: 'star', color: 'white' }}
+                        titleStyle={{ color: 'black' }}
+                        onPress={() => this.onSelect(item)}
+                      />
                   ))}
-                </List>
-              </View> : null}
-          </View>
-        </ScrollView>
-      </View>
+                  </List>
+                </View> : null}
+            </View>
+          </ScrollView>
+        </View>
+      </ImageBackground>
+
     );
   }
 }
@@ -99,7 +114,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
-    backgroundColor: '#fff',
   },
   blue: {
     color: 'blue',
@@ -108,13 +122,11 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    backgroundColor: '#fff',
-
   },
   list: {
     borderRadius: 10,
-    borderColor: 'cornflowerblue',
-    backgroundColor: 'cornflowerblue',
+    borderColor: '#f4d35e',
+    backgroundColor: '#f4d35e',
     marginTop: 5,
     marginBottom: 5,
     marginLeft: 10,
