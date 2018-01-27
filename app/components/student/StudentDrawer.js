@@ -145,7 +145,7 @@ class StudentDrawer extends Component {
           /> */}
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            onPress={this.Logout}
+            onPress={this.LogOut}
             iconRight={{ name: 'enhanced-encryption' }}
             backgroundColor="firebrick"
             rounded
