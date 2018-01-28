@@ -18,7 +18,7 @@ export default class StudentBadges extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>Student Class Schedule</Text>
+        <Text h1>Student Badges</Text>
       </View>
     );
   }

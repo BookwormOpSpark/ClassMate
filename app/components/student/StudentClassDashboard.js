@@ -70,7 +70,7 @@ class StudentClassDashboard extends React.Component {
                 backgroundColor="#FF9F1C"
                 rounded
                 small
-                color="white"
+                color="black"
                 title="Raise Hand"
               />
             </View>
@@ -89,6 +89,7 @@ class StudentClassDashboard extends React.Component {
                 backgroundColor="#2EC4B6"
                 small
                 rounded
+                color="black"
                 title="Homework"
               />
             </View>
@@ -107,6 +108,7 @@ class StudentClassDashboard extends React.Component {
                 backgroundColor="#f95738"
                 small
                 rounded
+                color="black"
                 title="Badges"
               />
             </View>
