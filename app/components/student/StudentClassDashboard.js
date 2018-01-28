@@ -96,7 +96,7 @@ class StudentClassDashboard extends React.Component {
             <View style={styles.item}>
               <Icon
                 color="#f95738"
-                name="calendar"
+                name="trophy"
                 style={styles.icon}
                 size={100}
                 onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
@@ -107,7 +107,7 @@ class StudentClassDashboard extends React.Component {
                 backgroundColor="#f95738"
                 small
                 rounded
-                title="Daily Schedule"
+                title="Badges"
               />
             </View>
 
