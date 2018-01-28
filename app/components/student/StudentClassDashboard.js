@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, ImageBackground } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
 
@@ -13,7 +13,6 @@ class StudentClassDashboard extends React.Component {
   }
 
   render() {
-    const className = this.props.state.selectSession.sessionName;
     const styles = StyleSheet.create({
       container: {
         flex: 1,

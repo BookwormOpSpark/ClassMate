@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, Image, View, ImageBackground } from 'react-native';
 import { ImagePicker } from 'expo';
 import { Spinner } from 'native-base';
-import { Button, Text, Header } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
 import { yellow } from '../../style/colors';
 import blackboard from '../../assets/blackboard.jpg';
