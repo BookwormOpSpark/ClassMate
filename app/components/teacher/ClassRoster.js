@@ -85,18 +85,18 @@ class ClassRoster extends React.Component {
       >
         <View style={styles.contentContainer}>
           <Text h1>{this.state.sessionName}</Text>
-          <Text h2 style={{ backgroundColor: 'transparent', textAlign: 'center', color: 'white' }}>Class Roster</Text>
+          <Text h2 style={{ backgroundColor: 'transparent', textAlign: 'center', color: white }}>Class Roster</Text>
           <ScrollView>
             <View style={styles.badges}>
               {
                 this.state.roster && this.state.roster.length > 0 ? this.state.roster.map((student, id) => (
                   <View key={`${id}`} style={styles.item}>
-                    <Icon key={`${id}`} name="logo-octocat" color="white" size={100} />
+                    <Icon key={`${id}`} name="logo-octocat" color={white} size={100} />
                     <Button
                       small
                       key={`bbbtn${id}`}
-                      backgroundColor={blue}
-                      color="white"
+                      backgroundColor={yellow}
+                      color="black"
                       buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                       title={`${student.nameFirst} ${student.nameLast}`}
                       onPress={() => this.onSelect(student)}

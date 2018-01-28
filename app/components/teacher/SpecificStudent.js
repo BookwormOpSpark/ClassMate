@@ -5,6 +5,7 @@ import { StyleSheet, View, Image, Linking, ImageBackground } from 'react-native'
 import { Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
+import { white } from '../../style/colors';
 
 class SpecificStudent extends React.Component {
   constructor(props) {
@@ -42,7 +43,8 @@ class SpecificStudent extends React.Component {
         text: {
           textAlign: 'center',
           marginTop: 10,
-          color: 'white',
+          color: white,
+          fontSize: 20,
         },
         contentContainer: {
           flexGrow: 1,
@@ -70,16 +72,16 @@ class SpecificStudent extends React.Component {
               style={styles.image}
               source={{ uri: this.props.state.specificStudent.photoUrl }}
             />
-            <Text h3 style={{ marginTop: 15, color: 'white' }}>{`${this.props.state.specificStudent.nameFirst} ${this.props.state.specificStudent.nameLast}`}</Text>
-            <Text h4 style={{ color: 'white' }}>5th Grade</Text>
+            <Text h2 style={{ marginTop: 15, color: white }}>{`${this.props.state.specificStudent.nameFirst} ${this.props.state.specificStudent.nameLast}`}</Text>
+            <Text h3 style={{ color: white }}>5th Grade</Text>
             {this.props.state.specificStudent.emergencyContact ?
               <View>
-                <Text h5 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold', color: 'white' }}>Emergency Contact</Text>
+                <Text h4 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold', color: white }}>Emergency Contact</Text>
                 <Text p style={styles.text}>{`${this.props.state.specificStudent.emergencyContact.nameFirst} ${this.props.state.specificStudent.emergencyContact.nameLast}`}</Text>
                 <Text p style={styles.text} leftIcon="ios-call-outline" >{`${this.props.state.specificStudent.emergencyContact.address}`}</Text>
                 <Text
                   p
-                  style={{ textAlign: 'center', marginTop: 10, fontWeight: 'bold', color: 'white' }}
+                  style={{ textAlign: 'center', marginTop: 30, fontWeight: 'bold', color: white, fontSize: 30, marginLeft: -25 }}
                   onPress={() => this.callNumber(`tel:1-${this.props.state.specificStudent.emergencyContact.phone}`)}
                 >
                   <Icon name="ios-call" color="green" size={25} />
@@ -87,7 +89,7 @@ class SpecificStudent extends React.Component {
                 </Text>
               </View>
                     :
-              <Text h5 style={{ marginTop: 30, color: 'white' }}>This student has yet to create an Emergency Contact</Text>
+              <Text h3 style={{ marginTop: 30, color: white, fontSize: 20, textAlign: 'center' }}>This student has yet to create an Emergency Contact</Text>
                 }
           </View>
         </ImageBackground>

@@ -45,8 +45,8 @@ class Assignment extends React.Component {
       },
       list: {
         borderRadius: 5,
-        borderColor: yellow,
-        backgroundColor: yellow,
+        borderColor: white,
+        backgroundColor: white,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
