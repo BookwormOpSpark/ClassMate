@@ -32,6 +32,7 @@ class TeacherClassDashboard extends React.Component {
         marginTop: 15,
         width: 150,
         height: 100,
+        alignContent: 'center',
       },
       shadow: {
         borderWidth: 1,
@@ -104,15 +105,15 @@ class TeacherClassDashboard extends React.Component {
               title="Class Roster"
             />
             <Button
-              onPress={() => this.props.navigation.navigate('TeacherClassSchedule')}
+              onPress={() => this.props.navigation.navigate('ClassBadges')}
               buttonStyle={styles.button}
               fontWeight="bold"
               fontFamily="monospace"
-              iconRight={{ name: 'schedule', color: 'black' }}
+              iconRight={{ name: 'local-pizza', color: 'black' }}
               backgroundColor="#f4d35e"
               borderRadius={5}
               color="black"
-              title="Daily Schedule"
+              title="Badges"
             />
             <Button
               onPress={() => this.props.navigation.navigate('CurrentPostedFunNavigation')}

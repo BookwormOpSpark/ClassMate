@@ -109,7 +109,6 @@ class StudentDashboard extends React.Component {
               <H3 style={{ color: yellow }} >Dashboard</H3>
             </Body>
             <Right>
-              {/* <Icon color="red" name="food-apple" size={30} /> */}
               <Image source={logo} style={{ width: 30, height: 30 }} />
             </Right>
           </Header>
