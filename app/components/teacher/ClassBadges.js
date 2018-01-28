@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 
-export default class TeacherClassSchedule extends React.Component {
+export default class ClassBadges extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -18,7 +18,7 @@ export default class TeacherClassSchedule extends React.Component {
     });
     return (
       <View style={styles.container}>
-        <Text h1>Class Schedule</Text>
+        <Text h1>Class Badges</Text>
       </View>
     );
   }

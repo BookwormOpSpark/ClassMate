@@ -104,7 +104,7 @@ class TeacherClassDashboard extends React.Component {
               title="Class Roster"
             />
             <Button
-              onPress={() => this.props.navigation.navigate('TeacherClassSchedule')}
+              onPress={() => this.props.navigation.navigate('ClassBadges')}
               buttonStyle={styles.button}
               fontWeight="bold"
               fontFamily="monospace"
