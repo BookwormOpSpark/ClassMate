@@ -70,7 +70,7 @@ class StudentClassDashboard extends React.Component {
                 backgroundColor="#FF9F1C"
                 rounded
                 small
-                color="white"
+                color="black"
                 title="Raise Hand"
               />
             </View>
@@ -89,6 +89,7 @@ class StudentClassDashboard extends React.Component {
                 backgroundColor="#2EC4B6"
                 small
                 rounded
+                color="black"
                 title="Homework"
               />
             </View>
@@ -96,18 +97,19 @@ class StudentClassDashboard extends React.Component {
             <View style={styles.item}>
               <Icon
                 color="#f95738"
-                name="calendar"
+                name="trophy"
                 style={styles.icon}
                 size={100}
-                onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
+                onPress={() => this.props.navigation.navigate('StudentBadges')}
               />
               <Button
-                onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
+                onPress={() => this.props.navigation.navigate('StudentBadges')}
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 backgroundColor="#f95738"
                 small
                 rounded
-                title="Daily Schedule"
+                color="black"
+                title="Badges"
               />
             </View>
 
