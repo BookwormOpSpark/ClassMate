@@ -32,6 +32,7 @@ class TeacherClassDashboard extends React.Component {
         marginTop: 15,
         width: 150,
         height: 100,
+        textAlign: 'center',
       },
       shadow: {
         borderWidth: 1,

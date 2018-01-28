@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 
-export default class StudentClassSchedule extends React.Component {
+export default class StudentBadges extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };

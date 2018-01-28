@@ -99,10 +99,10 @@ class StudentClassDashboard extends React.Component {
                 name="trophy"
                 style={styles.icon}
                 size={100}
-                onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
+                onPress={() => this.props.navigation.navigate('StudentBadges')}
               />
               <Button
-                onPress={() => this.props.navigation.navigate('StudentClassSchedule')}
+                onPress={() => this.props.navigation.navigate('StudentBadges')}
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 backgroundColor="#f95738"
                 small
