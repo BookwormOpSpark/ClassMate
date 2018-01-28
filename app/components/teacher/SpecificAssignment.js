@@ -6,7 +6,7 @@ import { Text, List, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Spinner } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
-import { blue, white, yellow, orange, red, green } from '../../style/colors';
+import { blue, white, yellow, orange, red, green, fireRed } from '../../style/colors';
 
 class SpecificAssignment extends React.Component {
   constructor(props) {
@@ -45,8 +45,8 @@ class SpecificAssignment extends React.Component {
       },
       list2: {
         borderRadius: 5,
-        borderColor: red,
-        backgroundColor: red,
+        borderColor: fireRed,
+        backgroundColor: fireRed,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
@@ -104,7 +104,7 @@ class SpecificAssignment extends React.Component {
               </View>
             </View>
           </Modal>
-          <Text h2 style={{ backgroundColor: 'transparent', color: 'white', textAlign: 'center' }}>{this.props.state.specificAssignment.title}</Text>
+          <Text h2 style={{ backgroundColor: 'transparent', color: yellow, textAlign: 'center' }}>{this.props.state.specificAssignment.title}</Text>
           <List containerStyle={styles.contentContainer}>
             {students.map(student => (
               student.photoUrl ?
@@ -112,7 +112,7 @@ class SpecificAssignment extends React.Component {
                   containerStyle={styles.list}
                   key={`bbbtn${student.id}`}
                   title={`${student.nameFirst} ${student.nameLast}`}
-                  leftIcon={{ name: 'book' }}
+                  leftIcon={{ name: 'book', color: 'black' }}
                   titleStyle={{ color: 'white' }}
                   onPress={() => {
                     this.openModal();
@@ -124,7 +124,7 @@ class SpecificAssignment extends React.Component {
                   containerStyle={styles.list2}
                   key={`bbbtn${student.id}`}
                   title={`${student.nameFirst} ${student.nameLast}`}
-                  leftIcon={{ name: 'book' }}
+                  leftIcon={{ name: 'book', color: 'black' }}
                   titleStyle={{ color: 'white' }}
                 />
         ))}
