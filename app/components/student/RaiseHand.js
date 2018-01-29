@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
 
 class RaiseHand extends React.Component {
@@ -114,7 +115,7 @@ class RaiseHand extends React.Component {
             style={{
               width: 150,
               height: 150,
-              marginBottom: 200,
+              marginBottom: 100,
               marginLeft: 120,
             }}
           />
