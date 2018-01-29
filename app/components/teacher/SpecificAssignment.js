@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Spinner } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
 import { blue, white, yellow, orange, red, green, fireRed } from '../../style/colors';
+import DashHeader from '../shared/Header';
 
 class SpecificAssignment extends React.Component {
   constructor(props) {
@@ -71,6 +72,7 @@ class SpecificAssignment extends React.Component {
 
     const students = this.props.state.assignmentCheck;
     const current = this.state.currentUrl;
+    const className = this.props.state.selectSession.sessionName;
     // console.log(current, 'this is current photoUrl');
     // console.log(this.props.state, 'this is props.state');
     return (
@@ -84,6 +86,11 @@ class SpecificAssignment extends React.Component {
           height: '100%',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.contentContainer}>
           <Modal
             visible={this.state.modalVisible}

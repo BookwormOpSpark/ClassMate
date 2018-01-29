@@ -8,29 +8,53 @@ import CheckIn from '../components/student/CheckIn';
 import Assignment from '../components/student/Assignment';
 
 const StudentClassNavigation = StackNavigator({
-  Home: {
+  StudentClassDashboard: {
     screen: StudentClassDashboard,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   RaiseHand: {
     screen: RaiseHand,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   CheckIn: {
     screen: CheckIn,
-  },
-  StudentClassDashboard: {
-    screen: StudentClassDashboard,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   Assignment: {
     screen: Assignment,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   SubmitHomework: {
     screen: SubmitHomework,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   StudentBadges: {
     screen: StudentBadges,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
+  // StudentClassSchedule: {
+  //   screen: StudentClassSchedule,
+  //   navigationOptions: () => ({
+  //     header: null,
+  //   }),
+  // },
   Fun: {
     screen: Fun,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
 });
 

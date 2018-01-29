@@ -6,6 +6,7 @@ import { Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
 import { white } from '../../style/colors';
+import DashHeader from '../shared/Header';
 
 class SpecificStudent extends React.Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class SpecificStudent extends React.Component {
           paddingHorizontal: 10,
         },
       });
+      const className = this.props.state.selectSession.sessionName;
 
       return (
         <ImageBackground
@@ -67,6 +69,11 @@ class SpecificStudent extends React.Component {
             justifyContent: 'center',
             }}
         >
+          <DashHeader
+            navigation={this.props.navigation}
+            className={className}
+            back
+          />
           <View style={styles.contentContainer}>
             <Image
               style={styles.image}

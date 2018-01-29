@@ -5,6 +5,7 @@ import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 
 class TeacherClassDashboard extends React.Component {
   constructor(props) {
@@ -57,6 +58,11 @@ class TeacherClassDashboard extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back={false}
+        />
         <View style={styles.bigContainer}>
           <Text style={{ marginBottom: 30 }}> Hi </Text>
           <View style={styles.container}>
@@ -64,7 +70,7 @@ class TeacherClassDashboard extends React.Component {
               onPress={() => this.props.navigation.navigate('Assignment')}
               buttonStyle={styles.button}
               fontWeight="bold"
-              fontFamily="monospace"
+              // fontFamily="monospace"
               iconRight={{ name: 'assignment', color: 'black' }}
               backgroundColor="#f4d35e"
               borderRadius={5}
@@ -75,7 +81,7 @@ class TeacherClassDashboard extends React.Component {
               onPress={() => this.props.navigation.navigate('Queue')}
               buttonStyle={styles.button}
               fontWeight="bold"
-              fontFamily="monospace"
+              // fontFamily="monospace"
               iconRight={{ name: 'thumb-up', color: 'black' }}
               backgroundColor="#f4d35e"
               borderRadius={5}
@@ -86,7 +92,7 @@ class TeacherClassDashboard extends React.Component {
               onPress={() => this.props.navigation.navigate('QRcode')}
               buttonStyle={styles.button}
               fontWeight="bold"
-              fontFamily="monospace"
+              // fontFamily="monospace"
               iconRight={{ name: 'code', color: 'black' }}
               backgroundColor="#f4d35e"
               borderRadius={5}
@@ -97,7 +103,7 @@ class TeacherClassDashboard extends React.Component {
               onPress={() => this.props.navigation.navigate('ClassRoster')}
               buttonStyle={styles.button}
               fontWeight="bold"
-              fontFamily="monospace"
+              // fontFamily="monospace"
               iconRight={{ name: 'person', color: 'black' }}
               backgroundColor="#f4d35e"
               borderRadius={5}
@@ -108,18 +114,18 @@ class TeacherClassDashboard extends React.Component {
               onPress={() => this.props.navigation.navigate('ClassBadges')}
               buttonStyle={styles.button}
               fontWeight="bold"
-              fontFamily="monospace"
-              iconRight={{ name: 'local-pizza', color: 'black' }}
+              // fontFamily="monospace"
+              iconRight={{ name: 'schedule', color: 'black' }}
               backgroundColor="#f4d35e"
               borderRadius={5}
               color="black"
               title="Badges"
             />
             <Button
-              onPress={() => this.props.navigation.navigate('CurrentPostedFunNavigation')}
+              onPress={() => this.props.navigation.navigate('CurrentPostedFun')}
               buttonStyle={styles.button}
               fontWeight="bold"
-              fontFamily="monospace"
+              // fontFamily="monospace"
               iconRight={{ name: 'movie', color: 'black' }}
               backgroundColor="#f4d35e"
               borderRadius={5}

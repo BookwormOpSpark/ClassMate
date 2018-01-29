@@ -8,6 +8,7 @@ import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, CreateAssignments } from '../../constant';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 // import { Text } from 'react-native-elements';
+import DashHeader from '../shared/Header';
 
 class CreateAssignment extends React.Component {
   constructor(props) {
@@ -61,6 +62,8 @@ class CreateAssignment extends React.Component {
         paddingHorizontal: 10,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
+
     return (
       <ImageBackground
         source={blackboard}
@@ -73,6 +76,11 @@ class CreateAssignment extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <Container style={styles.contentContainer}>
           <Header style={{ backgroundColor: 'transparent' }}>
             <Text style={styles.headerText}>Create a New Assignment</Text>

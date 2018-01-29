@@ -5,6 +5,9 @@ import TeacherFunNavigation from './TeacherFunNavigation';
 const CurrentPostedFunNavigation = StackNavigator({
   Home: {
     screen: CurrentPostedFun,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   TeacherFunNavigation: {
     screen: TeacherFunNavigation,
