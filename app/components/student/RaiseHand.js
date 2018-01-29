@@ -3,13 +3,13 @@ import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import _ from 'lodash';
-import { StyleSheet, View, ScrollView, ImageBackground } from 'react-native';
+import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-native';
 import { Accelerometer } from 'expo';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
-
+import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
 
 class RaiseHand extends React.Component {
   constructor(props) {
@@ -104,6 +104,15 @@ class RaiseHand extends React.Component {
               <Text>{y > 0.7 ? <Icon color="#f4d35e" name="hand-pointing-right" size={200} /> : ''}</Text>
             </View>
           </ScrollView>
+          <Image
+            source={liftPhone}
+            style={{
+              width: 150,
+              height: 150,
+              marginBottom: 200,
+              marginLeft: 120,
+            }}
+          />
         </View>
       </ImageBackground>
 
