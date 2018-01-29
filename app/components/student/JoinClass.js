@@ -2,9 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
+import blackboard from '../../assets/blackboard.jpg';
+import {blue, white, yellow, orange, red, green } from '../../style/colors';
 import { SERVER_URI, JoinClassRoute, DashboardRoute } from '../../constant';
+import DashHeader from '../shared/Header';
 
 export default class JoinClass extends React.Component {
   constructor(props) {
@@ -40,10 +43,18 @@ export default class JoinClass extends React.Component {
   render() {
     const styles = StyleSheet.create({
       container: {
-        flex: 1,
+        // had to comment out to make header work
+        // flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+      },
+      contentContainer: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 10,
       },
     });
     const student = this.props.state.user;
@@ -51,24 +62,41 @@ export default class JoinClass extends React.Component {
     const index = session.length - 1;
     const { className } = session[index] ? session[index] : '';
     return (
-      <View style={styles.container}>
-        <Text h2>{`Hello ${student.First_name}`}</Text>
-        <FormLabel>Enter the Join Code for the class</FormLabel>
-        <Icon color="blue" name="rocket" size={30} />
-        <FormInput
-          onChangeText={text => this.setState({ joinCode: text })}
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <DashHeader
+          navigation={this.props.navigation}
+          className="Join a class"
+          back={false}
         />
-        <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          onPress={this.handleSubmit}
-          backgroundColor="blue"
-          rounded
-          title="Join!"
-        />
-        <Text h5>{className ? `You are now enrolled in ${className}` : ''}</Text>
-        <Text>{className ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
+        <View style={styles.contentContainer}>
+          <Text h2 style={{ color: white }}>{`Hello ${student.First_name}!`}</Text>
+          <FormLabel style={{ color: yellow }}>Enter the Join Code for the class</FormLabel>
+          <Icon color={yellow} name="rocket" size={30} />
+          <FormInput
+            onChangeText={text => this.setState({ joinCode: text })}
+          />
+          <Button
+            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            onPress={this.handleSubmit}
+            backgroundColor={blue}
+            rounded
+            title="Join!"
+          />
+          <Text h5>{className ? `You are now enrolled in ${className}` : ''}</Text>
+          <Text>{className ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
 
-      </View>
+        </View>
+      </ImageBackground>
     );
   }
 }

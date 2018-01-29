@@ -8,6 +8,7 @@ import { Card, CardItem, Body } from 'native-base';
 import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
+import DashHeader from '../shared/Header';
 
 class Fun extends React.Component {
   constructor(props) {
@@ -30,18 +31,15 @@ class Fun extends React.Component {
     this.styles = StyleSheet.create({
       container: {
         flex: 1,
-        // backgroundColor: '#0d3b66',
         alignItems: 'center',
         justifyContent: 'center',
       },
       contentContainer: {
         flexGrow: 1,
-        // backgroundColor: '#0d3b66',
       },
       item: {
         width: 310,
         height: 280,
-        // marginBottom: 40,
       },
       view: {
         marginBottom: 40,
@@ -84,7 +82,6 @@ class Fun extends React.Component {
     const session = this.props.state.selectSession.sessionID || 5;
     axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
       .then((res) => {
-        console.log(res.data);
         this.setState({ fun: res.data });
       })
       .catch(err => console.error(err));
@@ -175,6 +172,11 @@ class Fun extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={this.styles.container}>
           <ScrollView
             contentContainerStyle={this.styles.contentContainer}

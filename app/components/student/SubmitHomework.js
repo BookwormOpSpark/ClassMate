@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, ImageBackground } from 'react-native';
 import { ImagePicker } from 'expo';
 import { Spinner } from 'native-base';
-import { Button, Text, Header } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
-import { blue } from '../../style/colors';
+import { yellow } from '../../style/colors';
+import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 
 class SubmitHomework extends React.Component {
   constructor(props) {
@@ -15,7 +17,6 @@ class SubmitHomework extends React.Component {
       image: null,
       loading: false,
     };
-    // console.log('Homework', this.props.state);
     this._postHomework = this._postHomework.bind(this);
     this._pickImage = this._pickImage.bind(this);
     this._openCamera = this._openCamera.bind(this);
@@ -23,7 +24,6 @@ class SubmitHomework extends React.Component {
 
   _pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
       base64: true,
     });
 
@@ -37,7 +37,6 @@ class SubmitHomework extends React.Component {
   _openCamera = async () => {
     const result = await ImagePicker.launchCameraAsync({
     });
-    // console.log('camera', result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
@@ -47,10 +46,8 @@ class SubmitHomework extends React.Component {
     this.setState({ loading: true });
     const participant = this.props.state.selectSession.participantID;
     const assignment = this.props.state.specificAssignment.id;
-    // console.log(participant, 'participant before APIURL');
-    const apiUrl = `${SERVER_URI}${PostHomework}/${participant}/${assignment}`;// need to update here
+    const apiUrl = `${SERVER_URI}${PostHomework}/${participant}/${assignment}`;
     const uri = this.state.image;
-    // console.log('posturi', uri);
 
     const uriParts = uri.split('.');
     const fileType = uriParts[uriParts.length - 1];
@@ -80,8 +77,9 @@ class SubmitHomework extends React.Component {
   render() {
     const styles = StyleSheet.create({
       bigcontainer: {
+        // had to comment this out to make header work
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'flex-start',
       },
@@ -92,40 +90,61 @@ class SubmitHomework extends React.Component {
 
 
     return (
-      <View style={styles.bigcontainer}>
-        <Text h3 style={{ color: blue, textAlign: 'center', marginBottom: 50 }}>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
+        <View style={styles.bigcontainer}>
+          <Text h3 style={{ color: yellow, textAlign: 'center', marginBottom: 50 }}>
           Submit Homeworks for {className}
-        </Text>
+          </Text>
 
-        <Button
-          style={[{ marginBottom: 10, marginTop: 40 }]}
-          title="Pick your homework from camera roll"
-          iconRight={{ name: 'attach-file' }}
-          backgroundColor={blue}
-          rounded
-          onPress={this._pickImage}
-        />
-        <Button
-          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-          title="Open Camera"
-          iconRight={{ name: 'camera' }}
-          backgroundColor={blue}
-          rounded
-          onPress={this._openCamera}
-        />
-        <Button
-          buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-          title="Post to Homeworks!"
-          iconRight={{ name: 'done' }}
-          backgroundColor={blue}
-          rounded
-          onPress={this._postHomework}
-        />
-        <View>{this.state.loading ? <Spinner color={blue} /> : null}</View>
-        <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
-        {image &&
+          <Button
+            style={[{ marginBottom: 10, marginTop: 40 }]}
+            title="Pick your homework from camera roll"
+            iconRight={{ name: 'attach-file', color: 'black' }}
+            backgroundColor={yellow}
+            borderRadius={5}
+            color="black"
+            onPress={this._pickImage}
+          />
+          <Button
+            buttonStyle={[{ marginBottom: 50, marginTop: 10 }]}
+            title="Open Camera"
+            iconRight={{ name: 'camera', color: 'black' }}
+            backgroundColor={yellow}
+            borderRadius={5}
+            color="black"
+            onPress={this._openCamera}
+          />
+          <Button
+            buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
+            title="Post to Homeworks!"
+            iconRight={{ name: 'done', color: 'black' }}
+            backgroundColor={yellow}
+            borderRadius={5}
+            color="black"
+            onPress={this._postHomework}
+          />
+          <View>{this.state.loading ? <Spinner color={yellow} /> : null}</View>
+          <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
+          {image &&
           <Image source={{ uri: image }} style={{ width: 250, height: 350 }} />}
-      </View>
+        </View>
+      </ImageBackground>
+
     );
   }
 }

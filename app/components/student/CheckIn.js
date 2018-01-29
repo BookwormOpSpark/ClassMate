@@ -7,6 +7,7 @@ import {
   StatusBar,
   StyleSheet,
   TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 import { Permissions, BarCodeScanner } from 'expo';
 import PropTypes from 'prop-types';
@@ -14,6 +15,8 @@ import { NavigationActions } from 'react-navigation';
 import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { selectSession } from '../../actions/actions';
+import DashHeader from '../shared/Header';
+import blackboard from '../../assets/blackboard.jpg';
 
 class CheckIn extends Component {
   constructor(props) {
@@ -99,23 +102,40 @@ class CheckIn extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.state.hasCameraPermission === null
-        ? <Text>Requesting for camera permission</Text>
-        : this.state.hasCameraPermission === false
-        ? <Text style={{ color: '#fff' }}>
-            Camera permission is not granted
-          </Text>
-          : <BarCodeScanner
-            onBarCodeRead={this._handleBarCodeRead}
-            style={{
-              height: Dimensions.get('window').height,
-              width: Dimensions.get('window').width,
-            }}
-          />}
-        {this._maybeRenderUrl()}
-        <StatusBar hidden />
-      </View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        {/* <DashHeader
+          navigation={this.props.navigation}
+          className="Check in"
+          back
+        /> */}
+        <View style={styles.container}>
+          {this.state.hasCameraPermission === null
+          ? <Text>Requesting for camera permission</Text>
+          : this.state.hasCameraPermission === false
+          ? <Text style={{ color: '#fff' }}>
+              Camera permission is not granted
+            </Text>
+            : <BarCodeScanner
+              onBarCodeRead={this._handleBarCodeRead}
+              style={{
+                height: Dimensions.get('window').height,
+                width: Dimensions.get('window').width,
+              }}
+            />}
+          {this._maybeRenderUrl()}
+          <StatusBar hidden />
+        </View>
+      </ImageBackground>
     );
   }
 }

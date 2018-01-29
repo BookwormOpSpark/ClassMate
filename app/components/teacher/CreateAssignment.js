@@ -8,6 +8,7 @@ import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, CreateAssignments } from '../../constant';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 // import { Text } from 'react-native-elements';
+import DashHeader from '../shared/Header';
 
 class CreateAssignment extends React.Component {
   constructor(props) {
@@ -31,10 +32,11 @@ class CreateAssignment extends React.Component {
           'Success!',
           'Assignment has been created!',
           [
-            { text: 'OK', onPress: () => console.log('OK Pressed') },
+            { text: 'OK', onPress: () => this.props.navigation.navigate('Assignment') },
           ],
           { cancelable: false },
         );
+        
       })
       .catch(err => console.error(err));
   }
@@ -48,7 +50,7 @@ class CreateAssignment extends React.Component {
         justifyContent: 'center',
       },
       headerText: {
-        color: 'white',
+        color: white,
         marginTop: 10,
         fontSize: 30,
       },
@@ -60,6 +62,8 @@ class CreateAssignment extends React.Component {
         paddingHorizontal: 10,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
+
     return (
       <ImageBackground
         source={blackboard}
@@ -72,6 +76,11 @@ class CreateAssignment extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <Container style={styles.contentContainer}>
           <Header style={{ backgroundColor: 'transparent' }}>
             <Text style={styles.headerText}>Create a New Assignment</Text>
@@ -79,12 +88,12 @@ class CreateAssignment extends React.Component {
           <Content>
             <Form>
               <Item stackedLabel>
-                <Label style={{ fontWeight: 'bold', color: 'white' }}>Title</Label>
-                <Input onChangeText={text => this.setState({ title: text })} />
+                <Label style={{ fontWeight: 'bold', color: white }}>Title</Label>
+                <Input style={{ color: white }} onChangeText={text => this.setState({ title: text })} />
               </Item>
               <Item stackedLabel last>
-                <Label style={{ fontWeight: 'bold', color: 'white' }}>Due Date - Please format MM/DD/YYYY</Label>
-                <Input onChangeText={text => this.setState({ dueDate: text })} />
+                <Label style={{ fontWeight: 'bold', color: white }}>Due Date - Please format MM/DD/YYYY</Label>
+                <Input style={{ color: white }} onChangeText={text => this.setState({ dueDate: text })} />
               </Item>
             </Form>
             <Button
@@ -92,7 +101,7 @@ class CreateAssignment extends React.Component {
               style={{ backgroundColor: blue }}
               onPress={() => this.onSelect()}
             >
-              <Text>Create Assignment</Text>
+              <Text style={{ color: white }}>Create Assignment</Text>
             </Button>
           </Content>
         </Container>

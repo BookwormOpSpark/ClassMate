@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { List, ListItem, Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 
 
 class Queue extends React.Component {
@@ -17,7 +18,6 @@ class Queue extends React.Component {
       messages: [],
     };
 
-    // this.socket = io(SERVER_URI);
     this.socket = io(SERVER_URI, {
       autoConnect: false,
     });
@@ -29,7 +29,6 @@ class Queue extends React.Component {
     this.socket.open();
 
     this.socket.on('connect', () => {
-      // console.log('connected');
       this.setState({
         now: Date.now(),
       });
@@ -45,7 +44,6 @@ class Queue extends React.Component {
   }
 
   onSelect(item) {
-    // console.log('item', item);
     const { messages } = this.state;
     const index = messages.indexOf(item);
     messages.splice(index, 1);
@@ -61,7 +59,7 @@ class Queue extends React.Component {
       <ImageBackground
         source={blackboard}
         style={{
-          // backgroundColor: '#000000',
+          backgroundColor: '#000000',
           flex: 1,
           position: 'absolute',
           width: '100%',
@@ -69,6 +67,11 @@ class Queue extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.sensor}>
           <ScrollView
             contentContainerStyle={styles.contentContainer}
@@ -84,7 +87,9 @@ class Queue extends React.Component {
             <View style={{ flex: 1 }}>
               {(messages.length > 0) ?
                 <View style={{ flex: 1 }}>
-                  <List containerStyle={{ flex: 1 }}>
+                  <List
+                    containerStyle={{ flex: 1, backgroundColor: 'transparent' }}
+                  >
                     {messages.map((item, id) => (
                       <ListItem
                         containerStyle={styles.list}

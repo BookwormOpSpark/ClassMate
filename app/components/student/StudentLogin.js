@@ -13,7 +13,7 @@ import logo from '../../assets/logo.png';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 import {blue, white, yellow, orange, red, green } from '../../style/colors';
-
+import PasswordInputText from 'react-native-hide-show-password-input';
 
 class StudentLogin extends React.Component {
   constructor(props) {
@@ -113,6 +113,7 @@ class StudentLogin extends React.Component {
           />
           <FormLabel>Password</FormLabel>
           <FormInput
+            secureTextEntry = {true}
             onChangeText={text => this.setState({ password: text })}
             style={{ paddingHorizontal: 10 }}
           />

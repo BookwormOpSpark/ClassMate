@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Text } from 'react-native-elements';
-import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import blackboard from '../../assets/blackboard.jpg';
 
-export default class GiveAQuizz extends React.Component {
+export default class StudentBadges extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -13,13 +13,12 @@ export default class GiveAQuizz extends React.Component {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center',
       },
     });
-    // const className = this.props.state.selectSession.sessionName;
-
+    
     return (
       <ImageBackground
         source={blackboard}
@@ -34,11 +33,11 @@ export default class GiveAQuizz extends React.Component {
       >
         <DashHeader
           navigation={this.props.navigation}
-          className="className"
+          className="badges"
           back
         />
         <View style={styles.container}>
-          <Text h1>Give A Quizz</Text>
+          <Text h1>Student Badges</Text>
         </View>
       </ImageBackground>
     );
