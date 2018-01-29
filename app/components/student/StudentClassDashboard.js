@@ -12,7 +12,6 @@ class StudentClassDashboard extends React.Component {
     this.springValue = new Animated.Value(0.7);
     this.animatedValue = new Animated.Value(0);
     this.spring = this.spring.bind(this);
-    this.animate = this.animate.bind(this);
   }
   componentDidMount() {
     this.spring();
@@ -51,7 +50,13 @@ class StudentClassDashboard extends React.Component {
       button: {
         marginBottom: 5,
         marginTop: 5,
-        selfAlign: 'center',
+        alignSelf: 'center',
+      },
+      animated: {
+        transform: [{ scale: this.springValue }],
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
       },
       item: {
         justifyContent: 'center',
@@ -78,7 +83,7 @@ class StudentClassDashboard extends React.Component {
 
             <View style={styles.item}>
               <Animated.View
-                style={{ transform: [{ scale: this.springValue }] }}
+                style={styles.animated}
               >
                 <Icon
                   color="#FF9F1C"
@@ -101,7 +106,7 @@ class StudentClassDashboard extends React.Component {
 
             <View style={styles.item}>
               <Animated.View
-                style={{ transform: [{ scale: this.springValue }] }}
+                style={styles.animated}
               >
                 <Icon
                   color="#2EC4B6"
@@ -124,7 +129,7 @@ class StudentClassDashboard extends React.Component {
 
             <View style={styles.item}>
               <Animated.View
-                style={{ transform: [{ scale: this.springValue }] }}
+                style={styles.animated}
               >
                 <Icon
                   color="#f95738"
@@ -147,7 +152,7 @@ class StudentClassDashboard extends React.Component {
 
             <View style={styles.item}>
               <Animated.View
-                style={{ transform: [{ scale: this.springValue }] }}
+                style={styles.animated}
               >
                 <Icon
                   color="gold"

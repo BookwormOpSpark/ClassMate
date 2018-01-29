@@ -5,14 +5,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { Video } from 'expo';
-import { Card, CardItem, Body, Animated, Easing } from 'native-base';
-import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
+import { Card, CardItem, Body } from 'native-base';
+import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground, Animated, Easing } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 
 class Fun extends React.Component {
   constructor(props) {
     super(props);
+    this.animatedValue = new Animated.Value(0);
     this.state = {
       fun: [
         { type: 'video', link: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' },
@@ -21,6 +22,7 @@ class Fun extends React.Component {
         { type: 'image', link: 'https://media4.giphy.com/avatars/nikdudukovic/ylDRTR05sy6M.gif' },
       ],
     };
+
 
     this.renderVideo = this.renderVideo.bind(this);
     this.renderImage = this.renderImage.bind(this);
