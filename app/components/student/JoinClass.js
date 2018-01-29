@@ -7,6 +7,7 @@ import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import blackboard from '../../assets/blackboard.jpg';
 import {blue, white, yellow, orange, red, green } from '../../style/colors';
 import { SERVER_URI, JoinClassRoute, DashboardRoute } from '../../constant';
+import DashHeader from '../shared/Header';
 
 export default class JoinClass extends React.Component {
   constructor(props) {
@@ -42,7 +43,8 @@ export default class JoinClass extends React.Component {
   render() {
     const styles = StyleSheet.create({
       container: {
-        flex: 1,
+        // had to comment out to make header work
+        // flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
@@ -70,6 +72,11 @@ export default class JoinClass extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className="Join a class"
+          back={false}
+        />
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${student.First_name}!`}</Text>
           <FormLabel style={{ color: yellow }}>Enter the Join Code for the class</FormLabel>

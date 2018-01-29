@@ -135,14 +135,14 @@ class TeacherDrawer extends Component {
             </View>
             <View style={{ paddingVertical: 5 }} />
             <View style={styles.emergencyContactStyle}>
-              <Button
+              {/* <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('EmergencyContact')}
                 iconRight={{ name: 'done' }}
                 backgroundColor="blue"
                 rounded
                 title="Emergency Contact"
-              />
+              /> */}
             </View>
           </View>
         </ScrollView>

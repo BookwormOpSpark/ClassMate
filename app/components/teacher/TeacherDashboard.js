@@ -9,6 +9,7 @@ import { Container, Header, Title, Left, Right, Button, Body, Content, Text, Car
 import logo from '../../assets/classmatelogoicon.png';
 import { logOut, getDashboard } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
+import DashHeader from '../shared/Header';
 
 class TeacherDashboard extends React.Component {
   constructor(props) {
@@ -58,23 +59,11 @@ class TeacherDashboard extends React.Component {
 
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate('DrawerOpen')}
-            >
-              <Icon name="menu" size={30} />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Dashboard</Title>
-          </Body>
-          <Right>
-            {/* <Icon color="red" name="food-apple" size={30} /> */}
-            <Image source={logo} style={{ width: 30, height: 30 }} />
-          </Right>
-        </Header>
+        <DashHeader
+          navigation={this.props.navigation}
+          className="Dashboard"
+          back={false}
+        />
         <Content padder>
           <Text style={{ fontSize: 30 }} > {teacher.First_name} {teacher.Last_name}</Text>
           <Card>

@@ -8,6 +8,7 @@ import { Button, Text } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
 import { yellow } from '../../style/colors';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 
 class SubmitHomework extends React.Component {
   constructor(props) {
@@ -76,7 +77,9 @@ class SubmitHomework extends React.Component {
   render() {
     const styles = StyleSheet.create({
       bigcontainer: {
-        flex: 1,
+        // had to comment this out to make header work
+        // flex: 1,
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'flex-start',
       },
@@ -98,6 +101,11 @@ class SubmitHomework extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.bigcontainer}>
           <Text h3 style={{ color: yellow, textAlign: 'center', marginBottom: 50 }}>
           Submit Homeworks for {className}

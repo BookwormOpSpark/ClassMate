@@ -14,12 +14,21 @@ const TeacherDrawerNavigator = DrawerNavigator({
   },
   TeacherClassNavigation: {
     screen: TeacherClassNavigation,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   AddClass: {
     screen: AddClass,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   EmergencyContact: {
     screen: EmergencyContact,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
 }, {
   contentComponent: TeacherDrawer,

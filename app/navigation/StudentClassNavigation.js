@@ -22,6 +22,9 @@ const StudentClassNavigation = StackNavigator({
   },
   CheckIn: {
     screen: CheckIn,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   Assignment: {
     screen: Assignment,
@@ -31,6 +34,9 @@ const StudentClassNavigation = StackNavigator({
   },
   SubmitHomework: {
     screen: SubmitHomework,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   StudentBadges: {
     screen: StudentBadges,

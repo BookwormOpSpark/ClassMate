@@ -10,6 +10,7 @@ import { blue, white, yellow, orange, red, green } from '../../style/colors';
 import blackboard from '../../assets/blackboard.jpg';
 import { specificAssignment, selectAssignment } from '../../actions/actions';
 import { SERVER_URI, CheckAssignment } from '../../constant';
+import DashHeader from '../shared/Header';
 
 class Assignment extends React.Component {
   constructor(props) {
@@ -61,6 +62,7 @@ class Assignment extends React.Component {
 
     // const lessons = this.props.state.dashboard.assignments;
     const lessons = this.props.state.classInfo.assignments;
+    const className = this.props.state.selectSession.sessionName;
 
 
     return (
@@ -74,6 +76,11 @@ class Assignment extends React.Component {
           height: '100%',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.contentContainer}>
 
           <Text h2 style={{ textAlign: 'center', alignItems: 'center', color: yellow }}>Assignments</Text>

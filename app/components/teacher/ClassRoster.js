@@ -9,6 +9,7 @@ import { blue, white, yellow, orange, red, green } from '../../style/colors';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, StudentInformation } from '../../constant';
 import { specificStudent } from '../../actions/actions';
+import DashHeader from '../shared/Header';
 
 class ClassRoster extends React.Component {
   constructor(props) {
@@ -70,6 +71,7 @@ class ClassRoster extends React.Component {
         paddingHorizontal: 10,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
 
     return (
       <ImageBackground
@@ -83,6 +85,11 @@ class ClassRoster extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.contentContainer}>
           <Text h1>{this.state.sessionName}</Text>
           <Text h2 style={{ backgroundColor: 'transparent', textAlign: 'center', color: white }}>Class Roster</Text>

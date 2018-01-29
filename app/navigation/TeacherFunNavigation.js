@@ -5,9 +5,15 @@ import Fun from '../components/student/Fun';
 const TeacherFunNavigation = StackNavigator({
   Home: {
     screen: FunPost,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   Fun: {
     screen: Fun,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
 });
 
