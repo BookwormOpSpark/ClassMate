@@ -9,7 +9,6 @@ import { logOut, selectSession, getClassInfo } from '../../actions/actions';
 import { SERVER_URI, ClassInfoRoute } from '../../constant';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
-
 class StudentDrawer extends Component {
   constructor(props) {
     super(props);
