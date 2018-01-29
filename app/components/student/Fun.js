@@ -9,6 +9,7 @@ import { Card, CardItem, Body } from 'native-base';
 import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground, Animated, Easing } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
+import DashHeader from '../shared/Header';
 
 class Fun extends React.Component {
   constructor(props) {
@@ -193,6 +194,11 @@ class Fun extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={this.styles.container}>
           <ScrollView
             contentContainerStyle={this.styles.contentContainer}

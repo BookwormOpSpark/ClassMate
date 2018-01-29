@@ -5,6 +5,8 @@ import { StyleSheet, View, ImageBackground, Animated, Easing } from 'react-nativ
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
+
 
 class StudentClassDashboard extends React.Component {
   constructor(props) {
@@ -64,6 +66,7 @@ class StudentClassDashboard extends React.Component {
         marginTop: 20,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
 
     return (
       <ImageBackground
@@ -77,6 +80,11 @@ class StudentClassDashboard extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back={false}
+        />
         <View style={styles.container}>
 
           <View style={styles.badges}>

@@ -11,16 +11,26 @@ const StudentDrawerNavigator = DrawerNavigator({
     screen: StudentDashboardNavigation,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   StudentClassNavigation: {
     screen: StudentClassNavigation,
+    navigationOptions: () => ({
+      drawerLockMode: 'locked-closed',
+    }),
   },
   JoinClass: {
     screen: JoinClassContainer,
+    navigationOptions: () => ({
+      drawerLockMode: 'locked-closed',
+    }),
   },
   CheckIn: {
     screen: CheckIn,
+    navigationOptions: () => ({
+      drawerLockMode: 'locked-closed',
+    }),
   },
 }, {
   contentComponent: StudentDrawer,

@@ -7,6 +7,7 @@ import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logOut, selectSession, getClassInfo } from '../../actions/actions';
 import { SERVER_URI, ClassInfoRoute } from '../../constant';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class TeacherDrawer extends Component {
   constructor(props) {
@@ -65,21 +66,24 @@ class TeacherDrawer extends Component {
       container: {
         paddingTop: 20,
         flex: 1,
+        backgroundColor: white,
       },
       navItemStyle: {
         padding: 10,
       },
       sectionHeadingStyle: {
-        backgroundColor: 'lightgrey',
+        backgroundColor: yellow,
         paddingVertical: 10,
         paddingHorizontal: 5,
       },
       navSectionStyle: {
         paddingHorizontal: 15,
+        backgroundColor: white,
       },
       addClassStyle: {
-        // backgroundColor: 'green',
+        backgroundColor: white,
         alignItems: 'center',
+        padding: 10,
 
       },
       emergencyContactStyle: {
@@ -87,7 +91,7 @@ class TeacherDrawer extends Component {
       },
       footerContainer: {
         padding: 10,
-        // backgroundColor: 'red',
+        backgroundColor: white,
       },
 
     });
@@ -127,13 +131,13 @@ class TeacherDrawer extends Component {
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('AddClass')}
-                iconRight={{ name: 'done' }}
-                backgroundColor="blue"
+                iconRight={{ name: 'add-circle-outline' }}
+                backgroundColor={green}
                 rounded
                 title="Create a Class"
               />
             </View>
-            <View style={{ paddingVertical: 5 }} />
+            {/* <View style={{ paddingVertical: 5 }} />
             <View style={styles.emergencyContactStyle}>
               <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
@@ -143,15 +147,15 @@ class TeacherDrawer extends Component {
                 rounded
                 title="Emergency Contact"
               />
-            </View>
+            </View> */}
           </View>
         </ScrollView>
         <View style={styles.footerContainer}>
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.LogOut}
-            iconRight={{ name: 'enhanced-encryption' }}
-            backgroundColor="red"
+            iconRight={{ name: 'exit-to-app' }}
+            backgroundColor={red}
             rounded
             title="Log Out"
           />

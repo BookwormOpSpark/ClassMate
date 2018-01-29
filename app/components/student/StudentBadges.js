@@ -1,48 +1,45 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  Image
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import React from 'react';
+import { StyleSheet, View, ImageBackground } from 'react-native';
+import { Text } from 'react-native-elements';
+import DashHeader from '../shared/Header';
+import blackboard from '../../assets/blackboard.jpg';
 
 export default class StudentBadges extends React.Component {
   constructor() {
     super();
     this.springValue = new Animated.Value(0.3);
   }
-  componentDidMount() {
-    this.spring();
-  }
-  spring() {
-    this.springValue.setValue(0.7);
-    Animated.spring(
-      this.springValue,
-      {
-        toValue: 1,
-        friction: 1,
-        tension: 1,
-      },
-    ).start();
-  }
   render() {
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    });
+    
     return (
-      <View style={styles.container}>
-        <Animated.View
-          style={{ transform: [{ scale: this.springValue }] }}
-
-        >
-          <Icon
-            color="#FF9F1C"
-            name="rocket"
-            size={200}
-          />
-        </Animated.View>
-      </View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <DashHeader
+          navigation={this.props.navigation}
+          className="badges"
+          back
+        />
+        <View style={styles.container}>
+          <Text h1>Student Badges</Text>
+        </View>
+      </ImageBackground>
     );
   }
 }
