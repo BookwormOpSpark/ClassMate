@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, Text } from 'react-native';
 import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import { white } from '../../style/colors';
 
 class QRcode extends React.Component {
   constructor(props) {
@@ -42,10 +43,11 @@ class QRcode extends React.Component {
         <View style={styles.container}>
           <QRCode
             value={`${this.props.state.selectSession.sessionID}`}
-            size={150}
-            bgColor="blue"
+            size={250}
+            bgColor="black"
             fgColor="white"
           />
+          <Text style={{ color: white }}> Have students scan this code to check in for class! </Text>
         </View>
       </ImageBackground>
     );

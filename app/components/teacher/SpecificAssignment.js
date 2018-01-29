@@ -37,8 +37,8 @@ class SpecificAssignment extends React.Component {
       },
       list: {
         borderRadius: 5,
-        borderColor: blue,
-        backgroundColor: blue,
+        borderColor: green,
+        backgroundColor: green,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,
@@ -46,8 +46,8 @@ class SpecificAssignment extends React.Component {
       },
       list2: {
         borderRadius: 5,
-        borderColor: fireRed,
-        backgroundColor: fireRed,
+        borderColor: red,
+        backgroundColor: red,
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 5,

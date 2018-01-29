@@ -99,6 +99,7 @@ class Assignment extends React.Component {
           <Button
             block
             success
+            style={{ marginBottom: 45 }}
             onPress={() => this.props.navigation.navigate('CreateAssignment')}
           >
             <Text style={{ fontSize: 20 }}>Create a New Assignment</Text>

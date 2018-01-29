@@ -105,7 +105,7 @@ class StudentLogin extends React.Component {
           <Text h3 style={{ color: white, paddingTop: 15 }}>
             Student Login
           </Text>
-          <FormLabel>User Name</FormLabel>
+          <FormLabel>Username</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ username: text })}
             style={{ paddingHorizontal: 10 }}
@@ -122,7 +122,7 @@ class StudentLogin extends React.Component {
             success
             onPress={this.onLogin}
           >
-            <Text>LOGIN</Text>
+            <Text>Login</Text>
           </Button>
           <Text style={{ padding: 20, color: yellow }} >
             OR
@@ -133,7 +133,7 @@ class StudentLogin extends React.Component {
             style={{ backgroundColor: white }}
             onPress={this.newStudent}
           >
-            <Text>create new account</Text>
+            <Text>Create New Account</Text>
           </Button>
         </View>
       </ImageBackground>

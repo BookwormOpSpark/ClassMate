@@ -114,13 +114,13 @@ class AddClass extends React.Component {
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.handleSubmit}
-            backgroundColor={blue}
+            backgroundColor={green}
             rounded
             title="Create Class!"
           />
-          <Text h5>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
-          <Text>{this.state.added ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
-          <View>{this.state.added ? <Spinner color="blue" /> : null}</View>
+          <Text h4 style={{ color: white }}>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
+          <Text>{this.state.added ? <Icon color={white} name="thumb-up" size={20} /> : ''}</Text>
+          <View>{this.state.added ? <Spinner color={white} /> : null}</View>
         </View>
       </ImageBackground>
     );

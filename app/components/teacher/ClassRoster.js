@@ -102,7 +102,7 @@ class ClassRoster extends React.Component {
                     <Button
                       small
                       key={`bbbtn${id}`}
-                      backgroundColor={yellow}
+                      backgroundColor={green}
                       color="black"
                       buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                       title={`${student.nameFirst} ${student.nameLast}`}
