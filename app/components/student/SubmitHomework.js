@@ -78,8 +78,8 @@ class SubmitHomework extends React.Component {
     const styles = StyleSheet.create({
       bigcontainer: {
         // had to comment this out to make header work
-        // flex: 1,
-        backgroundColor: '#fff',
+        flex: 1,
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'flex-start',
       },

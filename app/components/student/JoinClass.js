@@ -50,6 +50,7 @@ export default class JoinClass extends React.Component {
         justifyContent: 'center',
       },
       contentContainer: {
+        flex: 1,
         backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'flex-start',

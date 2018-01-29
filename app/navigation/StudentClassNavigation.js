@@ -41,12 +41,12 @@ const StudentClassNavigation = StackNavigator({
   StudentBadges: {
     screen: StudentBadges,
   },
-  StudentClassSchedule: {
-    screen: StudentClassSchedule,
-    navigationOptions: () => ({
-      header: null,
-    }),
-  },
+  // StudentClassSchedule: {
+  //   screen: StudentClassSchedule,
+  //   navigationOptions: () => ({
+  //     header: null,
+  //   }),
+  // },
   Fun: {
     screen: Fun,
     navigationOptions: () => ({

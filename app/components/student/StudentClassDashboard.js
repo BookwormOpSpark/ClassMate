@@ -39,6 +39,7 @@ class StudentClassDashboard extends React.Component {
         marginTop: 20,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
 
     return (
       <ImageBackground
