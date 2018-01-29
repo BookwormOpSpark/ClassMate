@@ -106,20 +106,18 @@ class StudentDashboard extends React.Component {
             <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {user.First_name} {user.Last_name}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 40, marginBottom: 30 }}>
               <Button
-                block
                 iconRight
                 success
-                // onPress={this.props.navigation.navigate('CheckIn')}
+                onPress={() => this.props.navigation.navigate('CheckIn')}
               >
                 <Text>Check In</Text>
                 <Icon name="check" size={20} style={{ marginRight: 10 }} />
               </Button>
 
               <Button
-                block
-                iconLeft
+                iconRight
                 danger
-                // onPress={this.props.navigation.navigate('EmergencyContact')}
+                onPress={() => this.props.navigation.navigate('EmergencyContact')}
               >
                 <Text>Contact</Text>
                 <Icon name="account" size={20} style={{ marginRight: 10 }} />
