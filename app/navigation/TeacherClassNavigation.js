@@ -85,6 +85,9 @@ const TeacherClassNavigation = StackNavigator({
   },
   ClassBadges: {
     screen: ClassBadges,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   // TeacherClassSchedule: {
   //   screen: TeacherClassSchedule,
