@@ -18,11 +18,32 @@ export default class StudentBadges extends React.Component {
         justifyContent: 'flex-start',
         alignItems: 'center',
       },
-      badges: {
+      allBadges: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
         flexWrap: 'wrap',
+      },
+      badge: {
+        width: 150,
+        height: 150,
+        borderRadius: 150,
+        marginTop: 15,
+        marginBottom: 15,
+      },
+      icon: {
+        fontSize: 30,
+        color: 'yellow',
+        lineHeight: 20,
+        alignSelf: 'center',
+        marginTop: 30,
+      },
+      text: {
+        textAlign: 'center',
+        alignItems: 'center',
+        color: 'yellow',
+        fontSize: 15,
+        fontStyle: 'italic',
       },
     });
 
@@ -44,55 +65,48 @@ export default class StudentBadges extends React.Component {
           back
         />
         <View style={styles.container}>
-          <View style={styles.badges}>
+          <View style={styles.allBadges}>
             <Badge
               primary
-              style={{ width: 100, height: 100, borderRadius: 100 }}
+              style={styles.badge}
             >
               <Icon
                 name="star"
-                style={{
- fontSize: 30, color: 'yellow', lineHeight: 20, alignSelf: 'center', marginTop: 10,
-}}
+                style={styles.icon}
               />
-              <Text style={{ alignSelf: 'center', alignItems: 'center', color: 'yellow' }}> Award for good grades!</Text>
-            </Badge>
-            <Badge
-              success
-              style={{ width: 100, height: 100, borderRadius: 100 }}
-            >
-              <Icon
-                name="star"
-                style={{
- fontSize: 30, color: 'yellow', lineHeight: 20, alignSelf: 'center', marginTop: 10,
-}}
-              />
-              <Text style={{ alignSelf: 'center', alignItems: 'center', color: 'yellow' }}> Award for good participation!</Text>
+              <Text style={styles.text}> Award for good grades!</Text>
             </Badge>
             <Badge
               info
-              style={{ width: 100, height: 100, borderRadius: 100 }}
+              style={styles.badge}
             >
               <Icon
                 name="star"
-                style={{
- fontSize: 30, color: 'yellow', lineHeight: 20, alignSelf: 'center', marginTop: 10,
-}}
+                style={styles.icon}
               />
-              <Text style={{ alignSelf: 'center', alignItems: 'center', color: 'yellow' }}> Award for good punctuality!</Text>
+              <Text style={styles.text}> Award for good behavior!</Text>
+            </Badge>
+            <Badge
+              danger
+              style={styles.badge}
+            >
+              <Icon
+                name="star"
+                style={styles.icon}
+              />
+              <Text style={styles.text}> Award for good attitude!</Text>
             </Badge>
             <Badge
               warning
-              style={{ width: 100, height: 100, borderRadius: 100 }}
+              style={styles.badge}
             >
               <Icon
                 name="star"
-                style={{
- fontSize: 30, color: 'yellow', lineHeight: 20, alignSelf: 'center', marginTop: 10,
-}}
+                style={styles.icon}
               />
-              <Text style={{ alignSelf: 'center', alignItems: 'center', color: 'yellow' }}> Award for good behavior!</Text>
+              <Text style={styles.text}> Award for good grades!</Text>
             </Badge>
+
 
           </View>
         </View>
