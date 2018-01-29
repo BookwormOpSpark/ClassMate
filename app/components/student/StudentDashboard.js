@@ -4,13 +4,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, Dimensions, ScrollView, ActivityIndicator, ImageBackground, Image } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import axios from 'axios';
-import { Container, Header, Title, Left, Right, Button, Body, Content, Text, Card, CardItem, H3 } from 'native-base';
+import { Container, Header, Title, Left, Right, Button, Body, Content, Card, CardItem, H3, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { logOut, getDashboard, selectSession } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/classmatelogoicon.png';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
+import DashHeader from '../shared/Header';
 
 class StudentDashboard extends React.Component {
   constructor(props) {
@@ -96,33 +97,32 @@ class StudentDashboard extends React.Component {
         }}
       >
         <Container>
-          <Header style={{ backgroundColor: blue, justifyContent: 'center' }}>
-            <Left>
-              <Button
-                transparent
-                onPress={() => this.props.navigation.navigate('DrawerOpen')}
-              >
-                <Icon name="menu" size={30} color={yellow} />
-              </Button>
-            </Left>
-            <Body>
-              <H3 style={{ color: yellow }} >Dashboard</H3>
-            </Body>
-            <Right>
-              <Image source={logo} style={{ width: 30, height: 30 }} />
-            </Right>
-          </Header>
-
+          <DashHeader
+            navigation={this.props.navigation}
+            className="Dashboard"
+            back={false}
+          />
           <Content padder>
-            <Text style={{ fontSize: 30, color: white }} > {user.First_name} {user.Last_name}</Text>
-            <Button
-              iconRight
-              success
-              // onPress={this.props.navigation.navigate('CheckIn')}
-            >
-              <Icon name="check" size={20} />
-              <Text>Check In</Text>
-            </Button>
+            <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {user.First_name} {user.Last_name}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 40, marginBottom: 30 }}>
+              <Button
+                iconRight
+                success
+                onPress={() => this.props.navigation.navigate('CheckIn')}
+              >
+                <Text>Check In</Text>
+                <Icon name="check" size={20} style={{ marginRight: 10 }} />
+              </Button>
+
+              <Button
+                iconRight
+                danger
+                onPress={() => this.props.navigation.navigate('EmergencyContact')}
+              >
+                <Text>Contact</Text>
+                <Icon name="account" size={20} style={{ marginRight: 10 }} />
+              </Button>
+            </View>
             {/* <Button
               onPress={this.props.navigation.navigate('CheckIn')}
               buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
@@ -131,14 +131,6 @@ class StudentDashboard extends React.Component {
               rounded
               title="CheckIn"
             /> */}
-            <Button
-              iconLeft
-              danger
-              // onPress={this.props.navigation.navigate('EmergencyContact')}
-            >
-              <Icon name="account" size={20} />
-              <Text>Contact</Text>
-            </Button>
             {/* <Button
               buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
               onPress={this.navigateToScreen('EmergencyContact')}

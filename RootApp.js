@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <MainNavigation />
+      <LoginNavigation />
     </Provider>
   );
 }

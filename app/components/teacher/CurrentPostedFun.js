@@ -9,6 +9,7 @@ import { Card, CardItem, Body, Button, Icon } from 'native-base';
 import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
+import DashHeader from '../shared/Header';
 
 class CurrentPostedFun extends React.Component {
   constructor(props) {
@@ -231,6 +232,12 @@ class CurrentPostedFun extends React.Component {
           justifyContent: 'center',
         }}
       >
+        {/* this breaks the navigation */}
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={this.styles.container}>
           <ScrollView
             contentContainerStyle={this.styles.contentContainer}
@@ -247,7 +254,7 @@ class CurrentPostedFun extends React.Component {
               iconLeft
               success
               style={this.styles.buttonAdd}
-              onPress={() => this.props.navigation.navigate('TeacherFunNavigation')}
+              onPress={() => this.props.navigation.navigate('FunPost')}
             >
               <Icon active name="ios-add-circle-outline" />
               <Text>      Add More Fun Stuff</Text>

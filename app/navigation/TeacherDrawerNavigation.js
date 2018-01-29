@@ -10,16 +10,29 @@ const TeacherDrawerNavigator = DrawerNavigator({
     screen: TeacherDashboardNavigation,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   TeacherClassNavigation: {
     screen: TeacherClassNavigation,
+    navigationOptions: () => ({
+      header: null,
+      drawerLockMode: 'locked-closed',
+    }),
   },
   AddClass: {
     screen: AddClass,
+    navigationOptions: () => ({
+      header: null,
+      drawerLockMode: 'locked-closed',
+    }),
   },
   EmergencyContact: {
     screen: EmergencyContact,
+    navigationOptions: () => ({
+      header: null,
+      drawerLockMode: 'locked-closed',
+    }),
   },
 }, {
   contentComponent: TeacherDrawer,

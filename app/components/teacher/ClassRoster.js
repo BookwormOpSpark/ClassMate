@@ -9,6 +9,7 @@ import { blue, white, yellow, orange, red, green } from '../../style/colors';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, StudentInformation } from '../../constant';
 import { specificStudent } from '../../actions/actions';
+import DashHeader from '../shared/Header';
 
 class ClassRoster extends React.Component {
   constructor(props) {
@@ -20,13 +21,13 @@ class ClassRoster extends React.Component {
   }
 
   onSelect = async (item) => {
-    console.log('item', item);
+    // console.log('item', item);
     await axios.get(`${SERVER_URI}${StudentInformation}`, {
       params: {
         id: item.id,
       },
     }).then((res) => {
-      console.log(res.data, 'res.data from axios');
+      // console.log(res.data, 'res.data from axios');
       this.props.dispatch(specificStudent(res.data));
     })
       .catch(err => console.error(err));
@@ -34,7 +35,7 @@ class ClassRoster extends React.Component {
   };
 
   render() {
-    console.log(this.props.state, 'props...state');
+    // console.log(this.props.state, 'props...state');
     const styles = StyleSheet.create({
       container: {
         backgroundColor: '#fff',
@@ -70,6 +71,7 @@ class ClassRoster extends React.Component {
         paddingHorizontal: 10,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
 
     return (
       <ImageBackground
@@ -83,6 +85,11 @@ class ClassRoster extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.contentContainer}>
           <Text h1>{this.state.sessionName}</Text>
           <Text h2 style={{ backgroundColor: 'transparent', textAlign: 'center', color: white }}>Class Roster</Text>

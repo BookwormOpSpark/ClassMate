@@ -9,6 +9,7 @@ import { Button, Text } from 'react-native-elements';
 import { Item, Input, Form, Spinner } from 'native-base';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 
 
 class FunPost extends React.Component {
@@ -128,6 +129,11 @@ class FunPost extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.bigcontainer}>
           <Text h3 style={{ color: '#faf0ca', textAlign: 'center', marginBottom: 50 }}>
           Post Fun Stuffs for Class {className}

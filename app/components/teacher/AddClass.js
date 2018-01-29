@@ -8,9 +8,10 @@ import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
 import { Spinner } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
-import {blue, white, yellow, orange, red, green } from '../../style/colors';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 import { getDashboard, getSession, selectSession } from '../../actions/actions';
 import { SERVER_URI, AddClassRoute, DashboardRoute } from '../../constant';
+import DashHeader from '../shared/Header';
 
 class AddClass extends React.Component {
   constructor(props) {
@@ -69,6 +70,7 @@ class AddClass extends React.Component {
         justifyContent: 'center',
       },
       contentContainer: {
+        flex: 1,
         backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -92,6 +94,11 @@ class AddClass extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className="Create Class"
+          back={false}
+        />
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${teacher.First_name}!`}</Text>
           <Text h4 style={{ color: white }}>Create a New Class!</Text>
