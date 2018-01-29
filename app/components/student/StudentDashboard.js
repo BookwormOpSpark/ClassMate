@@ -80,7 +80,6 @@ class StudentDashboard extends React.Component {
                 <Text>Check In</Text>
                 <Icon name="check" size={20} style={{ marginRight: 10 }} />
               </Button>
-
               <Button
                 block
                 iconLeft
