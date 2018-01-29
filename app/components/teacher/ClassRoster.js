@@ -21,13 +21,13 @@ class ClassRoster extends React.Component {
   }
 
   onSelect = async (item) => {
-    console.log('item', item);
+    // console.log('item', item);
     await axios.get(`${SERVER_URI}${StudentInformation}`, {
       params: {
         id: item.id,
       },
     }).then((res) => {
-      console.log(res.data, 'res.data from axios');
+      // console.log(res.data, 'res.data from axios');
       this.props.dispatch(specificStudent(res.data));
     })
       .catch(err => console.error(err));
@@ -35,7 +35,7 @@ class ClassRoster extends React.Component {
   };
 
   render() {
-    console.log(this.props.state, 'props...state');
+    // console.log(this.props.state, 'props...state');
     const styles = StyleSheet.create({
       container: {
         backgroundColor: '#fff',
