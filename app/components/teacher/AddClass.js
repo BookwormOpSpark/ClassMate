@@ -70,6 +70,7 @@ class AddClass extends React.Component {
         justifyContent: 'center',
       },
       contentContainer: {
+        flex: 1,
         backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'flex-start',
