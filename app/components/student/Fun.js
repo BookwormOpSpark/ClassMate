@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { Video } from 'expo';
-import { Card, CardItem, Body } from 'native-base';
+import { Card, CardItem, Body, Animated, Easing } from 'native-base';
 import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
@@ -26,6 +27,7 @@ class Fun extends React.Component {
     this.renderYouTube = this.renderYouTube.bind(this);
     this.renderInternetLink = this.renderInternetLink.bind(this);
     this.keyExtractor = this.keyExtractor.bind(this);
+    this.animate = this.animate.bind(this);
 
     this.styles = StyleSheet.create({
       container: {
@@ -84,6 +86,20 @@ class Fun extends React.Component {
         this.setState({ fun: res.data });
       })
       .catch(err => console.error(err));
+
+    this.animate(Easing.bounce);
+  }
+
+  animate(easing) {
+    this.animatedValue.setValue(0);
+    Animated.timing(
+      this.animatedValue,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing,
+      },
+    ).start();
   }
 
   keyExtractor = item => item.link;
@@ -151,6 +167,10 @@ class Fun extends React.Component {
   }
 
   render() {
+    const marginLeft = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 260],
+    });
     const className = this.props.state.selectSession.sessionName;
 
     const list = this.state.fun;
@@ -182,6 +202,18 @@ class Fun extends React.Component {
             >
               {`Interesting stuff to check out for class ${className}`}
             </Text>
+
+            <Animated.View
+              style={[
+                { marginLeft },
+              ]}
+            >
+              <Icon
+                color="white"
+                name="rocket"
+                size={30}
+              />
+            </Animated.View>
 
             <FlatList
               contentContainerStyle={this.styles.container}
