@@ -7,7 +7,7 @@ import blackboard from '../../assets/blackboard.jpg';
 export default class StudentBadges extends React.Component {
   constructor() {
     super();
-    this.springValue = new Animated.Value(0.3);
+    // this.springValue = new Animated.Value(0.3);
   }
   render() {
     const styles = StyleSheet.create({
@@ -18,7 +18,7 @@ export default class StudentBadges extends React.Component {
         justifyContent: 'center',
       },
     });
-    
+
     return (
       <ImageBackground
         source={blackboard}

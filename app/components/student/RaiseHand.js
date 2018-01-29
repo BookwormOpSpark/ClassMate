@@ -9,11 +9,8 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
-<<<<<<< HEAD
-import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
-=======
 import DashHeader from '../shared/Header';
->>>>>>> 18d62d050b75aee08fa4fb1784daa4f00d9f1d90
+import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
 
 class RaiseHand extends React.Component {
   constructor(props) {
@@ -118,7 +115,7 @@ class RaiseHand extends React.Component {
             style={{
               width: 150,
               height: 150,
-              marginBottom: 200,
+              marginBottom: 100,
               marginLeft: 120,
             }}
           />
