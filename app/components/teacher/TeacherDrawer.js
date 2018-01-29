@@ -130,7 +130,7 @@ class TeacherDrawer extends Component {
                 iconRight={{ name: 'done' }}
                 backgroundColor="blue"
                 rounded
-                title="Add a Class"
+                title="Create a Class"
               />
             </View>
             <View style={{ paddingVertical: 5 }} />

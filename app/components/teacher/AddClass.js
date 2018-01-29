@@ -3,10 +3,12 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
 import { Spinner } from 'native-base';
+import blackboard from '../../assets/blackboard.jpg';
+import {blue, white, yellow, orange, red, green } from '../../style/colors';
 import { getDashboard, getSession, selectSession } from '../../actions/actions';
 import { SERVER_URI, AddClassRoute, DashboardRoute } from '../../constant';
 
@@ -66,35 +68,54 @@ class AddClass extends React.Component {
         alignItems: 'center',
         justifyContent: 'center',
       },
+      contentContainer: {
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 10,
+      },
+
     });
     const teacher = this.props.state.user;
     const { session } = this.props.state;
     const index = session.length - 1;
     const { description } = session[index] ? session[index] : '';
     return (
-      <View style={styles.container}>
-        <Text h2>{`Teacher ${teacher.First_name}`}</Text>
-        <Text h4>Create a New Class!</Text>
-        <Icon color="blue" name="rocket" size={30} />
-        <FormLabel>Enter the Join Code for the class</FormLabel>
-        <FormInput
-          onChangeText={text => this.setState({ joinCode: text })}
-        />
-        <FormLabel>Enter the class description</FormLabel>
-        <FormInput
-          onChangeText={text => this.setState({ description: text })}
-        />
-        <Button
-          buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-          onPress={this.handleSubmit}
-          backgroundColor="blue"
-          rounded
-          title="Create Class!"
-        />
-        <Text h5>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
-        <Text>{this.state.added ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
-        <View>{this.state.added ? <Spinner color="blue" /> : null}</View>
-      </View>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <View style={styles.contentContainer}>
+          <Text h2 style={{ color: white }}>{`Hello ${teacher.First_name}!`}</Text>
+          <Text h4 style={{ color: white }}>Create a New Class!</Text>
+          <Icon color={yellow} name="rocket" size={30} />
+          <FormLabel>Enter the Join Code for the class</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ joinCode: text })}
+          />
+          <FormLabel>Enter the class description</FormLabel>
+          <FormInput
+            onChangeText={text => this.setState({ description: text })}
+          />
+          <Button
+            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            onPress={this.handleSubmit}
+            backgroundColor={blue}
+            rounded
+            title="Create Class!"
+          />
+          <Text h5>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
+          <Text>{this.state.added ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
+          <View>{this.state.added ? <Spinner color="blue" /> : null}</View>
+        </View>
+      </ImageBackground>
     );
   }
 }

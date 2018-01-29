@@ -30,18 +30,15 @@ class Fun extends React.Component {
     this.styles = StyleSheet.create({
       container: {
         flex: 1,
-        // backgroundColor: '#0d3b66',
         alignItems: 'center',
         justifyContent: 'center',
       },
       contentContainer: {
         flexGrow: 1,
-        // backgroundColor: '#0d3b66',
       },
       item: {
         width: 310,
         height: 280,
-        // marginBottom: 40,
       },
       view: {
         marginBottom: 40,
@@ -84,7 +81,6 @@ class Fun extends React.Component {
     const session = this.props.state.selectSession.sessionID || 5;
     axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
       .then((res) => {
-        console.log(res.data);
         this.setState({ fun: res.data });
       })
       .catch(err => console.error(err));

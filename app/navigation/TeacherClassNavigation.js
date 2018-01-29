@@ -6,7 +6,7 @@ import Queue from '../components/teacher/Queue';
 import QRcode from '../components/teacher/QRcode';
 import ClassRoster from '../components/teacher/ClassRoster';
 import SpecificStudent from '../components/teacher/SpecificStudent';
-import TeacherClassSchedule from '../components/teacher/TeacherClassSchedule';
+import ClassBadges from '../components/teacher/ClassBadges';
 import CreateAssignment from '../components/teacher/CreateAssignment';
 import CurrentPostedFunNavigation from './CurrentPostedFunNavigation';
 
@@ -44,8 +44,8 @@ const TeacherClassNavigation = StackNavigator({
   SpecificStudent: {
     screen: SpecificStudent,
   },
-  TeacherClassSchedule: {
-    screen: TeacherClassSchedule,
+  ClassBadges: {
+    screen: ClassBadges,
   },
 });
 

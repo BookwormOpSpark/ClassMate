@@ -27,6 +27,11 @@ class RaiseHand extends React.Component {
     this._subscribe();
   }
 
+  componentWillUnmount() {
+    this._unsubscribe();
+    this.socket.close();
+  }
+
   getInQueue() {
     const { y } = this.state.accelerometerData;
     if (y > 0.7) {
