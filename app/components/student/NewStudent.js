@@ -115,6 +115,7 @@ class NewStudent extends React.Component {
           />
           <FormLabel>Password</FormLabel>
           <FormInput
+            secureTextEntry={true}
             onChangeText={text => this.setState({ password: text })}
           />
           <View style={{ paddingTop: 20, paddingHorizontal: 10 }} />
