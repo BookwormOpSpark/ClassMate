@@ -5,6 +5,8 @@ import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
+
 
 class StudentClassDashboard extends React.Component {
   constructor(props) {
@@ -51,6 +53,11 @@ class StudentClassDashboard extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back={false}
+        />
         <View style={styles.container}>
           <Icon color="#faf0ca" name="rocket" size={30} />
 

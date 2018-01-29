@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
-
+import DashHeader from '../shared/Header';
 
 class RaiseHand extends React.Component {
   constructor(props) {
@@ -87,6 +87,11 @@ class RaiseHand extends React.Component {
           justifyContent: 'center',
         }}
       >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
         <View style={styles.sensor}>
           <ScrollView
             contentContainerStyle={styles.contentContainer}
