@@ -102,23 +102,6 @@ class StudentDashboard extends React.Component {
             className="Dashboard"
             back={false}
           />
-          {/* <Header style={{ backgroundColor: blue, justifyContent: 'center' }}>
-            <Left>
-              <Button
-                transparent
-                onPress={() => this.props.navigation.navigate('DrawerOpen')}
-              >
-                <Icon name="menu" size={30} color={yellow} />
-              </Button>
-            </Left>
-            <Body>
-              <H3 style={{ color: yellow }} >Dashboard</H3>
-            </Body>
-            <Right>
-              <Image source={logo} style={{ width: 30, height: 30 }} />
-            </Right>
-          </Header> */}
-
           <Content padder>
             <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {user.First_name} {user.Last_name}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 40, marginBottom: 30 }}>

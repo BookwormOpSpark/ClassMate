@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, ImageBackground } from 'react-native';
 // import { Text, Button, Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -10,6 +10,8 @@ import logo from '../../assets/classmatelogoicon.png';
 import { logOut, getDashboard } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
 import DashHeader from '../shared/Header';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
+import blackboard from '../../assets/blackboard.jpg';
 
 class TeacherDashboard extends React.Component {
   constructor(props) {
@@ -58,50 +60,62 @@ class TeacherDashboard extends React.Component {
 
 
     return (
-      <Container>
-        <DashHeader
-          navigation={this.props.navigation}
-          className="Dashboard"
-          back={false}
-        />
-        <Content padder>
-          <Text style={{ fontSize: 30 }} > {teacher.First_name} {teacher.Last_name}</Text>
-          <Card>
-            <CardItem header>
-              <Icon color="blue" name="calendar" size={25} />
-              <Text>Your Schedule Today</Text>
-            </CardItem>
-            {
-              this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <Container>
+          <DashHeader
+            navigation={this.props.navigation}
+            className="Dashboard"
+            back={false}
+          />
+          <Content padder>
+            <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {teacher.First_name} {teacher.Last_name}</Text>
+            <View style={{ paddingVertical: 10 }} />
+            <Card>
+              <CardItem header>
+                <Icon color={blue} name="calendar" size={25} />
+                <Text>  Your Schedule Today</Text>
+              </CardItem>
+              {
+                this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
+                  <CardItem key={index}>
+                    <Text>
+                      {`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}
+                    </Text>
+                    <Text>
+                      {'\t\t\t\t\t\t\t\t\t\t'}
+                    </Text>
+                    <Text>
+                      {`${event.summary}`}
+                    </Text>
+                  </CardItem>
+                )) : null
+              }
+            </Card>
+            <Card>
+              <CardItem header>
+                <Icon color={blue} name="bell" size={25} />
+                <Text>  Upcoming Due Dates</Text>
+              </CardItem>
+              {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.map((el, index) => (
                 <CardItem key={index}>
-                  <Text>
-                    {`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}
-                  </Text>
-                  <Text>
-                    {'\t\t\t\t\t\t\t\t\t\t'}
-                  </Text>
-                  <Text>
-                    {`${event.summary}`}
-                  </Text>
+                  <Text>{`${el.title} --  ${el.dueDate}`}</Text>
                 </CardItem>
               )) : null
             }
-          </Card>
-          <Card>
-            <CardItem header>
-              <Icon color="blue" name="bell" size={25} />
-              <Text>  Upcoming Due Dates</Text>
-            </CardItem>
-            {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.map((el, index) => (
-              <CardItem key={index}>
-                <Text>{`${el.title} --  ${el.dueDate}`}</Text>
-              </CardItem>
-            )) : null
-          }
-          </Card>
-        </Content>
-      </Container>
-
+            </Card>
+          </Content>
+        </Container>
+      </ImageBackground>
       // <View style={styles.container}>
       //   <Header
       //     leftComponent={{ icon: 'menu', color: '#fff' }}
