@@ -31,7 +31,6 @@ class EmergencyContact extends React.Component {
     const info = { emergencyContact, userId };
     await axios.post(`${SERVER_URI}${CreateEmergencyContact}`, info)
       .then((res) => {
-        console.log(res, 'created Contact');
         Alert.alert(
           'Success!',
           'Emergency Contact has been created',
@@ -57,7 +56,7 @@ class EmergencyContact extends React.Component {
   }
 
   render() {
-    console.log(this.props.state.user)
+    // console.log(this.props.state.user)
     const contactInfo = this.props.state.user.emergencyContactInfo ? this.props.state.user.emergencyContactInfo[0] : {};
     const styles = StyleSheet.create({
       container: {
