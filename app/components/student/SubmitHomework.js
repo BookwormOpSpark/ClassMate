@@ -6,9 +6,9 @@ import { ImagePicker } from 'expo';
 import { Spinner } from 'native-base';
 import { Button, Text } from 'react-native-elements';
 import { SERVER_URI, PostHomework } from '../../constant';
-import { yellow } from '../../style/colors';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class SubmitHomework extends React.Component {
   constructor(props) {
@@ -115,7 +115,7 @@ class SubmitHomework extends React.Component {
             style={[{ marginBottom: 10, marginTop: 40 }]}
             title="Pick your homework from camera roll"
             iconRight={{ name: 'attach-file', color: 'black' }}
-            backgroundColor={yellow}
+            backgroundColor={white}
             borderRadius={5}
             color="black"
             onPress={this._pickImage}
@@ -124,7 +124,7 @@ class SubmitHomework extends React.Component {
             buttonStyle={[{ marginBottom: 50, marginTop: 10 }]}
             title="Open Camera"
             iconRight={{ name: 'camera', color: 'black' }}
-            backgroundColor={yellow}
+            backgroundColor={white}
             borderRadius={5}
             color="black"
             onPress={this._openCamera}
@@ -133,13 +133,13 @@ class SubmitHomework extends React.Component {
             buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
             title="Post to Homeworks!"
             iconRight={{ name: 'done', color: 'black' }}
-            backgroundColor={yellow}
+            backgroundColor={white}
             borderRadius={5}
             color="black"
             onPress={this._postHomework}
           />
-          <View>{this.state.loading ? <Spinner color={yellow} /> : null}</View>
-          <Text style={{ textAlign: 'center' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
+          <View>{this.state.loading ? <Spinner color={white} /> : null}</View>
+          <Text style={{ textAlign: 'center', color: white }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
           {image &&
           <Image source={{ uri: image }} style={{ width: 250, height: 350 }} />}
         </View>

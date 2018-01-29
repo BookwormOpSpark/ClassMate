@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View, Dimensions, ScrollView, ActivityIndicator, ImageBackground, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView, ActivityIndicator, ImageBackground, Image, Text } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import axios from 'axios';
-import { Container, Header, Title, Left, Right, Button, Body, Content, Card, CardItem, H3, Text } from 'native-base';
+import { Container, Header, Title, Left, Right, Button, Body, Content, Card, CardItem, H3 } from 'native-base';
 import { connect } from 'react-redux';
 import { logOut, getDashboard, selectSession } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
