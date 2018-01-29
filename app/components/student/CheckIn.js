@@ -113,11 +113,11 @@ class CheckIn extends Component {
           justifyContent: 'center',
         }}
       >
-        <DashHeader
+        {/* <DashHeader
           navigation={this.props.navigation}
           className="Check in"
           back
-        />
+        /> */}
         <View style={styles.container}>
           {this.state.hasCameraPermission === null
           ? <Text>Requesting for camera permission</Text>
