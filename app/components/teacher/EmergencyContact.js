@@ -8,6 +8,7 @@ import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Car
 import { SERVER_URI, CreateEmergencyContact } from '../../constant';
 import DashHeader from '../shared/Header';
 import blackboard from '../../assets/blackboard.jpg';
+import { yellow, white } from '../../style/colors';
 
 
 class EmergencyContact extends React.Component {
@@ -30,7 +31,7 @@ class EmergencyContact extends React.Component {
     const info = { emergencyContact, userId };
     await axios.post(`${SERVER_URI}${CreateEmergencyContact}`, info)
       .then((res) => {
-        // console.log('created Contact');
+        console.log(res, 'created Contact');
         Alert.alert(
           'Success!',
           'Emergency Contact has been created',
@@ -66,7 +67,7 @@ class EmergencyContact extends React.Component {
         justifyContent: 'center',
       },
       headerText: {
-        color: 'white',
+        color: white,
         marginTop: 10,
         fontSize: 30,
       },
@@ -75,6 +76,13 @@ class EmergencyContact extends React.Component {
         alignItems: 'center',
         marginTop: 50,
         padding: 10,
+      },
+      contentContainer: {
+        flexGrow: 1,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 10,
       },
     });
     return (
@@ -95,39 +103,44 @@ class EmergencyContact extends React.Component {
           back
         />
         <View style={{ flex: 1 }}>
-          <Container style={{ backgroundColor: 'white' }}>
-            <Header style={{ backgroundColor: '#0080ff' }}>
+          <Container style={{ backgroundColor: 'transparent' }}>
+            <Header style={{ backgroundColor: 'transparent' }}>
               <Text style={styles.headerText}>Emergency Contact</Text>
             </Header>
             <Content>
               {this.props.state.user.emergencyContact === null ?
                 <Form style={{ justifyContent: 'center' }}>
                   <Item stackedLabel>
-                    <Label>First Name</Label>
+                    <Label style={{ color: white }}>First Name</Label>
                     <Input
+                      style={{ color: white }}
                       onChangeText={text => this.setState({ nameFirst: text })}
                     />
                   </Item>
                   <Item stackedLabel>
-                    <Label>Last Name</Label>
+                    <Label style={{ color: white }}>Last Name</Label>
                     <Input
+                      style={{ color: white }}
                       onChangeText={text => this.setState({ nameLast: text })}
                     />
                   </Item>
                   <Item stackedLabel>
-                    <Label>Address</Label>
+                    <Label style={{ color: white }}>Address</Label>
                     <Input
+                      style={{ color: white }}
                       onChangeText={text => this.setState({ address: text })}
                     />
                   </Item>
                   <Item stackedLabel>
-                    <Label>Phone Number</Label>
+                    <Label style={{ color: white }}>Phone Number</Label>
                     <Input
+                      style={{ color: white }}
                       onChangeText={text => this.setState({ phone: text })}
                     />
                   </Item>
                   <Button
                     block
+                    success
                     onPress={() => this.onSelect()}
                   >
                     <Text>Create Contact</Text>
