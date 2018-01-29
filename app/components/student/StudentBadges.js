@@ -5,9 +5,9 @@ import DashHeader from '../shared/Header';
 import blackboard from '../../assets/blackboard.jpg';
 
 export default class StudentBadges extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { text: '' };
+  constructor() {
+    super();
+    // this.springValue = new Animated.Value(0.3);
   }
   render() {
     const styles = StyleSheet.create({
@@ -18,7 +18,7 @@ export default class StudentBadges extends React.Component {
         justifyContent: 'center',
       },
     });
-    
+
     return (
       <ImageBackground
         source={blackboard}
@@ -43,3 +43,11 @@ export default class StudentBadges extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

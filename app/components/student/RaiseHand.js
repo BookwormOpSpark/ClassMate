@@ -115,7 +115,7 @@ class RaiseHand extends React.Component {
             style={{
               width: 150,
               height: 150,
-              marginBottom: 200,
+              marginBottom: 100,
               marginLeft: 120,
             }}
           />
