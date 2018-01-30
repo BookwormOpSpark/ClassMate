@@ -6,12 +6,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { Spinner } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import blackboard from '../../assets/blackboard.jpg';
 import {blue, white, yellow, orange, red, green } from '../../style/colors';
 import { SERVER_URI, JoinClassRoute, DashboardRoute } from '../../constant';
 import DashHeader from '../shared/Header';
 import { getDashboard, getSession, selectSession } from '../../actions/actions';
-import { NavigationActions } from 'react-navigation';
 
 class JoinClass extends React.Component {
   constructor(props) {
@@ -110,17 +110,6 @@ class JoinClass extends React.Component {
           <FormInput
             onChangeText={text => this.setState({ joinCode: text })}
           />
-<<<<<<< HEAD
-          <Button
-            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            onPress={this.handleSubmit}
-            backgroundColor={green}
-            rounded
-            title="Join!"
-          />
-          <Text h5 style={{ fontSize: 25, color: white }}>{className ? `You are now enrolled in ${className}` : ''}</Text>
-
-=======
           <View style={{ padding: 10 }} />
           {!this.state.joined ?
             <Button
@@ -135,7 +124,6 @@ class JoinClass extends React.Component {
           }
           <Text h4 style={{ color: white }}>{(className && this.state.joined) ? `You are now enrolled in ${className}` : ''}</Text>
           <Text>{(className && this.state.joined) ? <Icon color={white} name="thumb-up" size={20} /> : ''}</Text>
->>>>>>> ef51674b48dc509e6bc568343b32e181c93c881f
         </View>
       </ImageBackground>
     );
