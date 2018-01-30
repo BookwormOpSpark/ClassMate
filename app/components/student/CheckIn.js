@@ -127,10 +127,7 @@ class CheckIn extends Component {
             </Text>
             : <BarCodeScanner
               onBarCodeRead={this._handleBarCodeRead}
-              style={{
-                height: Dimensions.get('window').height,
-                width: Dimensions.get('window').width,
-              }}
+                style={{ height: 400, width: 400 }}
             />}
           {this._maybeRenderUrl()}
           <StatusBar hidden />
