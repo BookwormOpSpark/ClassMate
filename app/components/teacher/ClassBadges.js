@@ -1,103 +1,66 @@
+import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
-import { Text, Button } from 'react-native-elements';
-import { Permissions, Notifications } from 'expo';
-import { SERVER_URI, SendNotifications } from '../../constant';
-import DashHeader from '../shared/Header';
-import blackboard from '../../assets/blackboard.jpg';
+import ExpoTHREE from 'expo-three';
+import { Dimensions } from 'react-native';
+import * as THREE from 'three';
+console.disableYellowBox = true;
 
-export default class ClassBadges extends React.Component {
-  constructor(props) {
-    super(props);
+
+export default class StudentBadges extends React.Component {
+  constructor() {
+    super();
     this.state = { text: '' };
-    this.registerForPushNotificationsAsync = this.registerForPushNotificationsAsync.bind(this);
-  }
-
-  componentDidMount() {
+    this._onGLContextCreate = this._onGLContextCreate.bind(this);
   }
 
 
-  registerForPushNotificationsAsync= async () => {
-    const PUSH_ENDPOINT = `${SERVER_URI}${SendNotifications}`;
-    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    let finalStatus = existingStatus;
+  _onGLContextCreate = async (gl) => {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      gl.drawingBufferWidth / gl.drawingBufferHeight,
+      0.1,
+      1000);
+    const renderer = ExpoTHREE.createRenderer({ gl });
+    renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+    renderer.setClearColor(0xffffff);
 
-    // only ask if permissions have not already been determined, because
-    // iOS won't necessarily prompt the user a second time.
-    if (existingStatus !== 'granted') {
-      // Android remote notification permissions are granted during the app
-      // install, so this will only ask on iOS
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
-    }
-
-    // Stop here if the user did not grant permissions
-    if (finalStatus !== 'granted') {
-      return;
-    }
-
-    // Get the token that uniquely identifies this device
-    const token = await Notifications.getExpoPushTokenAsync();
-
-    // POST the token to your backend server from where you can
-    // retrieve it to send push notifications.
-    return fetch(PUSH_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        token: {
-          value: token,
-        },
-        user: {
-          username: 'Lili',
-        },
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material1 = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/classmatelogoicon.png')),
       }),
     });
-  }
-
+    const material2 = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/blackboard.jpg')),
+      }),
+    });
+    const cube1 = new THREE.Mesh(geometry, material1);
+    const cube2 = new THREE.Mesh(geometry, material2);
+    scene.add(cube1);
+    scene.add(cube2);
+    camera.position.z = 5;
+    const animate = () => {
+      requestAnimationFrame(animate);
+      cube1.rotation.x += 0.05;
+      cube1.rotation.y += 0.03;
+      cube2.rotation.x += 0.05;
+      cube2.rotation.y += 0.03;
+      renderer.render(scene, camera);
+      gl.endFrameEXP();
+    };
+    animate();
+  };
 
   render() {
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    });
     return (
-      <ImageBackground
-        source={blackboard}
-        style={{
-          backgroundColor: '#000000',
-          flex: 1,
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-        }}
-      >
-        <DashHeader
-          navigation={this.props.navigation}
-          className="badges"
-          back
-        />
-        <View style={styles.container}>
-          <Text h1>Class Badges</Text>
-          <Button
-            onPress={this.registerForPushNotificationsAsync}
-            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            backgroundColor="#FF9F1C"
-            rounded
-            small
-            color="black"
-            title="Send Notification Badges"
-          />
-        </View>
-      </ImageBackground>
+      <Expo.GLView
+        style={{ flex: 1 }}
+        onContextCreate={this._onGLContextCreate}
+      />
     );
   }
 }
