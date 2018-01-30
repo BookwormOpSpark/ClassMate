@@ -99,6 +99,7 @@ class AddClass extends React.Component {
           className="Create Class"
           back={false}
         />
+        <View style={{ padding: 5 }} />
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${teacher.First_name}!`}</Text>
           <Text h4 style={{ color: white }}>Create a New Class!</Text>

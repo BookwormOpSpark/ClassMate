@@ -101,6 +101,7 @@ class JoinClass extends React.Component {
           className="Join a class"
           back={false}
         />
+        <View style={{ padding: 5 }} />
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${student.First_name}!`}</Text>
           {/* <Icon color={yellow} name="rocket" size={30} /> */}
