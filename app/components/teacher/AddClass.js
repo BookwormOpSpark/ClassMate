@@ -102,7 +102,9 @@ class AddClass extends React.Component {
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${teacher.First_name}!`}</Text>
           <Text h4 style={{ color: white }}>Create a New Class!</Text>
-          <Icon color={yellow} name="rocket" size={30} />
+          <Text></Text>
+          <Text></Text>
+          <Text></Text>
           <FormLabel>Enter the Join Code for the class</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ joinCode: text })}

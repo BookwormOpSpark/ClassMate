@@ -88,12 +88,11 @@ export default class JoinClass extends React.Component {
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.handleSubmit}
-            backgroundColor={blue}
+            backgroundColor={green}
             rounded
             title="Join!"
           />
-          <Text h5>{className ? `You are now enrolled in ${className}` : ''}</Text>
-          <Text>{className ? <Icon color="blue" name="thumb-up" size={20} /> : ''}</Text>
+          <Text h5 style={{ fontSize: 25, color: white }}>{className ? `You are now enrolled in ${className}` : ''}</Text>
 
         </View>
       </ImageBackground>
