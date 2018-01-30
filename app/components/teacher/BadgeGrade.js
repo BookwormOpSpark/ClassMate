@@ -10,7 +10,7 @@ class BadgeGrade extends React.Component {
   constructor(props) {
     super(props);
     console.log('badge')
-    console.log(this.props.state.dashboard)
+    // console.log(this.props.state.dashboard)
     this.state = { language: '' };
   }
   render() {

@@ -10,7 +10,7 @@ class BadgeTime extends React.Component {
   constructor(props) {
     super(props);
     console.log('badge');
-    console.log(this.props.state.classInfo.students);
+    // console.log(this.props.state.classInfo.students);
     this.state = { studentSelected: '' };
   }
   render() {

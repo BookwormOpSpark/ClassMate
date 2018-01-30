@@ -45,6 +45,7 @@ class StudentDashboard extends React.Component {
   }
 
   render() {
+    // console.log(this.props.state, 'this is props.state');
     // NOTE styles is acting up w button
     // const { height, width } = Dimensions.get('window');
     // const styles = StyleSheet.create({
