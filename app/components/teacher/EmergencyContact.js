@@ -57,7 +57,13 @@ class EmergencyContact extends React.Component {
 
   render() {
     // console.log(this.props.state.user)
-    const contactInfo = this.props.state.user.emergencyContactInfo ? this.props.state.user.emergencyContactInfo[0] : {};
+    const contactInfo = this.props.state.user.emergencyContactInfo ? this.props.state.user.emergencyContactInfo[0] : { email: '' };
+    let formattedPhone = contactInfo.email;
+    if (formattedPhone.length) {
+      const digitz = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+      formattedPhone = formattedPhone.split('').filter(char => digitz.includes(char)).join('');
+      formattedPhone = `(${formattedPhone.slice(0, 3)})-${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`;
+    }
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -160,7 +166,7 @@ class EmergencyContact extends React.Component {
                     <Text
                       onPress={() => this.callNumber(`tel:1-${contactInfo.email}`)}
                       style={{ textDecorationLine: 'underline' }}
-                    >{`1-(${contactInfo.email.slice(0, 3)})-${contactInfo.email.slice(3, 6)}-${contactInfo.email.slice(6)}`}
+                    >{`1-${formattedPhone}`}
                     </Text>
                   </CardItem>
                 </Card>

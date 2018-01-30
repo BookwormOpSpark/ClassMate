@@ -56,7 +56,12 @@ class SpecificStudent extends React.Component {
         },
       });
       const className = this.props.state.selectSession.sessionName;
-
+      let formattedPhone = this.props.state.specificStudent.emergencyContact ? this.props.state.specificStudent.emergencyContact.phone : '';
+      if (formattedPhone.length) {
+        const digitz = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        formattedPhone = formattedPhone.split('').filter(char => digitz.includes(char)).join('');
+        formattedPhone = `${formattedPhone.slice(0, 3)}-${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`;
+      }
       return (
         <ImageBackground
           source={blackboard}
@@ -89,10 +94,10 @@ class SpecificStudent extends React.Component {
                 <Text
                   p
                   style={{ textAlign: 'center', marginTop: 30, fontWeight: 'bold', color: white, fontSize: 30, marginLeft: -25 }}
-                  onPress={() => this.callNumber(`tel:1-${this.props.state.specificStudent.emergencyContact.phone}`)}
+                  onPress={() => this.callNumber(`tel:1-${formattedPhone}`)}
                 >
                   <Icon name="ios-call" color="green" size={35} />
-                  {`    ${this.props.state.specificStudent.emergencyContact.phone}`}
+                  {`    ${formattedPhone}`}
                 </Text>
               </View>
                     :
