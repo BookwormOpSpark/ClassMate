@@ -33,7 +33,7 @@ class StudentLogin extends React.Component {
     axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
         if (res.data === 'Incorrect Password') {
-          console.log('wrong password');
+          // console.log('wrong password');
         } else {
           let emergencyContactInfo = null;
           if (res.data.emergencyContact !== null) {
@@ -48,7 +48,7 @@ class StudentLogin extends React.Component {
             emergencyContact: res.data.id_emergencyContact,
             emergencyContactInfo,
           };
-          console.log('user: ', user);
+          // console.log('user: ', user);
           return this.props.dispatch(getUser(user));
         }
       })
