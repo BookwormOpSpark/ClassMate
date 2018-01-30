@@ -11,11 +11,24 @@ import DashHeader from '../shared/Header';
 class ClassBadges extends React.Component {
   constructor(props) {
     super(props);
+    this.springValue = new Animated.Value(0.7);
     this.animatedValue = new Animated.Value(0);
+    this.spring = this.spring.bind(this);
   }
   componentDidMount() {
+    this.spring();
   }
-
+  spring() {
+    this.springValue.setValue(0.7);
+    Animated.spring(
+      this.springValue,
+      {
+        toValue: 1,
+        friction: 1,
+        tension: 1,
+      },
+    ).start();
+  }
 
   render() {
     const styles = StyleSheet.create({
@@ -81,20 +94,66 @@ class ClassBadges extends React.Component {
                 style={styles.animated}
               >
                 <Icon
-                  color="gold"
+                  color="#FF9F1C"
                   name="trophy"
                   size={100}
-                  onPress={() => this.props.navigation.navigate('BadgeBahavior')}
+                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
                   style={styles.icon}
                 />
                 <Button
-                  onPress={() => this.props.navigation.navigate('BadgeBahavior')}
+                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
                   buttonStyle={styles.button}
-                  backgroundColor="gold"
+                  backgroundColor="#FF9F1C"
                   rounded
                   small
                   color="black"
-                  title="Badge for good behavior"
+                  title="Good Spirit"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="#2EC4B6"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
+                  buttonStyle={styles.button}
+                  backgroundColor="#2EC4B6"
+                  small
+                  rounded
+                  color="black"
+                  title="Good grades"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="green"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeBehavior')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeBehavior')}
+                  buttonStyle={styles.button}
+                  backgroundColor="green"
+                  small
+                  rounded
+                  color="black"
+                  title="Good behavior"
                 />
               </Animated.View>
             </View>
@@ -115,55 +174,9 @@ class ClassBadges extends React.Component {
                   buttonStyle={styles.button}
                   backgroundColor="gold"
                   small
-                  rounded
-                  color="black"
-                  title="Badge for good punctuality"
-                />
-              </Animated.View>
-            </View>
-
-            <View style={styles.item}>
-              <Animated.View
-                style={styles.animated}
-              >
-                <Icon
-                  color="gold"
-                  name="trophy"
-                  style={styles.icon}
-                  size={100}
-                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
-                />
-                <Button
-                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
-                  buttonStyle={styles.button}
-                  backgroundColor="gold"
-                  small
-                  rounded
-                  color="black"
-                  title="Badge for good grades"
-                />
-              </Animated.View>
-            </View>
-
-            <View style={styles.item}>
-              <Animated.View
-                style={styles.animated}
-              >
-                <Icon
-                  color="gold"
-                  name="trophy"
-                  style={styles.icon}
-                  size={100}
-                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
-                />
-                <Button
-                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
-                  buttonStyle={styles.button}
-                  backgroundColor="gold"
-                  small
                   color="black"
                   rounded
-                  title="Badges for team spirit!"
+                  title="Good punctuality"
                 />
               </Animated.View>
             </View>
