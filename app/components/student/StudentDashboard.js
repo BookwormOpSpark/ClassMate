@@ -24,12 +24,14 @@ class StudentDashboard extends React.Component {
   }
 
   componentWillMount() {
+    console.log('above axios: ', this.props.state.user.id);
+    console.log('props state user: ', this.props.state.user);
     axios.get(`${SERVER_URI}${DashboardRoute}`, {
       params: {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      // console.log(res.data);
+      console.log(res.data);
       this.props.dispatch(getDashboard(res.data));
       this.state.isLoaded = true;
       this.setState({ assignments: res.data.sessionInfo.assignments });
@@ -82,6 +84,7 @@ class StudentDashboard extends React.Component {
     //     justifyContent: 'center',
     //   },
     // });
+    console.log('this.props.state: ', this.props.state);
     const { user } = this.props.state;
 
     return (
