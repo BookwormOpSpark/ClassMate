@@ -7,7 +7,7 @@ import {
   StatusBar,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import { Permissions, BarCodeScanner } from 'expo';
 import PropTypes from 'prop-types';
@@ -127,7 +127,10 @@ class CheckIn extends Component {
             </Text>
             : <BarCodeScanner
               onBarCodeRead={this._handleBarCodeRead}
-                style={{ height: 400, width: 400 }}
+              style={{
+                height: Dimensions.get('window').height,
+                width: Dimensions.get('window').width,
+              }}
             />}
           {this._maybeRenderUrl()}
           <StatusBar hidden />
