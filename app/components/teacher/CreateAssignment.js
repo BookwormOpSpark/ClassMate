@@ -36,7 +36,6 @@ class CreateAssignment extends React.Component {
           ],
           { cancelable: false },
         );
-        
       })
       .catch(err => console.error(err));
   }

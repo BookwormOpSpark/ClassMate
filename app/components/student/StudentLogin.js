@@ -5,14 +5,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
-import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, ImageBackground, Image, Alert } from 'react-native';
 import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-elements';
 import { Header, Title, Left, Right, Body, Button } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/logo.png';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
-import {blue, white, yellow, orange, red, green } from '../../style/colors';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class StudentLogin extends React.Component {
   constructor(props) {
@@ -32,36 +32,36 @@ class StudentLogin extends React.Component {
     // console.log(student);
     axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
-        let emergencyContactInfo = null;
-        if (res.data.emergencyContact !== null) {
-          emergencyContactInfo = res.data.emergencyContact;
+        if(res.data === 'user not found'){
+          Alert.alert('Username not found');
         }
-        // console.log('res', res.data);
-        const user = {
-          id: res.data.user.id,
-          First_name: res.data.user.nameFirst,
-          Last_name: res.data.user.nameLast,
-          email: res.data.user.email,
-          picture: { data: { url: res.data.user.photoUrl } },
-          emergencyContact: res.data.user.id_emergencyContact,
-          emergencyContactInfo,
-        };
-        // console.log(this.props.dispatch(getUser(user)));
-        return this.props.dispatch(getUser(user));
+        else if (res.data === 'incorrect password') {
+          Alert.alert('Incorrect Password');
+        } else {
+          let emergencyContactInfo = null;
+          if (res.data.emergencyContact !== null) {
+            emergencyContactInfo = res.data.emergencyContact;
+          }
+          const user = {
+            id: res.data.id,
+            First_name: res.data.nameFirst,
+            Last_name: res.data.nameLast,
+            email: res.data.email,
+            picture: { data: { url: res.data.photoUrl } },
+            emergencyContact: res.data.id_emergencyContact,
+            emergencyContactInfo,
+          };
+          return this.props.dispatch(getUser(user));
+        }
       })
-      .then((res) => {
-        // console.log(res, 'bottom res');
-        const verified = res.payload.id;
-        if (verified) {
-          // this.props.navigation.navigate('StudentDashboardNavigation');
-          const resetStack = NavigationActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
-            ],
-          });
-          this.props.navigation.dispatch(resetStack);
-        }
+      .then(() => {
+        const resetStack = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
+          ],
+        });
+        this.props.navigation.dispatch(resetStack);
       })
       .catch(err => console.error(err));
   }
@@ -112,7 +112,7 @@ class StudentLogin extends React.Component {
           />
           <FormLabel>Password</FormLabel>
           <FormInput
-            secureTextEntry = {true}
+            secureTextEntry
             onChangeText={text => this.setState({ password: text })}
             style={{ paddingHorizontal: 10 }}
           />
