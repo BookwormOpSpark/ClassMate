@@ -51,15 +51,17 @@ class StudentLogin extends React.Component {
             emergencyContact: res.data.id_emergencyContact,
             emergencyContactInfo,
           };
-          const resetStack = NavigationActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
-            ],
-          });
-          this.props.navigation.dispatch(resetStack);
           return this.props.dispatch(getUser(user));
         }
+      })
+      .then(() => {
+        const resetStack = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
+          ],
+        });
+        this.props.navigation.dispatch(resetStack);
       })
       .catch(err => console.error(err));
   }
