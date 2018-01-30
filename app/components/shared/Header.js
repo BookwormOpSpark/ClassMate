@@ -22,9 +22,9 @@ export default class DashHeader extends React.Component {
   render() {
     const { navigation, className, back } = this.props;
     return (
-      <Header style={{ backgroundColor: blue, justifyContent: 'center' }}>
+      <Header style={{ backgroundColor: blue, justifyContent: 'center', marginTop: 23 }}>
         <Left style={{ flexDirection: 'row' }}>
-          {back &&
+          {back ?
             <Button
               transparent
               onPress={() => navigation.goBack()}
@@ -32,16 +32,17 @@ export default class DashHeader extends React.Component {
             >
               <Icon name="arrow-left-thick" size={30} color={yellow} />
             </Button>
+          :
+            <Button
+              transparent
+              onPress={() => navigation.navigate('DrawerOpen')}
+            >
+              <Icon name="menu" size={30} color={yellow} />
+            </Button>
           }
-          <Button
-            transparent
-            onPress={() => navigation.navigate('DrawerOpen')}
-          >
-            <Icon name="menu" size={30} color={yellow} />
-          </Button>
         </Left>
-        <Body>
-          <H3 style={{ color: yellow }} >{className}</H3>
+        <Body style={{ alignItems: 'center', marginBottom: 10, paddingLeft: -100, paddingRight: -100 }}>
+          <H3 style={{ color: yellow, marginLeft: 70 }} >{className}</H3>
         </Body>
         <Right>
           <Image source={logo} style={{ width: 30, height: 30 }} />
