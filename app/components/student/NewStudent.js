@@ -10,7 +10,7 @@ import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-element
 import { Header, Title, Left, Right, Body, Button } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/logo.png';
-import { SERVER_URI, StudentLoginRoute } from '../../constant';
+import { SERVER_URI, StudentCreateRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
@@ -30,7 +30,7 @@ class NewStudent extends React.Component {
   onLogin() {
     const student = this.state;
     // console.log(student);
-    axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
+    axios.post(`${SERVER_URI}${StudentCreateRoute}`, student)
       .then((res) => {
         let emergencyContactInfo = null;
         if (res.data.emergencyContact !== null) {

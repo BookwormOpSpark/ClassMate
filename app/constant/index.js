@@ -1,9 +1,10 @@
 export const androidClientId = '29245857360-gi2ilv6b04e6mpn9icn9ngiq0buq4elr.apps.googleusercontent.com';
 export const iosClientId = '766434726628-1guelram8v9kr9mtapqa2587ss7bc6sl.apps.googleusercontent.com';
-export const SERVER_URI = 'http://7025580b.ngrok.io';
+export const SERVER_URI = 'http://ea4ef52d.ngrok.io';
 // *********Route************//
 export const TeacherLoginRoute = '/login';
-export const StudentLoginRoute = '/studentCreate';
+export const StudentLoginRoute = '/studentLogin';
+export const StudentCreateRoute = '/studentCreate';
 export const DashboardRoute = '/dashboard'; // send user_id and get back the session_id, session_name and due_dates
 export const JoinClassRoute = '/joinClass'; // POST user_id and joincode => get back name_class and session_id and particpant_id
 export const AddClassRoute = '/addClass'; // send class name, teacher_id, joincode => get back ?
