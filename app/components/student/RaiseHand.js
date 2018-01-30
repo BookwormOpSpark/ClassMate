@@ -9,13 +9,8 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
-<<<<<<< HEAD
 import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
 import DashHeader from '../shared/Header';
-=======
-import DashHeader from '../shared/Header';
-import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
->>>>>>> c9859a242cd2be71d435dddc4604e483814fa493
 
 class RaiseHand extends React.Component {
   constructor(props) {
