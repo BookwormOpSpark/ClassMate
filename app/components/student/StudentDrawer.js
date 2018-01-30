@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Permissions, Notifications } from 'expo';
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logOut, selectSession, getClassInfo } from '../../actions/actions';
-import { SERVER_URI, ClassInfoRoute } from '../../constant';
+import { SERVER_URI, ClassInfoRoute, SendFirstNotification } from '../../constant';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class StudentDrawer extends Component {
@@ -15,6 +16,7 @@ class StudentDrawer extends Component {
     // console.log('Student DRAWER PROPS', this.props);
     this.state = {};
     this.LogOut = this.LogOut.bind(this);
+    this.registerForPushNotificationsAsync = this.registerForPushNotificationsAsync.bind(this);
   }
 
   onSelect = async (item) => {
@@ -47,6 +49,47 @@ class StudentDrawer extends Component {
       index: 0,
       actions: [NavigationActions.navigate({ routeName: 'Home' })],
     }));
+  }
+
+  registerForPushNotificationsAsync = async () => {
+    const PUSH_ENDPOINT = `${SERVER_URI}${SendFirstNotification}`;
+    const userID = this.props.state.user.id;
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+
+    // only ask if permissions have not already been determined, because
+    // iOS won't necessarily prompt the user a second time.
+    if (existingStatus !== 'granted') {
+      // Android remote notification permissions are granted during the app
+      // install, so this will only ask on iOS
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+
+    // Stop here if the user did not grant permissions
+    if (finalStatus !== 'granted') {
+      return;
+    }
+
+    // Get the token that uniquely identifies this device
+    const token = await Notifications.getExpoPushTokenAsync();
+
+    // POST the token to your backend server from where you can
+    // retrieve it to send push notifications.
+    return fetch(PUSH_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        // token: {
+        //   value: token,
+        // },
+        token: token,
+        userID: userID
+      }),
+    });
   }
 
   navigateToScreen = route => () => {
@@ -134,14 +177,14 @@ class StudentDrawer extends Component {
           </View>
         </ScrollView>
         <View style={styles.footerContainer}>
-          {/* <Button
-            onPress={this.navigateToScreen('CheckIn')}
-            buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
-            iconRight={{ name: 'done' }}
-            backgroundColor="green"
+          <Button
+            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+            onPress={this.registerForPushNotificationsAsync}
+            iconRight={{ name: 'exit-to-app' }}
+            backgroundColor={blue}
             rounded
-            title="CheckIn"
-          /> */}
+            title="Accept Notifications"
+          />
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.LogOut}

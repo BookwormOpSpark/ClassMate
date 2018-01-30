@@ -12,8 +12,6 @@ import { SERVER_URI, SendBadges, SendBadgeNotification } from '../../constant';
 class BadgeTime extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('badge');
-    // console.log(this.props.state.classInfo.students);
     this.state = { studentSelected: '' };
     this.postBadge = this.postBadge.bind(this);
   }
@@ -21,16 +19,13 @@ class BadgeTime extends React.Component {
   postBadge = async () => {
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
-    console.log(students);
     const student = this.state.studentSelected.split(' ');
     const studentArr = students.filter(item => item.nameFirst === student[0] && item.nameLast === student[1]);
-    const studentID = studentArr[0].id;
+    const studentID = studentArr[0].participantId;
     const userID = studentArr[0].id;
 
-    console.log(studentID);
-
     await axios.post(`${SERVER_URI}${SendBadges}`, { type: 'type1', studentID })
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.log(err));
     await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userID })
       .then(res => console.log(res))
@@ -53,9 +48,6 @@ class BadgeTime extends React.Component {
     });
     const className = this.props.state.selectSession.sessionName;
     const { students } = this.props.state.classInfo;
-    const { studentSelected } = this.state;
-    console.log(studentSelected);
-
     return (
       <ImageBackground
         source={blackboard}
