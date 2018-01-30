@@ -176,7 +176,7 @@ class ClassBadges extends React.Component {
                   small
                   color="black"
                   rounded
-                  title="Good punctuality"
+                  title="Good timing"
                 />
               </Animated.View>
             </View>
