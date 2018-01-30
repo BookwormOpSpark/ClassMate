@@ -39,6 +39,7 @@
     "eslint": "^4.15.0",
     "exp": "^47.4.4",
     "expo": "^23.0.4",
+    "expo-three": "^2.2.2-alpha.0",
     "inherits": "^2.0.3",
     "ionicons": "^3.0.0",
     "jest-expo": "23.0.0",
@@ -58,6 +59,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "socket.io-client": "^2.0.4",
+    "three": "^0.89.0",
     "util": "^0.10.3"
   }
 }

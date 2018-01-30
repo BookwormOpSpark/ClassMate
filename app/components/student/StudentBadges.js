@@ -1,124 +1,67 @@
+import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
-import { Text } from 'react-native-elements';
-import { Badge, Icon } from 'native-base';
+import ExpoTHREE from 'expo-three';
+import { Dimensions } from 'react-native';
+import * as THREE from 'three';
+console.disableYellowBox = true;
 
-import DashHeader from '../shared/Header';
-import blackboard from '../../assets/blackboard.jpg';
 
 export default class StudentBadges extends React.Component {
   constructor() {
     super();
     this.state = { text: '' };
+    this._onGLContextCreate = this._onGLContextCreate.bind(this);
   }
-  render() {
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-      },
-      allBadges: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-      },
-      badge: {
-        width: 150,
-        height: 150,
-        borderRadius: 150,
-        marginTop: 15,
-        marginBottom: 15,
-      },
-      icon: {
-        fontSize: 30,
-        color: 'yellow',
-        lineHeight: 20,
-        alignSelf: 'center',
-        marginTop: 30,
-      },
-      text: {
-        textAlign: 'center',
-        alignItems: 'center',
-        color: 'yellow',
-        fontSize: 15,
-        fontStyle: 'italic',
-      },
+
+
+  _onGLContextCreate = async (gl) => {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      gl.drawingBufferWidth / gl.drawingBufferHeight,
+      0.1,
+      1000);
+    const renderer = ExpoTHREE.createRenderer({ gl });
+    renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+    renderer.setClearColor(0xffffff);
+
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material1 = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/classmatelogoicon.png')),
+      }),
     });
+    const material2 = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/blackboard.jpg')),
+      }),
+    });
+    const cube1 = new THREE.Mesh(geometry, material1);
+    const cube2 = new THREE.Mesh(geometry, material2);
+    scene.add(cube1);
+    scene.add(cube2);
+    camera.position.z = 5;
+    const animate = () => {
+      requestAnimationFrame(animate);
+      cube1.rotation.x += 0.05;
+      cube1.rotation.y += 0.03;
+      cube2.rotation.x += 0.05;
+      cube2.rotation.y += 0.03;
+      renderer.render(scene, camera);
+      gl.endFrameEXP();
+    };
+    animate();
+  };
 
+  render() {
     return (
-      <ImageBackground
-        source={blackboard}
-        style={{
-          backgroundColor: '#000000',
-          flex: 1,
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-        }}
-      >
-        <DashHeader
-          navigation={this.props.navigation}
-          className="badges"
-          back
-        />
-        <View style={styles.container}>
-          <View style={styles.allBadges}>
-            <Badge
-              primary
-              style={styles.badge}
-            >
-              <Icon
-                name="star"
-                style={styles.icon}
-              />
-              <Text style={styles.text}> Award for good grades!</Text>
-            </Badge>
-            <Badge
-              info
-              style={styles.badge}
-            >
-              <Icon
-                name="star"
-                style={styles.icon}
-              />
-              <Text style={styles.text}> Award for good behavior!</Text>
-            </Badge>
-            <Badge
-              danger
-              style={styles.badge}
-            >
-              <Icon
-                name="star"
-                style={styles.icon}
-              />
-              <Text style={styles.text}> Award for good attitude!</Text>
-            </Badge>
-            <Badge
-              warning
-              style={styles.badge}
-            >
-              <Icon
-                name="star"
-                style={styles.icon}
-              />
-              <Text style={styles.text}> Award for good grades!</Text>
-            </Badge>
-
-
-          </View>
-        </View>
-      </ImageBackground>
+      <Expo.GLView
+        style={{ flex: 1 }}
+        onContextCreate={this._onGLContextCreate}
+      />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

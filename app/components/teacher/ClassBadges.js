@@ -1,67 +1,189 @@
-import Expo from 'expo';
 import React from 'react';
-import ExpoTHREE from 'expo-three';
-import { Dimensions } from 'react-native';
-import * as THREE from 'three';
-console.disableYellowBox = true;
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PropTypes from 'prop-types';
+import { StyleSheet, View, ImageBackground, Animated, Easing } from 'react-native';
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 
 
-export default class StudentBadges extends React.Component {
-  constructor() {
-    super();
-    this.state = { text: '' };
-    this._onGLContextCreate = this._onGLContextCreate.bind(this);
+class ClassBadges extends React.Component {
+  constructor(props) {
+    super(props);
+    this.animatedValue = new Animated.Value(0);
+  }
+  componentDidMount() {
   }
 
 
-  _onGLContextCreate = async (gl) => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      gl.drawingBufferWidth / gl.drawingBufferHeight,
-      0.1,
-      1000);
-    const renderer = ExpoTHREE.createRenderer({ gl });
-    renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
-    renderer.setClearColor(0xffffff);
-
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material1 = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/classmatelogoicon.png')),
-      }),
-    });
-    const material2 = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/blackboard.jpg')),
-      }),
-    });
-    const cube1 = new THREE.Mesh(geometry, material1);
-    const cube2 = new THREE.Mesh(geometry, material2);
-    scene.add(cube1);
-    scene.add(cube2);
-    camera.position.z = 5;
-    const animate = () => {
-      requestAnimationFrame(animate);
-      cube1.rotation.x += 0.05;
-      cube1.rotation.y += 0.03;
-      cube2.rotation.x += 0.05;
-      cube2.rotation.y += 0.03;
-      renderer.render(scene, camera);
-      gl.endFrameEXP();
-    };
-    animate();
-  };
-
   render() {
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+      },
+      badges: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+      },
+      icon: {
+        textShadowColor: 'black',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        textShadowOffset: { width: 5, height: 3 },
+      },
+      button: {
+        marginBottom: 5,
+        marginTop: 5,
+        alignSelf: 'center',
+      },
+      animated: {
+        // transform: [{ scale: this.springValue }],
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+      },
+      item: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+      },
+    });
+    const className = this.props.state.selectSession.sessionName;
+
     return (
-      <Expo.GLView
-        style={{ flex: 1 }}
-        onContextCreate={this._onGLContextCreate}
-      />
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back={false}
+        />
+        <View style={styles.container}>
+
+          <View style={styles.badges}>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="gold"
+                  name="trophy"
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeBahavior')}
+                  style={styles.icon}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeBahavior')}
+                  buttonStyle={styles.button}
+                  backgroundColor="gold"
+                  rounded
+                  small
+                  color="black"
+                  title="Badge for good behavior"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="gold"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeTime')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeTime')}
+                  buttonStyle={styles.button}
+                  backgroundColor="gold"
+                  small
+                  rounded
+                  color="black"
+                  title="Badge for good punctuality"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="gold"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
+                  buttonStyle={styles.button}
+                  backgroundColor="gold"
+                  small
+                  rounded
+                  color="black"
+                  title="Badge for good grades"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="gold"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
+                  buttonStyle={styles.button}
+                  backgroundColor="gold"
+                  small
+                  color="black"
+                  rounded
+                  title="Badges for team spirit!"
+                />
+              </Animated.View>
+            </View>
+          </View>
+        </View>
+      </ImageBackground>
+
     );
   }
 }
 
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(ClassBadges);
+
+
+ClassBadges.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
