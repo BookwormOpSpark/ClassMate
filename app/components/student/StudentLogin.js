@@ -95,7 +95,7 @@ class StudentLogin extends React.Component {
         <Button
           transparent
           onPress={() => this.props.navigation.goBack()}
-          style={{ paddingTop: 50, paddingHorizontal: 10 }}
+          style={{ paddingTop: 45, paddingHorizontal: 10, paddingBottom: 25 }}
         >
           <Icon name="arrow-left-thick" size={50} color={yellow} />
         </Button>
