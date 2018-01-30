@@ -1,10 +1,6 @@
 export const androidClientId = '29245857360-gi2ilv6b04e6mpn9icn9ngiq0buq4elr.apps.googleusercontent.com';
 export const iosClientId = '766434726628-1guelram8v9kr9mtapqa2587ss7bc6sl.apps.googleusercontent.com';
-<<<<<<< HEAD
-export const SERVER_URI = 'https://05bc3bfd.ngrok.io';
-=======
-export const SERVER_URI = 'https://75bb4eb0.ngrok.io';
->>>>>>> ef51674b48dc509e6bc568343b32e181c93c881f
+export const SERVER_URI = 'https://42179311.ngrok.io';
 // *********Route************//
 export const TeacherLoginRoute = '/login';
 export const StudentLoginRoute = '/studentLogin';
@@ -18,12 +14,13 @@ export const ClassSchedule = '/classSchedule'; // googleCalendar API
 export const ClassRoster = '/classRoster'; // send session_id => get back all the participants
 export const GetAssignments = '/getAssignment'; // send session_id => get back all the assignments
 export const CreateAssignments = '/createAssignment'; // send session_id => get back all the assignments
-export const StudentInformation = '/studentInformation'; // send student_id and get back specific student info 
-export const QueueRoute = '/queue'; // send student_id and get back specific student info 
-export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info 
-export const PostFunStuff = '/funStuff'; // send student_id and get back specific student info 
+export const StudentInformation = '/studentInformation'; // send student_id and get back specific student info
+export const QueueRoute = '/queue'; // send student_id and get back specific student info
+export const ClassInfoRoute = '/classInfo'; // send student_id and get back specific student info
+export const PostFunStuff = '/funStuff'; // send student_id and get back specific student info
 export const CreateEmergencyContact = '/createEmergencyContact'; // sends userID and batch of info and creates emergencyContact for user
 export const CheckAssignment = '/checkAssignment'; // sends sesssionID and assignmentID to get back list of students and whether or not they have completed the assignment
 export const CreateAssignment = '/createAssignment'; // sends title, dueDate, and sessionID and creates Assignment associated with that session
-export const SendNotifications = '/notifications'; // sends title, dueDate, and sessionID and creates Assignment associated with that session
-export const DeleteFunStuff = '/deleteFunStuff'; // sends funStuffID and deletes funStuff in question.
+export const SendFirstNotification = '/firstNotification';
+export const SendBadgeNotification = '/badgeNotification';
+export const SendBadges = '/badges';
