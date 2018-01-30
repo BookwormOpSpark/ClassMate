@@ -48,12 +48,14 @@ export default class ClassBadges extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        token: {
-          value: token,
-        },
-        user: {
-          username: 'Lili',
-        },
+        // token: {
+        //   value: token,
+        // },
+        token: token,
+        userID: userID
+        // user: {
+        //   username: 'Lili',
+        // },
       }),
     });
   }
