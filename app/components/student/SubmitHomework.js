@@ -131,7 +131,7 @@ class SubmitHomework extends React.Component {
           />
           <Button
             buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-            title="Post to Homeworks!"
+            title="Submit Homework!"
             iconRight={{ name: 'done', color: 'black' }}
             backgroundColor={white}
             borderRadius={5}
@@ -139,7 +139,7 @@ class SubmitHomework extends React.Component {
             onPress={this._postHomework}
           />
           <View>{this.state.loading ? <Spinner color={white} /> : null}</View>
-          <Text style={{ textAlign: 'center', color: white }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
+          <Text style={{ textAlign: 'center', color: white }}>{this.state.loading ? 'Document Loading ...' : ''}</Text>
           {image &&
           <Image source={{ uri: image }} style={{ width: 250, height: 350 }} />}
         </View>

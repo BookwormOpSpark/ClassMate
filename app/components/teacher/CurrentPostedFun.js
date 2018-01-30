@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { Video } from 'expo';
 import { Card, CardItem, Body, Button, Icon } from 'native-base';
-import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageBackground, Alert } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
-import { SERVER_URI, PostFunStuff } from '../../constant';
+import { SERVER_URI, PostFunStuff, DeleteFunStuff } from '../../constant';
 import DashHeader from '../shared/Header';
 
 class CurrentPostedFun extends React.Component {
@@ -28,6 +28,7 @@ class CurrentPostedFun extends React.Component {
     this.renderYouTube = this.renderYouTube.bind(this);
     this.renderInternetLink = this.renderInternetLink.bind(this);
     this.keyExtractor = this.keyExtractor.bind(this);
+    this.onDelete = this.onDelete.bind(this);
 
     this.styles = StyleSheet.create({
       container: {
@@ -78,11 +79,29 @@ class CurrentPostedFun extends React.Component {
     });
   }
 
+
   componentDidMount() {
     const session = this.props.state.selectSession.sessionID || 5;
     axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
       .then((res) => {
         this.setState({ fun: res.data });
+      })
+      .catch(err => console.error(err));
+  }
+
+  onDelete = (item) => {
+    console.log(item, 'item coming through from onDelete');
+    const id = item.id;
+    const link = item.link
+    console.log(id, link, 'id and link before sending to route')
+    axios.delete(`${SERVER_URI}${DeleteFunStuff}/${id}`)
+      .then((res) => {
+        console.log(res);
+        axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
+          .then((result) => {
+            this.setState({ fun: result.data });
+          })
+          .catch(err => console.error(err));
       })
       .catch(err => console.error(err));
   }
