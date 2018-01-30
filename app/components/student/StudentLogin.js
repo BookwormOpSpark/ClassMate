@@ -20,8 +20,7 @@ class StudentLogin extends React.Component {
     this.state = {
       username: '',
       password: '',
-      nameFirst: '',
-      nameLast: '',
+      authenticated: false,
     };
     this.onLogin = this.onLogin.bind(this);
     this.newStudent = this.newStudent.bind(this);
@@ -29,15 +28,14 @@ class StudentLogin extends React.Component {
 
   onLogin() {
     const student = this.state;
-    // console.log(student);
     axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
-        if(res.data === 'user not found'){
+        if (res.data === 'user not found') {
           Alert.alert('Username not found');
-        }
-        else if (res.data === 'incorrect password') {
+        } else if (res.data === 'incorrect password') {
           Alert.alert('Incorrect Password');
         } else {
+          this.state.authenticated = true;
           let emergencyContactInfo = null;
           if (res.data.emergencyContact !== null) {
             emergencyContactInfo = res.data.emergencyContact;
@@ -55,13 +53,15 @@ class StudentLogin extends React.Component {
         }
       })
       .then(() => {
-        const resetStack = NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
-          ],
-        });
-        this.props.navigation.dispatch(resetStack);
+        if (this.state.authenticated) {
+          const resetStack = NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
+            ],
+          });
+          this.props.navigation.dispatch(resetStack);
+        }
       })
       .catch(err => console.error(err));
   }
