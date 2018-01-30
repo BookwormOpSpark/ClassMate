@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import { Permissions, Notifications } from 'expo';
-import { SERVER_URI, SendNotifications } from '../../constant';
+import { SERVER_URI, SendFirstNotification } from '../../constant';
 import DashHeader from '../shared/Header';
 import blackboard from '../../assets/blackboard.jpg';
 
@@ -18,7 +18,7 @@ export default class ClassBadges extends React.Component {
 
 
   registerForPushNotificationsAsync= async () => {
-    const PUSH_ENDPOINT = `${SERVER_URI}${SendNotifications}`;
+    const PUSH_ENDPOINT = `${SERVER_URI}${SendFirstNotification}`;
     const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
     let finalStatus = existingStatus;
 

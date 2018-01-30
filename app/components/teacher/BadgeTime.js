@@ -7,7 +7,7 @@ import { Button, Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
-import { SERVER_URI, SendBadges } from '../../constant';
+import { SERVER_URI, SendBadges, SendBadgeNotification } from '../../constant';
 
 class BadgeTime extends React.Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class BadgeTime extends React.Component {
     console.log(studentID);
 
     await axios.post(`${SERVER_URI}${SendBadges}`, { badgeType: 'type1', studentID });
+    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { badgeType: 'type1', studentID });
   }
 
   render() {

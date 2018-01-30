@@ -21,5 +21,6 @@ export const PostFunStuff = '/funStuff'; // send student_id and get back specifi
 export const CreateEmergencyContact = '/createEmergencyContact'; // sends userID and batch of info and creates emergencyContact for user
 export const CheckAssignment = '/checkAssignment'; // sends sesssionID and assignmentID to get back list of students and whether or not they have completed the assignment
 export const CreateAssignment = '/createAssignment'; // sends title, dueDate, and sessionID and creates Assignment associated with that session
-export const SendNotifications = '/notifications';
+export const SendFirstNotification = '/firstNotification';
+export const SendBadgeNotification = '/badgeNotifications';
 export const SendBadges = '/badges';
