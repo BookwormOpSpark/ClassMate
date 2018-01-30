@@ -166,7 +166,7 @@ class EmergencyContact extends React.Component {
                     <Text
                       onPress={() => this.callNumber(`tel:1-${contactInfo.email}`)}
                       style={{ textDecorationLine: 'underline' }}
-                    >{`1-(${contactInfo.email.slice(0, 3)})-${contactInfo.email.slice(3, 6)}-${contactInfo.email.slice(6)}`}
+                    >{`1-${formattedPhone}`}
                     </Text>
                   </CardItem>
                 </Card>
