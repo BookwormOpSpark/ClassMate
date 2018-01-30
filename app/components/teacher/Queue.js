@@ -8,6 +8,7 @@ import { List, ListItem, Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import { white } from '../../style/colors';
 
 
 class Queue extends React.Component {
@@ -78,8 +79,7 @@ class Queue extends React.Component {
             scrollEnabled
           >
             <View style={{ alignItems: 'center' }}>
-              <Text h1 style={{ color: '#f4d35e' }}>{className || 'Class'}</Text>
-              <Text h4 style={{ color: '#f4d35e' }}>
+              <Text h3 style={{ color: white }}>
                 {this.state.messages.length > 0 ? 'Hands Raised' : 'No Hands Currently Raised' }
               </Text>
             </View>

@@ -5,7 +5,7 @@ import { StyleSheet, View, Image, Linking, ImageBackground } from 'react-native'
 import { Button, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
-import { white } from '../../style/colors';
+import { white, red } from '../../style/colors';
 import DashHeader from '../shared/Header';
 
 class SpecificStudent extends React.Component {
@@ -83,7 +83,7 @@ class SpecificStudent extends React.Component {
             <Text h3 style={{ color: white }}>5th Grade</Text>
             {this.props.state.specificStudent.emergencyContact ?
               <View>
-                <Text h4 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold', color: white }}>Emergency Contact</Text>
+                <Text h4 style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold', color: red }}>Emergency Contact</Text>
                 <Text p style={styles.text}>{`${this.props.state.specificStudent.emergencyContact.nameFirst} ${this.props.state.specificStudent.emergencyContact.nameLast}`}</Text>
                 <Text p style={styles.text} leftIcon="ios-call-outline" >{`${this.props.state.specificStudent.emergencyContact.address}`}</Text>
                 <Text
@@ -91,7 +91,7 @@ class SpecificStudent extends React.Component {
                   style={{ textAlign: 'center', marginTop: 30, fontWeight: 'bold', color: white, fontSize: 30, marginLeft: -25 }}
                   onPress={() => this.callNumber(`tel:1-${this.props.state.specificStudent.emergencyContact.phone}`)}
                 >
-                  <Icon name="ios-call" color="green" size={25} />
+                  <Icon name="ios-call" color="green" size={35} />
                   {`    ${this.props.state.specificStudent.emergencyContact.phone}`}
                 </Text>
               </View>

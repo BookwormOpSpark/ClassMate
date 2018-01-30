@@ -208,7 +208,7 @@ class Fun extends React.Component {
               h3
               style={this.styles.text}
             >
-              {`Interesting stuff to check out for class ${className}`}
+              {`Check This Out!`}
             </Text>
 
             <Animated.View
