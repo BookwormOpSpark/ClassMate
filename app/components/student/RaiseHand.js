@@ -104,7 +104,7 @@ class RaiseHand extends React.Component {
             scrollEnabled
           >
             <View style={{ alignItems: 'center' }}>
-              <Text h6 style={{ color: '#f4d35e' }}>{`Stand up your phone to be added to the ${className} queue!`}</Text>
+              <Text h6 style={{ color: '#f4d35e', fontSize: 20 }}>{`Lift your phone to raise your hand!`}</Text>
               <Icon color="#f4d35e" name="paw" size={40} />
               <Text style={styles.yellow}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
               <Text>{y > 0.7 ? <Icon color="#f4d35e" name="hand-pointing-right" size={200} /> : ''}</Text>

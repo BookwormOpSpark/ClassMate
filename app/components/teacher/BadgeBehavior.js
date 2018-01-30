@@ -1,16 +1,17 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, Text } from 'react-native';
+import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
-import QRCode from 'react-native-qrcode';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
-import { white } from '../../style/colors';
 
-class QRcode extends React.Component {
+class BadgeBehavior extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    console.log('badge')
+    console.log(this.props.state.dashboard)
+    this.state = { language: '' };
   }
   render() {
     const styles = StyleSheet.create({
@@ -41,13 +42,20 @@ class QRcode extends React.Component {
           back
         />
         <View style={styles.container}>
-          <QRCode
-            value={`${this.props.state.selectSession.sessionID}`}
-            size={250}
-            bgColor="black"
-            fgColor="white"
+          <Icon
+            color="gold"
+            name="trophy"
+            size={100}
+            // onPress={}
+            style={styles.icon}
           />
-          <Text style={{ color: white }}> Have students scan this code to check in for class! </Text>
+          <Picker
+            style={{ width: 100 }}
+            selectedValue={this.state.language}
+            onValueChange={(lang) => this.setState({ language: lang })}>
+            <Picker.Item label="Java" value="java" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
         </View>
       </ImageBackground>
     );
@@ -58,9 +66,9 @@ const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps)(QRcode);
+export default connect(mapStateToProps)(BadgeBehavior);
 
-QRcode.propTypes = {
+BadgeBehavior.propTypes = {
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };

@@ -10,6 +10,7 @@ import { Item, Input, Form, Spinner } from 'native-base';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import { white } from '../../style/colors';
 
 
 class FunPost extends React.Component {
@@ -135,8 +136,8 @@ class FunPost extends React.Component {
           back
         />
         <View style={styles.bigcontainer}>
-          <Text h3 style={{ color: '#faf0ca', textAlign: 'center', marginBottom: 50 }}>
-          Post Fun Stuffs for Class {className}
+          <Text h3 style={{ color: white, textAlign: 'center', marginBottom: 50 }}>
+          Post Fun Stuff Here!
           </Text>
 
           <Button

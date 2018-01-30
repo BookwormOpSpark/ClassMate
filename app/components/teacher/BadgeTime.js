@@ -1,16 +1,17 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, Text } from 'react-native';
+import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
-import QRCode from 'react-native-qrcode';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
-import { white } from '../../style/colors';
 
-class QRcode extends React.Component {
+class BadgeTime extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    console.log('badge');
+    console.log(this.props.state.classInfo.students);
+    this.state = { studentSelected: '' };
   }
   render() {
     const styles = StyleSheet.create({
@@ -22,6 +23,7 @@ class QRcode extends React.Component {
       },
     });
     const className = this.props.state.selectSession.sessionName;
+    const { students } = this.props.state.classInfo;
 
     return (
       <ImageBackground
@@ -41,13 +43,22 @@ class QRcode extends React.Component {
           back
         />
         <View style={styles.container}>
-          <QRCode
-            value={`${this.props.state.selectSession.sessionID}`}
-            size={250}
-            bgColor="black"
-            fgColor="white"
+          <Icon
+            color="gold"
+            name="trophy"
+            size={100}
+            // onPress={}
+            style={styles.icon}
           />
-          <Text style={{ color: white }}> Have students scan this code to check in for class! </Text>
+          <Picker
+            style={{ width: 100 }}
+            selectedValue={this.state.studentSelected}
+            onValueChange={student => this.setState({ studentSelected: student })}
+          >
+            {students.map(student => (
+              <Picker.Item label={student.nameFirst} value={student.nameFirst} />
+            ))}
+          </Picker>
         </View>
       </ImageBackground>
     );
@@ -58,9 +69,9 @@ const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps)(QRcode);
+export default connect(mapStateToProps)(BadgeTime);
 
-QRcode.propTypes = {
+BadgeTime.propTypes = {
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };

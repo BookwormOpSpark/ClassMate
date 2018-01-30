@@ -1,73 +1,73 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
-import { Text, Button } from 'react-native-elements';
-import { Permissions, Notifications } from 'expo';
-import { SERVER_URI, SendNotifications } from '../../constant';
-import DashHeader from '../shared/Header';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PropTypes from 'prop-types';
+import { StyleSheet, View, ImageBackground, Animated, Easing } from 'react-native';
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
+import DashHeader from '../shared/Header';
 
-export default class ClassBadges extends React.Component {
+
+class ClassBadges extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
-    this.registerForPushNotificationsAsync = this.registerForPushNotificationsAsync.bind(this);
+    this.springValue = new Animated.Value(0.7);
+    this.animatedValue = new Animated.Value(0);
+    this.spring = this.spring.bind(this);
   }
-
   componentDidMount() {
+    this.spring();
   }
-
-
-  registerForPushNotificationsAsync= async () => {
-    const PUSH_ENDPOINT = `${SERVER_URI}${SendNotifications}`;
-    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    let finalStatus = existingStatus;
-
-    // only ask if permissions have not already been determined, because
-    // iOS won't necessarily prompt the user a second time.
-    if (existingStatus !== 'granted') {
-      // Android remote notification permissions are granted during the app
-      // install, so this will only ask on iOS
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
-    }
-
-    // Stop here if the user did not grant permissions
-    if (finalStatus !== 'granted') {
-      return;
-    }
-
-    // Get the token that uniquely identifies this device
-    const token = await Notifications.getExpoPushTokenAsync();
-
-    // POST the token to your backend server from where you can
-    // retrieve it to send push notifications.
-    return fetch(PUSH_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+  spring() {
+    this.springValue.setValue(0.7);
+    Animated.spring(
+      this.springValue,
+      {
+        toValue: 1,
+        friction: 1,
+        tension: 1,
       },
-      body: JSON.stringify({
-        token: {
-          value: token,
-        },
-        user: {
-          username: 'Lili',
-        },
-      }),
-    });
+    ).start();
   }
-
 
   render() {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-        backgroundColor: 'transparent',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+      },
+      badges: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+      },
+      icon: {
+        textShadowColor: 'black',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        textShadowOffset: { width: 5, height: 3 },
+      },
+      button: {
+        marginBottom: 5,
+        marginTop: 5,
+        alignSelf: 'center',
+      },
+      animated: {
+        // transform: [{ scale: this.springValue }],
         justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+      },
+      item: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
       },
     });
+    const className = this.props.state.selectSession.sessionName;
+
     return (
       <ImageBackground
         source={blackboard}
@@ -82,23 +82,121 @@ export default class ClassBadges extends React.Component {
       >
         <DashHeader
           navigation={this.props.navigation}
-          className="badges"
-          back
+          className={className}
+          back={false}
         />
         <View style={styles.container}>
-          <Text h1>Class Badges</Text>
-          <Button
-            onPress={this.registerForPushNotificationsAsync}
-            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            backgroundColor="#FF9F1C"
-            rounded
-            small
-            color="black"
-            title="Send Notification Badges"
-          />
+
+          <View style={styles.badges}>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="#FF9F1C"
+                  name="trophy"
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
+                  style={styles.icon}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeSpirit')}
+                  buttonStyle={styles.button}
+                  backgroundColor="#FF9F1C"
+                  rounded
+                  small
+                  color="black"
+                  title="Good Spirit"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="#2EC4B6"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeGrade')}
+                  buttonStyle={styles.button}
+                  backgroundColor="#2EC4B6"
+                  small
+                  rounded
+                  color="black"
+                  title="Good grades"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="green"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeBehavior')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeBehavior')}
+                  buttonStyle={styles.button}
+                  backgroundColor="green"
+                  small
+                  rounded
+                  color="black"
+                  title="Good behavior"
+                />
+              </Animated.View>
+            </View>
+
+            <View style={styles.item}>
+              <Animated.View
+                style={styles.animated}
+              >
+                <Icon
+                  color="gold"
+                  name="trophy"
+                  style={styles.icon}
+                  size={100}
+                  onPress={() => this.props.navigation.navigate('BadgeTime')}
+                />
+                <Button
+                  onPress={() => this.props.navigation.navigate('BadgeTime')}
+                  buttonStyle={styles.button}
+                  backgroundColor="gold"
+                  small
+                  color="black"
+                  rounded
+                  title="Good punctuality"
+                />
+              </Animated.View>
+            </View>
+          </View>
         </View>
       </ImageBackground>
+
     );
   }
 }
 
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(ClassBadges);
+
+
+ClassBadges.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
