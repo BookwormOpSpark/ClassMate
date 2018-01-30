@@ -24,6 +24,8 @@ class StudentDashboard extends React.Component {
   }
 
   componentWillMount() {
+    // console.log('above axios: ', this.props.state.user.id);
+    // console.log('props state user: ', this.props.state.user);
     axios.get(`${SERVER_URI}${DashboardRoute}`, {
       params: {
         userId: this.props.state.user.id,
@@ -45,6 +47,7 @@ class StudentDashboard extends React.Component {
   }
 
   render() {
+    // console.log(this.props.state, 'this is props.state');
     // NOTE styles is acting up w button
     // const { height, width } = Dimensions.get('window');
     // const styles = StyleSheet.create({
@@ -82,6 +85,7 @@ class StudentDashboard extends React.Component {
     //     justifyContent: 'center',
     //   },
     // });
+    // console.log('this.props.state: ', this.props.state);
     const { user } = this.props.state;
 
     return (

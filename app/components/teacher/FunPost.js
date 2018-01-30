@@ -170,7 +170,7 @@ class FunPost extends React.Component {
             onPress={this.postFinal}
           />
           <View>{this.state.loading ? <Spinner color="blue" /> : null}</View>
-          <Text style={{ textAlign: 'center', color: 'white' }}>{this.state.loading ? 'Document Loading ... :)' : ''}</Text>
+          <Text style={{ textAlign: 'center', color: 'white' }}>{this.state.loading ? 'Document Loading ...' : ''}</Text>
         </View>
       </ImageBackground>
 

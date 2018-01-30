@@ -14,6 +14,7 @@ class TeacherClassDashboard extends React.Component {
   }
 
   render() {
+    console.log(this.props.state)
     const className = this.props.state.selectSession.sessionName;
     const styles = StyleSheet.create({
       bigContainer: {
