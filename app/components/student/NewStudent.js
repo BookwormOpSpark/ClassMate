@@ -88,7 +88,7 @@ class NewStudent extends React.Component {
         <Button
           transparent
           onPress={() => this.props.navigation.goBack()}
-          style={{ paddingTop: 50, paddingHorizontal: 10 }}
+          style={{ paddingTop: 50, paddingHorizontal: 10, paddingBottom: 20 }}
         >
           <Icon name="arrow-left-thick" size={50} color={yellow} />
         </Button>
@@ -121,7 +121,7 @@ class NewStudent extends React.Component {
             success
             onPress={this.onLogin}
           >
-            <Text>LET'S GO!</Text>
+            <Text>Let's go!</Text>
           </Button>
         </View>
       </ImageBackground>

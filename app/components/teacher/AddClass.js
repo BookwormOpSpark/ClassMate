@@ -99,18 +99,29 @@ class AddClass extends React.Component {
           className="Create Class"
           back={false}
         />
+        <View style={{ padding: 5 }} />
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${teacher.First_name}!`}</Text>
           <Text h4 style={{ color: white }}>Create a New Class!</Text>
-          <Icon color={yellow} name="rocket" size={30} />
+<<<<<<< HEAD
+          <Text></Text>
+          <Text></Text>
+          <Text></Text>
+          <FormLabel>Enter the Join Code for the class</FormLabel>
+=======
+          {/* <Icon color={yellow} name="rocket" size={30} /> */}
+          <View style={{ padding: 10 }} />
+          <FormLabel>Enter the class name</FormLabel>
+>>>>>>> ef51674b48dc509e6bc568343b32e181c93c881f
+          <FormInput
+            onChangeText={text => this.setState({ description: text })}
+          />
           <FormLabel>Enter the Join Code for the class</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ joinCode: text })}
           />
-          <FormLabel>Enter the class description</FormLabel>
-          <FormInput
-            onChangeText={text => this.setState({ description: text })}
-          />
+          <View style={{ padding: 10 }} />
+          {!this.state.added &&
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.handleSubmit}
@@ -118,6 +129,7 @@ class AddClass extends React.Component {
             rounded
             title="Create Class!"
           />
+          }
           <Text h4 style={{ color: white }}>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
           <Text>{this.state.added ? <Icon color={white} name="thumb-up" size={20} /> : ''}</Text>
           <View>{this.state.added ? <Spinner color={white} /> : null}</View>

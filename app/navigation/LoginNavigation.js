@@ -2,12 +2,15 @@ import { StackNavigator } from 'react-navigation';
 import React from 'react';
 import { Container, Spinner } from 'native-base';
 import PropTypes from 'prop-types';
+import { ImageBackground } from 'react-native';
 import StudentLogin from '../components/student/StudentLogin';
 import NewStudent from '../components/student/NewStudent';
 import TeacherLogin from '../components/teacher/TeacherLogin';
 import FirstPage from '../components/FirstPage';
 import StudentDrawerNavigation from './StudentDrawerNavigation';
 import TeacherDrawerNavigation from './TeacherDrawerNavigation';
+import blackboard from '../assets/blackboard.jpg';
+import { yellow } from '../style/colors';
 
 
 const LoginNavigation = StackNavigator({
@@ -53,9 +56,21 @@ const LoginNavigation = StackNavigator({
   },
   Spinner: {
     screen: ({ navigation }) => (
-      <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Spinner color="blue" />
-      </Container>
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <Container style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Spinner color={yellow} />
+        </Container>
+      </ImageBackground>
     ),
     navigationOptions: () => ({
       header: null,
