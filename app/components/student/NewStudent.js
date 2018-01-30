@@ -36,21 +36,18 @@ class NewStudent extends React.Component {
         if (res.data.emergencyContact !== null) {
           emergencyContactInfo = res.data.emergencyContact;
         }
-        // console.log('res', res.data);
         const user = {
-          id: res.data.user.id,
-          First_name: res.data.user.nameFirst,
-          Last_name: res.data.user.nameLast,
-          email: res.data.user.email,
-          picture: { data: { url: res.data.user.photoUrl } },
-          emergencyContact: res.data.user.id_emergencyContact,
+          id: res.data.id,
+          First_name: res.data.nameFirst,
+          Last_name: res.data.nameLast,
+          email: res.data.email,
+          picture: { data: { url: res.data.photoUrl } },
+          emergencyContact: res.data.id_emergencyContact,
           emergencyContactInfo,
         };
-        // console.log(this.props.dispatch(getUser(user)));
         return this.props.dispatch(getUser(user));
       })
       .then((res) => {
-        // console.log(res, 'bottom res');
         const verified = res.payload.id;
         if (verified) {
           // this.props.navigation.navigate('StudentDashboardNavigation');
