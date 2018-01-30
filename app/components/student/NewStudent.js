@@ -10,7 +10,7 @@ import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-element
 import { Header, Title, Left, Right, Body, Button } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/logo.png';
-import { SERVER_URI, StudentLoginRoute } from '../../constant';
+import { SERVER_URI, StudentCreateRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
@@ -30,27 +30,24 @@ class NewStudent extends React.Component {
   onLogin() {
     const student = this.state;
     // console.log(student);
-    axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
+    axios.post(`${SERVER_URI}${StudentCreateRoute}`, student)
       .then((res) => {
         let emergencyContactInfo = null;
         if (res.data.emergencyContact !== null) {
           emergencyContactInfo = res.data.emergencyContact;
         }
-        // console.log('res', res.data);
         const user = {
-          id: res.data.user.id,
-          First_name: res.data.user.nameFirst,
-          Last_name: res.data.user.nameLast,
-          email: res.data.user.email,
-          picture: { data: { url: res.data.user.photoUrl } },
-          emergencyContact: res.data.user.id_emergencyContact,
+          id: res.data.id,
+          First_name: res.data.nameFirst,
+          Last_name: res.data.nameLast,
+          email: res.data.email,
+          picture: { data: { url: res.data.photoUrl } },
+          emergencyContact: res.data.id_emergencyContact,
           emergencyContactInfo,
         };
-        // console.log(this.props.dispatch(getUser(user)));
         return this.props.dispatch(getUser(user));
       })
       .then((res) => {
-        // console.log(res, 'bottom res');
         const verified = res.payload.id;
         if (verified) {
           // this.props.navigation.navigate('StudentDashboardNavigation');

@@ -9,8 +9,6 @@ import DashHeader from '../shared/Header';
 class BadgeSpirit extends React.Component {
   constructor(props) {
     super(props);
-    console.log('badge')
-    console.log(this.props.state.dashboard)
     this.state = { language: '' };
   }
   render() {

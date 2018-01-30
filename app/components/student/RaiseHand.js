@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
-import DashHeader from '../shared/Header';
 import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
+import DashHeader from '../shared/Header';
 
 class RaiseHand extends React.Component {
   constructor(props) {
