@@ -9,9 +9,9 @@ import DashHeader from '../shared/Header';
 class BadgeTime extends React.Component {
   constructor(props) {
     super(props);
-    console.log('badge')
-    console.log(this.props.state.dashboard)
-    this.state = { language: '' };
+    console.log('badge');
+    console.log(this.props.state.classInfo.students);
+    this.state = { studentSelected: '' };
   }
   render() {
     const styles = StyleSheet.create({
@@ -23,6 +23,7 @@ class BadgeTime extends React.Component {
       },
     });
     const className = this.props.state.selectSession.sessionName;
+    const { students } = this.props.state.classInfo;
 
     return (
       <ImageBackground
@@ -51,10 +52,12 @@ class BadgeTime extends React.Component {
           />
           <Picker
             style={{ width: 100 }}
-            selectedValue={this.state.language}
-            onValueChange={(lang) => this.setState({ language: lang })}>
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
+            selectedValue={this.state.studentSelected}
+            onValueChange={student => this.setState({ studentSelected: student })}
+          >
+            {students.map(student => (
+              <Picker.Item label={student.nameFirst} value={student.nameFirst} />
+            ))}
           </Picker>
         </View>
       </ImageBackground>
