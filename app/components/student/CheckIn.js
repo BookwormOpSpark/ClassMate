@@ -19,12 +19,7 @@ class CheckIn extends Component {
     this.state = {
       lastScannedUrl: null,
     };
-    // this.handleClick = this.handleClick.bind(this);
   }
-
-  // handleClick = () => {
-  //   this.goBack();
-  // };
 
   _handleBarCodeRead = (result) => {
     if (result.data !== this.state.lastScannedUrl) {
