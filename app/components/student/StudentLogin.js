@@ -5,14 +5,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
-import { StyleSheet, View, ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, ImageBackground, Image, Alert } from 'react-native';
 import { Text, FormLabel, FormInput, Card, ListItem } from 'react-native-elements';
 import { Header, Title, Left, Right, Body, Button } from 'native-base';
 import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/logo.png';
 import { SERVER_URI, StudentLoginRoute } from '../../constant';
 import { getUser } from '../../actions/actions';
-import {blue, white, yellow, orange, red, green } from '../../style/colors';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class StudentLogin extends React.Component {
   constructor(props) {
@@ -32,8 +32,11 @@ class StudentLogin extends React.Component {
     // console.log(student);
     axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
-        if (res.data === 'Incorrect Password') {
-          // console.log('wrong password');
+        if(res.data === 'user not found'){
+          Alert.alert('Username not found');
+        }
+        else if (res.data === 'incorrect password') {
+          Alert.alert('Incorrect Password');
         } else {
           let emergencyContactInfo = null;
           if (res.data.emergencyContact !== null) {
@@ -48,18 +51,15 @@ class StudentLogin extends React.Component {
             emergencyContact: res.data.id_emergencyContact,
             emergencyContactInfo,
           };
-          // console.log('user: ', user);
+          const resetStack = NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
+            ],
+          });
+          this.props.navigation.dispatch(resetStack);
           return this.props.dispatch(getUser(user));
         }
-      })
-      .then((res) => {
-        const resetStack = NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'StudentDrawerNavigation' }),
-          ],
-        });
-        this.props.navigation.dispatch(resetStack);
       })
       .catch(err => console.error(err));
   }
@@ -110,7 +110,7 @@ class StudentLogin extends React.Component {
           />
           <FormLabel>Password</FormLabel>
           <FormInput
-            secureTextEntry = {true}
+            secureTextEntry
             onChangeText={text => this.setState({ password: text })}
             style={{ paddingHorizontal: 10 }}
           />
