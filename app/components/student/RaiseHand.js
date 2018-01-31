@@ -17,6 +17,7 @@ class RaiseHand extends React.Component {
     super(props);
     this.state = {
       accelerometerData: {},
+      handRaised: false,
     };
 
     this.socket = io(SERVER_URI);
@@ -29,6 +30,7 @@ class RaiseHand extends React.Component {
   }
 
   componentWillUnmount() {
+    this.state.handRaised = false;
     this._unsubscribe();
     this.socket.close();
   }
@@ -36,6 +38,7 @@ class RaiseHand extends React.Component {
   getInQueue() {
     const { y } = this.state.accelerometerData;
     if (y > 0.7) {
+      this.state.handRaised = true;
       this.sendSocket();
     }
   }
@@ -73,6 +76,7 @@ class RaiseHand extends React.Component {
         color: '#f4d35e',
         fontWeight: 'bold',
         fontSize: 30,
+        marginTop: 50,
       },
       contentContainer: {
         flexGrow: 1,
@@ -105,9 +109,8 @@ class RaiseHand extends React.Component {
           >
             <View style={{ alignItems: 'center' }}>
               <Text h6 style={{ color: '#f4d35e', fontSize: 20 }}>{`Lift your phone to raise your hand!`}</Text>
-              <Icon color="#f4d35e" name="paw" size={40} />
-              <Text style={styles.yellow}>{y > 0.7 ? 'Your hand is raised' : ''}</Text>
-              <Text>{y > 0.7 ? <Icon color="#f4d35e" name="hand-pointing-right" size={200} /> : ''}</Text>
+              <Text style={styles.yellow}>{this.state.handRaised ? 'Your hand is raised' : ''}</Text>
+              <Text>{this.state.handRaised ? <Icon color="#f4d35e" name="human-greeting" size={200} /> : ''}</Text>
             </View>
           </ScrollView>
           <Image

@@ -41,8 +41,8 @@ export default class DashHeader extends React.Component {
             </Button>
           }
         </Left>
-        <Body style={{ alignItems: 'center', marginBottom: 10, paddingLeft: -100, paddingRight: -100 }}>
-          <H3 style={{ color: yellow, marginLeft: 70 }} >{className}</H3>
+        <Body style={{ marginBottom: 10, paddingLeft: -100, paddingRight: -100 }}>
+          <H3 style={{ color: yellow }} >{className}</H3>
         </Body>
         <Right>
           <Image source={logo} style={{ width: 30, height: 30 }} />
