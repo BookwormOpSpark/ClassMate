@@ -82,7 +82,7 @@ class SpecificStudent extends React.Component {
           <View style={styles.contentContainer}>
             <Image
               style={styles.image}
-              source={{ uri: this.props.state.specificStudent.photoUrl }}
+              source={{ uri: this.props.state.specificStudent.photoUrl || 'http://www1.udel.edu/oiss/about/images/woman-placeholder.jpg' }}
             />
             <Text h2 style={{ marginTop: 15, color: white }}>{`${this.props.state.specificStudent.nameFirst} ${this.props.state.specificStudent.nameLast}`}</Text>
             <Text h3 style={{ color: white }}>5th Grade</Text>
