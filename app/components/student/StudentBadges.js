@@ -1,8 +1,9 @@
 import Expo from 'expo';
 import React from 'react';
 import ExpoTHREE from 'expo-three';
-import { Dimensions } from 'react-native';
+import { Dimensions, View, Text } from 'react-native';
 import * as THREE from 'three';
+
 console.disableYellowBox = true;
 
 
@@ -20,7 +21,8 @@ export default class StudentBadges extends React.Component {
       75,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
       0.1,
-      1000);
+      1000,
+    );
     const renderer = ExpoTHREE.createRenderer({ gl });
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
     renderer.setClearColor(0xffffff);

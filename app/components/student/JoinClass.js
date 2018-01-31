@@ -16,8 +16,6 @@ import { getDashboard, getSession, selectSession } from '../../actions/actions';
 class JoinClass extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('JoinClass');
-    // console.log(this.props.state);
     this.state = {
       joinCode: '',
       joined: false,

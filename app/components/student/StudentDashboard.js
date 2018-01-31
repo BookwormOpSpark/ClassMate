@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, Dimensions, ScrollView, ActivityIndicator, ImageBackground, Image } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, Card } from 'react-native-elements';
 import axios from 'axios';
-import { Container, Header, Title, Left, Right, Button, Body, Content, Card, CardItem, H3, Text } from 'native-base';
+import { Container, Header, Title, Left, Right, Button, Body, Content, CardItem, H3, Text, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { logOut, getDashboard, selectSession } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
@@ -35,6 +35,7 @@ class StudentDashboard extends React.Component {
       this.props.dispatch(getDashboard(res.data));
       this.state.isLoaded = true;
       this.setState({ assignments: res.data.sessionInfo.assignments });
+      // console.log('\nSTATE.ASSIGNMENTS\n: ', this.state.assignments);
     })
       .catch((err) => {
         console.error(err);
@@ -47,45 +48,6 @@ class StudentDashboard extends React.Component {
   }
 
   render() {
-    // console.log(this.props.state, 'this is props.state');
-    // NOTE styles is acting up w button
-    // const { height, width } = Dimensions.get('window');
-    // const styles = StyleSheet.create({
-    //   bigcontainer: {
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    //     justifyContent: 'flex-start',
-    //   },
-    //   container: {
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    //     alignItems: 'center',
-    //   },
-    //   list: {
-    //     borderRadius: 5,
-    //     borderColor: '#0000ff',
-    //     backgroundColor: '#0000ff',
-    //     marginTop: 5,
-    //     marginBottom: 5,
-    //     marginLeft: 5,
-    //     marginRight: 5,
-    //   },
-    //   newlist: {
-    //     borderRadius: 5,
-    //     borderColor: 'cornflowerblue',
-    //     backgroundColor: 'cornflowerblue',
-    //     marginTop: 5,
-    //     marginBottom: 5,
-    //     marginLeft: 5,
-    //     marginRight: 5,
-    //   },
-    //   contentContainer: {
-    //     flexGrow: 1,
-    //     backgroundColor: '#fff',
-    //     justifyContent: 'center',
-    //   },
-    // });
-    // console.log('this.props.state: ', this.props.state);
     const { user } = this.props.state;
 
     return (
@@ -108,8 +70,9 @@ class StudentDashboard extends React.Component {
           />
           <Content padder>
             <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {user.First_name} {user.Last_name}</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 40, marginBottom: 30 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 10, marginBottom: 5 }}>
               <Button
+                block
                 iconRight
                 success
                 onPress={() => this.props.navigation.navigate('CheckIn')}
@@ -119,7 +82,8 @@ class StudentDashboard extends React.Component {
               </Button>
 
               <Button
-                iconRight
+                block
+                iconLeft
                 danger
                 onPress={() => this.props.navigation.navigate('EmergencyContact')}
               >
@@ -127,87 +91,31 @@ class StudentDashboard extends React.Component {
                 <Icon name="account" size={20} style={{ marginRight: 10 }} />
               </Button>
             </View>
-            {/* <Button
-              onPress={this.props.navigation.navigate('CheckIn')}
-              buttonStyle={[{ marginBottom: 5, marginTop: 60 }]}
-              iconRight={{ name: 'done' }}
-              backgroundColor="green"
-              rounded
-              title="CheckIn"
-            /> */}
-            {/* <Button
-              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              onPress={this.navigateToScreen('EmergencyContact')}
-              iconRight={{ name: 'done' }}
-              backgroundColor="blue"
-              rounded
-              title="Emergency Contact"
-            /> */}
-            <Card>
-              <CardItem header>
-                <Icon color={blue} name="calendar" size={25} />
-                <Text>  Your Schedule Today</Text>
-              </CardItem>
-              {
-                this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
-                  <CardItem key={index}>
-                    <Text>
-                      {`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}
-                    </Text>
-                    <Text>
-                      {'\t\t\t\t\t\t\t\t\t\t'}
-                    </Text>
-                    <Text>
-                      {`${event.summary}`}
-                    </Text>
-                  </CardItem>
-                )) : null
+            <Card title="YOUR SCHEDULE TODAY" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
+              <View style={{ alignItems: 'center' }}><Icon color={blue} name="calendar" size={25} /></View>
+              <View style={{ padding: 5 }} />
+              {this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
+                <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                  <Text style={{ width: '30%', textAlign: 'center' }}>{`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}</Text>
+                  <Text style={{ width: '70%', textAlign: 'right' }}>{`${event.summary}`}</Text>
+                </View>
+                )) : <Spinner color={blue} />
               }
             </Card>
-            <Card>
-              <CardItem header>
-                <Icon color={blue} name="bell" size={25} />
-                <Text>  Upcoming Due Dates</Text>
-              </CardItem>
-              {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.map((el, index) => (
-                <CardItem key={index}>
-                  <Text>{`${el.title} --  ${el.dueDate}`}</Text>
-                </CardItem>
-              )) : null
+            <Card title="UPCOMING DUE DATES" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }}>
+              <View style={{ alignItems: 'center' }}><Icon color={blue} name="bell" size={25} /></View>
+              <View style={{ padding: 5 }} />
+              {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.reverse().map((el, index) => (
+                <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                  <Text style={{ width: '70%' }}>{el.title}</Text>
+                  <Text style={{ width: '30%' }}>{el.dueDate}</Text>
+                </View>
+              )) : <Spinner color={blue} />
               }
             </Card>
           </Content>
         </Container>
       </ImageBackground>
-      // <View style={styles.bigcontainer}>
-      //   <Header
-      //     leftComponent={{ icon: 'menu', color: '#fff' }}
-      //     centerComponent={{ text: `Student ${user.First_name} Dashboard`, style: { color: '#fff' } }}
-      //     rightComponent={{ icon: 'home', color: '#fff' }}
-      //     outerContainerStyles={{ width: Dimensions.get('window').width }}
-      //   />
-      //   <ScrollView
-      //     contentContainerStyle={styles.contentContainer}
-      //     scrollEnabled
-      //   >
-      //     <View style={styles.container}>
-      //       <Text h5>Your Class Schedule</Text>
-      //       <Icon color="blue" name="calendar" size={30} />
-
-      //       <Text h5>Upcoming Due Dates</Text>
-      //       <Icon color="blue" name="bell" size={30} />
-
-      //       <Button
-      //         buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-      //         onPress={() => this.props.navigation.navigate('StudentClassNavigation')}
-      //         iconRight={{ name: 'done' }}
-      //         backgroundColor="blue"
-      //         rounded
-      //         title="Class"
-      //       />
-      //     </View>
-      //   </ScrollView>
-      // </View>
     );
   }
 }

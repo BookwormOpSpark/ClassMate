@@ -90,13 +90,13 @@ class CurrentPostedFun extends React.Component {
   }
 
   onDelete = (item) => {
-    console.log(item, 'item coming through from onDelete');
+    // console.log(item, 'item coming through from onDelete');
     const id = item.id;
     const link = item.link
-    console.log(id, link, 'id and link before sending to route')
+    // console.log(id, link, 'id and link before sending to route')
     axios.delete(`${SERVER_URI}${DeleteFunStuff}/${id}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         axios.get(`${SERVER_URI}${PostFunStuff}/${session}`)
           .then((result) => {
             this.setState({ fun: result.data });
