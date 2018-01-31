@@ -75,7 +75,7 @@ class SubmitHomework extends React.Component {
   }
 
   render() {
-    // console.log(this.props.state, 'props.state from submitHomework ')
+    console.log(this.props.state, 'props.state from submitHomework ')
     const styles = StyleSheet.create({
       bigcontainer: {
         // had to comment this out to make header work
@@ -130,15 +130,19 @@ class SubmitHomework extends React.Component {
             color="black"
             onPress={this._openCamera}
           />
-          <Button
-            buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
-            title="Submit Homework!"
-            iconRight={{ name: 'done', color: 'black' }}
-            backgroundColor={white}
-            borderRadius={5}
-            color="black"
-            onPress={this._postHomework}
-          />
+          {this.state.image !== null ? 
+            <Button
+              buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
+              title="Submit Homework!"
+              iconRight={{ name: 'done', color: 'black' }}
+              backgroundColor={white}
+              borderRadius={5}
+              color="black"
+              onPress={this._postHomework}
+            />
+          :
+          null
+          }
           <View>{this.state.loading ? <Spinner color={white} /> : null}</View>
           <Text style={{ textAlign: 'center', color: white }}>{this.state.loading ? 'Document Loading ...' : ''}</Text>
           {image &&
