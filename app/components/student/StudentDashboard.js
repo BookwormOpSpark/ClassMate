@@ -48,45 +48,6 @@ class StudentDashboard extends React.Component {
   }
 
   render() {
-    // console.log(this.props.state, 'this is props.state');
-    // NOTE styles is acting up w button
-    // const { height, width } = Dimensions.get('window');
-    // const styles = StyleSheet.create({
-    //   bigcontainer: {
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    //     justifyContent: 'flex-start',
-    //   },
-    //   container: {
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    //     alignItems: 'center',
-    //   },
-    //   list: {
-    //     borderRadius: 5,
-    //     borderColor: '#0000ff',
-    //     backgroundColor: '#0000ff',
-    //     marginTop: 5,
-    //     marginBottom: 5,
-    //     marginLeft: 5,
-    //     marginRight: 5,
-    //   },
-    //   newlist: {
-    //     borderRadius: 5,
-    //     borderColor: 'cornflowerblue',
-    //     backgroundColor: 'cornflowerblue',
-    //     marginTop: 5,
-    //     marginBottom: 5,
-    //     marginLeft: 5,
-    //     marginRight: 5,
-    //   },
-    //   contentContainer: {
-    //     flexGrow: 1,
-    //     backgroundColor: '#fff',
-    //     justifyContent: 'center',
-    //   },
-    // });
-    // console.log('this.props.state: ', this.props.state);
     const { user } = this.props.state;
 
     return (
@@ -107,25 +68,6 @@ class StudentDashboard extends React.Component {
             className="Dashboard"
             back={false}
           />
-          {/* <Header style={{ backgroundColor: blue, justifyContent: 'center' }}>
-            <Left>
-              <Button
-                iconRight
-                success
-                onPress={() => this.props.navigation.navigate('CheckIn')}
-              >
-                <Text>Check In</Text>
-                <Icon name="check" size={20} style={{ marginRight: 10 }} />
-              </Button>
-            </Left>
-            <Body>
-              <H3 style={{ color: yellow }} >Dashboard</H3>
-            </Body>
-            <Right>
-              <Image source={logo} style={{ width: 30, height: 30 }} />
-            </Right>
-          </Header> */}
-
           <Content padder>
             <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {user.First_name} {user.Last_name}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 10, marginBottom: 5 }}>
@@ -133,7 +75,7 @@ class StudentDashboard extends React.Component {
                 block
                 iconRight
                 success
-                // onPress={this.props.navigation.navigate('CheckIn')}
+                onPress={() => this.props.navigation.navigate('CheckIn')}
               >
                 <Text>Check In</Text>
                 <Icon name="check" size={20} style={{ marginRight: 10 }} />
@@ -143,7 +85,7 @@ class StudentDashboard extends React.Component {
                 block
                 iconLeft
                 danger
-                // onPress={this.props.navigation.navigate('EmergencyContact')}
+                onPress={() => this.props.navigation.navigate('EmergencyContact')}
               >
                 <Text>Contact</Text>
                 <Icon name="account" size={20} style={{ marginRight: 10 }} />
