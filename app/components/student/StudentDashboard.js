@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, Dimensions, ScrollView, ActivityIndicator, ImageBackground, Image } from 'react-native';
 import { List, ListItem, Card } from 'react-native-elements';
 import axios from 'axios';
-import { Container, Header, Title, Left, Right, Button, Body, Content, CardItem, H3, Text } from 'native-base';
+import { Container, Header, Title, Left, Right, Button, Body, Content, CardItem, H3, Text, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { logOut, getDashboard, selectSession } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
@@ -12,7 +12,6 @@ import blackboard from '../../assets/blackboard.jpg';
 import logo from '../../assets/classmatelogoicon.png';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 import DashHeader from '../shared/Header';
-import { Spinner } from 'native-base';
 
 class StudentDashboard extends React.Component {
   constructor(props) {
@@ -129,7 +128,7 @@ class StudentDashboard extends React.Component {
 
           <Content padder>
             <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {user.First_name} {user.Last_name}</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 40, marginBottom: 30 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', marginTop: 10, marginBottom: 5 }}>
               <Button
                 block
                 iconRight
@@ -150,7 +149,6 @@ class StudentDashboard extends React.Component {
                 <Icon name="account" size={20} style={{ marginRight: 10 }} />
               </Button>
             </View>
-      {/* ///////////////////////////////////////////////////////   THIS IS THE SCHEDULE    //////////////////////////////////////// */}
             <Card title="YOUR SCHEDULE TODAY" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
               <View style={{ alignItems: 'center' }}><Icon color={blue} name="calendar" size={25} /></View>
               <View style={{ padding: 5 }} />
@@ -162,7 +160,6 @@ class StudentDashboard extends React.Component {
                 )) : <Spinner color={blue} />
               }
             </Card>
-    {/* ////////////////////////////////////////////   THIS IS THE Due Dates    //////////////////////////////////////////////////// */}
             <Card title="UPCOMING DUE DATES" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }}>
               <View style={{ alignItems: 'center' }}><Icon color={blue} name="bell" size={25} /></View>
               <View style={{ padding: 5 }} />
