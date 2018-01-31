@@ -130,7 +130,7 @@ class SubmitHomework extends React.Component {
             color="black"
             onPress={this._openCamera}
           />
-          {this.state.image !== null ? 
+          {this.state.image !== null ?
             <Button
               buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
               title="Submit Homework!"
