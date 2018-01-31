@@ -34,7 +34,7 @@ class FirstPage extends React.Component {
       const token = info.idToken;
       axios.post(`${SERVER_URI}${TeacherLoginRoute}`, { idtoken: token })
         .then((res) => {
-          console.log(res.data, 'top res');
+          // console.log(res.data, 'top res');
           let emergencyContactInfo = null;
           if (res.data.emergencyContact !== null) {
             emergencyContactInfo = res.data.emergencyContact;
