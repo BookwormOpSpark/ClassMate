@@ -25,32 +25,96 @@ export default class StudentBadges extends React.Component {
     );
     const renderer = ExpoTHREE.createRenderer({ gl });
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
-    renderer.setClearColor(0xffffff);
+    renderer.setClearColor('#ECA963');
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material1 = new THREE.MeshBasicMaterial({
+    const materialClock = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/classmatelogoicon.png')),
+        asset: Expo.Asset.fromModule(require('../../assets/clock.png')),
       }),
     });
-    const material2 = new THREE.MeshBasicMaterial({
+    const materialCurious = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/blackboard.jpg')),
+        asset: Expo.Asset.fromModule(require('../../assets/curious.png')),
       }),
     });
-    const cube1 = new THREE.Mesh(geometry, material1);
-    const cube2 = new THREE.Mesh(geometry, material2);
-    scene.add(cube1);
-    scene.add(cube2);
+    const materialScience = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/science.png')),
+      }),
+    });
+    const materialABC = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/abc.png')),
+      }),
+    });
+
+    const cubesClock = Array(1)
+      .fill()
+      .map(() => {
+        const cube = new THREE.Mesh(geometry, materialClock);
+        scene.add(cube);
+        cube.position.x = 1; // 3 - 6 * Math.random();
+        cube.position.y = 1; // 3 - 6 * Math.random();
+        cube.position.z = -3; // -5 * Math.random();
+        return { cube };
+      });
+    
+    const cubesCurious = Array(1)
+      .fill()
+      .map(() => {
+        const cube = new THREE.Mesh(geometry, materialCurious);
+        scene.add(cube);
+        cube.position.x = 2; // 4 - 6 * Math.random();
+        cube.position.y = 3; // 4 - 6 * Math.random();
+        cube.position.z = -2; // -5 * Math.random();
+        return { cube };
+      });
+    const cubesABC = Array(1)
+      .fill()
+      .map(() => {
+        const cube = new THREE.Mesh(geometry, materialABC);
+        scene.add(cube);
+        cube.position.x = 2; // 2 - 6 * Math.random();
+        cube.position.y = 4; // 2 - 6 * Math.random();
+        cube.position.z = -2; // -2 * Math.random();
+        return { cube };
+      });
+    const cubesScience = Array(1)
+      .fill()
+      .map(() => {
+        const cube = new THREE.Mesh(geometry, materialScience);
+        scene.add(cube);
+        cube.position.x = 3; // - 6 * Math.random();
+        cube.position.y = 3; // - 6 * Math.random();
+        cube.position.z = -2; // - 2 * Math.random();
+        return { cube };
+      });
+
     camera.position.z = 5;
+
     const animate = () => {
       requestAnimationFrame(animate);
-      cube1.rotation.x += 0.05;
-      cube1.rotation.y += 0.03;
-      cube2.rotation.x += 0.05;
-      cube2.rotation.y += 0.03;
+      cubesABC.forEach(({ cube }) => {
+        cube.rotation.x += 0.05;
+        cube.rotation.y += 0.03;
+      });
+      cubesClock.forEach(({ cube }) => {
+        cube.rotation.x += 0.06;
+        cube.rotation.y += 0.04;
+      });
+      cubesCurious.forEach(({ cube }) => {
+        cube.rotation.x += 0.04;
+        cube.rotation.y += 0.03;
+      });
+      cubesScience.forEach(({ cube }) => {
+        cube.rotation.x += 0.02;
+        cube.rotation.y += 0.01;
+      });
       renderer.render(scene, camera);
       gl.endFrameEXP();
     };
