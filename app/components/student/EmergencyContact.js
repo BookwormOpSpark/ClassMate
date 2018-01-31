@@ -42,7 +42,10 @@ class EmergencyContact extends React.Component {
           ],
           { cancelable: false },
         );
-        this.setState({ submitted: true });
+        const digitz = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        let formattedPhone = phone.split('').filter(char => digitz.includes(char)).join('');
+        formattedPhone = `(${formattedPhone.slice(0, 3)})-${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`;
+        this.setState({ submitted: true, phone: formattedPhone });
       })
       .catch(err => console.error(err));
   }
@@ -67,30 +70,24 @@ class EmergencyContact extends React.Component {
       formattedPhone = `(${formattedPhone.slice(0, 3)})-${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`;
     }
     const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
       headerText: {
         color: white,
         marginTop: 10,
         fontSize: 30,
       },
-      card: {
-        backgroundColor: '#fff',
+      rowView: {
+        flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 50,
-        padding: 10,
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
       },
-      contentContainer: {
-        flexGrow: 1,
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingHorizontal: 10,
+      categoryText: {
+        width: '30%',
+        textAlign: 'left',
+        fontWeight: 'bold',
+        fontSize: 18,
       },
+
     });
     return (
       <ImageBackground
@@ -111,102 +108,93 @@ class EmergencyContact extends React.Component {
         />
         <View style={{ flex: 1 }}>
           <Container style={{ backgroundColor: 'transparent' }}>
-            <Header style={{ backgroundColor: 'transparent' }}>
-              <Text style={styles.headerText}>Emergency Contact</Text>
-            </Header>
             <Content>
-              {this.state.submitted ?
+              {this.state.submitted &&
                 <Card title="EMERGENCY CONTACT" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
-                  <View style={{ alignItems: 'center' }}>
-                    <Icon color={blue} name="asterisk" size={25} />
-                    <View style={{ padding: 5 }} />
-                    <Text>{this.state.nameFirst}</Text>
-                    <Text>{this.state.nameLast}</Text>
-                    <Text>{this.state.address}</Text>
-                    <Text>{this.state.phone}</Text>
+                  <View style={{ alignItems: 'center' }}><Icon color={blue} name="asterisk" size={25} /></View>
+                  <View style={{ padding: 5 }} />
+                  <View style={styles.rowView}>
+                    <Text style={styles.categoryText}>Name :</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{`${this.state.nameFirst} ${this.state.nameLast}`}</Text>
+                  </View>
+                  <View style={styles.rowView}>
+                    <Text style={styles.categoryText}>Address :</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{this.state.address}</Text>
+                  </View>
+                  <View style={styles.rowView}>
+                    <Text style={styles.categoryText}>Phone :</Text>
+                    <Text
+                      style={{ width: '70%', textAlign: 'right', textDecorationLine: 'underline' }}
+                      onPress={() => this.callNumber(`tel:1-${this.state.phone}`)}
+                    >
+                      {`1-${this.state.phone}`}
+                    </Text>
                   </View>
                 </Card>
-                :
-                this.props.state.user.emergencyContact === null ?
-                  <Form style={{ justifyContent: 'center' }}>
-                    <Item stackedLabel>
-                      <Label style={{ color: white }}>First Name</Label>
-                      <Input
-                        style={{ color: white }}
-                        onChangeText={text => this.setState({ nameFirst: text })}
-                      />
-                    </Item>
-                    <Item stackedLabel>
-                      <Label style={{ color: white }}>Last Name</Label>
-                      <Input
-                        style={{ color: white }}
-                        onChangeText={text => this.setState({ nameLast: text })}
-                      />
-                    </Item>
-                    <Item stackedLabel>
-                      <Label style={{ color: white }}>Address</Label>
-                      <Input
-                        style={{ color: white }}
-                        onChangeText={text => this.setState({ address: text })}
-                      />
-                    </Item>
-                    <Item stackedLabel>
-                      <Label style={{ color: white }}>Phone Number</Label>
-                      <Input
-                        style={{ color: white }}
-                        onChangeText={text => this.setState({ phone: text })}
-                      />
-                    </Item>
-                    <View style={{ padding: 10 }} />
-                    <Button
-                      block
-                      success
-                      onPress={() => this.onSelect()}
+              }
+              {!this.state.submitted && !this.props.state.user.emergencyContact &&
+                <Form style={{ justifyContent: 'center' }}>
+                  <Item stackedLabel>
+                    <Label style={{ color: white }}>First Name</Label>
+                    <Input
+                      style={{ color: white }}
+                      onChangeText={text => this.setState({ nameFirst: text })}
+                    />
+                  </Item>
+                  <Item stackedLabel>
+                    <Label style={{ color: white }}>Last Name</Label>
+                    <Input
+                      style={{ color: white }}
+                      onChangeText={text => this.setState({ nameLast: text })}
+                    />
+                  </Item>
+                  <Item stackedLabel>
+                    <Label style={{ color: white }}>Address</Label>
+                    <Input
+                      style={{ color: white }}
+                      onChangeText={text => this.setState({ address: text })}
+                    />
+                  </Item>
+                  <Item stackedLabel>
+                    <Label style={{ color: white }}>Phone Number</Label>
+                    <Input
+                      style={{ color: white }}
+                      onChangeText={text => this.setState({ phone: text })}
+                    />
+                  </Item>
+                  <View style={{ padding: 10 }} />
+                  <Button
+                    block
+                    success
+                    onPress={() => this.onSelect()}
+                  >
+                    <Text>Create Contact</Text>
+                  </Button>
+                </Form>
+              }
+              {!this.state.submitted && this.props.state.user.emergencyContact &&
+                <Card title="EMERGENCY CONTACT" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
+                  <View style={{ alignItems: 'center' }}><Icon color={blue} name="asterisk" size={25} /></View>
+                  <View style={{ padding: 5 }} />
+                  <View style={styles.rowView}>
+                    <Text style={styles.categoryText}>Name :</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{`${contactInfo.nameFirst} ${contactInfo.nameLast}`}</Text>
+                  </View>
+                  <View style={styles.rowView}>
+                    <Text style={styles.categoryText}>Address :</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{contactInfo.address}</Text>
+                  </View>
+                  <View style={styles.rowView}>
+                    <Text style={styles.categoryText}>Phone :</Text>
+                    <Text
+                      style={{ width: '70%', textAlign: 'right', textDecorationLine: 'underline' }}
+                      onPress={() => this.callNumber(`tel:1-${contactInfo.email}`)}
                     >
-                      <Text>Create Contact</Text>
-                    </Button>
-                  </Form>
-                  :
-                  <Card title="EMERGENCY CONTACT" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
-                    <View style={{ alignItems: 'center' }}><Icon color={blue} name="asterisk" size={25} /></View>
-                    <View style={{ padding: 5 }} />
-                      <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                        <Text style={{ width: '30%', textAlign: 'left' }}>Name :</Text>
-                        <Text style={{ width: '70%', textAlign: 'right' }}>{`${contactInfo.nameFirst} ${contactInfo.nameLast}`}</Text>
-                      </View>
-                      <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                        <Text style={{ width: '30%', textAlign: 'left' }}>Address :</Text>
-                        <Text style={{ width: '70%', textAlign: 'right' }}>{contactInfo.address}</Text>
-                      </View>
-                      <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                        <Text style={{ width: '30%', textAlign: 'left' }}>Phone :</Text>
-                        <Text
-                          style={{ width: '70%', textAlign: 'right', textDecorationLine: 'underline' }}
-                          onPress={() => this.callNumber(`tel:1-${contactInfo.email}`)}
-                        >
-                          {`1-${formattedPhone}`}
-                        </Text>
-                      </View>
-                  </Card>
-                  // <Card style={styles.card}>
-                  //   <CardItem header>
-                  //     <Text style={{ fontWeight: 'bold', fontSize: 18 }}> Name : </Text>
-                  //     <Text>{`${contactInfo.nameFirst} ${contactInfo.nameLast}`}</Text>
-                  //   </CardItem>
-                  //   <CardItem>
-                  //     <Text style={{ fontWeight: 'bold', fontSize: 18 }}> Address : </Text>
-                  //     <Text>{`${contactInfo.address}`}</Text>
-                  //   </CardItem>
-                  //   <CardItem>
-                  //     <Text style={{ fontWeight: 'bold', fontSize: 18 }}> Phone Number : </Text>
-                  //     <Text
-                  //       onPress={() => this.callNumber(`tel:1-${contactInfo.email}`)}
-                  //       style={{ textDecorationLine: 'underline' }}
-                  //     >{`1-${formattedPhone}`}
-                  //     </Text>
-                  //   </CardItem>
-                  // </Card>
-                }
+                      {`1-${formattedPhone}`}
+                    </Text>
+                  </View>
+                </Card>
+              }
             </Content>
           </Container>
         </View>
