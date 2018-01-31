@@ -75,6 +75,7 @@ class SubmitHomework extends React.Component {
   }
 
   render() {
+    // console.log(this.props.state, 'props.state from submitHomework ')
     const styles = StyleSheet.create({
       bigcontainer: {
         // had to comment this out to make header work
