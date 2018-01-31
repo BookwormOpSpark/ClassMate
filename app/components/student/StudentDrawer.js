@@ -56,7 +56,6 @@ class StudentDrawer extends Component {
     const userID = this.props.state.user.id;
     const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
     let finalStatus = existingStatus;
-    console.log(await Permissions.getAsync(Permissions.NOTIFICATIONS));
 
     // only ask if permissions have not already been determined, because
     // iOS won't necessarily prompt the user a second time.

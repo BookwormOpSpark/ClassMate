@@ -19,16 +19,17 @@ class BadgeTime extends React.Component {
   postBadge = async () => {
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
+    const teacherName = `${this.props.state.user.First_name} ${this.props.state.user.Last_name}`;
     const studentName = this.state.studentSelected;
     const student = this.state.studentSelected.split(' ');
     const studentArr = students.filter(item => item.nameFirst === student[0] && item.nameLast === student[1]);
-    const studentID = studentArr[0].participantId;
-    const userID = studentArr[0].id;
+    const studentId = studentArr[0].participantId;
+    const userId = studentArr[0].id;
 
-    await axios.post(`${SERVER_URI}${SendBadges}`, { type: 'type1', studentID })
+    await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId: 2, studentId })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
-    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userID, studentName })
+    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userId, studentName, teacherName })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
     alert(`Badge send to student ${studentName}`);

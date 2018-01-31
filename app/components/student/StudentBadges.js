@@ -69,40 +69,40 @@ export default class StudentBadges extends React.Component {
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialCurious);
         scene.add(cube);
-        cube.position.x = 2; // 4 - 6 * Math.random();
-        cube.position.y = 3; // 4 - 6 * Math.random();
-        cube.position.z = -2; // -5 * Math.random();
+        cube.position.x = 0; // 4 - 6 * Math.random();
+        cube.position.y = 0; // 4 - 6 * Math.random();
+        cube.position.z = 0; // -5 * Math.random();
         return { cube };
       });
-    const cubesABC = Array(1)
-      .fill()
-      .map(() => {
-        const cube = new THREE.Mesh(geometry, materialABC);
-        scene.add(cube);
-        cube.position.x = 2; // 2 - 6 * Math.random();
-        cube.position.y = 4; // 2 - 6 * Math.random();
-        cube.position.z = -2; // -2 * Math.random();
-        return { cube };
-      });
-    const cubesScience = Array(1)
-      .fill()
-      .map(() => {
-        const cube = new THREE.Mesh(geometry, materialScience);
-        scene.add(cube);
-        cube.position.x = 3; // - 6 * Math.random();
-        cube.position.y = 3; // - 6 * Math.random();
-        cube.position.z = -2; // - 2 * Math.random();
-        return { cube };
-      });
+    // const cubesABC = Array(1)
+    //   .fill()
+    //   .map(() => {
+    //     const cube = new THREE.Mesh(geometry, materialABC);
+    //     scene.add(cube);
+    //     cube.position.x = 2; // 2 - 6 * Math.random();
+    //     cube.position.y = 4; // 2 - 6 * Math.random();
+    //     cube.position.z = -2; // -2 * Math.random();
+    //     return { cube };
+    //   });
+    // const cubesScience = Array(1)
+    //   .fill()
+    //   .map(() => {
+    //     const cube = new THREE.Mesh(geometry, materialScience);
+    //     scene.add(cube);
+    //     cube.position.x = 3; // - 6 * Math.random();
+    //     cube.position.y = 3; // - 6 * Math.random();
+    //     cube.position.z = -2; // - 2 * Math.random();
+    //     return { cube };
+    //   });
 
     camera.position.z = 5;
 
     const animate = () => {
       requestAnimationFrame(animate);
-      cubesABC.forEach(({ cube }) => {
-        cube.rotation.x += 0.05;
-        cube.rotation.y += 0.03;
-      });
+      // cubesABC.forEach(({ cube }) => {
+      //   cube.rotation.x += 0.05;
+      //   cube.rotation.y += 0.03;
+      // });
       cubesClock.forEach(({ cube }) => {
         cube.rotation.x += 0.06;
         cube.rotation.y += 0.04;
@@ -111,10 +111,10 @@ export default class StudentBadges extends React.Component {
         cube.rotation.x += 0.04;
         cube.rotation.y += 0.03;
       });
-      cubesScience.forEach(({ cube }) => {
-        cube.rotation.x += 0.02;
-        cube.rotation.y += 0.01;
-      });
+      // cubesScience.forEach(({ cube }) => {
+      //   cube.rotation.x += 0.02;
+      //   cube.rotation.y += 0.01;
+      // });
       renderer.render(scene, camera);
       gl.endFrameEXP();
     };
