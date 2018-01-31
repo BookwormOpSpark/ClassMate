@@ -105,19 +105,6 @@ class TeacherDashboard extends React.Component {
           </Content>
         </Container>
       </ImageBackground>
-      // <View style={styles.container}>
-      //   <Header
-      //     leftComponent={{ icon: 'menu', color: '#fff' }}
-      //     centerComponent={{ text: `Teacher ${teacher.First_name} Dashboard`, style: { color: '#fff' } }}
-      //     rightComponent={{ icon: 'home', color: '#fff' }}
-      //     outerContainerStyles={{ width: Dimensions.get('window').width }}
-      //   />
-      //   <Text h5>Your Class Schedule</Text>
-      //   <Icon color="blue" name="calendar" size={30} />
-
-      //   <Text h5>Upcoming Due Dates</Text>
-      //   <Icon color="blue" name="bell" size={30} />
-      // </View>
     );
   }
 }
