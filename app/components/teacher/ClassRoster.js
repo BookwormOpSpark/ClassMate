@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Image, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Text, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Left, Right, Switch } from 'native-base';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -90,30 +91,38 @@ class ClassRoster extends React.Component {
           className={className}
           back
         />
-        <View style={styles.contentContainer}>
-          <Text h1>{this.state.sessionName}</Text>
-          <Text h2 style={{ backgroundColor: 'transparent', textAlign: 'center', color: white }}>Class Roster</Text>
-          <ScrollView>
-            <View style={styles.badges}>
-              {
-                this.state.roster && this.state.roster.length > 0 ? this.state.roster.map((student, id) => (
-                  <View key={`${id}`} style={styles.item}>
-                    <Icon key={`${id}`} name="logo-octocat" color={white} size={100} />
-                    <Button
-                      small
-                      key={`bbbtn${id}`}
-                      backgroundColor={green}
-                      color="black"
-                      buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-                      title={`${student.nameFirst} ${student.nameLast}`}
+        <ScrollView>
+          <Container>
+            <Header style={{ backgroundColor: 'transparent' }}>
+              <Text style={{ color: yellow, fontSize: 40, textDecorationLine: 'underline' }}>Class Roster</Text>
+            </Header>
+            <Text style={{ color: yellow, fontSize: 20, textAlign: 'center', paddingBottom: 20 }}>Click a student to see detailed information.</Text>
+            <Content>
+              <List>
+                {this.state.roster && this.state.roster.length > 0 ?
+                  this.state.roster.map((student, id) => (
+                    <ListItem
+                      icon
+                      style={{ }}
+                      key={id}
                       onPress={() => this.onSelect(student)}
-                    />
-                  </View>
+                    >
+                      <Left>
+                        <Icon style={{ color: white }} name="logo-octocat" />
+                      </Left>
+                      <Body>
+                        <Text style={{ color: white, fontSize: 20 }}>{`${student.nameFirst} ${student.nameLast}`}</Text>
+                      </Body>
+                      <Right>
+                        <Icon style={{ color: white, fontSize: 15 }} name="ios-arrow-dropright" />
+                      </Right>
+                    </ListItem>
                   ))
-                : null}
-            </View>
-          </ScrollView>
-        </View>
+              : null}
+              </List>
+            </Content>
+          </Container>
+        </ScrollView>
       </ImageBackground>
     );
   }
