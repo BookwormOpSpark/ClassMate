@@ -6,12 +6,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { Spinner } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import blackboard from '../../assets/blackboard.jpg';
 import {blue, white, yellow, orange, red, green } from '../../style/colors';
 import { SERVER_URI, JoinClassRoute, DashboardRoute } from '../../constant';
 import DashHeader from '../shared/Header';
 import { getDashboard, getSession, selectSession } from '../../actions/actions';
-import { NavigationActions } from 'react-navigation';
 
 class JoinClass extends React.Component {
   constructor(props) {

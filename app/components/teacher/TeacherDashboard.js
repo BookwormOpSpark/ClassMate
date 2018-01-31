@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, Dimensions, Image, ImageBackground } from 'react-native';
-// import { Text, Button, Header } from 'react-native-elements';
+import { List, ListItem, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Container, Header, Title, Left, Right, Button, Body, Content, Text, Card, CardItem } from 'native-base';
+import { Container, Header, Title, Left, Right, Button, Body, Content, Text, CardItem, Spinner } from 'native-base';
 import logo from '../../assets/classmatelogoicon.png';
 import { logOut, getDashboard } from '../../actions/actions';
 import { SERVER_URI, DashboardRoute } from '../../constant';
@@ -80,38 +80,27 @@ class TeacherDashboard extends React.Component {
           <Content padder>
             <Text style={{ fontSize: 30, color: white, textAlign: 'center' }} > {teacher.First_name} {teacher.Last_name}</Text>
             <View style={{ paddingVertical: 10 }} />
-            <Card>
-              <CardItem header>
-                <Icon color={blue} name="calendar" size={25} />
-                <Text>  Your Schedule Today</Text>
-              </CardItem>
-              {
-                this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
-                  <CardItem key={index}>
-                    <Text>
-                      {`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}
-                    </Text>
-                    <Text>
-                      {'\t\t\t\t\t\t\t\t\t\t'}
-                    </Text>
-                    <Text>
-                      {`${event.summary}`}
-                    </Text>
-                  </CardItem>
-                )) : null
+            <Card title="YOUR SCHEDULE TODAY" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
+              <View style={{ alignItems: 'center' }}><Icon color={blue} name="calendar" size={25} /></View>
+              <View style={{ padding: 5 }} />
+              {this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
+                <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                  <Text style={{ width: '30%', textAlign: 'center' }}>{`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}</Text>
+                  <Text style={{ width: '70%', textAlign: 'right' }}>{`${event.summary}`}</Text>
+                </View>
+              )) : <Spinner color={blue} />
               }
             </Card>
-            <Card>
-              <CardItem header>
-                <Icon color={blue} name="bell" size={25} />
-                <Text>  Upcoming Due Dates</Text>
-              </CardItem>
-              {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.map((el, index) => (
-                <CardItem key={index}>
-                  <Text>{`${el.title} --  ${el.dueDate}`}</Text>
-                </CardItem>
-              )) : null
-            }
+            <Card title="UPCOMING DUE DATES" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }}>
+              <View style={{ alignItems: 'center' }}><Icon color={blue} name="bell" size={25} /></View>
+              <View style={{ padding: 5 }} />
+              {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.reverse().map((el, index) => (
+                <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                  <Text style={{ width: '70%' }}>{el.title}</Text>
+                  <Text style={{ width: '30%' }}>{el.dueDate}</Text>
+                </View>
+              )) : <Spinner color={blue} />
+              }
             </Card>
           </Content>
         </Container>

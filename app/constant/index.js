@@ -1,6 +1,10 @@
 export const androidClientId = '29245857360-gi2ilv6b04e6mpn9icn9ngiq0buq4elr.apps.googleusercontent.com';
 export const iosClientId = '766434726628-1guelram8v9kr9mtapqa2587ss7bc6sl.apps.googleusercontent.com';
+<<<<<<< HEAD
 export const SERVER_URI = 'http://d73caa87.ngrok.io';
+=======
+export const SERVER_URI = 'https://75bb4eb0.ngrok.io';
+>>>>>>> 819041548711920d7c7435e2e041a09182ed6793
 // *********Route************//
 export const TeacherLoginRoute = '/login';
 export const StudentLoginRoute = '/studentLogin';
