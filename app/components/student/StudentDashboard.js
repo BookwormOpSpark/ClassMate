@@ -35,7 +35,7 @@ class StudentDashboard extends React.Component {
       this.props.dispatch(getDashboard(res.data));
       this.state.isLoaded = true;
       this.setState({ assignments: res.data.sessionInfo.assignments });
-      console.log('\nSTATE.ASSIGNMENTS\n: ', this.state.assignments);
+      // console.log('\nSTATE.ASSIGNMENTS\n: ', this.state.assignments);
     })
       .catch((err) => {
         console.error(err);
