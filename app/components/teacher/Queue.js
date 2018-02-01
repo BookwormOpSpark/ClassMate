@@ -36,24 +36,32 @@ class Queue extends React.Component {
     });
 
     this.socket.on(`${this.props.state.selectSession.sessionID}`, (data) => {
-      this.setState({ messages: [...this.state.messages, data.student] });
+      let raised = false;
+      this.state.messages.forEach((message) => {
+        if (message.id === data.student.id) {
+          raised = true;
+        }
+      });
+      if(!raised){
+        this.setState({ messages: [...this.state.messages, data.student] });
+      }
     });
   }
-  
+
   componentWillUnmount() {
     this.socket.close();
   }
-  
+
   onSelect(item) {
     const { messages } = this.state;
     const index = messages.indexOf(item);
     messages.splice(index, 1);
     this.setState({ messages });
   }
-  
-  
+
+
   render() {
-    // console.log('this.state.messages: ', this.state.messages);
+    console.log('this.state.messages: ', this.state.messages);
     const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
     const { messages } = this.state;
 
@@ -95,7 +103,7 @@ class Queue extends React.Component {
                       <ListItem
                         containerStyle={styles.list}
                         key={`bbbtn${id}`}
-                        title={`${item.First_name} ${item.Last_name} raised his hand`}
+                        title={`${item.First_name} ${item.Last_name} raised their hand`}
                         subtitle={moment(this.state.now).from(moment(item.time))}
                         subtitleStyle={{ color: 'black' }}
                         leftIcon={{ name: 'hand', color: 'white' }}
