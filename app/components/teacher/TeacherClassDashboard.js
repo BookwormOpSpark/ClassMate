@@ -65,7 +65,7 @@ class TeacherClassDashboard extends React.Component {
           back={false}
         />
         <View style={styles.bigContainer}>
-          <Text style={{ marginBottom: 30 }}> Hi </Text>
+          <View style={{ marginBottom: 30 }} />
           <View style={styles.container}>
             <Button
               onPress={() => this.props.navigation.navigate('Assignment')}
