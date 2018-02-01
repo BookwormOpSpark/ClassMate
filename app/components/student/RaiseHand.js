@@ -27,6 +27,9 @@ class RaiseHand extends React.Component {
 
   componentDidMount() {
     this._subscribe();
+    this.socket.on(`${this.props.state.user.id}`, () => {
+      this.setState({ handRaised: false });
+    });
   }
 
   componentWillUnmount() {
@@ -62,7 +65,8 @@ class RaiseHand extends React.Component {
     this._subscription && this._subscription.remove();
     this._subscription = null;
   }
-
+  
+  
   render() {
     const styles = StyleSheet.create({
       sensor: {

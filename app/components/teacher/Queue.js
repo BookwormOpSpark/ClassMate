@@ -42,7 +42,7 @@ class Queue extends React.Component {
           raised = true;
         }
       });
-      if(!raised){
+      if (!raised) {
         this.setState({ messages: [...this.state.messages, data.student] });
       }
     });
@@ -53,6 +53,7 @@ class Queue extends React.Component {
   }
 
   onSelect(item) {
+    this.socket.emit('hand down', {student: item.id});
     const { messages } = this.state;
     const index = messages.indexOf(item);
     messages.splice(index, 1);
@@ -61,7 +62,6 @@ class Queue extends React.Component {
 
 
   render() {
-    console.log('this.state.messages: ', this.state.messages);
     const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
     const { messages } = this.state;
 
