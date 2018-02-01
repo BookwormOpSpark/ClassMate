@@ -41,6 +41,7 @@ class StudentBadges3D extends React.Component {
   }
 
   getBadges() {
+    console.log('hello');
     const studentID = this.props.state.selectSession.participantID;
     axios.get(`${SERVER_URI}${SendBadges}`, {
       params: {
@@ -54,23 +55,29 @@ class StudentBadges3D extends React.Component {
           return memo;
         }, {});
         this.setState({ badges });
-        console.log('state', this.state);
-        console.log('state 1', this.state.badges['2']);
       })
       .catch(err => console.error(err));
   }
 
 
   _onGLContextCreate = async (gl) => {
-    console.log('onContext');
-    await this.getBadges();
-    const gradeCount = this.state.badges ? this.state.badges['1'] : 0;
-    console.log('grade', gradeCount);
-    const timeCount = this.state.badges ? this.state.badges['2'] : 0;
-    console.log('time', timeCount);
-    const spiritCount = this.state.badges ? this.state.badges['3'] : 0;
+    let gradeCount = 0;
+    let participationCount = 0;
+    let spiritCount = 0;
+    let timeCount = 0;
+
+    await this.getBadges()
+      .then((res) => {
+        console.log('hello23');
+        gradeCount = this.state.badges['1'] ? this.state.badges['1'] : 0;
+        timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
+        spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
+        participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
+      });
+
     console.log('spirit', spiritCount);
-    const participationCount = this.state.badges ? this.state.badges['4'] : 0;
+    console.log('time', timeCount);
+    console.log('grade', gradeCount);
     console.log('participation', participationCount);
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -200,15 +207,6 @@ class StudentBadges3D extends React.Component {
   };
 
   render() {
-    console.log('render');
-    const gradeCount = this.state.badges ? this.state.badges['1'] : 0;
-    console.log('grade', gradeCount);
-    const timeCount = this.state.badges ? this.state.badges['2'] : 0;
-    console.log('time', timeCount);
-    const spiritCount = this.state.badges ? this.state.badges['3'] : 0;
-    console.log('spirit', spiritCount);
-    const participationCount = this.state.badges ? this.state.badges['4'] : 0;
-    console.log('participation', participationCount);
     return (
       <Expo.GLView
         style={{ flex: 1 }}

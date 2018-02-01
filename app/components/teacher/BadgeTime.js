@@ -17,7 +17,6 @@ class BadgeTime extends React.Component {
   }
 
   postBadge = async () => {
-    // console.log(this.props.state, 'this.props.state')
     const badgeId = 2; // id for timing
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
