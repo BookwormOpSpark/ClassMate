@@ -140,16 +140,16 @@ class StudentClassDashboard extends React.Component {
                 style={styles.animated}
               >
                 <Icon
-                  color="#f95738"
+                  color="#5fad56"
                   name="trophy"
                   style={styles.icon}
                   size={100}
-                  onPress={() => this.props.navigation.navigate('StudentBadges')}
+                  onPress={() => this.props.navigation.navigate('StudentBadgesNavigation')}
                 />
                 <Button
-                  onPress={() => this.props.navigation.navigate('StudentBadges')}
+                  onPress={() => this.props.navigation.navigate('StudentBadgesNavigation')}
                   buttonStyle={styles.button}
-                  backgroundColor="#f95738"
+                  backgroundColor="#5fad56"
                   small
                   rounded
                   color="black"
