@@ -46,7 +46,7 @@ class TeacherDashboard extends React.Component {
 
   render() {
     const teacher = this.props.state.user;
-    console.log('\nTHIS.PROPS.STATE.DASH\n', this.props.state.dashboard);
+    // console.log('\nTHIS.PROPS.STATE.DASH\n', this.props.state.dashboard);
 
     return (
       <ImageBackground

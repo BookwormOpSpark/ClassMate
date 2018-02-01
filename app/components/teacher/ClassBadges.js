@@ -13,22 +13,10 @@ class ClassBadges extends React.Component {
     super(props);
     this.springValue = new Animated.Value(0.7);
     this.animatedValue = new Animated.Value(0);
-    this.spring = this.spring.bind(this);
   }
   componentDidMount() {
-    this.spring();
   }
-  spring() {
-    this.springValue.setValue(0.7);
-    Animated.spring(
-      this.springValue,
-      {
-        toValue: 1,
-        friction: 1,
-        tension: 1,
-      },
-    ).start();
-  }
+
 
   render() {
     const styles = StyleSheet.create({

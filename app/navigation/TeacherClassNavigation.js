@@ -14,9 +14,7 @@ import FunPost from '../components/teacher/FunPost';
 import Fun from '../components/student/Fun';
 
 const TeacherClassNavigation = StackNavigator({
-  // Home: {
-  //   screen: TeacherClassDashboard,
-  // },
+
   TeacherClassDashboard: {
     screen: TeacherClassDashboard,
     navigationOptions: () => ({
@@ -89,12 +87,6 @@ const TeacherClassNavigation = StackNavigator({
       header: null,
     }),
   },
-  // TeacherClassSchedule: {
-  //   screen: TeacherClassSchedule,
-  //   navigationOptions: () => ({
-  //     header: null,
-  //   }),
-  // },
 });
 
 export default TeacherClassNavigation;
