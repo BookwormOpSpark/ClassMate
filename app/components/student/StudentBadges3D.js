@@ -19,6 +19,7 @@ class StudentBadges3D extends React.Component {
   }
 
   componentDidMount() {
+    console.log('componentMount');
     this.getBadges();
     // const studentID = this.props.state.selectSession.participantID;
     // const getState = axios.get(`${SERVER_URI}${SendBadges}`, {
@@ -54,21 +55,23 @@ class StudentBadges3D extends React.Component {
         }, {});
         this.setState({ badges });
         console.log('state', this.state);
+        console.log('state 1', this.state.badges['2']);
       })
       .catch(err => console.error(err));
   }
 
 
   _onGLContextCreate = async (gl) => {
+    console.log('onContext');
     await this.getBadges();
     const gradeCount = this.state.badges ? this.state.badges['1'] : 0;
-    console.log(gradeCount);
+    console.log('grade', gradeCount);
     const timeCount = this.state.badges ? this.state.badges['2'] : 0;
-    console.log(timeCount);
+    console.log('time', timeCount);
     const spiritCount = this.state.badges ? this.state.badges['3'] : 0;
-    console.log(spiritCount);
+    console.log('spirit', spiritCount);
     const participationCount = this.state.badges ? this.state.badges['4'] : 0;
-    console.log(participationCount);
+    console.log('participation', participationCount);
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -197,6 +200,15 @@ class StudentBadges3D extends React.Component {
   };
 
   render() {
+    console.log('render');
+    const gradeCount = this.state.badges ? this.state.badges['1'] : 0;
+    console.log('grade', gradeCount);
+    const timeCount = this.state.badges ? this.state.badges['2'] : 0;
+    console.log('time', timeCount);
+    const spiritCount = this.state.badges ? this.state.badges['3'] : 0;
+    console.log('spirit', spiritCount);
+    const participationCount = this.state.badges ? this.state.badges['4'] : 0;
+    console.log('participation', participationCount);
     return (
       <Expo.GLView
         style={{ flex: 1 }}

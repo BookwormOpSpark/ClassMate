@@ -31,7 +31,9 @@ class BadgeTime extends React.Component {
     await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId, studentId })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
-    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userId, studentName, teacherName })
+    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, {
+ className, userId, studentName, teacherName 
+})
       // .then(res => console.log(res))
       .catch(err => console.error(err));
     alert(`Badge send to student ${studentName}`);
@@ -85,7 +87,7 @@ class BadgeTime extends React.Component {
               borderColor: 'white',
               borderWidth: 1,
               marginTop: 20,
-              color: 'blue',
+              color: 'black',
             }}
             selectedValue={this.state.studentSelected}
             onValueChange={student => this.setState({ studentSelected: student })}
@@ -100,8 +102,9 @@ class BadgeTime extends React.Component {
           <Button
             buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
             title="Give Badge"
-            iconRight={{ name: 'done' }}
-            backgroundColor="#5fad56"
+            iconRight={{ name: 'done', color: 'black' }}
+            backgroundColor="#f4d35e"
+            color="black"
             borderRadius={5}
             onPress={this.postBadge}
           />
