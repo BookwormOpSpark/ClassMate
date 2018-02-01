@@ -12,6 +12,9 @@ const StudentBadgesNavigation = StackNavigator({
   },
   StudentBadges3D: {
     screen: StudentBadges3D,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
 });
 

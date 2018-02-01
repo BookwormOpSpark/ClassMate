@@ -30,43 +30,13 @@ class StudentBadges extends React.Component {
       contentContainer: {
         flexGrow: 1,
       },
-      item: {
-        width: 310,
-        height: 280,
-      },
       view: {
         marginBottom: 40,
         alignItems: 'center',
       },
-      buttonAdd: {
-        marginBottom: 30,
-        marginTop: 30,
-        alignSelf: 'center',
-        justifyContent: 'center',
-        width: 300,
-      },
-      video: {
-        width: 310,
-        height: 210,
-      },
       text: {
+        textAlign: 'center',
         color: '#f4d35e',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 30,
-      },
-      button: {
-        marginTop: 10,
-        height: 30,
-        width: 310,
-        backgroundColor: 'red',
-        opacity: 0.6,
-        alignSelf: 'center',
-      },
-      link: {
-        color: '#0d3b66',
-        fontWeight: 'bold',
-        textAlign: 'center',
       },
     });
   }
@@ -79,6 +49,7 @@ class StudentBadges extends React.Component {
       },
     })
       .then((res) => {
+        console.log(res.data);
         this.setState({ badges: res.data });
       })
       .catch(err => console.error(err));
@@ -120,7 +91,7 @@ class StudentBadges extends React.Component {
     const className = this.props.state.selectSession.sessionName;
 
     const list = this.state.fun;
-    const imageList = list.length > 0 ? list.filter(item => item.type === 'image') : [];
+    // const imageList = list.length > 0 ? list.filter(item => item.type === 'image') : [];
 
     return (
       <ImageBackground
@@ -157,7 +128,7 @@ class StudentBadges extends React.Component {
               ]}
             >
               <Icon
-                color="white"
+                color="gold"
                 name="rocket"
                 size={30}
               />
@@ -174,7 +145,7 @@ class StudentBadges extends React.Component {
               title="Badges Crazy!"
               backgroundColor="#5fad56"
               borderRadius={5}
-              onPress={() => this.props.navigation.navigate('Badges3D')}
+              onPress={() => this.props.navigation.navigate('StudentBadges3D')}
             />
 
           </ScrollView>

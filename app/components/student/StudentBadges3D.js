@@ -7,7 +7,7 @@ import fontHelvetiker from 'three/examples/fonts/helvetiker_regular.typeface.jso
 console.disableYellowBox = true;
 
 
-export default class StudentBadges extends React.Component {
+export default class StudentBadges3D extends React.Component {
   constructor() {
     super();
     this.state = { text: '' };
