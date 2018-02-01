@@ -60,7 +60,7 @@ class StudentBadges3D extends React.Component {
 
 
   _onGLContextCreate = async (gl) => {
-    await this.getBadges();
+    // await this.getBadges();
     const gradeCount = this.state.badges ? this.state.badges['1'] : 0;
     console.log(gradeCount);
     const timeCount = this.state.badges ? this.state.badges['2'] : 0;
