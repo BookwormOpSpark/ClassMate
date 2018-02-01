@@ -30,7 +30,7 @@ class StudentLogin extends React.Component {
     const student = this.state;
     axios.post(`${SERVER_URI}${StudentLoginRoute}`, student)
       .then((res) => {
-        console.log(res.data, 'res.data from StudentLogin');
+        // console.log(res.data, 'res.data from StudentLogin');
         if (res.data === 'user not found') {
           Alert.alert('Username not found');
         } else if (res.data === 'incorrect password') {

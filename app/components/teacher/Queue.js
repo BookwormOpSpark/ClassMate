@@ -35,24 +35,25 @@ class Queue extends React.Component {
       });
     });
 
-    this.socket.on('new-message', (data) => {
-      this.setState({ messages: [...this.state.messages, data.message] });
+    this.socket.on(`${this.props.state.selectSession.sessionID}`, (data) => {
+      this.setState({ messages: [...this.state.messages, data.student] });
     });
   }
-
+  
   componentWillUnmount() {
     this.socket.close();
   }
-
+  
   onSelect(item) {
     const { messages } = this.state;
     const index = messages.indexOf(item);
     messages.splice(index, 1);
     this.setState({ messages });
   }
-
-
+  
+  
   render() {
+    console.log('this.state.messages: ', this.state.messages);
     const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
     const { messages } = this.state;
 
@@ -94,10 +95,10 @@ class Queue extends React.Component {
                       <ListItem
                         containerStyle={styles.list}
                         key={`bbbtn${id}`}
-                        title={`${item.student}`}
+                        title={`${item.First_name} ${item.Last_name} raised his hand`}
                         subtitle={moment(this.state.now).from(moment(item.time))}
                         subtitleStyle={{ color: 'black' }}
-                        leftIcon={{ name: 'star', color: 'white' }}
+                        leftIcon={{ name: 'hand', color: 'white' }}
                         titleStyle={{ color: 'black' }}
                         onPress={() => this.onSelect(item)}
                       />
