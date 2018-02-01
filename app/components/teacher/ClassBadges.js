@@ -1,11 +1,12 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, ImageBackground, Animated, Easing } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import { green } from '../../style/colors';
 
 
 class ClassBadges extends React.Component {
@@ -83,7 +84,7 @@ class ClassBadges extends React.Component {
               >
                 <Icon
                   color="#FF9F1C"
-                  name="trophy"
+                  name="star"
                   size={100}
                   onPress={() => this.props.navigation.navigate('BadgeSpirit')}
                   style={styles.icon}
@@ -106,7 +107,7 @@ class ClassBadges extends React.Component {
               >
                 <Icon
                   color="#2EC4B6"
-                  name="trophy"
+                  name="spellcheck"
                   style={styles.icon}
                   size={100}
                   onPress={() => this.props.navigation.navigate('BadgeGrade')}
@@ -118,7 +119,7 @@ class ClassBadges extends React.Component {
                   small
                   rounded
                   color="black"
-                  title="Good grades"
+                  title="Grades"
                 />
               </Animated.View>
             </View>
@@ -128,8 +129,8 @@ class ClassBadges extends React.Component {
                 style={styles.animated}
               >
                 <Icon
-                  color="green"
-                  name="trophy"
+                  color={green}
+                  name="group"
                   style={styles.icon}
                   size={100}
                   onPress={() => this.props.navigation.navigate('BadgeBehavior')}
@@ -137,11 +138,11 @@ class ClassBadges extends React.Component {
                 <Button
                   onPress={() => this.props.navigation.navigate('BadgeBehavior')}
                   buttonStyle={styles.button}
-                  backgroundColor="green"
+                  backgroundColor={green}
                   small
                   rounded
                   color="black"
-                  title="Good behavior"
+                  title="Participation"
                 />
               </Animated.View>
             </View>
@@ -152,7 +153,7 @@ class ClassBadges extends React.Component {
               >
                 <Icon
                   color="gold"
-                  name="trophy"
+                  name="schedule"
                   style={styles.icon}
                   size={100}
                   onPress={() => this.props.navigation.navigate('BadgeTime')}
@@ -164,7 +165,7 @@ class ClassBadges extends React.Component {
                   small
                   color="black"
                   rounded
-                  title="Good timing"
+                  title="Punctuality"
                 />
               </Animated.View>
             </View>
