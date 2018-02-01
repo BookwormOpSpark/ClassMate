@@ -17,19 +17,24 @@ class BadgeTime extends React.Component {
   }
 
   postBadge = async () => {
+    console.log(this.props.state, 'this.props.state')
+    const badgeId = 2;
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
     const studentName = this.state.studentSelected;
     const student = this.state.studentSelected.split(' ');
     const studentArr = students.filter(item => item.nameFirst === student[0] && item.nameLast === student[1]);
-    const studentID = studentArr[0].participantId;
-    const userID = studentArr[0].id;
+    const studentId = studentArr[0].participantId;
+    const userId = studentArr[0].id;
 
-    await axios.post(`${SERVER_URI}${SendBadges}`, { type: 'type1', studentID })
-      // .then(res => console.log(res))
+    await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId, studentId })
+    console.log(studentID, 'this is studentID in sendBadges')
+      .then(res => console.log(res, 'res from sendBadges'))
       .catch(err => console.error(err));
-    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userID, studentName })
-      // .then(res => console.log(res))
+      
+    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userId, studentName })
+    console.log(userID, studentName, className, 'userID, studentName, className in badgeNotification')
+      .then(res => console.log(res, 'res from sendNotifications'))
       .catch(err => console.error(err));
     alert(`Badge send to student ${studentName}`);
   }
@@ -116,6 +121,7 @@ export default connect(mapStateToProps)(BadgeTime);
 
 BadgeTime.propTypes = {
   state: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
