@@ -140,7 +140,7 @@ class StudentClassDashboard extends React.Component {
                 style={styles.animated}
               >
                 <Icon
-                  color="#5fad56"
+                  color="#66CCFF"
                   name="trophy"
                   style={styles.icon}
                   size={100}
@@ -149,7 +149,7 @@ class StudentClassDashboard extends React.Component {
                 <Button
                   onPress={() => this.props.navigation.navigate('StudentBadgesNavigation')}
                   buttonStyle={styles.button}
-                  backgroundColor="#5fad56"
+                  backgroundColor="#66CCFF"
                   small
                   rounded
                   color="black"
