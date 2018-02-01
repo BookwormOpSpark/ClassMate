@@ -30,7 +30,6 @@ class RaiseHand extends React.Component {
   }
 
   componentWillUnmount() {
-    this.state.handRaised = false;
     this._unsubscribe();
     this.socket.close();
   }
@@ -108,7 +107,7 @@ class RaiseHand extends React.Component {
             scrollEnabled
           >
             <View style={{ alignItems: 'center' }}>
-              <Text h6 style={{ color: '#f4d35e', fontSize: 20 }}>{`Lift your phone to raise your hand!`}</Text>
+              <Text h6 style={{ color: '#f4d35e', fontSize: 20 }}>Lift your phone to raise your hand!</Text>
               <Text style={styles.yellow}>{this.state.handRaised ? 'Your hand is raised' : ''}</Text>
               <Text>{this.state.handRaised ? <Icon color="#f4d35e" name="human-greeting" size={200} /> : ''}</Text>
             </View>

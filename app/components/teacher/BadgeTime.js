@@ -17,6 +17,8 @@ class BadgeTime extends React.Component {
   }
 
   postBadge = async () => {
+    // console.log(this.props.state, 'this.props.state')
+    const badgeId = 2;
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
     const teacherName = `${this.props.state.user.First_name} ${this.props.state.user.Last_name}`;
@@ -117,6 +119,7 @@ export default connect(mapStateToProps)(BadgeTime);
 
 BadgeTime.propTypes = {
   state: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
