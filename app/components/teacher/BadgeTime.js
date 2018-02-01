@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { Button, Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -18,7 +18,7 @@ class BadgeTime extends React.Component {
 
   postBadge = async () => {
     // console.log(this.props.state, 'this.props.state')
-    const badgeId = 2;
+    const badgeId = 2; // id for timing
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
     const teacherName = `${this.props.state.user.First_name} ${this.props.state.user.Last_name}`;
@@ -28,7 +28,7 @@ class BadgeTime extends React.Component {
     const studentId = studentArr[0].participantId;
     const userId = studentArr[0].id;
 
-    await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId: 2, studentId })
+    await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId, studentId })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
     await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userId, studentName, teacherName })
@@ -72,16 +72,16 @@ class BadgeTime extends React.Component {
         <View style={styles.container}>
           <Icon
             color="gold"
-            name="trophy"
+            name="schedule"
             size={100}
             style={styles.icon}
           />
-          <Text h3 style={styles.text}>Good Timing Badge</Text>
+          <Text h3 style={styles.text}>Punctuality Badge</Text>
           <Picker
-            itemStyle={{ color: 'blue', alignSelf: 'center' }}
+            itemStyle={{ color: 'black', alignSelf: 'center' }}
             style={{
               width: 300,
-              backgroundColor: '#FFF0E0',
+              backgroundColor: '#f4d35e',
               borderColor: 'white',
               borderWidth: 1,
               marginTop: 20,
