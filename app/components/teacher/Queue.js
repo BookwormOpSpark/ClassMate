@@ -53,7 +53,7 @@ class Queue extends React.Component {
   
   
   render() {
-    console.log('this.state.messages: ', this.state.messages);
+    // console.log('this.state.messages: ', this.state.messages);
     const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
     const { messages } = this.state;
 
