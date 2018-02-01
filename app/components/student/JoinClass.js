@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Button, Text, FormLabel, FormInput } from 'react-native-elements';
 import { Spinner } from 'native-base';
+import { BarCodeScanner } from 'expo';
 import { NavigationActions } from 'react-navigation';
 import blackboard from '../../assets/blackboard.jpg';
 import {blue, white, yellow, orange, red, green } from '../../style/colors';
@@ -23,15 +24,18 @@ class JoinClass extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit = async () => {
-    const { joinCode } = this.state;
+  handleSubmit = async (barcode) => {
+    console.log('SCANNED', barcode);
+    const sessionId = parseInt(barcode.data, 10);
+    console.log('JOIN CODE ', sessionId);
     const userId = this.props.state.user.id;
+    console.log('USER ID AND TYPEOF', userId, typeof userId);
     this.setState({ joined: true });
     let id;
-
-    await axios.post(`${SERVER_URI}${JoinClassRoute}`, { joinCode, userId })
+    
+    await axios.post(`${SERVER_URI}${JoinClassRoute}`, { sessionId, userId })
       .then((res) => {
-        // console.log(res.data);
+        console.log('RES.DATA FROM POST REQUEST', res.data);
         const { sessionId, className, participantId } = res.data;
         id = sessionId;
         this.props.onJoiningClass({ sessionId, className, participantId });
@@ -43,12 +47,13 @@ class JoinClass extends React.Component {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      // console.log(res.data);
+      console.log('RES.DATA FROM DASHBOARD GET REQUEST', res.data);
       this.props.onDashboard(res.data);
       const { sessions } = this.props.state.dashboard.sessionInfo;
       let sessionIndex = sessions.reduce((index, sesh, i) => {
         return sesh.sessionID === id ? i : index;
       }, sessions.length - 1);
+      console.log('SESSION INDEX', sessionIndex)
       this.props.dispatch(selectSession(sessions[sessionIndex]));
       const navigateAction = NavigationActions.navigate({
         routeName: 'StudentClassNavigation',
@@ -101,27 +106,24 @@ class JoinClass extends React.Component {
         />
         <View style={{ padding: 5 }} />
         <View style={styles.contentContainer}>
-          <Text h2 style={{ color: white }}>{`Hello ${student.First_name}!`}</Text>
-          {/* <Icon color={yellow} name="rocket" size={30} /> */}
-          <View style={{ padding: 10 }} />
-          <FormLabel style={{ color: yellow }}>Enter the Join Code for the class</FormLabel>
-          <FormInput
-            onChangeText={text => this.setState({ joinCode: text })}
+          <Text h2 style={{ color: white, marginBottom: 10 }}>{`Hello ${student.First_name} !`}</Text>
+          <Text style={{ color: white, marginBottom: 10 }}>Scan a QR code from your teacher to join a class</Text>
+          <BarCodeScanner
+            onBarCodeRead={this.handleSubmit}
+            style={{
+              height: 350,
+              width: 350,
+            }}
           />
-          <View style={{ padding: 10 }} />
-          {!this.state.joined ?
-            <Button
-              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-              onPress={this.handleSubmit}
-              backgroundColor={green}
-              rounded
-              title="Join!"
-            />
-            :
+          {this.state.joined &&
             <Spinner color={white} />
           }
-          <Text h4 style={{ color: white }}>{(className && this.state.joined) ? `You are now enrolled in ${className}` : ''}</Text>
-          <Text>{(className && this.state.joined) ? <Icon color={white} name="thumb-up" size={20} /> : ''}</Text>
+          {this.state.joined && className && 
+            <Text h4 style={{ color: white }}>{`You are now enrolled in ${className} !`}</Text>
+          }
+          {this.state.joined && className &&
+            <Icon color={green} name="thumb-up" size={20} />
+          }
         </View>
       </ImageBackground>
     );
