@@ -18,7 +18,7 @@ class TeacherDashboard extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      assignments: [],
+      assignments: null,
       calendar: [],
     };
     this.LogOut = this.LogOut.bind(this);
@@ -45,19 +45,8 @@ class TeacherDashboard extends React.Component {
   }
 
   render() {
-    // console.log(this.props.state);
-    // const { height, width } = Dimensions.get('window');
-    // const styles = StyleSheet.create({
-    //   container: {
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    //     alignItems: 'center',
-    //     justifyContent: 'flex-start',
-    //   },
-    // });
     const teacher = this.props.state.user;
-    // console.log(this.props.state.dashboard, 'this.props....assignments');
-
+    console.log('\nTHIS.PROPS.STATE.DASH\n', this.props.state.dashboard);
 
     return (
       <ImageBackground
@@ -83,24 +72,47 @@ class TeacherDashboard extends React.Component {
             <Card title="YOUR SCHEDULE TODAY" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
               <View style={{ alignItems: 'center' }}><Icon color={blue} name="calendar" size={25} /></View>
               <View style={{ padding: 5 }} />
-              {this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
+              {this.props.state.dashboard.formattedCalendar ? this.props.state.dashboard.formattedCalendar.reduce((content, event, index) => (index === 0 ? [(
                 <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                   <Text style={{ width: '30%', textAlign: 'center' }}>{`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}</Text>
                   <Text style={{ width: '70%', textAlign: 'right' }}>{`${event.summary}`}</Text>
                 </View>
-              )) : <Spinner color={blue} />
+                )]
+                : content.concat(
+                  <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                    <Text style={{ width: '30%', textAlign: 'center' }}>{`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{`${event.summary}`}</Text>
+                  </View>)),
+                  (<Text style={{ textAlign: 'center' }}>No classes today!</Text>)
+                )
+                : <Spinner color={blue} />
               }
             </Card>
             <Card title="UPCOMING DUE DATES" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }}>
               <View style={{ alignItems: 'center' }}><Icon color={blue} name="bell" size={25} /></View>
               <View style={{ padding: 5 }} />
-              {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.reverse().map((el, index) => (
+              {this.state.assignments ? this.state.assignments.reverse().reduce((content, el, index) => (index === 0 ? [(
+                <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                  <Text style={{ width: '70%' }}>{el.title}</Text>
+                  <Text style={{ width: '30%' }}>{el.dueDate}</Text>
+                </View>
+              )]
+                : content.concat(
+                  <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                    <Text style={{ width: '70%' }}>{el.title}</Text>
+                    <Text style={{ width: '30%' }}>{el.dueDate}</Text>
+                  </View>)),
+                (<Text style={{ textAlign: 'center' }}>No due dates on the horizon!</Text>)
+              )
+                : <Spinner color={blue} />
+              }
+              {/* {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.reverse().map((el, index) => (
                 <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                   <Text style={{ width: '70%' }}>{el.title}</Text>
                   <Text style={{ width: '30%' }}>{el.dueDate}</Text>
                 </View>
               )) : <Spinner color={blue} />
-              }
+              } */}
             </Card>
           </Content>
         </Container>
