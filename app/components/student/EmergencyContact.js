@@ -74,6 +74,7 @@ class EmergencyContact extends React.Component {
         color: white,
         marginTop: 10,
         fontSize: 30,
+        textAlign: 'center',
       },
       rowView: {
         flexDirection: 'row',
@@ -133,7 +134,9 @@ class EmergencyContact extends React.Component {
                 </Card>
               }
               {!this.state.submitted && !this.props.state.user.emergencyContact &&
-                <Form style={{ justifyContent: 'center' }}>
+                <Form style={{ justifyContent: 'center', marginRight: 15 }}>
+                  <Text style={styles.headerText}>Add an emergency contact</Text>
+                  <View style={{ padding: 10 }} />
                   <Item stackedLabel>
                     <Label style={{ color: white }}>First Name</Label>
                     <Input
@@ -166,6 +169,7 @@ class EmergencyContact extends React.Component {
                   <Button
                     block
                     success
+                    style={{ marginLeft: 15 }}
                     onPress={() => this.onSelect()}
                   >
                     <Text>Create Contact</Text>
