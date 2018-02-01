@@ -1,17 +1,39 @@
 import Expo from 'expo';
 import React from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ExpoTHREE from 'expo-three';
 import * as THREE from 'three';
-import fontHelvetiker from 'three/examples/fonts/helvetiker_regular.typeface.json';
+import { SERVER_URI, SendBadges } from '../../constant';
 
 console.disableYellowBox = true;
 
 
-export default class StudentBadges3D extends React.Component {
+class StudentBadges3D extends React.Component {
   constructor() {
     super();
-    this.state = { text: '' };
+    this.state = {};
     this._onGLContextCreate = this._onGLContextCreate.bind(this);
+  }
+
+  componentDidMount() {
+    const studentID = this.props.state.selectSession.participantID;
+    axios.get(`${SERVER_URI}${SendBadges}`, {
+      params: {
+        studentID,
+      },
+    })
+      .then((res) => {
+        const badgesInit = res.data;
+        const badges = badgesInit.reduce((memo, curr) => {
+          memo[curr.id_badge] ? memo[curr.id_badge] += 1 : memo[curr.id_badge] = 1;
+          return memo;
+        }, {});
+        this.setState({ badges });
+        console.log('state', this.state);
+      })
+      .catch(err => console.error(err));
   }
 
 
@@ -65,13 +87,13 @@ export default class StudentBadges3D extends React.Component {
     const materialScience = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/science.png')),
+        asset: Expo.Asset.fromModule(require('../../assets/grades.jpg')),
       }),
     });
     const materialABC = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/abc.png')),
+        asset: Expo.Asset.fromModule(require('../../assets/spiritgood.png')),
       }),
     });
 
@@ -153,3 +175,12 @@ export default class StudentBadges3D extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(StudentBadges3D);
+StudentBadges3D.propTypes = {
+  state: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+};
