@@ -14,15 +14,27 @@ const ClassBadgesNavigation = StackNavigator({
   },
   BadgeGrade: {
     screen: BadgeGrade,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   BadgeTime: {
     screen: BadgeTime,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   BadgeSpirit: {
     screen: BadgeSpirit,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
   BadgeBehavior: {
     screen: BadgeBehavior,
+    navigationOptions: () => ({
+      header: null,
+    }),
   },
 });
 
