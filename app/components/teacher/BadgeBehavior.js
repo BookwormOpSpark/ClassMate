@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import { green } from '../../style/colors';
 
 class BadgeBehavior extends React.Component {
   constructor(props) {
@@ -41,8 +42,8 @@ class BadgeBehavior extends React.Component {
         />
         <View style={styles.container}>
           <Icon
-            color="gold"
-            name="trophy"
+            color={green}
+            name="group"
             size={100}
             // onPress={}
             style={styles.icon}

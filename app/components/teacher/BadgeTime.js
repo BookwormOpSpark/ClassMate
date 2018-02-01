@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { Button, Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -31,7 +31,7 @@ class BadgeTime extends React.Component {
     console.log(studentID, 'this is studentID in sendBadges')
       .then(res => console.log(res, 'res from sendBadges'))
       .catch(err => console.error(err));
-      
+
     await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userId, studentName })
     console.log(userID, studentName, className, 'userID, studentName, className in badgeNotification')
       .then(res => console.log(res, 'res from sendNotifications'))
@@ -74,11 +74,11 @@ class BadgeTime extends React.Component {
         <View style={styles.container}>
           <Icon
             color="gold"
-            name="trophy"
+            name="schedule"
             size={100}
             style={styles.icon}
           />
-          <Text h3 style={styles.text}>Good Timing Badge</Text>
+          <Text h3 style={styles.text}>Punctuality Badge</Text>
           <Picker
             itemStyle={{ color: 'blue', alignSelf: 'center' }}
             style={{
