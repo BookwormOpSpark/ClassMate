@@ -14,11 +14,13 @@ class StudentBadges extends React.Component {
   constructor(props) {
     super(props);
     this.animatedValue = new Animated.Value(0);
+    this.spinValue = new Animated.Value(0);
     this.state = {};
 
     this.renderBadgeGrade = this.renderBadgeGrade.bind(this);
     this.keyExtractor = this.keyExtractor.bind(this);
     this.animate = this.animate.bind(this);
+    this.spin = this.spin.bind(this);
 
     this.styles = StyleSheet.create({
       container: {
@@ -65,10 +67,12 @@ class StudentBadges extends React.Component {
         }, {});
         this.setState({ badges });
         console.log('state', this.state);
+        console.log('state', this.state.badges['1']);
       })
       .catch(err => console.error(err));
 
     this.animate(Easing.bounce);
+    this.spin();
   }
 
   animate(easing) {
@@ -81,6 +85,18 @@ class StudentBadges extends React.Component {
         easing,
       },
     ).start();
+  }
+
+  spin() {
+    this.state.spinValue.setValue(0);
+    Animated.timing(
+      this.state.spinValue,
+      {
+        toValue: 1,
+        duration: 2000,
+        easing: Easing.linear,
+      },
+    ).start(() => this.spin());
   }
 
   keyExtractor = item => item;
@@ -131,13 +147,19 @@ class StudentBadges extends React.Component {
       inputRange: [-3, 1],
       outputRange: [0, 260],
     });
+    const getStartValue = () => '0deg';
+    const getEndValue = () => '360deg';
+    const spin = this.state.spinValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [getStartValue(), getEndValue()],
+    });
     const className = this.props.state.selectSession.sessionName;
 
-    const badgeGrade = [1, 1, 1, 1 ]; // list.length > 0 ? list.filter(item => item.type === 'image') : [];
+    const badgeGrade = [1, 1, 1, 1]; // list.length > 0 ? list.filter(item => item.type === 'image') : [];
     // const badgeGrade = this.state.badges['1'].length > 0 ? this.state['1'] : [];
-    // const badgeTime = this.state.badges['2'].length > 0 ? this.state['2'] : [];
-    // const badgeSpirit = this.state.badges['3'].length > 0 ? this.state['3'] : [];
-    // const badgeParticipation = this.state.badges['4'].length > 0 ? this.state['4'] : [];
+    const badgeTime = this.state.badges['2'].length > 0 ? this.state.badges['2'] : [];
+    const badgeSpirit = this.state.badges['3'].length > 0 ? this.state.badges['3'] : [];
+    const badgeParticipation = this.state.badges['4'].length > 0 ? this.state.badges['4'] : [];
 
     return (
       <ImageBackground
@@ -161,19 +183,18 @@ class StudentBadges extends React.Component {
             contentContainerStyle={this.styles.contentContainer}
             scrollEnabled
           >
+            <Text
+              h3
+              style={this.styles.text}
+            >
+          Wooooow
+            </Text>
 
             <Animated.View
               style={[
                 { marginLeft },
               ]}
             >
-              <Text
-                h3
-                style={this.styles.text}
-              >
-                Wooooow
-              </Text>
-
               <Icon
                 color="gold"
                 name="rocket"
@@ -181,38 +202,42 @@ class StudentBadges extends React.Component {
               />
             </Animated.View>
 
-            <FlatList
-              contentContainerStyle={this.styles.list}
-              renderItem={item => this.renderBadgeGrade(item)}
-              data={badgeGrade}
-              keyExtractor={this.keyExtractor}
-            />
-            <FlatList
-              contentContainerStyle={this.styles.list}
-              renderItem={item => this.renderBadgeTime(item)}
-              data={badgeGrade}
-              keyExtractor={this.keyExtractor}
-            />
-            <FlatList
-              contentContainerStyle={this.styles.list}
-              renderItem={item => this.renderBadgeParticipation(item)}
-              data={badgeGrade}
-              keyExtractor={this.keyExtractor}
-            />
-            <FlatList
-              contentContainerStyle={this.styles.list}
-              renderItem={item => this.renderBadgeSpirit(item)}
-              data={badgeGrade}
-              keyExtractor={this.keyExtractor}
-            />
-            <Button
-              buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
-              title="Badges Crazy!"
-              backgroundColor="#f4d35e"
-              borderRadius={5}
-              onPress={() => this.props.navigation.navigate('StudentBadges3D')}
-            />
+            <Animated.View
+              style={{ transform: [{ rotate: spin }] }}
+            >
 
+              <FlatList
+                contentContainerStyle={this.styles.list}
+                renderItem={item => this.renderBadgeGrade(item)}
+                data={badgeGrade}
+                keyExtractor={this.keyExtractor}
+              />
+              <FlatList
+                contentContainerStyle={this.styles.list}
+                renderItem={item => this.renderBadgeTime(item)}
+                data={badgeGrade}
+                keyExtractor={this.keyExtractor}
+              />
+              <FlatList
+                contentContainerStyle={this.styles.list}
+                renderItem={item => this.renderBadgeParticipation(item)}
+                data={badgeGrade}
+                keyExtractor={this.keyExtractor}
+              />
+              <FlatList
+                contentContainerStyle={this.styles.list}
+                renderItem={item => this.renderBadgeSpirit(item)}
+                data={badgeGrade}
+                keyExtractor={this.keyExtractor}
+              />
+              <Button
+                buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
+                title="Badges Crazy!"
+                backgroundColor="#f4d35e"
+                borderRadius={5}
+                onPress={() => this.props.navigation.navigate('StudentBadges3D')}
+              />
+            </Animated.View>
           </ScrollView>
         </View>
       </ImageBackground>
