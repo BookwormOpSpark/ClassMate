@@ -88,8 +88,8 @@ class EmergencyContact extends React.Component {
         fontWeight: 'bold',
         fontSize: 18,
       },
-
     });
+    let { nameFirst, nameLast, address, phone } = this.state;
     return (
       <ImageBackground
         source={blackboard}
@@ -116,19 +116,19 @@ class EmergencyContact extends React.Component {
                   <View style={{ padding: 5 }} />
                   <View style={styles.rowView}>
                     <Text style={styles.categoryText}>Name :</Text>
-                    <Text style={{ width: '70%', textAlign: 'right' }}>{`${this.state.nameFirst} ${this.state.nameLast}`}</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{`${nameFirst} ${nameLast}`}</Text>
                   </View>
                   <View style={styles.rowView}>
                     <Text style={styles.categoryText}>Address :</Text>
-                    <Text style={{ width: '70%', textAlign: 'right' }}>{this.state.address}</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{address}</Text>
                   </View>
                   <View style={styles.rowView}>
                     <Text style={styles.categoryText}>Phone :</Text>
                     <Text
                       style={{ width: '70%', textAlign: 'right', textDecorationLine: 'underline' }}
-                      onPress={() => this.callNumber(`tel:1-${this.state.phone}`)}
+                      onPress={() => this.callNumber(`tel:1-${phone}`)}
                     >
-                      {`1-${this.state.phone}`}
+                      {`1-${phone}`}
                     </Text>
                   </View>
                 </Card>
@@ -159,21 +159,33 @@ class EmergencyContact extends React.Component {
                     />
                   </Item>
                   <Item stackedLabel>
-                    <Label style={{ color: white }}>Phone Number</Label>
+                    <Label style={{ color: white }}>Phone Number (no punctuation please)</Label>
                     <Input
                       style={{ color: white }}
                       onChangeText={text => this.setState({ phone: text })}
                     />
                   </Item>
                   <View style={{ padding: 10 }} />
-                  <Button
-                    block
-                    success
-                    style={{ marginLeft: 15 }}
-                    onPress={() => this.onSelect()}
-                  >
-                    <Text>Create Contact</Text>
-                  </Button>
+                  {(nameFirst.length > 0 && nameLast.length > 0 && address.length > 0 && phone.length === 10) ?
+                    <Button
+                      block
+                      success
+                      style={{ marginLeft: 15 }}
+                      onPress={() => this.onSelect()}
+                    >
+                      <Text>Create Contact</Text>
+                    </Button>
+                  :
+                    <Button
+                      block
+                      disabled
+                      
+                      style={{ marginLeft: 15 }}
+                      onPress={() => this.onSelect()}
+                    >
+                      <Text>Create Contact</Text>
+                    </Button>
+                  }
                 </Form>
               }
               {!this.state.submitted && this.props.state.user.emergencyContact &&
