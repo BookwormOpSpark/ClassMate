@@ -47,6 +47,7 @@ class QRcode extends React.Component {
             bgColor="black"
             fgColor="white"
           />
+          <View style={{ padding: 10 }} />
           <Text style={{ color: white }}> Have students scan this code to check in for class! </Text>
         </View>
       </ImageBackground>
