@@ -133,10 +133,10 @@ class ClassBadges extends React.Component {
                   name="group"
                   style={styles.icon}
                   size={100}
-                  onPress={() => this.props.navigation.navigate('BadgePunctuality')}
+                  onPress={() => this.props.navigation.navigate('BadgeParticipation')}
                 />
                 <Button
-                  onPress={() => this.props.navigation.navigate('BadgePunctuality')}
+                  onPress={() => this.props.navigation.navigate('BadgeParticipation')}
                   buttonStyle={styles.button}
                   backgroundColor={green}
                   small
