@@ -19,7 +19,7 @@ class AddClass extends React.Component {
     // console.log('AddClass');
     // console.log(this.props.state);
     this.state = {
-      joinCode: '',
+      joinCode: 'poop',
       description: '',
       added: false,
     };
@@ -103,25 +103,29 @@ class AddClass extends React.Component {
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${teacher.First_name}!`}</Text>
           <Text h4 style={{ color: white }}>Create a New Class!</Text>
-          {/* <Icon color={yellow} name="rocket" size={30} /> */}
+          <Text style={{ color: white, padding: 5, textAlign: 'center' }}>then use the class QR code to have students join or check in</Text>
           <View style={{ padding: 10 }} />
           <FormLabel>Enter the class name</FormLabel>
           <FormInput
             onChangeText={text => this.setState({ description: text })}
           />
-          <FormLabel>Enter the Join Code for the class</FormLabel>
-          <FormInput
-            onChangeText={text => this.setState({ joinCode: text })}
-          />
           <View style={{ padding: 10 }} />
-          {!this.state.added &&
-          <Button
-            buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
-            onPress={this.handleSubmit}
-            backgroundColor={green}
-            rounded
-            title="Create Class!"
-          />
+          {!this.state.added && this.state.description.length === 0 &&
+            <Button
+              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+              backgroundColor="grey"
+              rounded
+              title="Create Class!"
+            />
+          }
+          {!this.state.added && this.state.description.length > 0 &&
+            <Button
+              buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
+              onPress={this.handleSubmit}
+              backgroundColor={green}
+              rounded
+              title="Create Class!"
+            />
           }
           <Text h4 style={{ color: white }}>{this.state.added ? `You just created a ${this.state.description} class!` : ''}</Text>
           <Text>{this.state.added ? <Icon color={white} name="thumb-up" size={20} /> : ''}</Text>
