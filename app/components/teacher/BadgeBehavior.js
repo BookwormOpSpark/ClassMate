@@ -7,7 +7,7 @@ import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
 import { green } from '../../style/colors';
 
-class BadgeBehavior extends React.Component {
+class BadgePunctuality extends React.Component {
   constructor(props) {
     super(props);
     this.state = { language: '' };
@@ -65,9 +65,9 @@ const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps)(BadgeBehavior);
+export default connect(mapStateToProps)(BadgePunctuality);
 
-BadgeBehavior.propTypes = {
+BadgePunctuality.propTypes = {
   state: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
