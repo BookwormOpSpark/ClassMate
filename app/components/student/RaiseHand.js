@@ -27,6 +27,9 @@ class RaiseHand extends React.Component {
 
   componentDidMount() {
     this._subscribe();
+    this.socket.on(`${this.props.state.user.id}`, () => {
+      this.setState({ handRaised: false });
+    });
   }
 
   componentWillUnmount() {
@@ -44,7 +47,8 @@ class RaiseHand extends React.Component {
 
   sendSocket() {
     this.socket.emit('raise-hand', {
-      student: this.props.state.user.First_name,
+      student: this.props.state.user,
+      sessionID: this.props.state.selectSession.sessionID,
       time: Date.now(),
     });
   }
@@ -61,8 +65,8 @@ class RaiseHand extends React.Component {
     this._subscription && this._subscription.remove();
     this._subscription = null;
   }
-
-
+  
+  
   render() {
     const styles = StyleSheet.create({
       sensor: {
