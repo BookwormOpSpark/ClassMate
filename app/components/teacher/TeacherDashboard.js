@@ -106,13 +106,6 @@ class TeacherDashboard extends React.Component {
               )
                 : <Spinner color={blue} />
               }
-              {/* {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.reverse().map((el, index) => (
-                <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                  <Text style={{ width: '70%' }}>{el.title}</Text>
-                  <Text style={{ width: '30%' }}>{el.dueDate}</Text>
-                </View>
-              )) : <Spinner color={blue} />
-              } */}
             </Card>
           </Content>
         </Container>
