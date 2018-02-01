@@ -27,24 +27,29 @@ export default class StudentBadges extends React.Component {
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
     renderer.setClearColor('#ECA963');
 
-    let font = '';
-    const text = 'Hello!';
-    const loader = new THREE.FontLoader();
-    loader.load(fontHelvetiker, (response) => {
-      font = response;
-    });
+    // let font = '';
+    // const text = 'Hello!';
+    // const loader = new THREE.FontLoader();
+    // loader.load(fontHelvetiker, (response) => {
+    //   font = response;
+    // });
+
+    // const geometryText = new THREE.TextGeometry(text, {
+    //   font,
+    //   size: 10,
+    //   height: 10,
+    //   curveSegments: 2,
+    // });
+    // const materialText = new THREE.MeshBasicMaterial({ color: 0xff0000, overdraw: 0.5 });
+    // const textHello = new THREE.Mesh(geometryText, materialText);
+    // textHello.position.x = 0;
+    // textHello.position.y = 0;
+    // textHello.position.z = 0;
+    // const group = new THREE.Group();
+    // group.add(textHello);
+    // scene.add(group);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const geometryText = new THREE.TextGeometry(text, {
-      font,
-      size: 50,
-      height: 20,
-      curveSegments: 2,
-    });
-    const materialText = [
-      new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff, overdraw: 0.5 }),
-      new THREE.MeshBasicMaterial({ color: 0x000000, overdraw: 0.5 }),
-    ];
     const materialClock = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
@@ -69,9 +74,6 @@ export default class StudentBadges extends React.Component {
         asset: Expo.Asset.fromModule(require('../../assets/abc.png')),
       }),
     });
-    const textHello = new THREE.Mesh(geometryText, materialText);
-    // scene.add(textHello);
-
 
     const cubesClock = Array(1)
       .fill()

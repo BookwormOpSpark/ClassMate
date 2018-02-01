@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import { StyleSheet, View, ScrollView, Image, FlatList, ImageBackground, Animated, Easing } from 'react-native';
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, SendBadges } from '../../constant';
@@ -163,11 +163,18 @@ class StudentBadges extends React.Component {
               />
             </Animated.View>
 
-            <FlatList
+            {/*            <FlatList
               contentContainerStyle={this.styles.container}
               renderItem={({ item }) => this.renderImage(item)}
               data={imageList}
               keyExtractor={this.keyExtractor}
+/> */}
+            <Button
+              buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
+              title="Badges Crazy!"
+              backgroundColor="#5fad56"
+              borderRadius={5}
+              onPress={() => this.props.navigation.navigate('Badges3D')}
             />
 
           </ScrollView>
