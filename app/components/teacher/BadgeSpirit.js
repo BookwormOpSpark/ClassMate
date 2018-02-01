@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
@@ -41,8 +41,8 @@ class BadgeSpirit extends React.Component {
         />
         <View style={styles.container}>
           <Icon
-            color="gold"
-            name="trophy"
+            color="#FF9F1C"
+            name="star"
             size={100}
             // onPress={}
             style={styles.icon}
