@@ -31,7 +31,7 @@ class StudentBadges extends React.Component {
       },
       list: {
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         flexDirection: 'row',
       },
       view: {

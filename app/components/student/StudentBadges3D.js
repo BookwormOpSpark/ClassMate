@@ -38,6 +38,10 @@ class StudentBadges3D extends React.Component {
 
 
   _onGLContextCreate = async (gl) => {
+    const gradeCount = this.state.badges ? this.state.badges['1'] : 0;
+    const timeCount = this.state.badges ? this.state.badges['2'] : 0;
+    const spiritCount = this.state.badges ? this.state.badges['3'] : 0;
+    const participationCount = this.state.badges ? this.state.badges['4'] : 0;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -72,35 +76,35 @@ class StudentBadges3D extends React.Component {
     // scene.add(group);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const materialClock = new THREE.MeshBasicMaterial({
+    const materialTime = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
         asset: Expo.Asset.fromModule(require('../../assets/clock.png')),
       }),
     });
-    const materialCurious = new THREE.MeshBasicMaterial({
+    const materialParticipation = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
         asset: Expo.Asset.fromModule(require('../../assets/curious.png')),
       }),
     });
-    const materialScience = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/grades.jpg')),
-      }),
-    });
-    const materialABC = new THREE.MeshBasicMaterial({
+    const materialSpirit = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
         asset: Expo.Asset.fromModule(require('../../assets/spiritgood.png')),
       }),
     });
+    const materialGrade = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/grades.jpg')),
+      }),
+    });
 
-    const cubesClock = Array(1)
+    const cubesTime = Array(timeCount)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialClock);
+        const cube = new THREE.Mesh(geometry, materialTime);
         scene.add(cube);
         cube.position.x = 1.5; // 3 - 6 * Math.random();
         cube.position.y = 2; // 3 - 6 * Math.random();
@@ -108,30 +112,30 @@ class StudentBadges3D extends React.Component {
         return { cube };
       });
 
-    const cubesCurious = Array(1)
+    const cubesParticipation = Array(participationCount)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialCurious);
+        const cube = new THREE.Mesh(geometry, materialParticipation);
         scene.add(cube);
         cube.position.x = -1.5; // 4 - 6 * Math.random();
         cube.position.y = 2; // 4 - 6 * Math.random();
         cube.position.z = 0; // -5 * Math.random();
         return { cube };
       });
-    const cubesABC = Array(1)
+    const cubesGrade = Array(gradeCount)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialABC);
+        const cube = new THREE.Mesh(geometry, materialGrade);
         scene.add(cube);
         cube.position.x = 1.5; // 2 - 6 * Math.random();
         cube.position.y = -1; // 2 - 6 * Math.random();
         cube.position.z = 0; // -2 * Math.random();
         return { cube };
       });
-    const cubesScience = Array(1)
+    const cubesSpirit = Array(spiritCount)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialScience);
+        const cube = new THREE.Mesh(geometry, materialSpirit);
         scene.add(cube);
         cube.position.x = -1.5; // - 6 * Math.random();
         cube.position.y = -1; // - 6 * Math.random();
@@ -143,19 +147,19 @@ class StudentBadges3D extends React.Component {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      cubesABC.forEach(({ cube }) => {
+      cubesGrade.forEach(({ cube }) => {
         cube.rotation.x += 0.03;
         cube.rotation.y += 0.03;
       });
-      cubesClock.forEach(({ cube }) => {
+      cubesTime.forEach(({ cube }) => {
         cube.rotation.x += 0.03;
         cube.rotation.y += 0.03;
       });
-      cubesCurious.forEach(({ cube }) => {
+      cubesParticipation.forEach(({ cube }) => {
         cube.rotation.x += 0.03;
         cube.rotation.y += 0.03;
       });
-      cubesScience.forEach(({ cube }) => {
+      cubesSpirit.forEach(({ cube }) => {
         cube.rotation.x += 0.03;
         cube.rotation.y += 0.03;
       });
