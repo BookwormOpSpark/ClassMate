@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
@@ -41,8 +41,8 @@ class BadgeGrade extends React.Component {
         />
         <View style={styles.container}>
           <Icon
-            color="gold"
-            name="trophy"
+            color="#2EC4B6"
+            name="spellcheck"
             size={100}
             // onPress={}
             style={styles.icon}

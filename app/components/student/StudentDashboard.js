@@ -18,7 +18,7 @@ class StudentDashboard extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      assignments: [],
+      assignments: null,
     };
     this.onLogout = this.onLogout.bind(this);
   }
@@ -80,7 +80,6 @@ class StudentDashboard extends React.Component {
                 <Text>Check In</Text>
                 <Icon name="check" size={20} style={{ marginRight: 10 }} />
               </Button>
-
               <Button
                 block
                 iconLeft
@@ -94,23 +93,39 @@ class StudentDashboard extends React.Component {
             <Card title="YOUR SCHEDULE TODAY" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }} >
               <View style={{ alignItems: 'center' }}><Icon color={blue} name="calendar" size={25} /></View>
               <View style={{ padding: 5 }} />
-              {this.props.state.dashboard.formattedCalendar && this.props.state.dashboard.formattedCalendar.length > 0 ? this.props.state.dashboard.formattedCalendar.map((event, index) => (
+              {this.props.state.dashboard.formattedCalendar ? this.props.state.dashboard.formattedCalendar.reduce((content, event, index) => (index === 0 ? [(
                 <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                   <Text style={{ width: '30%', textAlign: 'center' }}>{`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}</Text>
                   <Text style={{ width: '70%', textAlign: 'right' }}>{`${event.summary}`}</Text>
                 </View>
-                )) : <Spinner color={blue} />
+              )]
+                : content.concat(
+                  <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                    <Text style={{ width: '30%', textAlign: 'center' }}>{`${event.startTime.time.slice(0, -3)} - ${event.endTime.time.slice(0, -3)}`}</Text>
+                    <Text style={{ width: '70%', textAlign: 'right' }}>{`${event.summary}`}</Text>
+                  </View>)),
+                (<Text style={{ textAlign: 'center' }}>No classes today!</Text>)
+              )
+                : <Spinner color={blue} />
               }
             </Card>
             <Card title="UPCOMING DUE DATES" containerStyle={{ backgroundColor: white, borderColor: blue }} dividerStyle={{ backgroundColor: blue }}>
               <View style={{ alignItems: 'center' }}><Icon color={blue} name="bell" size={25} /></View>
               <View style={{ padding: 5 }} />
-              {this.state.assignments && this.state.assignments.length > 0 ? this.state.assignments.reverse().map((el, index) => (
+              {this.state.assignments ? this.state.assignments.reverse().reduce((content, el, index) => (index === 0 ? [(
                 <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
                   <Text style={{ width: '70%' }}>{el.title}</Text>
                   <Text style={{ width: '30%' }}>{el.dueDate}</Text>
                 </View>
-              )) : <Spinner color={blue} />
+              )]
+                : content.concat(
+                  <View key={index} style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                    <Text style={{ width: '70%' }}>{el.title}</Text>
+                    <Text style={{ width: '30%' }}>{el.dueDate}</Text>
+                  </View>)),
+                (<Text style={{ textAlign: 'center' }}>No due dates on the horizon!</Text>)
+              )
+                : <Spinner color={blue} />
               }
             </Card>
           </Content>

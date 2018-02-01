@@ -1,133 +1,167 @@
-import Expo from 'expo';
 import React from 'react';
-import ExpoTHREE from 'expo-three';
-import { Dimensions, View, Text } from 'react-native';
-import * as THREE from 'three';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { connect } from 'react-redux';
+import { Text, Button } from 'react-native-elements';
+import { StyleSheet, View, ScrollView, Image, FlatList, ImageBackground, Animated, Easing } from 'react-native';
+import blackboard from '../../assets/blackboard.jpg';
+import { SERVER_URI, SendBadges } from '../../constant';
+import DashHeader from '../shared/Header';
 
-console.disableYellowBox = true;
+class StudentBadges extends React.Component {
+  constructor(props) {
+    super(props);
+    this.animatedValue = new Animated.Value(0);
+    this.state = {
+      badges: '',
+    };
 
+    this.renderImage = this.renderImage.bind(this);
+    this.keyExtractor = this.keyExtractor.bind(this);
+    this.animate = this.animate.bind(this);
 
-export default class StudentBadges extends React.Component {
-  constructor() {
-    super();
-    this.state = { text: '' };
-    this._onGLContextCreate = this._onGLContextCreate.bind(this);
+    this.styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      contentContainer: {
+        flexGrow: 1,
+      },
+      view: {
+        marginBottom: 40,
+        alignItems: 'center',
+      },
+      text: {
+        textAlign: 'center',
+        color: '#f4d35e',
+      },
+    });
   }
 
+  componentDidMount() {
+    const studentID = this.props.state.selectSession.participantID;
+    axios.get(`${SERVER_URI}${SendBadges}`, {
+      params: {
+        studentID,
+      },
+    })
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ badges: res.data });
+      })
+      .catch(err => console.error(err));
 
-  _onGLContextCreate = async (gl) => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      gl.drawingBufferWidth / gl.drawingBufferHeight,
-      0.1,
-      1000,
+    this.animate(Easing.bounce);
+  }
+
+  animate(easing) {
+    this.animatedValue.setValue(0);
+    Animated.timing(
+      this.animatedValue,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing,
+      },
+    ).start();
+  }
+
+  keyExtractor = item => item.link;
+
+  renderImage(item) {
+    return (
+      <View style={this.styles.view}>
+        <Icon
+          color="white"
+          name="rocket"
+          size={50}
+        />
+      </View>
     );
-    const renderer = ExpoTHREE.createRenderer({ gl });
-    renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
-    renderer.setClearColor('#ECA963');
-
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const materialClock = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/clock.png')),
-      }),
-    });
-    const materialCurious = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/curious.png')),
-      }),
-    });
-    const materialScience = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/science.png')),
-      }),
-    });
-    const materialABC = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/abc.png')),
-      }),
-    });
-
-    const cubesClock = Array(1)
-      .fill()
-      .map(() => {
-        const cube = new THREE.Mesh(geometry, materialClock);
-        scene.add(cube);
-        cube.position.x = 1; // 3 - 6 * Math.random();
-        cube.position.y = 1; // 3 - 6 * Math.random();
-        cube.position.z = -3; // -5 * Math.random();
-        return { cube };
-      });
-    
-    const cubesCurious = Array(1)
-      .fill()
-      .map(() => {
-        const cube = new THREE.Mesh(geometry, materialCurious);
-        scene.add(cube);
-        cube.position.x = 2; // 4 - 6 * Math.random();
-        cube.position.y = 3; // 4 - 6 * Math.random();
-        cube.position.z = -2; // -5 * Math.random();
-        return { cube };
-      });
-    const cubesABC = Array(1)
-      .fill()
-      .map(() => {
-        const cube = new THREE.Mesh(geometry, materialABC);
-        scene.add(cube);
-        cube.position.x = 2; // 2 - 6 * Math.random();
-        cube.position.y = 4; // 2 - 6 * Math.random();
-        cube.position.z = -2; // -2 * Math.random();
-        return { cube };
-      });
-    const cubesScience = Array(1)
-      .fill()
-      .map(() => {
-        const cube = new THREE.Mesh(geometry, materialScience);
-        scene.add(cube);
-        cube.position.x = 3; // - 6 * Math.random();
-        cube.position.y = 3; // - 6 * Math.random();
-        cube.position.z = -2; // - 2 * Math.random();
-        return { cube };
-      });
-
-    camera.position.z = 5;
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-      cubesABC.forEach(({ cube }) => {
-        cube.rotation.x += 0.05;
-        cube.rotation.y += 0.03;
-      });
-      cubesClock.forEach(({ cube }) => {
-        cube.rotation.x += 0.06;
-        cube.rotation.y += 0.04;
-      });
-      cubesCurious.forEach(({ cube }) => {
-        cube.rotation.x += 0.04;
-        cube.rotation.y += 0.03;
-      });
-      cubesScience.forEach(({ cube }) => {
-        cube.rotation.x += 0.02;
-        cube.rotation.y += 0.01;
-      });
-      renderer.render(scene, camera);
-      gl.endFrameEXP();
-    };
-    animate();
-  };
+  }
 
   render() {
+    const marginLeft = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 260],
+    });
+    const className = this.props.state.selectSession.sessionName;
+
+    const list = this.state.fun;
+    // const imageList = list.length > 0 ? list.filter(item => item.type === 'image') : [];
+
     return (
-      <Expo.GLView
-        style={{ flex: 1 }}
-        onContextCreate={this._onGLContextCreate}
-      />
+      <ImageBackground
+        source={blackboard}
+        style={{
+          backgroundColor: '#000000',
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <DashHeader
+          navigation={this.props.navigation}
+          className={className}
+          back
+        />
+        <View style={this.styles.container}>
+          <ScrollView
+            contentContainerStyle={this.styles.contentContainer}
+            scrollEnabled
+          >
+            <Text
+              h3
+              style={this.styles.text}
+            >
+              Student Badges
+            </Text>
+
+            <Animated.View
+              style={[
+                { marginLeft },
+              ]}
+            >
+              <Icon
+                color="gold"
+                name="rocket"
+                size={30}
+              />
+            </Animated.View>
+
+            {/*            <FlatList
+              contentContainerStyle={this.styles.container}
+              renderItem={({ item }) => this.renderImage(item)}
+              data={imageList}
+              keyExtractor={this.keyExtractor}
+/> */}
+            <Button
+              buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
+              title="Badges Crazy!"
+              backgroundColor="#5fad56"
+              borderRadius={5}
+              onPress={() => this.props.navigation.navigate('StudentBadges3D')}
+            />
+
+          </ScrollView>
+        </View>
+      </ImageBackground>
+
     );
   }
 }
 
+const mapStateToProps = state => ({
+  state,
+});
+
+export default connect(mapStateToProps)(StudentBadges);
+StudentBadges.propTypes = {
+  state: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+};
