@@ -64,10 +64,10 @@ class StudentBadges3D extends React.Component {
     const timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
     const spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
     const participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
-    console.log('spirit', spiritCount);
-    console.log('time', timeCount);
-    console.log('grade', gradeCount);
-    console.log('participation', participationCount);
+    // console.log('spirit', spiritCount);
+    // console.log('time', timeCount);
+    // console.log('grade', gradeCount);
+    // console.log('participation', participationCount);
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,

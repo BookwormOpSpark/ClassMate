@@ -92,6 +92,10 @@ class StudentDrawer extends Component {
   navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
       routeName: route,
+      action: NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Home' })],
+      }),
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -151,7 +155,6 @@ class StudentDrawer extends Component {
                 {prevSessions.map((session, id) => (
                   <Text
                     style={styles.navItemStyle}
-                    // onPress={this.navigateToScreen('StudentClassNavigation')}
                     onPress={() => this.onSelect(session)}
                     key={id}
                   >
@@ -162,14 +165,14 @@ class StudentDrawer extends Component {
             }
             <View style={{ paddingVertical: 5 }} />
             <View style={styles.addClassStyle}>
-              <Button
+              {/* <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('JoinClass')}
                 iconRight={{ name: 'add-circle-outline' }}
                 backgroundColor={green}
                 rounded
                 title="Join a Class"
-              />
+              /> */}
             </View>
           </View>
         </ScrollView>
@@ -177,7 +180,7 @@ class StudentDrawer extends Component {
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.registerForPushNotificationsAsync}
-            iconRight={{ name: 'exit-to-app' }}
+            iconRight={{ name: 'music-note' }}
             backgroundColor={blue}
             rounded
             title="Accept Notifications"

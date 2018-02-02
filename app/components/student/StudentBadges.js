@@ -247,13 +247,13 @@ class StudentBadges extends React.Component {
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeParticipation(item)}
-              data={badgeSpirit}
+              data={badgeParticipation}
               keyExtractor={this.keyExtractor}
             />
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeSpirit(item)}
-              data={badgeParticipation}
+              data={badgeSpirit}
               keyExtractor={this.keyExtractor}
             />
             <Button

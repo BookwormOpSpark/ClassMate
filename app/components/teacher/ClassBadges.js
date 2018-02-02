@@ -72,7 +72,7 @@ class ClassBadges extends React.Component {
         <DashHeader
           navigation={this.props.navigation}
           className={className}
-          back={false}
+          back
         />
         <View style={styles.container}>
 

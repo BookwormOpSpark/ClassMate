@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { StyleSheet, View, Dimensions, ScrollView, ActivityIndicator, ImageBackground, Image, Text } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
-import axios from 'axios';
-import { Container, Header, Title, Left, Right, Button, Body, Content, Card, CardItem, H3 } from 'native-base';
-import { connect } from 'react-redux';
-import { logOut, getDashboard, selectSession } from '../../actions/actions';
-import { SERVER_URI, DashboardRoute } from '../../constant';
-import blackboard from '../../assets/blackboard.jpg';
+import { Image } from 'react-native';
+import { Header } from 'react-native-elements';
+import { Button } from 'native-base';
 import logo from '../../assets/classmatelogoicon.png';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
@@ -22,33 +17,29 @@ export default class DashHeader extends React.Component {
   render() {
     const { navigation, className, back } = this.props;
     return (
-      <Header style={{ backgroundColor: blue, justifyContent: 'center', marginTop: 23 }}>
-        <Left style={{ flexDirection: 'row' }}>
-          {back ?
+      <Header
+        backgroundColor={blue}
+        statusBarProps={{ barStyle: 'light-content' }}
+        leftComponent={
+          back ?
             <Button
               transparent
               onPress={() => navigation.goBack()}
               style={{ marginRight: 10 }}
             >
-              <Icon name="arrow-left-thick" size={30} color={yellow} />
+              <Icon name="arrow-left-thick" size={30} color={yellow} style={{ marginTop: 20 }} />
             </Button>
           :
             <Button
               transparent
               onPress={() => navigation.navigate('DrawerOpen')}
             >
-              <Icon name="menu" size={30} color={yellow} />
+              <Icon name="menu" size={30} color={yellow} style={{ marginTop: 20 }} />
             </Button>
-          }
-        </Left>
-        <Body style={{ marginBottom: 10, paddingLeft: -100, paddingRight: -100 }}>
-          <H3 style={{ color: yellow }} >{className}</H3>
-        </Body>
-        <Right>
-          <Image source={logo} style={{ width: 30, height: 30 }} />
-        </Right>
-      </Header>
-
+        }
+        centerComponent={{ text: className, style: { color: yellow, fontSize: 20, marginTop: 20 } }}
+        rightComponent={<Image source={logo} style={{ width: 30, height: 30, marginTop: 20 }} />}
+      />
     );
   }
 }

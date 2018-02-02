@@ -44,15 +44,6 @@ class StudentBadges3D extends React.Component {
 
 
   _onGLContextCreate = async (gl) => {
-    // const gradeCount = this.state.badges['1'] ? this.state.badges['1'] : 0;
-    // const timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
-    // const spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
-    // const participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
-    // console.log('spirit', spiritCount);
-    // console.log('time', timeCount);
-    // console.log('grade', gradeCount);
-    // console.log('participation', participationCount);
-
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -91,7 +82,16 @@ class StudentBadges3D extends React.Component {
       }),
     });
 
-    const cubesClock = Array(1)
+    const gradeCount = this.state.badges['1'] ? this.state.badges['1'] : 0;
+    const timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
+    const spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
+    const participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
+    console.log('spirit', this.state.badges['1']);
+    console.log('time', timeCount);
+    console.log('grade', gradeCount);
+    console.log('participation', participationCount);
+
+    const cubesClock = Array(timeCount)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialClock);
@@ -102,7 +102,7 @@ class StudentBadges3D extends React.Component {
         return { cube };
       });
 
-    const cubesCurious = Array(1)
+    const cubesCurious = Array(participationCount)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialCurious);
@@ -112,7 +112,7 @@ class StudentBadges3D extends React.Component {
         cube.position.z = 0; // -5 * Math.random();
         return { cube };
       });
-    const cubesSpirit = Array(1)
+    const cubesSpirit = Array(spiritCount)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialSpirit);
@@ -122,7 +122,7 @@ class StudentBadges3D extends React.Component {
         cube.position.z = 0; // -2 * Math.random();
         return { cube };
       });
-    const cubesGrade = Array(1)
+    const cubesGrade = Array(gradeCount)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialGrade);
