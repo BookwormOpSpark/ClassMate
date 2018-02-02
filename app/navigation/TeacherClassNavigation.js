@@ -6,12 +6,15 @@ import Queue from '../components/teacher/Queue';
 import QRcode from '../components/teacher/QRcode';
 import ClassRoster from '../components/teacher/ClassRoster';
 import SpecificStudent from '../components/teacher/SpecificStudent';
-import ClassBadgesNavigation from './ClassBadgesNavigation';
 import CreateAssignment from '../components/teacher/CreateAssignment';
-// import CurrentPostedFunNavigation from './CurrentPostedFunNavigation';
 import CurrentPostedFun from '../components/teacher/CurrentPostedFun';
 import FunPost from '../components/teacher/FunPost';
 import Fun from '../components/student/Fun';
+import BadgeGrade from '../components/teacher/BadgeGrade';
+import BadgeParticipation from '../components/teacher/BadgeParticipation';
+import BadgeTime from '../components/teacher/BadgeTime';
+import BadgeSpirit from '../components/teacher/BadgeSpirit';
+import ClassBadges from '../components/teacher/ClassBadges';
 
 const TeacherClassNavigation = StackNavigator({
 
@@ -81,8 +84,32 @@ const TeacherClassNavigation = StackNavigator({
       header: null,
     }),
   },
-  ClassBadgesNavigation: {
-    screen: ClassBadgesNavigation,
+  ClassBadges: {
+    screen: ClassBadges,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  BadgeGrade: {
+    screen: BadgeGrade,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  BadgeTime: {
+    screen: BadgeTime,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  BadgeSpirit: {
+    screen: BadgeSpirit,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  BadgeParticipation: {
+    screen: BadgeParticipation,
     navigationOptions: () => ({
       header: null,
     }),
