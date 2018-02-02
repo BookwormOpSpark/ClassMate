@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
 import { SERVER_URI, SendBadges, SendBadgeNotification } from '../../constant';
-import { green } from '../../style/colors';
 
 class BadgeParticipation extends React.Component {
   constructor(props) {
@@ -32,7 +31,7 @@ class BadgeParticipation extends React.Component {
       // .then(res => console.log(res))
       .catch(err => console.error(err));
     await axios.post(`${SERVER_URI}${SendBadgeNotification}`, {
-      className, userId, studentName, teacherName
+      className, userId, studentName, teacherName,
     })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
@@ -48,7 +47,7 @@ class BadgeParticipation extends React.Component {
         justifyContent: 'flex-start',
       },
       text: {
-        color: 'green',
+        color: '#5fad56',
         textAlign: 'center',
       },
     });
@@ -73,7 +72,7 @@ class BadgeParticipation extends React.Component {
         />
         <View style={styles.container}>
           <Icon
-            color="green"
+            color="#5fad56"
             name="group"
             size={100}
             style={styles.icon}
@@ -103,7 +102,7 @@ class BadgeParticipation extends React.Component {
             buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
             title="Give Badge"
             iconRight={{ name: 'done', color: 'black' }}
-            backgroundColor="green"
+            backgroundColor="#5fad56"
             color="black"
             borderRadius={5}
             onPress={this.postBadge}

@@ -19,7 +19,6 @@ class StudentBadges3D extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentMount');
     this.getBadges();
     // const studentID = this.props.state.selectSession.participantID;
     // const getState = axios.get(`${SERVER_URI}${SendBadges}`, {
@@ -41,7 +40,6 @@ class StudentBadges3D extends React.Component {
   }
 
   getBadges() {
-    console.log('hello');
     const studentID = this.props.state.selectSession.participantID;
     axios.get(`${SERVER_URI}${SendBadges}`, {
       params: {
@@ -129,7 +127,7 @@ class StudentBadges3D extends React.Component {
       }),
     });
 
-    const cubesTime = Array(timeCount)
+    const cubesTime = Array(1)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialTime);
@@ -140,7 +138,7 @@ class StudentBadges3D extends React.Component {
         return { cube };
       });
 
-    const cubesParticipation = Array(participationCount)
+    const cubesParticipation = Array(1)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialParticipation);
@@ -150,7 +148,7 @@ class StudentBadges3D extends React.Component {
         cube.position.z = 0; // -5 * Math.random();
         return { cube };
       });
-    const cubesGrade = Array(gradeCount)
+    const cubesGrade = Array(1)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialGrade);
@@ -160,7 +158,7 @@ class StudentBadges3D extends React.Component {
         cube.position.z = 0; // -2 * Math.random();
         return { cube };
       });
-    const cubesSpirit = Array(spiritCount)
+    const cubesSpirit = Array(1)
       .fill()
       .map(() => {
         const cube = new THREE.Mesh(geometry, materialSpirit);

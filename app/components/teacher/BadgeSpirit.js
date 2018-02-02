@@ -82,7 +82,7 @@ class BadgeSpirit extends React.Component {
             itemStyle={{ color: 'black', alignSelf: 'center' }}
             style={{
               width: 300,
-              backgroundColor: '##FF9F1C',
+              backgroundColor: '#FF9F1C',
               borderColor: 'white',
               borderWidth: 1,
               marginTop: 20,
