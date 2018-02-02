@@ -162,14 +162,14 @@ class StudentDrawer extends Component {
             }
             <View style={{ paddingVertical: 5 }} />
             <View style={styles.addClassStyle}>
-              <Button
+              {/* <Button
                 buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
                 onPress={this.navigateToScreen('JoinClass')}
                 iconRight={{ name: 'add-circle-outline' }}
                 backgroundColor={green}
                 rounded
                 title="Join a Class"
-              />
+              /> */}
             </View>
           </View>
         </ScrollView>
@@ -177,7 +177,7 @@ class StudentDrawer extends Component {
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
             onPress={this.registerForPushNotificationsAsync}
-            iconRight={{ name: 'exit-to-app' }}
+            iconRight={{ name: 'music-note' }}
             backgroundColor={blue}
             rounded
             title="Accept Notifications"

@@ -3,8 +3,6 @@ import StudentDashboardNavigation from './StudentDashboardNavigation';
 import StudentClassNavigation from './StudentClassNavigation';
 import StudentDrawer from '../components/student/StudentDrawer';
 import JoinClassContainer from '../containers/JoinClassContainer';
-import CheckIn from '../components/student/CheckIn';
-// import EmergencyContact from '../components/teacher/EmergencyContact';
 
 const StudentDrawerNavigator = DrawerNavigator({
   StudentDashboardNavigation: {
@@ -22,12 +20,6 @@ const StudentDrawerNavigator = DrawerNavigator({
   },
   JoinClass: {
     screen: JoinClassContainer,
-    navigationOptions: () => ({
-      drawerLockMode: 'locked-closed',
-    }),
-  },
-  CheckIn: {
-    screen: CheckIn,
     navigationOptions: () => ({
       drawerLockMode: 'locked-closed',
     }),

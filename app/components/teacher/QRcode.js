@@ -41,14 +41,14 @@ class QRcode extends React.Component {
           back
         />
         <View style={styles.container}>
+          <Text style={{ color: white }}> Have students scan this code to join the class!</Text>
+          <View style={{ padding: 20 }} />
           <QRCode
             value={`${this.props.state.selectSession.sessionID}`}
             size={250}
             bgColor="black"
             fgColor="white"
           />
-          <View style={{ padding: 10 }} />
-          <Text style={{ color: white }}> Have students scan this code to check in for class! </Text>
         </View>
       </ImageBackground>
     );

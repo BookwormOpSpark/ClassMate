@@ -25,17 +25,13 @@ class JoinClass extends React.Component {
   }
 
   handleSubmit = async (barcode) => {
-    console.log('SCANNED', barcode);
     const sessionId = parseInt(barcode.data, 10);
-    console.log('JOIN CODE ', sessionId);
     const userId = this.props.state.user.id;
-    console.log('USER ID AND TYPEOF', userId, typeof userId);
     this.setState({ joined: true });
     let id;
     
     await axios.post(`${SERVER_URI}${JoinClassRoute}`, { sessionId, userId })
       .then((res) => {
-        console.log('RES.DATA FROM POST REQUEST', res.data);
         const { sessionId, className, participantId } = res.data;
         id = sessionId;
         this.props.onJoiningClass({ sessionId, className, participantId });
@@ -47,13 +43,11 @@ class JoinClass extends React.Component {
         userId: this.props.state.user.id,
       },
     }).then((res) => {
-      console.log('RES.DATA FROM DASHBOARD GET REQUEST', res.data);
       this.props.onDashboard(res.data);
       const { sessions } = this.props.state.dashboard.sessionInfo;
       let sessionIndex = sessions.reduce((index, sesh, i) => {
         return sesh.sessionID === id ? i : index;
       }, sessions.length - 1);
-      console.log('SESSION INDEX', sessionIndex)
       this.props.dispatch(selectSession(sessions[sessionIndex]));
       const navigateAction = NavigationActions.navigate({
         routeName: 'StudentClassNavigation',
