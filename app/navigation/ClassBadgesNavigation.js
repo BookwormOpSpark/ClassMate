@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation';
 import BadgeGrade from '../components/teacher/BadgeGrade';
-import BadgeBehavior from '../components/teacher/BadgeBehavior';
+import BadgeParticipation from '../components/teacher/BadgeParticipation';
 import BadgeTime from '../components/teacher/BadgeTime';
 import BadgeSpirit from '../components/teacher/BadgeSpirit';
 import ClassBadges from '../components/teacher/ClassBadges';
@@ -30,8 +30,8 @@ const ClassBadgesNavigation = StackNavigator({
       header: null,
     }),
   },
-  BadgeBehavior: {
-    screen: BadgeBehavior,
+  BadgeParticipation: {
+    screen: BadgeParticipation,
     navigationOptions: () => ({
       header: null,
     }),

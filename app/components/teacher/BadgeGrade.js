@@ -1,27 +1,58 @@
 import React from 'react';
+import axios from 'axios';
 import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
+import { Button, Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
+import { SERVER_URI, SendBadges, SendBadgeNotification } from '../../constant';
 
 class BadgeGrade extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { language: '' };
+    this.state = { studentSelected: '' };
+    this.postBadge = this.postBadge.bind(this);
   }
+
+  postBadge = async () => {
+    const badgeId = 1; // id for grade
+    const { students } = this.props.state.classInfo;
+    const className = this.props.state.selectSession.sessionName;
+    const teacherName = `${this.props.state.user.First_name} ${this.props.state.user.Last_name}`;
+    const studentName = this.state.studentSelected;
+    const student = this.state.studentSelected.split(' ');
+    const studentArr = students.filter(item => item.nameFirst === student[0] && item.nameLast === student[1]);
+    const studentId = studentArr[0].participantId;
+    const userId = studentArr[0].id;
+
+    await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId, studentId })
+      // .then(res => console.log(res))
+      .catch(err => console.error(err));
+    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, {
+      className, userId, studentName, teacherName
+    })
+      // .then(res => console.log(res))
+      .catch(err => console.error(err));
+    alert(`Badge send to student ${studentName}`);
+  }
+
   render() {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
         backgroundColor: 'transparent',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+      },
+      text: {
+        color: '#2EC4B6',
+        textAlign: 'center',
       },
     });
     const className = this.props.state.selectSession.sessionName;
-
+    const { students } = this.props.state.classInfo;
     return (
       <ImageBackground
         source={blackboard}
@@ -44,16 +75,38 @@ class BadgeGrade extends React.Component {
             color="#2EC4B6"
             name="spellcheck"
             size={100}
-            // onPress={}
             style={styles.icon}
           />
+          <Text h3 style={styles.text}>Grade Badge</Text>
           <Picker
-            style={{ width: 100 }}
-            selectedValue={this.state.language}
-            onValueChange={(lang) => this.setState({ language: lang })}>
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
+            itemStyle={{ color: 'black', alignSelf: 'center' }}
+            style={{
+              width: 300,
+              backgroundColor: '#2EC4B6',
+              borderColor: 'white',
+              borderWidth: 1,
+              marginTop: 20,
+              color: 'black',
+            }}
+            selectedValue={this.state.studentSelected}
+            onValueChange={student => this.setState({ studentSelected: student })}
+          >
+            {students.map(student => (
+              <Picker.Item
+                label={`${student.nameFirst} ${student.nameLast}`}
+                value={`${student.nameFirst} ${student.nameLast}`}
+              />
+            ))}
           </Picker>
+          <Button
+            buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
+            title="Give Badge"
+            iconRight={{ name: 'done', color: 'black' }}
+            backgroundColor="#2EC4B6"
+            color="black"
+            borderRadius={5}
+            onPress={this.postBadge}
+          />
         </View>
       </ImageBackground>
     );
@@ -68,6 +121,7 @@ export default connect(mapStateToProps)(BadgeGrade);
 
 BadgeGrade.propTypes = {
   state: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

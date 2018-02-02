@@ -9,7 +9,7 @@ import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
 import { SERVER_URI, SendBadges, SendBadgeNotification } from '../../constant';
 
-class BadgeTime extends React.Component {
+class BadgeParticipation extends React.Component {
   constructor(props) {
     super(props);
     this.state = { studentSelected: '' };
@@ -17,7 +17,7 @@ class BadgeTime extends React.Component {
   }
 
   postBadge = async () => {
-    const badgeId = 2; // id for timing
+    const badgeId = 4; // id for participation
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
     const teacherName = `${this.props.state.user.First_name} ${this.props.state.user.Last_name}`;
@@ -31,8 +31,8 @@ class BadgeTime extends React.Component {
       // .then(res => console.log(res))
       .catch(err => console.error(err));
     await axios.post(`${SERVER_URI}${SendBadgeNotification}`, {
- className, userId, studentName, teacherName 
-})
+      className, userId, studentName, teacherName,
+    })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
     alert(`Badge send to student ${studentName}`);
@@ -47,7 +47,7 @@ class BadgeTime extends React.Component {
         justifyContent: 'flex-start',
       },
       text: {
-        color: 'gold',
+        color: '#5fad56',
         textAlign: 'center',
       },
     });
@@ -72,17 +72,17 @@ class BadgeTime extends React.Component {
         />
         <View style={styles.container}>
           <Icon
-            color="gold"
-            name="schedule"
+            color="#5fad56"
+            name="group"
             size={100}
             style={styles.icon}
           />
-          <Text h3 style={styles.text}>Punctuality Badge</Text>
+          <Text h3 style={styles.text}>Participation Badge</Text>
           <Picker
             itemStyle={{ color: 'black', alignSelf: 'center' }}
             style={{
               width: 300,
-              backgroundColor: '#f4d35e',
+              backgroundColor: '#5fad56',
               borderColor: 'white',
               borderWidth: 1,
               marginTop: 20,
@@ -102,7 +102,7 @@ class BadgeTime extends React.Component {
             buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
             title="Give Badge"
             iconRight={{ name: 'done', color: 'black' }}
-            backgroundColor="#f4d35e"
+            backgroundColor="#5fad56"
             color="black"
             borderRadius={5}
             onPress={this.postBadge}
@@ -117,9 +117,9 @@ const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps)(BadgeTime);
+export default connect(mapStateToProps)(BadgeParticipation);
 
-BadgeTime.propTypes = {
+BadgeParticipation.propTypes = {
   state: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,

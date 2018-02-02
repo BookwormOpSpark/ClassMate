@@ -20,6 +20,23 @@ class StudentBadges3D extends React.Component {
 
   componentDidMount() {
     this.getBadges();
+    // const studentID = this.props.state.selectSession.participantID;
+    // const getState = axios.get(`${SERVER_URI}${SendBadges}`, {
+    //   params: {
+    //     studentID,
+    //   },
+    // })
+    //   .then((res) => {
+    //     const badgesInit = res.data;
+    //     const badges = badgesInit.reduce((memo, curr) => {
+    //       memo[curr.id_badge] ? memo[curr.id_badge] += 1 : memo[curr.id_badge] = 1;
+    //       return memo;
+    //     }, {});
+    //     this.setState({ badges });
+    //     console.log('state', this.state);
+    //   })
+    //   .catch(err => console.error(err));
+    // getState();
   }
 
   getBadges() {
@@ -36,23 +53,21 @@ class StudentBadges3D extends React.Component {
           return memo;
         }, {});
         this.setState({ badges });
-        console.log(this.state);
-        this._onGLContextCreate();
+        // this._onGLContextCreate();
       })
       .catch(err => console.error(err));
   }
 
 
   _onGLContextCreate = async (gl) => {
-    // const gradeCount = this.state.badges['1'] ? this.state.badges['1'] : 0;
-    // const timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
-    // const spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
-    // const participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
-    // console.log('spirit', spiritCount);
-    // console.log('time', timeCount);
-    // console.log('grade', gradeCount);
-    // console.log('participation', participationCount);
-
+    const gradeCount = this.state.badges['1'] ? this.state.badges['1'] : 0;
+    const timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
+    const spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
+    const participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
+    console.log('spirit', spiritCount);
+    console.log('time', timeCount);
+    console.log('grade', gradeCount);
+    console.log('participation', participationCount);
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -64,24 +79,17 @@ class StudentBadges3D extends React.Component {
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
     renderer.setClearColor('#ECA963');
 
-
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const materialClock = new THREE.MeshBasicMaterial({
+    const materialTime = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
         asset: Expo.Asset.fromModule(require('../../assets/clock.png')),
       }),
     });
-    const materialCurious = new THREE.MeshBasicMaterial({
+    const materialParticipation = new THREE.MeshBasicMaterial({
       transparent: true,
       map: await ExpoTHREE.createTextureAsync({
         asset: Expo.Asset.fromModule(require('../../assets/curious.png')),
-      }),
-    });
-    const materialGrade = new THREE.MeshBasicMaterial({
-      transparent: true,
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../assets/grades.jpg')),
       }),
     });
     const materialSpirit = new THREE.MeshBasicMaterial({
@@ -90,11 +98,17 @@ class StudentBadges3D extends React.Component {
         asset: Expo.Asset.fromModule(require('../../assets/spiritgood.png')),
       }),
     });
+    const materialGrade = new THREE.MeshBasicMaterial({
+      transparent: true,
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../assets/grades.jpg')),
+      }),
+    });
 
-    const cubesClock = Array(1)
+    const cubesTime = Array(1)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialClock);
+        const cube = new THREE.Mesh(geometry, materialTime);
         scene.add(cube);
         cube.position.x = 1.5; // 3 - 6 * Math.random();
         cube.position.y = 2; // 3 - 6 * Math.random();
@@ -102,30 +116,30 @@ class StudentBadges3D extends React.Component {
         return { cube };
       });
 
-    const cubesCurious = Array(1)
+    const cubesParticipation = Array(1)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialCurious);
+        const cube = new THREE.Mesh(geometry, materialParticipation);
         scene.add(cube);
         cube.position.x = -1.5; // 4 - 6 * Math.random();
         cube.position.y = 2; // 4 - 6 * Math.random();
         cube.position.z = 0; // -5 * Math.random();
         return { cube };
       });
-    const cubesSpirit = Array(1)
+    const cubesGrade = Array(1)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialSpirit);
+        const cube = new THREE.Mesh(geometry, materialGrade);
         scene.add(cube);
         cube.position.x = 1.5; // 2 - 6 * Math.random();
         cube.position.y = -1; // 2 - 6 * Math.random();
         cube.position.z = 0; // -2 * Math.random();
         return { cube };
       });
-    const cubesGrade = Array(1)
+    const cubesSpirit = Array(1)
       .fill()
       .map(() => {
-        const cube = new THREE.Mesh(geometry, materialGrade);
+        const cube = new THREE.Mesh(geometry, materialSpirit);
         scene.add(cube);
         cube.position.x = -1.5; // - 6 * Math.random();
         cube.position.y = -1; // - 6 * Math.random();
@@ -137,19 +151,19 @@ class StudentBadges3D extends React.Component {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      cubesSpirit.forEach(({ cube }) => {
-        cube.rotation.x += 0.03;
-        cube.rotation.y += 0.03;
-      });
-      cubesClock.forEach(({ cube }) => {
-        cube.rotation.x += 0.03;
-        cube.rotation.y += 0.03;
-      });
-      cubesCurious.forEach(({ cube }) => {
-        cube.rotation.x += 0.03;
-        cube.rotation.y += 0.03;
-      });
       cubesGrade.forEach(({ cube }) => {
+        cube.rotation.x += 0.03;
+        cube.rotation.y += 0.03;
+      });
+      cubesTime.forEach(({ cube }) => {
+        cube.rotation.x += 0.03;
+        cube.rotation.y += 0.03;
+      });
+      cubesParticipation.forEach(({ cube }) => {
+        cube.rotation.x += 0.03;
+        cube.rotation.y += 0.03;
+      });
+      cubesSpirit.forEach(({ cube }) => {
         cube.rotation.x += 0.03;
         cube.rotation.y += 0.03;
       });
@@ -178,6 +192,7 @@ StudentBadges3D.propTypes = {
   state: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
 };
+
 
 // let font = '';
 // const text = 'Hello!';
