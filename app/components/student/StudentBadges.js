@@ -90,7 +90,7 @@ class StudentBadges extends React.Component {
       this.spinValue,
       {
         toValue: 1,
-        duration: 2000,
+        duration: 4000,
         easing: Easing.linear,
       },
     ).start(() => this.spin());
