@@ -47,7 +47,7 @@ class BadgeSpirit extends React.Component {
         justifyContent: 'flex-start',
       },
       text: {
-        color: 'gold',
+        color: '#FF9F1C',
         textAlign: 'center',
       },
     });
@@ -72,17 +72,17 @@ class BadgeSpirit extends React.Component {
         />
         <View style={styles.container}>
           <Icon
-            color="gold"
-            name="schedule"
+            color="#FF9F1C"
+            name="star"
             size={100}
             style={styles.icon}
           />
-          <Text h3 style={styles.text}>Punctuality Badge</Text>
+          <Text h3 style={styles.text}>Spirit Badge</Text>
           <Picker
             itemStyle={{ color: 'black', alignSelf: 'center' }}
             style={{
               width: 300,
-              backgroundColor: '#f4d35e',
+              backgroundColor: '##FF9F1C',
               borderColor: 'white',
               borderWidth: 1,
               marginTop: 20,
@@ -102,7 +102,7 @@ class BadgeSpirit extends React.Component {
             buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
             title="Give Badge"
             iconRight={{ name: 'done', color: 'black' }}
-            backgroundColor="#f4d35e"
+            backgroundColor="#FF9F1C"
             color="black"
             borderRadius={5}
             onPress={this.postBadge}

@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
 import { SERVER_URI, SendBadges, SendBadgeNotification } from '../../constant';
+import { green } from '../../style/colors';
 
 class BadgeParticipation extends React.Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class BadgeParticipation extends React.Component {
         justifyContent: 'flex-start',
       },
       text: {
-        color: 'gold',
+        color: 'green',
         textAlign: 'center',
       },
     });
@@ -72,17 +73,17 @@ class BadgeParticipation extends React.Component {
         />
         <View style={styles.container}>
           <Icon
-            color="gold"
-            name="schedule"
+            color="green"
+            name="group"
             size={100}
             style={styles.icon}
           />
-          <Text h3 style={styles.text}>Punctuality Badge</Text>
+          <Text h3 style={styles.text}>Participation Badge</Text>
           <Picker
             itemStyle={{ color: 'black', alignSelf: 'center' }}
             style={{
               width: 300,
-              backgroundColor: '#f4d35e',
+              backgroundColor: '#5fad56',
               borderColor: 'white',
               borderWidth: 1,
               marginTop: 20,
@@ -102,7 +103,7 @@ class BadgeParticipation extends React.Component {
             buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
             title="Give Badge"
             iconRight={{ name: 'done', color: 'black' }}
-            backgroundColor="#f4d35e"
+            backgroundColor="green"
             color="black"
             borderRadius={5}
             onPress={this.postBadge}

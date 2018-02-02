@@ -55,26 +55,17 @@ class StudentBadges3D extends React.Component {
           return memo;
         }, {});
         this.setState({ badges });
+        this._onGLContextCreate();
       })
       .catch(err => console.error(err));
   }
 
 
   _onGLContextCreate = async (gl) => {
-    let gradeCount = 0;
-    let participationCount = 0;
-    let spiritCount = 0;
-    let timeCount = 0;
-
-    await this.getBadges()
-      .then((res) => {
-        console.log('hello23');
-        gradeCount = this.state.badges['1'] ? this.state.badges['1'] : 0;
-        timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
-        spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
-        participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
-      });
-
+    const gradeCount = this.state.badges['1'] ? this.state.badges['1'] : 0;
+    const timeCount = this.state.badges['2'] ? this.state.badges['2'] : 0;
+    const spiritCount = this.state.badges['3'] ? this.state.badges['3'] : 0;
+    const participationCount = this.state.badges['4'] ? this.state.badges['4'] : 0;
     console.log('spirit', spiritCount);
     console.log('time', timeCount);
     console.log('grade', gradeCount);
