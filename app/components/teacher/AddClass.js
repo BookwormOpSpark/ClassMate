@@ -103,7 +103,7 @@ class AddClass extends React.Component {
         <View style={styles.contentContainer}>
           <Text h2 style={{ color: white }}>{`Hello ${teacher.First_name}!`}</Text>
           <Text h4 style={{ color: white }}>Create a New Class!</Text>
-          <Text style={{ color: white, padding: 5, textAlign: 'center' }}>then use the class QR code to have students join or check in</Text>
+          <Text style={{ color: white, padding: 5, textAlign: 'center' }}>then use the class QR code to let students join</Text>
           <View style={{ padding: 10 }} />
           <FormLabel>Enter the class name</FormLabel>
           <FormInput

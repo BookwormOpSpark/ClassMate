@@ -75,9 +75,9 @@ class StudentDashboard extends React.Component {
                 block
                 iconRight
                 success
-                onPress={() => this.props.navigation.navigate('CheckIn')}
+                onPress={() => this.props.navigation.navigate('JoinClass')}
               >
-                <Text>Check In</Text>
+                <Text>Join Class</Text>
                 <Icon name="check" size={20} style={{ marginRight: 10 }} />
               </Button>
               <Button
