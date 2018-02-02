@@ -28,90 +28,105 @@ const TeacherClassNavigation = StackNavigator({
     screen: Assignment,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   SpecificAssignment: {
     screen: SpecificAssignment,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   Queue: {
     screen: Queue,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   CurrentPostedFun: {
     screen: CurrentPostedFun,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   FunPost: {
     screen: FunPost,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   Fun: {
     screen: Fun,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   CreateAssignment: {
     screen: CreateAssignment,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   ClassRoster: {
     screen: ClassRoster,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   QRcode: {
     screen: QRcode,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   SpecificStudent: {
     screen: SpecificStudent,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   ClassBadges: {
     screen: ClassBadges,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   BadgeGrade: {
     screen: BadgeGrade,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   BadgeTime: {
     screen: BadgeTime,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   BadgeSpirit: {
     screen: BadgeSpirit,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   BadgeParticipation: {
     screen: BadgeParticipation,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
 });
