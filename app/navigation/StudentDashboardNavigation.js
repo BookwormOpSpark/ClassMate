@@ -15,12 +15,14 @@ const StudentDashboardNavigation = StackNavigator({
     screen: CheckIn,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   EmergencyContact: {
     screen: EmergencyContact,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   JoinClass: {

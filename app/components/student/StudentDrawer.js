@@ -92,6 +92,10 @@ class StudentDrawer extends Component {
   navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
       routeName: route,
+      action: NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Home' })],
+      }),
     });
     this.props.navigation.dispatch(navigateAction);
   }
@@ -151,7 +155,6 @@ class StudentDrawer extends Component {
                 {prevSessions.map((session, id) => (
                   <Text
                     style={styles.navItemStyle}
-                    // onPress={this.navigateToScreen('StudentClassNavigation')}
                     onPress={() => this.onSelect(session)}
                     key={id}
                   >

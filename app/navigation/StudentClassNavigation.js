@@ -19,42 +19,49 @@ const StudentClassNavigation = StackNavigator({
     screen: RaiseHand,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   CheckIn: {
     screen: CheckIn,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   Assignment: {
     screen: Assignment,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   SubmitHomework: {
     screen: SubmitHomework,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   StudentBadges: {
     screen: StudentBadges,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   StudentBadges3D: {
     screen: StudentBadges3D,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
   Fun: {
     screen: Fun,
     navigationOptions: () => ({
       header: null,
+      drawerLockMode: 'locked-closed',
     }),
   },
 });

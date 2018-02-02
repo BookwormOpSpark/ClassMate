@@ -96,7 +96,7 @@ class JoinClass extends React.Component {
         <DashHeader
           navigation={this.props.navigation}
           className="Join a class"
-          back={false}
+          back
         />
         <View style={{ padding: 5 }} />
         <View style={styles.contentContainer}>
