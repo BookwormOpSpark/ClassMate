@@ -7,6 +7,7 @@ import { Button } from 'native-base';
 import logo from '../../assets/classmatelogoicon.png';
 import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
+
 export default class DashHeader extends React.Component {
   constructor(props) {
     super(props);
