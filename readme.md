@@ -18,4 +18,4 @@
 * [socket.io](https://socket.io/)
 
 ## Tech Stack
-![VIEW](tech2.PNG)
+![VIEW](tech2.png)
