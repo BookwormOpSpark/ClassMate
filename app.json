@@ -5,6 +5,10 @@
     "notification": {
       "icon": "./app/assets/classmatelogoicon.png",
       "color": "#f4d35e"
+    },
+    "version": "1.0.0",
+    "android": {
+      "package": "com.bookworm.classmate"
     }
   }
 }
