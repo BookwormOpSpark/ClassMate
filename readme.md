@@ -10,34 +10,17 @@
 
 ## Built With
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
+* [React-Native](https://facebook.github.io/react-native/)
+* [Redux](https://redux.js.org/)
+* [Expo](https://expo.io/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [feathers](https://feathersjs.com/)
+* [socket.io](https://socket.io/)
 
 ## Frame
 
 <img src="student.gif" class="img-fluid" height="260" width="150" alt="">
 <img src="teacher.gif" class="img-fluid" height="260" width="150" alt="">
-
-
-## Requirements
-
-- React Native
-- Expo
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```
-npm install
-```
 
 ## Tech Stack
 ![VIEW](tech2.png)
