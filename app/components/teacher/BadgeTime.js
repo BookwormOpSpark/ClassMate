@@ -30,9 +30,7 @@ class BadgeTime extends React.Component {
     await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId, studentId })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
-    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, {
- className, userId, studentName, teacherName 
-})
+    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userId, studentName, teacherName })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
     alert(`Badge send to student ${studentName}`);

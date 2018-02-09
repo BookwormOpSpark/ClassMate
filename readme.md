@@ -1,6 +1,6 @@
 # ClassMate
 
-> An app to make students life easier.
+> ClassMate is a classroom assistant designed to increase engagement between students and teachers
 
 ## Team
 
@@ -18,17 +18,16 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
+## Frame
 
->-
->-
->-
+<img src="student.gif" class="img-fluid" height="260" width="150" alt="">
+<img src="teacher.gif" class="img-fluid" height="260" width="150" alt="">
+
 
 ## Requirements
 
-- Node 0.10.x
-- 
-- 
+- React Native
+- Expo
 
 ## Development
 
