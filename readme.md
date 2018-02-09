@@ -17,7 +17,7 @@
 * [feathers](https://feathersjs.com/)
 * [socket.io](https://socket.io/)
 
-## Frame
+## Overview
 
 <img src="student.gif" class="img-fluid" height="260" width="150" alt="">
 <img src="teacher.gif" class="img-fluid" height="260" width="150" alt="">
