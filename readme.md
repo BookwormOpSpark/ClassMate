@@ -17,5 +17,10 @@
 * [feathers](https://feathersjs.com/)
 * [socket.io](https://socket.io/)
 
+## Overview
+
+<img src="student.gif" class="img-fluid" height="260" width="150" alt="">
+<img src="teacher.gif" class="img-fluid" height="260" width="150" alt="">
+
 ## Tech Stack
 ![VIEW](tech2.png)

@@ -2,7 +2,7 @@ import Expo from 'expo';
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'; 
 import ExpoTHREE from 'expo-three';
 import * as THREE from 'three';
 import { SERVER_URI, SendBadges } from '../../constant';
