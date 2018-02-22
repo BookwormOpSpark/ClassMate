@@ -64,7 +64,33 @@ class Queue extends React.Component {
   render() {
     const className = this.props.state.selectSession.sessionName || this.props.state.selectSession.className;
     const { messages } = this.state;
-
+    const styles = StyleSheet.create({
+      sensor: {
+        flex: 1,
+        marginTop: 15,
+        paddingHorizontal: 10,
+        justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
+      },
+      blue: {
+        color: 'blue',
+        fontWeight: 'bold',
+        fontSize: 30,
+      },
+      contentContainer: {
+        flexGrow: 1,
+        backgroundColor: 'transparent',
+      },
+      list: {
+        borderRadius: 10,
+        borderColor: '#f4d35e',
+        backgroundColor: '#f4d35e',
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 10,
+        marginRight: 10,
+      },
+    });
     return (
       <ImageBackground
         source={blackboard}
@@ -121,32 +147,6 @@ class Queue extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  sensor: {
-    flex: 1,
-    marginTop: 15,
-    paddingHorizontal: 10,
-    justifyContent: 'flex-start',
-  },
-  blue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  contentContainer: {
-    flexGrow: 1,
-  },
-  list: {
-    borderRadius: 10,
-    borderColor: '#f4d35e',
-    backgroundColor: '#f4d35e',
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-});
 
 const mapStateToProps = state => ({
   state,

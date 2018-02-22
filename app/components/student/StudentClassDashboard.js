@@ -47,9 +47,13 @@ class StudentClassDashboard extends React.Component {
         textShadowColor: 'black',
         shadowOpacity: 0.8,
         shadowRadius: 5,
+        backgroundColor: 'transparent',
         textShadowOffset: { width: 5, height: 3 },
       },
       button: {
+        textShadowColor: 'black',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
         marginBottom: 5,
         marginTop: 5,
         alignSelf: 'center',

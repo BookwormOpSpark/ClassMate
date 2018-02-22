@@ -11,6 +11,7 @@ import { SERVER_URI } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
 import liftPhone from '../../assets/liftPhoneWhiteNoScreen.gif';
 import DashHeader from '../shared/Header';
+import { blue, white, yellow, orange, red, green } from '../../style/colors';
 
 class RaiseHand extends React.Component {
   constructor(props) {
@@ -75,14 +76,22 @@ class RaiseHand extends React.Component {
         paddingHorizontal: 10,
         justifyContent: 'flex-start',
       },
-      yellow: {
-        color: '#f4d35e',
+      boldText: {
+        color: yellow,
         fontWeight: 'bold',
         fontSize: 30,
         marginTop: 50,
       },
       contentContainer: {
         flexGrow: 1,
+        backgroundColor: 'transparent',
+      },
+      icon: {
+        textShadowColor: 'black',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        backgroundColor: 'transparent',
+        textShadowOffset: { width: 5, height: 3 },
       },
     });
     const { y } = this.state.accelerometerData;
@@ -112,8 +121,12 @@ class RaiseHand extends React.Component {
           >
             <View style={{ alignItems: 'center' }}>
               <Text h6 style={{ color: '#f4d35e', fontSize: 20 }}>Lift your phone to raise your hand!</Text>
-              <Text style={styles.yellow}>{this.state.handRaised ? 'Your hand is raised' : ''}</Text>
-              <Text>{this.state.handRaised ? <Icon color="#f4d35e" name="human-greeting" size={200} /> : ''}</Text>
+              {this.state.handRaised &&
+                <View>
+                  <Text style={styles.boldText}>Your hand is raised</Text>
+                  <Icon color="#f4d35e" name="human-greeting" size={200} style={styles.icon} />
+                </View>
+              }
             </View>
           </ScrollView>
           <Image

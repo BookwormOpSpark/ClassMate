@@ -112,6 +112,7 @@ class FunPost extends React.Component {
       bigcontainer: {
         flex: 1,
         justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
       },
     });
 

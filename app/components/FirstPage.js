@@ -72,8 +72,8 @@ class FirstPage extends React.Component {
       container: {
         backgroundColor: 'transparent',
         paddingVertical: 130,
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
       },
       image: {
         width: '100%',
@@ -89,7 +89,7 @@ class FirstPage extends React.Component {
       >
       <View style={styles.container}>
           <Image 
-            style={{width: '95%', height: '23%', marginTop: 150}}
+            style={{width: '100%', height: '23%', marginTop: 150}}
             source={logo}
           />
 

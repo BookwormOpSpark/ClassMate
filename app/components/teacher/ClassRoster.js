@@ -94,9 +94,9 @@ class ClassRoster extends React.Component {
         <ScrollView>
           <Container>
             <Header style={{ backgroundColor: 'transparent' }}>
-              <Text style={{ color: yellow, fontSize: 40, textDecorationLine: 'underline' }}>Class Roster</Text>
+              <Text style={{ color: yellow, fontSize: 40 }}>Class Roster</Text>
             </Header>
-            <Text style={{ color: yellow, fontSize: 20, textAlign: 'center', paddingBottom: 20 }}>Click a student to see detailed information.</Text>
+            <Text style={{ color: yellow, fontSize: 20, textAlign: 'center', paddingVertical: 20, backgroundColor: 'transparent' }}>Click a student to see detailed information.</Text>
             <Content>
               <List>
                 {this.state.roster && this.state.roster.length > 0 ?

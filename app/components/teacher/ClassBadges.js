@@ -1,12 +1,12 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, ImageBackground, Animated, Easing } from 'react-native';
+import { StyleSheet, View, ImageBackground, Animated, Easing, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
-import { green } from '../../style/colors';
+import { green, yellow } from '../../style/colors';
 
 
 class ClassBadges extends React.Component {
@@ -25,6 +25,7 @@ class ClassBadges extends React.Component {
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
+        backgroundColor: 'transparent',
       },
       badges: {
         flexDirection: 'row',
@@ -37,6 +38,7 @@ class ClassBadges extends React.Component {
         shadowOpacity: 0.8,
         shadowRadius: 5,
         textShadowOffset: { width: 5, height: 3 },
+        backgroundColor: 'transparent',
       },
       button: {
         marginBottom: 5,
@@ -75,6 +77,7 @@ class ClassBadges extends React.Component {
           back
         />
         <View style={styles.container}>
+          <Text style={{ color: yellow, fontSize: 20, paddingVertical: 20 }}>Pick a badge to hand out</Text>
 
           <View style={styles.badges}>
 

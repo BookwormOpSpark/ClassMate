@@ -105,7 +105,7 @@ class StudentDrawer extends Component {
     const prevSessions = dashboard.sessionInfo ? dashboard.sessionInfo.sessions : [];
     const styles = StyleSheet.create({
       container: {
-        paddingTop: 20,
+        paddingTop: 30,
         flex: 1,
         backgroundColor: white,
       },
