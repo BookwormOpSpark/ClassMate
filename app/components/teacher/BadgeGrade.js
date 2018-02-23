@@ -79,7 +79,7 @@ class BadgeGrade extends React.Component {
           />
           <Text h3 style={styles.text}>Grade Badge</Text>
           <Picker
-            itemStyle={{ color: 'black', alignSelf: 'center' }}
+            itemStyle={{ color: 'black' }}
             style={{
               width: 300,
               backgroundColor: '#2EC4B6',

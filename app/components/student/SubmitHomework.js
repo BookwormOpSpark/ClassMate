@@ -71,6 +71,7 @@ class SubmitHomework extends React.Component {
     return fetch(apiUrl, options)
       .then((res) => {
         this.setState({ loading: false });
+        this.props.navigation.goBack();
       });
   }
 
@@ -108,12 +109,12 @@ class SubmitHomework extends React.Component {
           back
         />
         <View style={styles.bigcontainer}>
-          <Text h3 style={{ color: yellow, textAlign: 'center', marginBottom: 50 }}>
+          <Text h3 style={{ color: yellow, textAlign: 'center', marginTop: 10, marginBottom: 10 }}>
           Submit Homeworks for {className}
           </Text>
 
           <Button
-            style={[{ marginBottom: 10, marginTop: 40 }]}
+            style={[{ marginBottom: 10, marginTop: 10 }]}
             title="Pick your homework from camera roll"
             iconRight={{ name: 'attach-file', color: 'black' }}
             backgroundColor={white}
@@ -122,7 +123,7 @@ class SubmitHomework extends React.Component {
             onPress={this._pickImage}
           />
           <Button
-            buttonStyle={[{ marginBottom: 50, marginTop: 10 }]}
+            buttonStyle={[{ marginBottom: 25, marginTop: 10 }]}
             title="Open Camera"
             iconRight={{ name: 'camera', color: 'black' }}
             backgroundColor={white}
@@ -130,12 +131,12 @@ class SubmitHomework extends React.Component {
             color="black"
             onPress={this._openCamera}
           />
-          {this.state.image !== null ?
+          {this.state.image !== null && !this.state.loading ?
             <Button
               buttonStyle={[{ marginBottom: 10, marginTop: 10 }]}
               title="Submit Homework!"
               iconRight={{ name: 'done', color: 'black' }}
-              backgroundColor={white}
+              backgroundColor={green}
               borderRadius={5}
               color="black"
               onPress={this._postHomework}
