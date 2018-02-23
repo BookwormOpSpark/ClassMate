@@ -89,7 +89,7 @@ class FirstPage extends React.Component {
       >
       <View style={styles.container}>
           <Image 
-            style={{width: '100%', height: '23%', marginTop: 150}}
+            style={{width: '95%', height: '23%', marginTop: 150}}
             source={logo}
           />
 
