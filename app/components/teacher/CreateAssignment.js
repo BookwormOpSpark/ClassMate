@@ -6,10 +6,11 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
-import { SERVER_URI, CreateAssignments } from '../../constant';
+import { SERVER_URI, CreateAssignments, ClassInfoRoute } from '../../constant';
 import { white, green } from '../../style/colors';
 // import { Text } from 'react-native-elements';
 import DashHeader from '../shared/Header';
+import { getClassInfo } from '../../actions/actions';
 
 class CreateAssignment extends React.Component {
   constructor(props) {
@@ -28,7 +29,15 @@ class CreateAssignment extends React.Component {
     const info = { assignment, sessionId };
     await axios.post(`${SERVER_URI}${CreateAssignments}`, info)
       .then((res) => {
-        console.log('\nRES.DATA FROM ASSIGNMENT CREATION RETURN !!!!!!!!!!!!!\n', res.data);
+        // console.log('\nRES.DATA FROM ASSIGNMENT CREATION RETURN !!!!!!!!!!!!!\n', res.data);
+        axios.get(`${SERVER_URI}${ClassInfoRoute}`, {
+          params: {
+            sessionId,
+          },
+        }).then((res2) => {
+          // console.log('\nRES2.DATA !!!!!\n', res2.data);
+          this.props.dispatch(getClassInfo(res2.data));
+        });
         Alert.alert(
           'Success!',
           'Assignment has been created!',
