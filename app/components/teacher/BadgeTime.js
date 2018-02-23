@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { StyleSheet, View, ImageBackground, Picker } from 'react-native';
+import { StyleSheet, View, ImageBackground, Picker, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { Button, Text } from 'react-native-elements';
@@ -8,15 +8,20 @@ import PropTypes from 'prop-types';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
 import { SERVER_URI, SendBadges, SendBadgeNotification } from '../../constant';
+import { white } from '../../style/colors';
 
 class BadgeTime extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { studentSelected: '' };
+    this.state = {
+      studentSelected: '',
+      sending: false,
+    };
     this.postBadge = this.postBadge.bind(this);
   }
 
   postBadge = async () => {
+    this.setState({ sending: true });
     const badgeId = 2; // id for timing
     const { students } = this.props.state.classInfo;
     const className = this.props.state.selectSession.sessionName;
@@ -30,10 +35,14 @@ class BadgeTime extends React.Component {
     await axios.post(`${SERVER_URI}${SendBadges}`, { badgeId, studentId })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
-    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { className, userId, studentName, teacherName })
+    await axios.post(`${SERVER_URI}${SendBadgeNotification}`, { 
+      className, userId, studentName, teacherName,
+    })
       // .then(res => console.log(res))
       .catch(err => console.error(err));
-    alert(`Badge send to student ${studentName}`);
+    this.setState({ sending: false })
+    alert(`Punctuality badge sent to ${studentName}!`);
+    this.props.navigation.goBack();
   }
 
   render() {
@@ -47,6 +56,18 @@ class BadgeTime extends React.Component {
       text: {
         color: 'gold',
         textAlign: 'center',
+        textShadowColor: 'black',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        textShadowOffset: { width: 5, height: 3 },
+        backgroundColor: 'transparent',
+      },
+      icon: {
+        textShadowColor: 'black',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        textShadowOffset: { width: 5, height: 3 },
+        backgroundColor: 'transparent',
       },
     });
     const className = this.props.state.selectSession.sessionName;
@@ -77,18 +98,23 @@ class BadgeTime extends React.Component {
           />
           <Text h3 style={styles.text}>Punctuality Badge</Text>
           <Picker
-            itemStyle={{ color: 'black', alignSelf: 'center' }}
+            itemStyle={{ color: 'black' }}
             style={{
               width: 300,
               backgroundColor: '#f4d35e',
-              borderColor: 'white',
+              borderColor: 'black',
               borderWidth: 1,
               marginTop: 20,
               color: 'black',
+              textShadowColor: 'black',
+              shadowOpacity: 0.8,
+              shadowRadius: 5,
+              textShadowOffset: { width: 5, height: 3 },
             }}
             selectedValue={this.state.studentSelected}
             onValueChange={student => this.setState({ studentSelected: student })}
           >
+            <Picker.Item label="PICK A STUDENT" />
             {students.map(student => (
               <Picker.Item
                 label={`${student.nameFirst} ${student.nameLast}`}
@@ -96,15 +122,19 @@ class BadgeTime extends React.Component {
               />
             ))}
           </Picker>
-          <Button
-            buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
-            title="Give Badge"
-            iconRight={{ name: 'done', color: 'black' }}
-            backgroundColor="#f4d35e"
-            color="black"
-            borderRadius={5}
-            onPress={this.postBadge}
-          />
+          {!this.state.sending ?
+            <Button
+              buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
+              title="Give Badge"
+              iconRight={{ name: 'done', color: 'black' }}
+              backgroundColor={this.state.studentSelected ? '#f4d35e' : 'grey'}
+              color="black"
+              borderRadius={5}
+              onPress={this.state.studentSelected ? this.postBadge : null}
+            />
+            :
+              <ActivityIndicator color={white} style={{ marginTop: 40 }} />
+          }
         </View>
       </ImageBackground>
     );
