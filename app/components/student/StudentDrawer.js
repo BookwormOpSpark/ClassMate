@@ -183,7 +183,7 @@ class StudentDrawer extends Component {
             iconRight={{ name: 'music-note' }}
             backgroundColor={blue}
             rounded
-            title="Accept Notifications"
+            title="Notifications"
           />
           <Button
             buttonStyle={[{ marginBottom: 5, marginTop: 5 }]}
