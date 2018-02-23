@@ -54,7 +54,7 @@ class SubmitHomework extends React.Component {
 
     const formData = new FormData();
     formData.append('photo', {
-      uri,a
+      uri,
       name: `photo.${fileType}`,
       type: `image/${fileType}`,
     });

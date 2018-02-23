@@ -211,18 +211,6 @@ class Fun extends React.Component {
               {`Check This Out!`}
             </Text>
 
-            <Animated.View
-              style={[
-                { marginLeft },
-              ]}
-            >
-              <Icon
-                color="white"
-                name="rocket"
-                size={30}
-              />
-            </Animated.View>
-
             <FlatList
               contentContainerStyle={this.styles.container}
               renderItem={({ item }) => this.renderVideo(item)}

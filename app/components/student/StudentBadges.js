@@ -42,6 +42,10 @@ class StudentBadges extends React.Component {
       text: {
         textAlign: 'center',
         color: '#f4d35e',
+        marginBottom: 5,
+      },
+      btext: {
+        color: 'white',
       },
       image: {
         width: 65,
@@ -220,48 +224,35 @@ class StudentBadges extends React.Component {
           My Badges!
             </Text>
 
-            <Animated.View
-              style={[
-                { marginLeft },
-              ]}
-            >
-              <Icon
-                color="gold"
-                name="rocket"
-                size={30}
-              />
-            </Animated.View>
-
+            {!!badgeGrade && !!badgeGrade.length && <Text style={this.styles.btext}> Good Grades Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeGrade(item)}
               data={badgeGrade}
               keyExtractor={this.keyExtractor}
             />
+
+            {!!badgeTime && !!badgeTime.length && <Text style={this.styles.btext}> Great Punctuality Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeTime(item)}
               data={badgeTime}
               keyExtractor={this.keyExtractor}
             />
+            {!!badgeParticipation && !!badgeParticipation.length && <Text style={this.styles.btext}> Great Participation Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeParticipation(item)}
               data={badgeParticipation}
               keyExtractor={this.keyExtractor}
             />
+
+            {!!badgeSpirit && !!badgeSpirit.length && <Text style={this.styles.btext}> Great Spirit Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeSpirit(item)}
               data={badgeSpirit}
               keyExtractor={this.keyExtractor}
-            />
-            <Button
-              buttonStyle={[{ marginBottom: 10, marginTop: 20 }]}
-              title="Badges Crazy!"
-              backgroundColor="#f4d35e"
-              borderRadius={5}
-              onPress={() => this.props.navigation.navigate('StudentBadges3D')}
             />
           </ScrollView>
         </View>
