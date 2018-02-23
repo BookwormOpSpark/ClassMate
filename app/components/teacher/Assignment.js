@@ -90,6 +90,7 @@ class Assignment extends React.Component {
                 containerStyle={styles.list}
                 key={`bbbtn${assignment.id}`}
                 title={`${assignment.title}`}
+                subtitle={assignment.dueDate}
                 leftIcon={{ name: 'book', color: 'black' }}
                 titleStyle={{ color: 'black' }}
                 onPress={() => this.onSelect(assignment)}
