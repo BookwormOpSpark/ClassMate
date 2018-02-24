@@ -27,37 +27,38 @@ class JoinClass extends React.Component {
   handleSubmit = async (barcode) => {
     const sessionId = parseInt(barcode.data, 10);
     const userId = this.props.state.user.id;
-    this.setState({ joined: true });
-    let id;
-    
-    await axios.post(`${SERVER_URI}${JoinClassRoute}`, { sessionId, userId })
-      .then((res) => {
-        const { sessionId, className, participantId } = res.data;
-        id = sessionId;
-        this.props.onJoiningClass({ sessionId, className, participantId });
-      })
-      .catch(err => console.error(err));
+    if (!this.state.joined) {
+      this.setState({ joined: true });
+      let id;
+      await axios.post(`${SERVER_URI}${JoinClassRoute}`, { sessionId, userId })
+        .then((res) => {
+          const { sessionId, className, participantId } = res.data;
+          id = sessionId;
+          this.props.onJoiningClass({ sessionId, className, participantId });
+        })
+        .catch(err => console.error(err));
 
-    axios.get(`${SERVER_URI}${DashboardRoute}`, {
-      params: {
-        userId: this.props.state.user.id,
-      },
-    }).then((res) => {
-      this.props.onDashboard(res.data);
-      const { sessions } = this.props.state.dashboard.sessionInfo;
-      let sessionIndex = sessions.reduce((index, sesh, i) => {
-        return sesh.sessionID === id ? i : index;
-      }, sessions.length - 1);
-      this.props.dispatch(selectSession(sessions[sessionIndex]));
-      const navigateAction = NavigationActions.navigate({
-        routeName: 'StudentClassNavigation',
-        action: NavigationActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'StudentClassDashboard' })],
-        }),
+      axios.get(`${SERVER_URI}${DashboardRoute}`, {
+        params: {
+          userId: this.props.state.user.id,
+        },
+      }).then((res) => {
+        this.props.onDashboard(res.data);
+        const { sessions } = this.props.state.dashboard.sessionInfo;
+        let sessionIndex = sessions.reduce((index, sesh, i) => {
+          return sesh.sessionID === id ? i : index;
+        }, sessions.length - 1);
+        this.props.dispatch(selectSession(sessions[sessionIndex]));
+        const navigateAction = NavigationActions.navigate({
+          routeName: 'StudentClassNavigation',
+          action: NavigationActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'StudentClassDashboard' })],
+          }),
+        });
+        this.props.navigation.dispatch(navigateAction);
       });
-      this.props.navigation.dispatch(navigateAction);
-    });
+    }
   }
 
   render() {
