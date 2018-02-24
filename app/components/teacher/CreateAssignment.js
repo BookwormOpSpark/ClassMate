@@ -1,19 +1,21 @@
 import React from 'react';
 import { StyleSheet, Alert, ImageBackground } from 'react-native';
-import { Container, Header, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
+import { Container, Header, Content, Form, Item, Input, Label, Text } from 'native-base';
+import { Button } from 'react-native-elements';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import blackboard from '../../assets/blackboard.jpg';
-import { SERVER_URI, CreateAssignments } from '../../constant';
-import { blue, white, yellow, orange, red, green } from '../../style/colors';
+import { SERVER_URI, CreateAssignments, ClassInfoRoute } from '../../constant';
+import { white, green } from '../../style/colors';
 // import { Text } from 'react-native-elements';
 import DashHeader from '../shared/Header';
+import { getClassInfo } from '../../actions/actions';
 
 class CreateAssignment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       title: '',
       dueDate: '',
     };
@@ -27,12 +29,20 @@ class CreateAssignment extends React.Component {
     const info = { assignment, sessionId };
     await axios.post(`${SERVER_URI}${CreateAssignments}`, info)
       .then((res) => {
-        // console.log(res.data);
+        // console.log('\nRES.DATA FROM ASSIGNMENT CREATION RETURN !!!!!!!!!!!!!\n', res.data);
+        axios.get(`${SERVER_URI}${ClassInfoRoute}`, {
+          params: {
+            sessionId,
+          },
+        }).then((res2) => {
+          // console.log('\nRES2.DATA !!!!!\n', res2.data);
+          this.props.dispatch(getClassInfo(res2.data));
+        });
         Alert.alert(
           'Success!',
           'Assignment has been created!',
           [
-            { text: 'OK', onPress: () => this.props.navigation.navigate('Assignment') },
+            { text: 'OK', onPress: () => this.props.navigation.goBack() },
           ],
           { cancelable: false },
         );
@@ -95,13 +105,22 @@ class CreateAssignment extends React.Component {
                 <Input style={{ color: white }} onChangeText={text => this.setState({ dueDate: text })} />
               </Item>
             </Form>
-            <Button
-              block
-              style={{ backgroundColor: blue }}
-              onPress={() => this.onSelect()}
-            >
-              <Text style={{ color: white }}>Create Assignment</Text>
-            </Button>
+            {!this.state.title || this.state.dueDate.length !== 10 ?
+              <Button
+                buttonStyle={[{ marginBottom: 5, marginTop: 10 }]}
+                backgroundColor="grey"
+                rounded
+                title="Create Assignment"
+              />
+              :
+              <Button
+                buttonStyle={[{ marginBottom: 5, marginTop: 10 }]}
+                onPress={() => this.onSelect()}
+                backgroundColor={green}
+                rounded
+                title="Create Assignment"
+              />
+            }
           </Content>
         </Container>
       </ImageBackground>

@@ -3,15 +3,34 @@ import { StyleSheet, View, ImageBackground, Text } from 'react-native';
 import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode';
 import PropTypes from 'prop-types';
+import { Button } from 'react-native-elements';
+// import RNPrint from 'react-native-print';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
-import { white } from '../../style/colors';
+import { white, yellow } from '../../style/colors';
 
 class QRcode extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = {
+      text: '',
+      selectedPrinter: '',
+    };
   }
+
+  // selectPrinter = async () => {
+  //   const selectedPrinter = await RNPrint.selectPrinter();
+  //   this.setState({ selectedPrinter });
+  // }
+
+  // printHTML = async () => {
+  //   const selectedPrinter = await RNPrint.selectPrinter();
+  //   this.setState({ selectedPrinter });
+  //   await RNPrint.print({
+  //     html: '<QRCode value={`${this.props.state.selectSession.sessionID}`} size={250} bgColor="black" fgColor="white" />'
+  //   });
+  // }
+
   render() {
     const styles = StyleSheet.create({
       container: {
@@ -48,6 +67,14 @@ class QRcode extends React.Component {
             size={250}
             bgColor="black"
             fgColor="white"
+          />
+          <Button
+            buttonStyle={[{ marginBottom: 10, marginTop: 40 }]}
+            // onPress={() => this.printHTML()}
+            backgroundColor={yellow}
+            color="black"
+            rounded
+            title="print code"
           />
         </View>
       </ImageBackground>

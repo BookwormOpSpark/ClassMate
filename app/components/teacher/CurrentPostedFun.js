@@ -38,6 +38,7 @@ class CurrentPostedFun extends React.Component {
       },
       contentContainer: {
         flexGrow: 1,
+        backgroundColor: 'transparent',
       },
       item: {
         width: 310,

@@ -28,6 +28,7 @@ class StudentBadges extends React.Component {
       },
       contentContainer: {
         flexGrow: 1,
+        backgroundColor: 'transparent',
       },
       list: {
         flex: 1,

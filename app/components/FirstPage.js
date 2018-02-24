@@ -72,8 +72,8 @@ class FirstPage extends React.Component {
       container: {
         backgroundColor: 'transparent',
         paddingVertical: 130,
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
       },
       image: {
         width: '100%',

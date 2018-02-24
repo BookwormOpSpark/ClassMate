@@ -10,6 +10,7 @@ import { StyleSheet, View, ScrollView, Image, WebView, Linking, FlatList, ImageB
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 import DashHeader from '../shared/Header';
+import { yellow } from '../../style/colors';
 
 class Fun extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Fun extends React.Component {
       },
       contentContainer: {
         flexGrow: 1,
+        backgroundColor: 'transparent',
       },
       item: {
         width: 310,
@@ -61,7 +63,7 @@ class Fun extends React.Component {
         height: 210,
       },
       text: {
-        color: '#f4d35e',
+        color: yellow,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 30,

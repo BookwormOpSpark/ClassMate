@@ -7,6 +7,7 @@ import { StyleSheet, View, ImageBackground } from 'react-native';
 import { DocumentPicker } from 'expo';
 import { Button, Text } from 'react-native-elements';
 import { Item, Input, Form, Spinner } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import { SERVER_URI, PostFunStuff } from '../../constant';
 import blackboard from '../../assets/blackboard.jpg';
 import DashHeader from '../shared/Header';
@@ -66,7 +67,15 @@ class FunPost extends React.Component {
     const session = this.props.state.selectSession.sessionID || 2;
     axios.post(`${SERVER_URI}${PostFunStuff}/${session}`, { link, type })
       .then((res) => {
-        this.props.navigation.navigate('Fun');
+        // this.props.navigation.navigate('Fun');
+        const resetAction = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'TeacherClassDashboard' }),
+            NavigationActions.navigate({ routeName: 'Fun' }),
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
       })
       .catch(err => console.error(err));
   }
@@ -112,6 +121,7 @@ class FunPost extends React.Component {
       bigcontainer: {
         flex: 1,
         justifyContent: 'flex-start',
+        backgroundColor: 'transparent',
       },
     });
 
