@@ -8,6 +8,7 @@ import { StyleSheet, View, ScrollView, Image, FlatList, ImageBackground, Animate
 import blackboard from '../../assets/blackboard.jpg';
 import { SERVER_URI, SendBadges } from '../../constant';
 import DashHeader from '../shared/Header';
+import { white } from '../../style/colors';
 
 
 class StudentBadges extends React.Component {
@@ -46,7 +47,7 @@ class StudentBadges extends React.Component {
         marginBottom: 5,
       },
       btext: {
-        color: 'white',
+        color: white,
       },
       image: {
         width: 65,
@@ -225,7 +226,7 @@ class StudentBadges extends React.Component {
           My Badges!
             </Text>
 
-            {!!badgeGrade && !!badgeGrade.length && <Text style={this.styles.btext}> Good Grades Badges </Text>}
+            {!!badgeGrade && !!badgeGrade.length && <Text style={this.styles.btext}>  Good Grades Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeGrade(item)}
@@ -233,14 +234,14 @@ class StudentBadges extends React.Component {
               keyExtractor={this.keyExtractor}
             />
 
-            {!!badgeTime && !!badgeTime.length && <Text style={this.styles.btext}> Great Punctuality Badges </Text>}
+            {!!badgeTime && !!badgeTime.length && <Text style={this.styles.btext}>  Punctuality Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeTime(item)}
               data={badgeTime}
               keyExtractor={this.keyExtractor}
             />
-            {!!badgeParticipation && !!badgeParticipation.length && <Text style={this.styles.btext}> Great Participation Badges </Text>}
+            {!!badgeParticipation && !!badgeParticipation.length && <Text style={this.styles.btext}>  Participation Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeParticipation(item)}
@@ -248,7 +249,7 @@ class StudentBadges extends React.Component {
               keyExtractor={this.keyExtractor}
             />
 
-            {!!badgeSpirit && !!badgeSpirit.length && <Text style={this.styles.btext}> Great Spirit Badges </Text>}
+            {!!badgeSpirit && !!badgeSpirit.length && <Text style={this.styles.btext}>  Great Spirit Badges </Text>}
             <FlatList
               contentContainerStyle={this.styles.list}
               renderItem={item => this.renderBadgeSpirit(item)}
