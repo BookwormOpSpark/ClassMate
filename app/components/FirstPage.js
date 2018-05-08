@@ -94,7 +94,7 @@ class FirstPage extends React.Component {
           />
 
           <Button
-            buttonStyle={[{ marginBottom: 5, marginTop: 200}]}
+            buttonStyle={[{ marginBottom: 6, marginTop: 200}]}
             onPress={() => this.props.navigation.navigate('StudentLogin')}
             backgroundColor={blue}
             title="Student Login"
